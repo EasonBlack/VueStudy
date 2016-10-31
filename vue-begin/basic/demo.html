@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app"  v-on:click="getMessage">
+    {{ message }}
+    <my-div v-bind:mm="mm"></my-div>
+</div>
+</body>
+<script>
+    Vue.component('my-div', {
+        props: ['mm'],
+        template: '<div>{{mm || "My Div"}}</div>'
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+            getMessage: function(){
+                this.message = 'xxxxxxxxxxx';
+                this.mm = 'erererer';
+            }
+        }
+    })
+</script>
+</html>
