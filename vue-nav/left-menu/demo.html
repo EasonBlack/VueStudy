@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <script src="demo-left.js"></script>
+    <script src="demo-right.js"></script>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="demo.css" rel='stylesheet' />
+</head>
+<body>
+<div id="app">
+    <left-menu class="app__left" v-bind:menus="menus"></left-menu>
+    <right-content class="app__right"></right-content>
+</div>
+</body>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+           menus: [
+               {id: 1, name: 'Home'},
+               {id: 2, name: 'About',active:false,children:[
+                   {id: 21, name: 'View1'},
+                   {id: 22, name: 'View2'},
+                   {id: 23, name: 'View3'}
+               ]},
+               {id: 3, name: 'Help'}
+           ]
+        },
+        methods: {
+        }
+    })
+</script>
+</html>
