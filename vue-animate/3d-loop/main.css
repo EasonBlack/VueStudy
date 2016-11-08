@@ -1,0 +1,21 @@
+ul {
+  list-style: none; }
+
+.app__container {
+  position: relative;
+  margin: 50px; }
+
+.app__list {
+  position: relative;
+  width: 400px;
+  height: 500px; }
+
+.app__item {
+  display: block;
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  border: 1px solid steelblue;
+  transition: all 1s ease; }
+
+/*# sourceMappingURL=main.css.map */
