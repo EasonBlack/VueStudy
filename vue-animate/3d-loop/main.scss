@@ -19,6 +19,9 @@ ul {
   height: 300px;
   width: 300px;
   border: 1px solid steelblue;
+}
+
+.app__item:not(:last-child) {
   transition: all 1s ease;
 }
 
