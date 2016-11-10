@@ -1,0 +1,41 @@
+ul {
+  list-style: none;
+  font-family: Georgia;
+}
+
+.app__container {
+  position: relative;
+  margin: 50px;
+  height:500px;
+}
+
+.app__list {
+  position: absolute;
+  bottom:0px;
+  left:0px;
+  width: 400px;
+  perspective:500px;
+}
+
+.app__item {
+  display: block;
+  position:relative;
+  height: 0px;
+  opacity: 0;
+  line-height: 2em;
+  width: 300px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  transform: rotateX(-90deg);
+  transition: all 0.3s ease;
+}
+
+.app__item.show {
+  height: 2em;
+  transform:none;
+  opacity: 1;
+}
+
+.app__item:not(:last-child) {
+  transition: all 1s ease;
+}
