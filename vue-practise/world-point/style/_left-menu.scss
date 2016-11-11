@@ -1,0 +1,34 @@
+
+.app__left-menu_container {
+  position: fixed;
+  left: 50px;
+  bottom: 10px;
+  display:block;
+}
+
+.left-menu__list {
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  width: 400px;
+  perspective: 500px;
+}
+
+.left-menu__item {
+  display: block;
+  position: relative;
+  height: 0px;
+  opacity: 0;
+  line-height: 2em;
+  width: 300px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  transform: rotateX(-90deg);
+  transition: all 0.3s ease;
+}
+
+.left-menu__item.show {
+  height: 2em;
+  transform: none;
+  opacity: 1;
+}
