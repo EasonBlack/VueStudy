@@ -1,0 +1,32 @@
+
+.app__right-menu_container {
+  position: fixed;
+  right: 150px;
+  top: 100px;
+  display:block;
+}
+
+.right-menu__list {
+  position: relative;
+  width: 400px;
+  perspective: 500px;
+}
+
+.right-menu__item {
+  display: block;
+  position: relative;
+  height: 0px;
+  opacity: 0;
+  line-height: 2em;
+  width: 300px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  transform: rotateX(-90deg);
+  transition: all 0.3s ease;
+}
+
+.right-menu__item.show {
+  height: 2em;
+  transform: none;
+  opacity: 1;
+}
