@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/jquery.min.js"></script>
+    <script src="../../vendor/vue.js"></script>
+    <style>
+
+        .list-wrapper {
+            list-style: none;
+            display: flex;
+        }
+
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .list-enter-active, .list-leave-active {
+            transition: all 1s;
+        }
+
+        .list-enter, .list-leave-active {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+<div id="list-demo" class="demo">
+    <app></app>
+</div>
+</body>
+<script>
+    Vue.component('app-item', {
+        props: ['item'],
+        template: ` <li class="list-item">
+            {{ item }}
+        </li>`
+    })
+    Vue.component('app', {
+        template: `<div>
+            <button v-on:click="add">Add</button>
+            <button v-on:click="remove">Remove</button>
+            <transition-group name="list" tag="ul" class="list_wrapper">
+                 <app-item  v-for="(item,index) in items" v-bind:key="item"  :item="item">
+                       {{ item }}
+                 </app-item>
+            </transition-group>
+        </div>
+        `,
+        data: function () {
+            return {
+                items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                nextNum: 10
+            }
+        },
+        methods: {
+            randomIndex: function () {
+                return Math.floor(Math.random() * this.items.length)
+            },
+            add: function () {
+                this.items.splice(this.randomIndex(), 0, this.nextNum++)
+            },
+            remove: function () {
+                this.items.splice(this.randomIndex(), 1)
+            },
+        }
+    })
+
+    new Vue({
+        el: '#list-demo'
+    })
+</script>
+</html>

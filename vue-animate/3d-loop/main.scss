@@ -22,9 +22,16 @@ ul {
 }
 
 .app__item:not(:last-child) {
-  transition: all 1s ease;
+  transition: all 0.8s ease;
 }
 
-.item-list-move {
-
+.app__item_first {
+  opacity: 1;
+  transition: all 0.5s ease;
+  &.blur {
+    opacity: 0 !important;
+  }
 }
+
+
+

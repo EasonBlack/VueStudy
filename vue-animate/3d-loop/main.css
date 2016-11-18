@@ -18,6 +18,12 @@ ul {
   border: 1px solid steelblue; }
 
 .app__item:not(:last-child) {
-  transition: all 1s ease; }
+  transition: all 0.8s ease; }
+
+.app__item_first {
+  opacity: 1;
+  transition: all 0.5s ease; }
+  .app__item_first.blur {
+    opacity: 0 !important; }
 
 /*# sourceMappingURL=main.css.map */

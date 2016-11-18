@@ -1,6 +1,7 @@
 Vue.component('app-item', {
     props: ['item', 'index'],
     template: `<li class="app__item"
+             
                    :style="{ bottom: 200 * ( 0.45 * index) + 'px' , 
                          right: index * 2 + 'px',
                          width: 300 * (1 - 0.15 * index) + 'px' ,
