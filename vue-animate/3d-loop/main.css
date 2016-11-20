@@ -18,11 +18,11 @@ ul {
   border: 1px solid steelblue; }
 
 .app__item:not(:last-child) {
-  transition: all 0.8s ease; }
+  transition: all 0.8s ease-in-out; }
 
 .app__item_first {
   opacity: 1;
-  transition: all 0.5s ease; }
+  transition: all 0.5s ease-in-out; }
   .app__item_first.blur {
     opacity: 0 !important; }
 

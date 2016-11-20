@@ -5,6 +5,7 @@ ul {
 .app__container {
   position: relative;
   margin: 50px;
+  display: flex;
 }
 
 .app__list {
@@ -18,20 +19,13 @@ ul {
   position: absolute;
   height: 300px;
   width: 300px;
+  right:0px;
+  bottom:200px;
   border: 1px solid steelblue;
-}
-
-.app__item:not(:last-child) {
   transition: all 0.8s ease-in-out;
 }
 
-.app__item_first {
-  opacity: 1;
-  transition: all 0.5s ease-in-out;
-  &.blur {
-    opacity: 0 !important;
-  }
-}
+
 
 
 
