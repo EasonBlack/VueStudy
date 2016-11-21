@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/jquery.min.js"></script>
+    <script src="../../vendor/vue.js"></script>
+    <style>
+
+        .list-mask {
+            width:630px;
+            overflow:hidden;
+        }
+
+        .list-wrapper {
+            list-style: none;
+            display: flex;
+            height:250px;
+            transition: margin 0.5s ease;
+        }
+
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom:10px;
+            min-width:200px;
+            height:200px;
+            background-color:steelblue;
+        }
+
+        .list-enter-active, .list-leave-active {
+            transition: all 1s;
+        }
+
+        .list-enter, .list-leave-active {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+<div id="list-demo" class="demo">
+    <app></app>
+</div>
+</body>
+<script>
+    Vue.component('app-item', {
+        props: ['item'],
+        template: ` <li class="list-item">
+            {{ item }}
+        </li>`
+    })
+    Vue.component('app', {
+        template: `<div>
+            <button v-on:click="prev">Prev</button>
+            <button v-on:click="next">Next</button>
+            <div class="list-mask">
+            <ul class="list-wrapper"
+                :style="{
+                   marginLeft: -1 * position * 210 + 'px'
+                }">
+                 <app-item  v-for="(item,index) in items" v-bind:key="item"  :item="item">
+                       {{ item }}
+                 </app-item>
+            </ul>
+            </div>
+        </div>
+        `,
+        data: function () {
+            return {
+                position: 0,
+                items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+        },
+        methods: {
+            prev: function(){
+                this.position --;
+            },
+            next: function(){
+                this.position ++;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#list-demo'
+    })
+</script>
+</html>
