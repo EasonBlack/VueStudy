@@ -19,6 +19,9 @@ ul {
   right: 0px;
   bottom: 200px;
   border: 1px solid steelblue;
-  transition: all 0.8s ease-in-out; }
+  transition: all 0.3s ease-in-out; }
+
+.list-enter, .list-leave-active {
+  transform: translateX(50px); }
 
 /*# sourceMappingURL=main.css.map */
