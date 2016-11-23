@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../style/animate.css" rel="stylesheet" />
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <p>
+            <router-link to="/foo">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+
+    let AppView1 = Vue.component('app-view2', {
+        props: [],
+        template: '<div>this is view2</div>'
+    })
+    let AppView2 = Vue.component('app-view1', {
+        props: [],
+        template: '<div>this is view1</div>'
+    })
+
+    const router = new VueRouter({
+        routes: [
+            {path: '/foo', component: AppView1},
+            {path: '/bar', component: AppView2}
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+            getMessage: function () {
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app>
+        <app-view  :msg="'Hello XXx'"></app-view>
+    </app>
+</div>
+</body>
+<script>
+    Vue.component('app-view', {
+        props:['msg'],
+        template: `<div>
+            {{msg}}
+        </div>`
+    })
+
+    Vue.component('app', {
+        functional: true,
+        props: ['msg'],
+        render: function (createElement, context) {
+            return createElement(
+                    'div',
+                    {
+                        class:{
+                            'app__container':true
+                        }
+                    },
+                    context.children
+
+            )
+        },
+
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>

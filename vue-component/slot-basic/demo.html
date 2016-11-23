@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view :msg="'Hi'">
+        <div>This is View</div>
+    </app-view>
+</div>
+</body>
+<script>
+    Vue.component('app-view',{
+        props:['msg'],
+        template:`
+            <div>
+                {{msg}}
+                <slot></slot>
+            </div>
+       `
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>
