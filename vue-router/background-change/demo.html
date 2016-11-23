@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../vendor/snap.svg.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s ease;
+        }
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <p>
+            <router-link to="/world">World</router-link>
+            <router-link to="/china">China</router-link>
+        </p>
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
+
+    </div>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+
+    let WorldView = Vue.component('world', {
+        props: [],
+        template: `<div id="app__world">
+            this is World
+        </div>`,
+        mounted:function() {
+            let s = Snap("#app__world");
+            Snap.load("../../assets/world-map.svg", (c) => {
+                s.append(c);
+                this.world = s.select('#world');
+            });
+        },
+        beforeDestroy: function() {
+            console.log('before destroy')
+            this.world.animate({opacity: 0}, 1000, mina.ease);
+        },
+        destroyed: function() {
+            console.log('destroyed!!');
+        }
+    })
+    let ChinaView = Vue.component('china', {
+        props: [],
+        template: `<div id="app__china">
+            this is China
+        </div>`,
+        mounted:function() {
+            let s = Snap("#app__china");
+
+            Snap.load("../../assets/world-china.svg", (c) => {
+                s.append(c);
+                this.china = s.select("#china");
+                let ani = new Snap.Matrix();
+                ani.translate(1900, 150);
+                ani.scale(3.2);
+                this.china.animate({transform: ani}, 1000, mina.ease);
+            });
+        },
+        beforeDestroy: function() {
+            let ani = new Snap.Matrix();
+            ani.translate(2867, 617);
+            ani.scale(1);
+            this.china.animate({transform: ani, opacity: 0}, 1000, mina.ease);
+        },
+        destroyed: function() {
+        }
+    })
+
+    const router = new VueRouter({
+        routes: [
+            {path: '/world', component: WorldView},
+            {path: '/china', component: ChinaView},
+            {path: '/', redirect: '/world'}
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+            getMessage: function () {
+            }
+        }
+    })
+</script>
+</html>
