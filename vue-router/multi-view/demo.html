@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../style/animate.css" rel="stylesheet"/>
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <p>
+            <router-link to="/">Index</router-link>
+            <router-link to="/main">Main</router-link>
+        </p>
+        <router-view></router-view>
+        <router-view name="content"></router-view>
+    </div>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+
+    let AppView1 = Vue.component('app-view1', {
+        props: [],
+        template: '<div>this is view1</div>'
+    })
+    let AppView2 = Vue.component('app-view2', {
+        props: [],
+        template: '<div>this is view2</div>'
+    })
+
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/',
+                components: {
+                    default: AppView1,
+                    content: null
+                }
+            },
+            {
+                path: '/main',
+                components: {
+                    default: AppView1,
+                    content: AppView2
+                }
+            }
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app'
+    })
+</script>
+</html>

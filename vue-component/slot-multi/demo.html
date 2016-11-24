@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <app-view>
+        <view1 slot="view1"></view1>
+        <view2 slot="view2"></view2>
+        <view3 slot="view3"></view3>
+    </app-view>
+</div>
+</body>
+<script src="demo-components.js"></script>
+<script>
+    Vue.component('app-view',{
+        props:[],
+        template:`
+            <div>
+                <slot name="view1"></slot>
+                <slot name="view2"></slot>
+                <slot name="view3"></slot>
+            </div>
+       `
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>
