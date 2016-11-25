@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+    Vue.component('app-view', {
+        props: ['text'],
+        data: function () {
+            return {
+                viewmsg: 'bbbbbbbbbb'
+            }
+        },
+        methods: {
+           sayHello:function(){
+               alert(123);
+           }
+        },
+        template: `<div>
+            {{$parent.msg}}
+            <app-view-child></app-view-child>
+        </div>`
+    })
+
+    Vue.component('app-view-child', {
+        template: `<div>
+            {{$parent.viewmsg}}
+        </div>`,
+        mounted: function() {
+            console.log(this.$parent)
+        }
+    })
+
+
+    new Vue({
+        data: {
+            msg: 'hhhhhhhhhh'
+        }
+    }).$mount('#app')
+</script>
+</html>
