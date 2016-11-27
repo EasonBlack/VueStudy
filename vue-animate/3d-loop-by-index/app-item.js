@@ -8,7 +8,8 @@ Vue.component('app-item', {
                          height: _height,
                          'background-color': item.bgc,
                          opacity: _opacity,
-                         zIndex: 20-index 
+                         zIndex: 20-index,
+                         transform: _transform
                    }"
                 >
          This is Item {{item.title}}  {{index}}
@@ -28,11 +29,18 @@ Vue.component('app-item', {
         },
         _opacity: function () {
             if (this.item.ready) {
-                return 0.3
+                return 0
             } else {
                 return 1 - this.index * 0.2
             }
 
+        },
+        _transform: function() {
+            if (this.item.ready) {
+                return 'translateX(-30px)'
+            } else {
+
+            }
         }
 
     }

@@ -39,7 +39,11 @@ Vue.component('app', {
         selectIt: function (item) {
             let _index = this.items.findIndex((t) => t.id == item.id);
             for (let i = 0; i < _index; i++) {
-                this.items[i].ready = true;
+                //this.items[i].ready = true;
+                setTimeout(()=> {
+                    this.items[i].ready = true;
+                }, 200 * i)
+
             }
             setTimeout(()=> {
                 for (let i = 0; i < _index; i++) {
@@ -48,9 +52,9 @@ Vue.component('app', {
                     this.items.splice(0, 1);
                     setTimeout(()=> {
                         this.items.push(_theItem);
-                    }, 300)
+                    }, 300 * i)
                 }
-            }, 300)
+            }, 200 * _index)
         },
 
     }

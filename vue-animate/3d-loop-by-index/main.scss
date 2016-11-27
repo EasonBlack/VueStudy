@@ -19,16 +19,20 @@ ul {
   position: absolute;
   height: 300px;
   width: 300px;
-  right:0px;
-  bottom:200px;
+  right: 0px;
+  bottom: 200px;
   border: 1px solid steelblue;
-  transition: all 0.3s ease-in-out;
+  //transition: all 0.3s ease-in-out;
+  transform: translateX(0);
+  transition: all 0.5s ease, opacity 0.5s ease;
 }
 
 .list-enter-active, .list-leave-active {
+
 }
+
 .list-enter, .list-leave-active {
-  transform: translateX(50px);
+  transform: translateX(-30px);
 }
 
 
