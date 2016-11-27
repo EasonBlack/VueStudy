@@ -42,6 +42,32 @@ ul {
   .banner__list li {
     width: 100vw; }
 
+.subnav__wrapper {
+  width: 100vw;
+  overflow: hidden; }
+  .subnav__wrapper.stick {
+    position: absolute;
+    top: 60px;
+    left: 0px; }
+
+.subnav__list {
+  display: flex;
+  flex-direction: row;
+  transition: all 0.5s ease; }
+  .subnav__list li {
+    width: 25vw;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em; }
+
+.home-list__item {
+  width: 100vw;
+  height: 80px;
+  line-height: 80px;
+  padding-left: 60px; }
+
 .left-menu__container {
   width: 50vw;
   height: 100%;
@@ -68,14 +94,23 @@ ul {
 
 .right-content__container {
   width: 100vw;
-  height: 100%; }
+  height: 100%;
+  overflow-y: scroll; }
 
 .right-content__title-section {
+  position: absolute;
+  top: 0;
+  width: 100vw;
   height: 60px;
   line-height: 60px;
   text-align: center;
   font-size: 1.5em;
   color: white;
-  background-color: rgba(176, 196, 222, 0.7); }
+  background-color: rgba(176, 196, 222, 0.7);
+  z-index: 15; }
+
+.right-content__main-section {
+  margin-top: 60px;
+  z-index: 1; }
 
 /*# sourceMappingURL=main.css.map */

@@ -12,7 +12,7 @@ Vue.component('home', {
     `,
     data: function () {
         return {
-            menuActive: false
+            menuActive: true
         }
     },
     methods: {

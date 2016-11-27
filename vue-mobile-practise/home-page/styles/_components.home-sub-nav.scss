@@ -1,0 +1,26 @@
+
+.subnav__wrapper {
+  width: 100vw;
+  overflow: hidden;
+  &.stick {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+  }
+}
+
+
+.subnav__list {
+  display: flex;
+  flex-direction: row;
+  transition: all 0.5s ease;
+
+  li {
+    width: 25vw;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+  }
+}
