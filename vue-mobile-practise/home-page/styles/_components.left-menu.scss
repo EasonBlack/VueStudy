@@ -1,0 +1,27 @@
+.left-menu__container {
+  width:50vw;
+  height:100%;
+  overflow:scroll;
+  border-right: 1px solid rgba(#737373, 0.3);
+}
+
+.left-menu__title {
+  height:60px;
+  line-height:60px;
+  text-align:center;
+  font-size:1.4em;
+  color: rgba(white, 2);
+  background-color: rgba(lightsteelblue, 0.7);
+}
+
+.left-menu__projects {
+   display:block;
+}
+
+.left-menu__project {
+  padding-left:20px;
+  height:60px;
+  line-height:60px;
+  display:block;
+  border-bottom: 1px solid rgba(#737373, 0.3);
+}

@@ -1,0 +1,16 @@
+.home__mask {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home__container {
+  width: 150vw;
+  height: 100%;
+  display: flex;
+  transition: all 0.5s ease;
+}
+
+.home__menu_active {
+  margin-left: -50vw;
+}
