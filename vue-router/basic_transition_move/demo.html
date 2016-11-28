@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../style/animate.css" rel="stylesheet" />
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+    <style>
+        .view__container {
+            width: 100vw;
+            height: 50vh;
+            display:block;
+            position:relative;
+        }
+
+        .view__bg_blue {
+            background-color:steelblue;
+        }
+        .view__bg_green {
+            background-color: lightseagreen;
+        }
+
+        .move-enter-active, .move-leave-active {
+            transition: all .5s ease;
+        }
+        .move-enter, .move-leave-active {
+           transform: translateX(-100vw);
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <p>
+            <router-link to="/foo">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+        </p>
+        <transition  name="move">
+            <router-view></router-view>
+        </transition>
+
+    </div>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+
+    let AppView1 = Vue.component('app-view2', {
+        props: [],
+        template: '<div class="view__container view__bg_blue">this is view2</div>'
+    })
+    let AppView2 = Vue.component('app-view1', {
+        props: [],
+        template: '<div class="view__container view__bg_green">this is view1</div>'
+    })
+
+    const router = new VueRouter({
+        routes: [
+            {path: '/foo', component: AppView1},
+            {path: '/bar', component: AppView2}
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods: {
+            getMessage: function () {
+            }
+        }
+    })
+</script>
+</html>
