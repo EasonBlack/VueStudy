@@ -25,12 +25,18 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },{
+          test: /\.css$/,
+          loader: 'style!css'
+      },
+      {
+          test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+          loader: 'url-loader'
       },
       {
         test: /\.html$/,
         loader: 'vue-html'
-      },
-      {
+      }, {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url',
         query: {
@@ -40,9 +46,16 @@ module.exports = {
       }
     ]
   },
+  vue: {
+      loaders: {
+          'scss': 'style!css!sass'
+      }
+
+  },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue'
+      'vue$': 'vue/dist/vue', 
+      'bootstrap.css': path.resolve(__dirname, '../../style/bootstrap.css')
     }
   },
   devServer: {
