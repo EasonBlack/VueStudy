@@ -18,9 +18,9 @@ Vue.component('right-content', {
         return {
             subnavStick: false,
             images: [
-                {id: 1, src: 'http://placehold.it/400/564782/000000'},
-                {id: 2, src: 'http://placehold.it/400/128983/000000'},
-                {id: 3, src: 'http://placehold.it/400/897251/000000'}
+                {id: 1, src: '/Vue-Study/assets/400_400_1.png'},
+                {id: 2, src: '/Vue-Study/assets/400_400_2.png'},
+                {id: 3, src: '/Vue-Study/assets/400_400_3.png'}
             ],
             icons: [
                 {class: 'glyphicon-home'},
