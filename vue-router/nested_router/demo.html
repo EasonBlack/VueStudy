@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <link href="main.css" rel="stylesheet"/>
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <router-view></router-view>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+    let AppHome = Vue.component('app-home', {
+        props: [],
+        template: `<div>
+            <router-view></router-view>
+            <div class="footer">
+                <router-link to="/home/event">Event</router-link>
+                <router-link to="/home/resource">Resource</router-link>
+            </div>
+        </div>`
+    })
+    let HomeEvent = Vue.component('home-event',{
+        template: `<div>
+            <div class="header">Event</div>
+            <div class="content">
+                This is Home event
+                <div>
+                    <router-link to="/view1">View1</router-link>
+                </div>
+                 <div>
+                    <router-link to="/view2">View2</router-link>
+                </div>
+            </div>
+        </div>`
+    })
+    let HomeResource = Vue.component('home-resource',{
+        template: `<div>
+            <div class="header">Resource</div>
+            <div class="content">
+                This is Home Resource
+            </div>
+        </div>`
+    })
+    let AppView1 = Vue.component('app-view1', {
+        props: [],
+        template: `<div>
+            <div class="header">View1</div>
+            <div class="content-big">
+                This is App View1
+                <div>
+                    <router-link to="/home/event">Back</router-link>
+                </div>
+            </div>
+        </div>`
+    })
+    let AppView2 = Vue.component('app-view2', {
+        props: [],
+        template:  `<div>
+            <div class="header">View2</div>
+            <div class="content-big">
+                This is App View2
+                <div>
+                    <router-link to="/home/event">Back</router-link>
+                </div>
+            </div>
+        </div>`
+    })
+
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/home',
+                components: {
+                    default: AppHome,
+                },
+                children: [
+                    {
+                        // 当 /home/event 匹配成功，
+                        path: 'event',
+                        component: HomeEvent
+                    },
+                    {
+                        path: 'resource',
+                        component: HomeResource
+                    },
+                ]
+            },
+            {
+                path: '/view1',
+                component: AppView1
+            },
+            {
+                path: '/view2',
+                component: AppView2
+            },
+            {
+                path: '/',
+                redirect: '/home/event'
+            }
+
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app'
+    })
+</script>
+</html>
