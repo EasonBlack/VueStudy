@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+</body>
+<script>
+    Vue.component('app-section', {
+        props: ['rv'],
+        template: `<div>
+            <input type="radio" v-model="val" value='true' />
+            <input type="radio" v-model="val" value='false' />
+            <span>{{rv}}</span>
+        </div>`,
+        data: function() {
+            return {
+                val: 'true'
+            }
+        },
+        watch: {
+            "rv": function(v,o){
+                if(v==null) {
+                    this.val= null;
+                    return ;
+                }
+                if( v != o) {
+                    this.val = v.toString();
+                }
+            }
+        }
+    })
+
+    Vue.component('app', {
+        data: function() {
+            return {
+                rv: true
+            }
+        },
+        template: `<div>
+            <app-section :rv="rv"></app-section>
+            <button v-on:click="change">Check</button>
+            <button v-on:click="clear">Clear</button>
+        </div>`,
+        methods: {
+            change: function() {
+                this.rv = !this.rv;
+            },
+            clear: function() {
+                this.rv = null;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>
