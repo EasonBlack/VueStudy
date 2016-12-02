@@ -16,8 +16,6 @@ Vue.component('app-tab',{
         if(this.group.id == this.activegroup) {
             this.picked = this.group.id;
         }
-        //console.log(this.activegroup , this.group.id)
-
     },
     methods: {
 
