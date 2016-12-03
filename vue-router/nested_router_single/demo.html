@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-view></router-view>
+</div>
+</body>
+<script>
+    Vue.use(VueRouter);
+
+    let AppHome = Vue.component('app-home',{
+        template: `<div>
+             <div class="main-container">
+                <button v-on:click="next">Next Level</button>
+             </div>
+             <router-view></router-view>
+        </div>`,
+        methods: {
+            next : function() {
+                this.$router.push('/home/second')
+            }
+        }
+    })
+
+    let AppSecond = Vue.component('app-second',{
+        template: `<div>
+            <ul class="second-child" v-on:click="next">
+                <li>aaaaa</li>
+                <li>bbbbb</li>
+                <li>ccccc</li>
+                <li>ddddd</li>
+            </ul>
+            <router-view></router-view>
+        </div>`,
+        methods: {
+            next : function() {
+                this.$router.push('/home/second/third')
+            }
+        }
+    });
+
+    let AppThird = Vue.component('app-third',{
+        template: `<div>
+            <div class="third-child" v-on:click="back">
+            </div>
+        </div>`,
+        methods: {
+            back : function() {
+                this.$router.push('/home')
+            }
+        }
+    });
+
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/home',
+                component: AppHome,
+                children: [
+                    {
+                        path: 'second',
+                        component: AppSecond,
+                        children: [
+                            {
+                                path: 'third',
+                                component: AppThird
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                path: '/',
+                redirect: '/home'
+            }
+        ]
+    })
+
+
+    var app = new Vue({
+        router,
+        el: '#app'
+    })
+</script>
+</html>
