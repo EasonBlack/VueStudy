@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Arial"; }
+
+ul {
+  list-style: none; }
+
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative; }
+
+.header {
+  width: 100vw;
+  height: 70px;
+  font-size: 1.2em;
+  line-height: 70px;
+  text-align: center; }
+
+.shop-card {
+  width: 100vw;
+  height: 170px;
+  display: block;
+  background-color: lightseagreen; }
+
+.footer {
+  width: 100vw;
+  height: 70px;
+  font-size: 1.2em;
+  line-height: 70px;
+  text-align: center;
+  background-color: white;
+  color: white;
+  display: flex;
+  border-top: 1px solid #E7E5E2; }
+  .footer .foot-cost {
+    flex: 1;
+    padding-left: 10px;
+    height: 100%;
+    line-height: 100%;
+    color: #C59C77; }
+  .footer .foot-check {
+    width: 150px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    background-color: #C59C77;
+    color: white; }
+
+.shop-services {
+  width: 100vw;
+  height: calc(100vh - 310px);
+  overflow: hidden; }
+
+.service-type-tab {
+  width: 100%;
+  height: 70px;
+  display: flex; }
+  .service-type-tab li {
+    flex: 1;
+    position: relative;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .service-type-tab li.active:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      width: 80%;
+      height: 100%;
+      display: block;
+      border-bottom: 1px solid #2C2628; }
+
+.menu-container {
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: hidden;
+  display: flex;
+  position: relative; }
+
+.menu-mask {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+.menu-tabs {
+  width: 100px;
+  display: flex;
+  flex-direction: column; }
+  .menu-tabs li {
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 0.7em;
+    position: relative;
+    border-right: 1px solid #E7E5E2; }
+    .menu-tabs li:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      width: 80%;
+      border-bottom: 1px solid #E7E5E2; }
+    .menu-tabs li.active:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-left: 3px solid black; }
+
+.menu-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll; }
+
+.menu-items {
+  display: flex;
+  flex-direction: column; }
+
+.menu-item {
+  height: 110px; }
+
+/*# sourceMappingURL=main.css.map */

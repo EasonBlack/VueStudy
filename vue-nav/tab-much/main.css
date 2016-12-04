@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+ul {
+  list-style: none; }
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  margin-top: 100px;
+  margin-left: 100px; }
+
+.prev, .next {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 30px;
+  height: 100%; }
+
+.tabs-container {
+  width: 320px;
+  height: 40px;
+  overflow: hidden;
+  position: relative; }
+
+.prev {
+  left: 0;
+  top: 0; }
+
+.next {
+  right: 0;
+  top: 0; }
+
+.tabs {
+  width: 560px;
+  height: 100%;
+  display: flex;
+  z-index: 5;
+  transition: all 0.5s ease; }
+  .tabs li {
+    display: flex;
+    width: 80px;
+    background-color: steelblue;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid white; }
+    .tabs li.active, .tabs li.active:hover {
+      background-color: #00d6b2; }
+    .tabs li:hover {
+      background-color: rgba(70, 130, 180, 0.7); }
+
+.content {
+  width: 300px;
+  height: 300px; }
+
+.tran-enter-active, .tran-leave-active {
+  transition: opacity .5s ease; }
+
+.tran-enter, .tran-leave-active {
+  opacity: 0; }
+
+/*# sourceMappingURL=main.css.map */
