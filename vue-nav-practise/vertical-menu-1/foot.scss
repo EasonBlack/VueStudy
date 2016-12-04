@@ -1,0 +1,44 @@
+
+.footer {
+  width:100vw;
+  height:70px;
+  font-size:1.2em;
+  line-height:70px;
+  text-align: center;
+  background-color: white;
+  color:white;
+  display:flex;
+  border-top:1px solid #E7E5E2;
+  .foot-cost {
+    flex:1;
+    padding-left:10px;
+    color: #C59C77;
+    justify-content: center;
+    align-items: center;
+  }
+  .foot-check {
+    width:150px;
+    height:70px;
+    line-height:70px;
+    text-align:center;
+    background-color: #C59C77;
+    color:white;
+  }
+  .foot-order {
+    position:relative;
+  }
+  .foot-badge {
+    position:absolute;
+    top:10px;
+    left:50px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background-color:#C59C77;
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:0.5em;
+  }
+}

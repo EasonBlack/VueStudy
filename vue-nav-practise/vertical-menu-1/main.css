@@ -19,36 +19,6 @@ ul {
   line-height: 70px;
   text-align: center; }
 
-.shop-card {
-  width: 100vw;
-  height: 170px;
-  display: block;
-  background-color: lightseagreen; }
-
-.footer {
-  width: 100vw;
-  height: 70px;
-  font-size: 1.2em;
-  line-height: 70px;
-  text-align: center;
-  background-color: white;
-  color: white;
-  display: flex;
-  border-top: 1px solid #E7E5E2; }
-  .footer .foot-cost {
-    flex: 1;
-    padding-left: 10px;
-    height: 100%;
-    line-height: 100%;
-    color: #C59C77; }
-  .footer .foot-check {
-    width: 150px;
-    height: 70px;
-    line-height: 70px;
-    text-align: center;
-    background-color: #C59C77;
-    color: white; }
-
 .shop-services {
   width: 100vw;
   height: calc(100vh - 310px);

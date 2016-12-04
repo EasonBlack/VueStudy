@@ -1,7 +1,17 @@
 Vue.component('app', {
     template: `<div class="main-container">
         <div class="header">Title</div>
-        <div class="shop-card"></div>
+        <div class="shop-card">
+            <div class="shop-image"></div>
+            <div class="shop-content">
+                <div class="shop-key">
+                    <a>Healthy</a>
+                    <a>Lunch</a>
+                </div>
+                <div class="shop-address">5F,Block A,724 Nathan Road</div>
+                <div class="shop-number">8888-8888</div>
+            </div>
+        </div>
         <div class="shop-services">
             <ul class="service-type-tab">
                  <li v-on:click="serviceTypeActive = 'menu'" 
@@ -41,7 +51,13 @@ Vue.component('app', {
         </div>
         <div></div>
         <div class="footer">
-             <div class="foot-cost">$ {{totalCost}}</div>
+             <div class="foot-order">
+                <img src="../../assets/icons/order.png" /> 
+                <div class="foot-badge">{{totalNum}}</div>
+            </div>
+             <div class="foot-cost">
+                $ {{totalCost}}
+             </div>
              <div class="foot-check">CHECK-OUT</div>
         </div>
     </div>`,
@@ -62,6 +78,16 @@ Vue.component('app', {
     computed: {
         selectMenuItems: function () {
             return this.menuData.find((o)=> o.id == this.menuTypeIdActive).items;
+        },
+        totalNum: function() {
+            let _total =0;
+            if(!this.menuData) return 0;
+            this.menuData.forEach((group)=> {
+                group.items.forEach((item)=> {
+                    _total += item.num;
+                })
+            })
+            return  _total
         },
         totalCost: function () {
             let _total = 0;
