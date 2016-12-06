@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="main.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+</body>
+<script src="../../vendor/vue.js"></script>
+<script src="../../vendor/iscroll-probe.js"></script>
+
+<script>
+    Vue.component('app', {
+
+        template: `<div class="app__container">
+            <div class="app__header">Title</div>
+            <div class="app__nav" v-bind:class="{
+                        stick: navStick
+                    }"
+                    :style="{
+                        top: navTop + 'px',
+
+                    }">
+                        <div class="red_box"></div>
+            </div>
+            <div class="app__mask" id="wrapper">
+                 <div class="app__content">
+                    <div class="app__banner"></div>
+                    <div class="app__paragraph">
+                         <div class="big_box" v-for="n in 10"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>`,
+        data:function() {
+            return {
+                navStick: false,
+                navTop: 180
+            }
+        },
+        mounted: function() {
+            var self = this;
+            var myScroll = new IScroll('#wrapper', { probeType: 3, mouseWheel: false });
+
+            myScroll.on('scroll', function(e){
+
+                if(this.y < -100) {
+                    self.navStick = true;
+                    self.navTop = 80;
+                }else {
+                    self.navStick = false;
+                    self.navTop = 180 + this.y;
+                }
+                console.log(self.navTop);
+            });
+
+            document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        }
+
+    })
+    var vm = new Vue({
+        el: '#app'
+    })
+</script>
+</html>
