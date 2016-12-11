@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <link href="main.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+</body>
+<script>
+    var bus = new Vue();
+    Vue.component('right',{
+        template: `<div class="right__container"
+            v-bind:class="{
+                active:active
+            }"
+        >
+
+        </div>`,
+        data:function() {
+            return {
+                active: false
+            }
+        },
+        created:function() {
+            var self = this;
+            bus.$on('active', function(){
+                self.active = !self.active;
+            });
+        }
+    })
+    Vue.component('left',{
+        template: `<div class="left__container" v-on:click="triggerRight">
+        </div>`,
+        methods: {
+            triggerRight:function() {
+                bus.$emit('active');
+            }
+        }
+    })
+    Vue.component('app',{
+        template:`<div class="container">
+            <left></left>
+            <right></right>
+        </div>`
+    })
+
+    var vm = new Vue({
+        el: '#app'
+    })
+
+
+</script>
+</html>
