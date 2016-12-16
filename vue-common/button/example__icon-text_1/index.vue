@@ -11,7 +11,6 @@
         props: ['item'],
         data:function(){
             return {
-
             }
         },
         methods: {
