@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+</body>
+<script>
+    Vue.component('child1', {
+        template: `<div class="child">
+            This is Child 1
+        </div>`
+    })
+
+    Vue.component('child2', {
+        template: `<div class="child">
+            This is Child 2
+        </div>`
+    })
+
+    Vue.component('app', {
+        template: `<div>
+            <div v-for="n in 2" :is="'child'+n"></div>
+        </div>`
+    })
+
+
+    new Vue({
+      el: '#app',
+      template: '<app></app>'
+    })
+</script>
+</html>
