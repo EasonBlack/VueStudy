@@ -1,18 +1,18 @@
 <template>
 	<div class='container'>
-		This is app
-        <child></child>
+		<home-header></home-header>
+        <router-view></router-view>
 	</div>
 </template>
 
 <script>
-    import child from './views/test.vue';
+    import homeHeader from './view-home/header.vue';
     export default {
-        components: {child}
+        components: {homeHeader}
     }
 </script>
 <style lang='scss' scoped>
     .container {
-        background-color:red;
+
     }
 </style>
