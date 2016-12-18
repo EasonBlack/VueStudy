@@ -6,26 +6,55 @@
                  <span>Add a Dataset</span>
              </a>
         </div>
-        <div class='content__wrapper'>
-            This is board
+        <div class='content__container'>
+            <div class='content__wrapper'>
+                <div class='chart__wrapper chart__flex_1'>
+                    <bar-chart></bar-chart>
+                </div>
+                <div class='chart__wrapper chart__flex_1'>
+                     <area-spline-chart></area-spline-chart>
+                </div>
+                <div class='chart__wrapper chart__flex_1'>
+                     <stacked-column-chart
+                     v-if='monthlyAudit.length'
+                     :categories='monthCategories'
+                     :series='monthlyAudit'></stacked-column-chart>
+                </div>
+            </div
         </div>
+
         <new-panel :active='newPanelActive' v-on:toggleAddPanel='toggleAddPanel' ></new-panel>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     import newPanel from './new-panel.vue';
+    import barChart from '../charts/bar-chart.vue'
+    import areaSplineChart from '../charts/area-spline-chart.vue'
+    import stackedColumnChart from '../charts/stacked-column-chart.vue'
     export default{
-        components: {newPanel},
+        components: {newPanel, barChart, areaSplineChart, stackedColumnChart},
         data(){
             return{
+                monthCategories: ['Jan','Feb','Mar','Apr','May', 'Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'],
                 newPanelActive:false
             }
+        },
+        created:function(){
+            this.$store.dispatch('fetchMonthlyAudit');
         },
         methods: {
             toggleAddPanel:function(v) {
                 this.newPanelActive = !!v;
             }
+        },
+        computed:{
+             ...mapState({
+                 monthlyAudit: (state) => {
+                    return state.monthlyAudit
+                 }
+             })
         }
 
     }
@@ -67,8 +96,16 @@
               margin-right: 10px;
           }
      }
-
+     .content__container {
+        width:100vw;
+        height:calc(100% - #{$headerHeight});
+        overflow-y:scroll;
+     }
      .content__wrapper {
-        padding:$left-padding;
+        display:flex;
+        flex-wrap:wrap;
+     }
+     .chart__wrapper  {
+        padding:10px;
      }
 </style>
