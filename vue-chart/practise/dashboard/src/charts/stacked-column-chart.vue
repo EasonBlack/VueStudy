@@ -5,7 +5,7 @@
 <script>
     import Highcharts from 'highcharts';
     export default{
-        props: ['categories','series'],
+        props: ['categories','series', 'title'],
         data(){
             return{
                  target: undefined
@@ -18,7 +18,7 @@
                              type: 'column'
                          },
                          title: {
-                             text: 'Stacked column chart'
+                             text: this.title
                          },
                          xAxis: {
                              categories: [

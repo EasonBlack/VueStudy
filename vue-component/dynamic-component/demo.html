@@ -25,6 +25,9 @@
     Vue.component('app', {
         template: `<div>
             <div v-for="n in 2" :is="'child'+n"></div>
+            <div v-for="n in 2" class="wrapper">
+                <div :is="'child' +n "></div>
+            </div>
         </div>`
     })
 

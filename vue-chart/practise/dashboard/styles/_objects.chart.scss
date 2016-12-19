@@ -4,9 +4,23 @@
   height:100%;
 }
 
-.chart__flex_1 {
-  flex:1;
+.chart__flex_3 {
+  //flex:1;
+  min-width:calc( 33vw - 20px);
+  height:400px;
+  position:relative;
+}
+
+.chart__flex_2 {
+  //flex:1;
   min-width:calc( 50vw - 20px);
+  height:400px;
+  position:relative;
+}
+
+.chart__flex_1 {
+  //flex:1;
+  min-width:calc( 100vw - 20px);
   height:400px;
   position:relative;
 }

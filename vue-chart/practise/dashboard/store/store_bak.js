@@ -7,9 +7,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         chartType: [
-            {id: 'area_spline', title: 'Area Spline',chart: 'area-spline-chart'},
-            {id: 'bar', title: 'Bar', chart: 'bar-chart'},
-            {id: 'stacked_column', title: 'Stacked Column', chart: 'stacked-column-chart'}
+            {id: 'area_spline', title: 'Area Spline'},
+            {id: 'bar', title: 'Bar'},
+            {id: 'stacked_column', title: 'Stacked Column'}
         ],
         dataType: [
             {id: 'monthly_audit', title: 'Monthly Audit', fun: 'fetchMonthlyAudit'},
@@ -55,13 +55,11 @@ const store = new Vuex.Store({
             state.charts.push(_result)
         },
         addNewChart:(state, res)=> {
-            let _id = res.chartInfo.id + '-' + res.dataInfo.id;
             let _result = {
-                id: _id,
+                id: res.chartId + '-' + res.dataId,
+                chart: res.chartId,
                 size: res.size,
                 title: res.title,
-                dataInfo: res.dataInfo,
-                chartInfo:res.chartInfo,
                 data: res.data,
                 type:res.type
             }
@@ -70,36 +68,32 @@ const store = new Vuex.Store({
     },
     actions: {
         fetchDataById ({dispatch,commit,state},res) {
-            let _dataFun = res.dataInfo.fun;
-            console.log('xxxxxxxxx');
+            let _dataFun = res.dataSelected.fun;
             return dispatch(_dataFun, res);
         },
-        fetchMonthlyAudit ({ commit, state }, res) {
+        fetchMonthlyAudit ({ commit, state }) {
             $.when(
                 $.getJSON('../data/monthly_audit_data.json'),
                 $.getJSON('../data/monthly_audit_type.json')
             ).then((d, t)=>{
-                console.log(res);
-                commit('addNewChart', {data:d[0], type:t[0], ...res})
-                //commit('getAudit', {data:d[0], type:t[0]})
+                //commit('addNewChart', {data:d[0], type:t[0], ...res})
+                commit('getAudit', {data:d[0], type:t[0]})
             })
         },
-        fetchDeploymentEfficiency ({commit, state}, res) {
+        fetchDeploymentEfficiency ({commit, state}) {
             $.when(
                 $.getJSON('../data/deployment_efficiency_data.json'),
                 $.getJSON('../data/deployment_efficiency_type.json')
             ).then((d, t)=>{
-                commit('addNewChart', {data:d[0], type:t[0], ...res})
-                //commit('getDeploymentEfficiency', {data:d[0], type:t[0]})
+                commit('getDeploymentEfficiency', {data:d[0], type:t[0]})
             })
         },
-        fetchDeploymentMrr ({commit, state}, res) {
+        fetchDeploymentMrr ({commit, state}) {
             $.when(
                 $.getJSON('../data/deployment_mrr_data.json'),
                 $.getJSON('../data/deployment_mrr_type.json')
             ).then((d, t)=>{
-                commit('addNewChart', {data:d[0], type:t[0], ...res})
-                //commit('getDeploymentMrr', {data:d[0], type:t[0]})
+                commit('getDeploymentMrr', {data:d[0], type:t[0]})
             })
         }
     }

@@ -5,7 +5,7 @@
 <script>
     import Highcharts from 'highcharts';
     export default{
-          props: ['categories','series'],
+          props: ['categories','series', 'title'],
         data(){
             return{
                  target: undefined
@@ -17,7 +17,7 @@
                      type: 'areaspline',
                   },
                   title: {
-                      text: 'Average fruit consumption during one week'
+                      text: this.title
                   },
                   legend: {
                       layout: 'vertical',

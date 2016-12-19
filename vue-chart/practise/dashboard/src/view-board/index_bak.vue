@@ -8,19 +8,6 @@
         </div>
         <div class='content__container'>
             <div class='content__wrapper'>
-                <div class='chart__wrapper'
-                v-for='c in charts'
-                v-bind:class='{
-                    "chart__flex_1": c.size==1,
-                    "chart__flex_2": c.size==0.5,
-                    "chart__flex_3": c.size==0.3
-                }'
-                >
-                    <div :is='c.chartInfo.chart'
-                         :series='c.data'
-                         :categories='c.type'
-                         :title='c.title'></div>
-                </div>
                 <div class='chart__wrapper chart__flex_1'>
                     <bar-chart
                      v-if='deploymentMrr && deploymentMrr.data.length '
@@ -29,6 +16,21 @@
                     >
 
                     </bar-chart>
+                </div>
+                <div class='chart__wrapper chart__flex_1'>
+                     <area-spline-chart
+                     v-if='deploymentEfficiency && deploymentEfficiency.data.length '
+                     :categories='deploymentEfficiency.type'
+                     :series='deploymentEfficiency.data'
+                     >
+                     </area-spline-chart>
+                </div>
+                <div class='chart__wrapper chart__flex_1'>
+                     <stacked-column-chart
+                     v-if='monthlyAudit && monthlyAudit.data.length '
+                     :categories='monthlyAudit.type'
+                     :series='monthlyAudit.data'></stacked-column-chart>
+
                 </div>
             </div>
         </div>
@@ -47,12 +49,13 @@
         components: {newPanel, barChart, areaSplineChart, stackedColumnChart},
         data(){
             return{
-                newPanelActive:false,
-                charts: []
+                newPanelActive:false
             }
         },
         created:function(){
-
+            this.$store.dispatch('fetchMonthlyAudit');
+            this.$store.dispatch('fetchDeploymentEfficiency');
+            this.$store.dispatch('fetchDeploymentMrr');
         },
         methods: {
             toggleAddPanel:function(v) {
@@ -60,9 +63,11 @@
             }
         },
         computed:{
-            ...mapState({
-                charts: state => state.charts
-            })
+           ...mapGetters({
+	  	        monthlyAudit : 'monthlyAudit',
+	  	        deploymentEfficiency: 'deploymentEfficiency',
+	  	        deploymentMrr: 'deploymentMrr'
+		   })
         }
 
     }
