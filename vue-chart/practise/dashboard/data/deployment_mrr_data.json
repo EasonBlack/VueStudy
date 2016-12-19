@@ -1,0 +1,5 @@
+[
+  {"id":1, "name": "New MRR", "data": [ 7, 2,8,1,2,4] },
+  {"id":2, "name": "Expansion MRR", "data": [2,4,5,7,2,3] },
+  {"id":3, "name": "Lost MRR", "data": [2,4,5,7,2,3] }
+]

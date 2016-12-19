@@ -49,6 +49,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue',
+      'jquery': 'jquery/dist/jquery',
       'common': path.resolve(__dirname,'../../../vue-common'),
       'assets': path.resolve(__dirname, '../../../assets'),
     }

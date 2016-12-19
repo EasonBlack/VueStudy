@@ -9,18 +9,30 @@
         <div class='content__container'>
             <div class='content__wrapper'>
                 <div class='chart__wrapper chart__flex_1'>
-                    <bar-chart></bar-chart>
+                    <bar-chart
+                     v-if='deploymentMrr && deploymentMrr.data.length '
+                     :categories='deploymentMrr.type'
+                     :series='deploymentMrr.data'
+                    >
+
+                    </bar-chart>
                 </div>
                 <div class='chart__wrapper chart__flex_1'>
-                     <area-spline-chart></area-spline-chart>
+                     <area-spline-chart
+                     v-if='deploymentEfficiency && deploymentEfficiency.data.length '
+                     :categories='deploymentEfficiency.type'
+                     :series='deploymentEfficiency.data'
+                     >
+                     </area-spline-chart>
                 </div>
                 <div class='chart__wrapper chart__flex_1'>
                      <stacked-column-chart
-                     v-if='monthlyAudit.length'
-                     :categories='monthCategories'
-                     :series='monthlyAudit'></stacked-column-chart>
+                     v-if='monthlyAudit && monthlyAudit.data.length '
+                     :categories='monthlyAudit.type'
+                     :series='monthlyAudit.data'></stacked-column-chart>
+
                 </div>
-            </div
+            </div>
         </div>
 
         <new-panel :active='newPanelActive' v-on:toggleAddPanel='toggleAddPanel' ></new-panel>
@@ -28,7 +40,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState, mapGetters } from 'vuex'
     import newPanel from './new-panel.vue';
     import barChart from '../charts/bar-chart.vue'
     import areaSplineChart from '../charts/area-spline-chart.vue'
@@ -37,12 +49,13 @@
         components: {newPanel, barChart, areaSplineChart, stackedColumnChart},
         data(){
             return{
-                monthCategories: ['Jan','Feb','Mar','Apr','May', 'Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'],
                 newPanelActive:false
             }
         },
         created:function(){
             this.$store.dispatch('fetchMonthlyAudit');
+            this.$store.dispatch('fetchDeploymentEfficiency');
+            this.$store.dispatch('fetchDeploymentMrr');
         },
         methods: {
             toggleAddPanel:function(v) {
@@ -50,11 +63,11 @@
             }
         },
         computed:{
-             ...mapState({
-                 monthlyAudit: (state) => {
-                    return state.monthlyAudit
-                 }
-             })
+           ...mapGetters({
+	  	        monthlyAudit : 'monthlyAudit',
+	  	        deploymentEfficiency: 'deploymentEfficiency',
+	  	        deploymentMrr: 'deploymentMrr'
+		   })
         }
 
     }

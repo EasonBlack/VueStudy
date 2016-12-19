@@ -5,7 +5,7 @@
 <script>
     import Highcharts from 'highcharts';
     export default{
-        props: ['categories'],
+          props: ['categories','series'],
         data(){
             return{
                  target: undefined
@@ -31,13 +31,7 @@
                   },
                   xAxis: {
                       categories: [
-                          'Monday',
-                          'Tuesday',
-                          'Wednesday',
-                          'Thursday',
-                          'Friday',
-                          'Saturday',
-                          'Sunday'
+                        ...this.categories
                       ],
 
                   },
@@ -58,13 +52,9 @@
                           fillOpacity: 0.5
                       }
                   },
-                  series: [{
-                      name: 'John',
-                      data: [3, 4, 3, 5, 4, 10, 12]
-                  }, {
-                      name: 'Jane',
-                      data: [1, 3, 4, 3, 3, 5, 4]
-                  }],
+                  series: [
+                      ...this.series
+                  ],
                   credits: {
                       enabled: false
                   }
