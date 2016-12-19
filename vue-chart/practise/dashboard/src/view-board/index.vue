@@ -20,15 +20,9 @@
                          :series='c.data'
                          :categories='c.type'
                          :title='c.title'></div>
-                </div>
-                <div class='chart__wrapper chart__flex_1'>
-                    <bar-chart
-                     v-if='deploymentMrr && deploymentMrr.data.length '
-                     :categories='deploymentMrr.type'
-                     :series='deploymentMrr.data'
-                    >
-
-                    </bar-chart>
+                    <div class='close__wrapper' v-on:click='removeChart(c.id)'>
+                        <img :src='closeImg' />
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,7 +32,8 @@
 </template>
 
 <script>
-    import { mapState, mapGetters } from 'vuex'
+    import { mapState, mapGetters, mapMutations } from 'vuex'
+    import closeImg from 'assets/icons/close.png'
     import newPanel from './new-panel.vue';
     import barChart from '../charts/bar-chart.vue'
     import areaSplineChart from '../charts/area-spline-chart.vue'
@@ -48,7 +43,8 @@
         data(){
             return{
                 newPanelActive:false,
-                charts: []
+                charts: [],
+                closeImg: closeImg
             }
         },
         created:function(){
@@ -57,11 +53,17 @@
         methods: {
             toggleAddPanel:function(v) {
                 this.newPanelActive = !!v;
-            }
+            },
+            ...mapMutations({
+                removeChart: 'removeChart'
+            })
         },
         computed:{
             ...mapState({
-                charts: state => state.charts
+                charts: (state) => {
+                    return state.charts;
+                    //return state.charts.sort(function() { return Math.random() - 0.5 })
+                }
             })
         }
 
@@ -115,5 +117,24 @@
      }
      .chart__wrapper  {
         padding:10px;
+        position:relative;
+
+        .close__wrapper {
+            z-index:20;
+            background-color:lightsteelblue;
+            width:30px;
+            height:30px;
+            position:absolute;
+            top:10px;
+            right:10px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width:50%;
+                height:50%;
+            }
+        }
      }
 </style>

@@ -16,7 +16,8 @@ const store = new Vuex.Store({
             {id: 'deployment_efficiency', title:'Deployment Efficiency', fun: 'fetchDeploymentEfficiency'},
             {id: 'deployment_mrr',title: 'Deployment MRR', fun: 'fetchDeploymentMrr'}
         ],
-        charts: []
+        charts: [],
+        count:0
     },
     getters: {
         monthlyAudit: (state)=> {
@@ -30,29 +31,17 @@ const store = new Vuex.Store({
         },
     },
     mutations: {
-        getAudit: (state, res) =>  {
-            let _monthlyAudit = {
-                id: 'monthly_audit',
-                data: res.data,
-                type:res.type
-            }
-            state.charts.push(_monthlyAudit)
+        incrementCount: (state)=>{
+            state.count ++;
         },
-        getDeploymentEfficiency: (state, res)=>{
-            let _result = {
-                id: 'deployment_efficiency',
-                data: res.data,
-                type:res.type
+        removeChart: (state,id)=> {
+            let _id = id;
+            console.log(_id);
+            for(let i =0;i<state.charts.length;i++) {
+                if(state.charts[i].id == _id) {
+                    state.charts.splice(i,1);
+                }
             }
-            state.charts.push(_result)
-        },
-        getDeploymentMrr:(state, res) => {
-            let _result = {
-                id: 'deployment_mrr',
-                data: res.data,
-                type:res.type
-            }
-            state.charts.push(_result)
         },
         addNewChart:(state, res)=> {
             let _id = res.chartInfo.id + '-' + res.dataInfo.id;
@@ -65,13 +54,13 @@ const store = new Vuex.Store({
                 data: res.data,
                 type:res.type
             }
+            state.count ++;
             state.charts.push(_result)
         }
     },
     actions: {
         fetchDataById ({dispatch,commit,state},res) {
             let _dataFun = res.dataInfo.fun;
-            console.log('xxxxxxxxx');
             return dispatch(_dataFun, res);
         },
         fetchMonthlyAudit ({ commit, state }, res) {
@@ -79,7 +68,6 @@ const store = new Vuex.Store({
                 $.getJSON('../data/monthly_audit_data.json'),
                 $.getJSON('../data/monthly_audit_type.json')
             ).then((d, t)=>{
-                console.log(res);
                 commit('addNewChart', {data:d[0], type:t[0], ...res})
                 //commit('getAudit', {data:d[0], type:t[0]})
             })
