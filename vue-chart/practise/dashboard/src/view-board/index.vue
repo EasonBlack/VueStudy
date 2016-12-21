@@ -11,6 +11,7 @@
                 <div class='chart__wrapper'
                 v-for='c in charts'
                 v-bind:class='{
+                    "chart__pie-list": c.chartInfo.chart=="pie-list-chart",
                     "chart__flex_1": c.size==1,
                     "chart__flex_2": c.size==0.5,
                     "chart__flex_3": c.size==0.3
@@ -38,8 +39,9 @@
     import barChart from '../charts/bar-chart.vue'
     import areaSplineChart from '../charts/area-spline-chart.vue'
     import stackedColumnChart from '../charts/stacked-column-chart.vue'
+    import pieListChart from '../charts/pie-list-chart.vue'
     export default{
-        components: {newPanel, barChart, areaSplineChart, stackedColumnChart},
+        components: {newPanel, barChart, areaSplineChart, stackedColumnChart, pieListChart},
         data(){
             return{
                 newPanelActive:false,
@@ -62,7 +64,6 @@
             ...mapState({
                 charts: (state) => {
                     return state.charts;
-                    //return state.charts.sort(function() { return Math.random() - 0.5 })
                 }
             })
         }
