@@ -40,8 +40,9 @@
     import areaSplineChart from '../charts/area-spline-chart.vue'
     import stackedColumnChart from '../charts/stacked-column-chart.vue'
     import pieListChart from '../charts/pie-list-chart.vue'
+    import tableChart from '../charts/table-chart.vue'
     export default{
-        components: {newPanel, barChart, areaSplineChart, stackedColumnChart, pieListChart},
+        components: {newPanel, barChart, areaSplineChart, stackedColumnChart, pieListChart, tableChart},
         data(){
             return{
                 newPanelActive:false,

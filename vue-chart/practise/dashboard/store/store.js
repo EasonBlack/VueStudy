@@ -10,7 +10,9 @@ const store = new Vuex.Store({
             {id: 'area_spline', title: 'Area Spline',chart: 'area-spline-chart'},
             {id: 'bar', title: 'Bar', chart: 'bar-chart'},
             {id: 'stacked_column', title: 'Stacked Column', chart: 'stacked-column-chart'},
-            {id: 'pie', title: 'Pie', chart: 'pie-list-chart'}
+            {id: 'pie', title: 'Pie', chart: 'pie-list-chart'},
+            {id: 'table', title: 'Table', chart: 'table-chart'}
+
         ],
         dataType: [
             {id: 'monthly_audit', title: 'Monthly Audit', fun: 'fetchMonthlyAudit'},
