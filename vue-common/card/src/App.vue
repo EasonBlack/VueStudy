@@ -6,15 +6,19 @@
         <div  class='card_col_container'>
             <example-col-card :item='item'></example-col-card>
         </div>
+        <div>
+            <example-ul-card :item='item' :title="'Weather'"></example-ul-card>
+        </div>
 	</div>
 </template>
 
 <script>
     import exampleCard from '../example__1/index.vue';
     import exampleColCard from '../example__col__1/index.vue';
+    import exampleUlCard from '../example__ul__1/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCard, exampleColCard},
+	    components: {exampleCard, exampleColCard, exampleUlCard},
 		data() {
 			return {
                 item : {
