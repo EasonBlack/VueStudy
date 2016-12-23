@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var config = require('../../client/build/webpack.dev.config.js');
+var config = require('../../build/webpack.dev.config.js');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
