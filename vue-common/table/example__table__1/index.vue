@@ -1,9 +1,18 @@
 <template>
-    <div class='container'>
-        <table>
-
-        </table>
-    </div>
+    <table>
+        <thead>
+            <th v-for='col in columns'>{{col.name}}</th>
+        </thead>
+        <tbody>
+            <template v-for='row in rows'>
+                <tr>
+                   <td v-for='col in columns'>
+                       {{row[col.id]}}
+                   </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
 </template>
 
 <script>
@@ -19,14 +28,10 @@
 </script>
 
 <style lang='scss' scoped>
-    .container {
-        display:block;
+    table {
         width:100%;
-        height:100%;
-        overflow:hidden;
-
-        table {
-            width:100%;
+        tr {
+            height:40px;
         }
     }
 

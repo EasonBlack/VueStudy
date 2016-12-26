@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,CAAE;EACA,OAAO,EAAC,CAAC;EACT,MAAM,EAAC,CAAC",
+"sources": ["_settings.global.scss"],
+"names": [],
+"file": "main.css"
+}
