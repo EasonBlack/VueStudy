@@ -8,4 +8,9 @@ app.listen(2111, function () {
 
 require('./config/express')(app,express);
 require('./config/routes')(app);
-require('./config/webpack')(app);
+
+var env = process.argv[2] || 'development';
+if(env != 'production') {
+    console.log('dev webpack');
+    require('./config/webpack')(app);
+}

@@ -1,0 +1,2 @@
+node server/server.js production
+node server/server.js development

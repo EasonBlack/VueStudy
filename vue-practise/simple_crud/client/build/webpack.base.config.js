@@ -5,11 +5,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: [
         'webpack-hot-middleware/client',
-        '../client/src/main.js'
+        path.resolve(__dirname, '../src/main.js')
     ],
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/',
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: '/dist',
         filename: 'build.js',
 
     },
