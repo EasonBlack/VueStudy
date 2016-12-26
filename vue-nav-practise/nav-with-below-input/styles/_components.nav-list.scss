@@ -1,0 +1,43 @@
+
+.nav__container {
+  margin-top:200px;
+  display:block;
+  position:relative;
+  width:100vw;
+
+  ul {
+    display:flex;
+    flex-direction:row;
+    overflow-x:scroll;
+    height:50px;
+
+  }
+
+  li {
+    flex: 0 0 100px;
+    height:40px;
+    display:flex;
+    background-color:rgba(grey, 0.6);
+    justify-content: center;
+    align-items: center;
+    color:white;
+    position:relative;
+
+  }
+  li.nav__hack {
+    flex: 0 0 0px;
+  }
+  li.active:after {
+    content: ' ';
+    position: absolute;
+    left: 40px;
+    bottom:-10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+  }
+
+
+}
