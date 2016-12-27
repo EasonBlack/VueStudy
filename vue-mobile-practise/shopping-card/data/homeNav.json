@@ -1,0 +1,9 @@
+[
+  {"id": 1, "title": "推荐", "background": "Home_Recommend.jpg", "placeholder":"搜一搜，推荐更精准", "items": [] },
+  {"id": 2, "title": "商场", "background": "Home_Mall.jpg", "placeholder":"输入品牌名或商场名", "items": [] },
+  {"id": 3, "title": "优惠券", "background": "Home_Coupon.jpg", "placeholder":"输入品牌名或商场名", "items": [] },
+  {"id": 4, "title": "购物", "background": "Home_Shopping.jpg", "placeholder":"输入品牌名或商场名", "items": [] },
+  {"id": 5, "title": "美食", "background": "Home_Foodie.jpg", "placeholder":"输入品牌名或商场名", "items": [] },
+  {"id": 6, "title": "电影", "background": "Home_Movie.jpg", "placeholder":"输入品牌名或商场名", "items": [] },
+  {"id": 7, "title": "更多", "background": "Home_More.jpg", "placeholder":"输入品牌名或商场名", "items": [] }
+]

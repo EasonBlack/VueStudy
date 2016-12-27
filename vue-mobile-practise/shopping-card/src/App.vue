@@ -1,6 +1,6 @@
 <template>
-    <div class='container'>
-        This is container
+    <div class=container>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -17,7 +17,7 @@
 <style lang='scss' scoped>
     .container {
         width:100vw;
-        heigth:100vh;
+        height: 100vh;
         overflow:hidden;
     }
 </style>
