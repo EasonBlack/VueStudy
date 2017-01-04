@@ -8,7 +8,10 @@ module.exports = function(app){
     var compiler = webpack(config);
     app.use(webpackDevMiddleware(compiler, {
         noInfo: true,
-        publicPath: config.output.publicPath
+        publicPath: config.output.publicPath,
+        watchOptions: {
+            poll: true
+        }
     }));
     app.use(webpackHotMiddleware(compiler, { heartbeat: 10 * 1000}));
 

@@ -3,20 +3,25 @@
 		<div class='table_container'>
             <example-table :columns='columns' :rows='rows'></example-table>
         </div>
+        <div  class='table_container_2'>
+            <example-table2 :columns='columns' :rows='rows'></example-table2>
+        </div>
+
 	</div>
 </template>
 
 <script>
     import exampleTable from '../example__table__1/index.vue';
+    import exampleTable2 from '../example__table__2__crud/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleTable},
+	    components: {exampleTable, exampleTable2},
 		data() {
 			return {
                 columns: [
                     {id:'id', name: 'ID'},
                     {id:'name', name: 'Name'},
-                    {id:'state', name: 'State'}
+                    {id:'auth', name: 'AUTH'}
                 ],
                 rows: [
                     {id: '1',name: 'aaa' , state: '1'},
@@ -54,7 +59,11 @@
 		width:500px;
 		height:400px;
 		overflow-y:auto;
-		margin-bottom:20px;
+		margin-bottom:50px;
+	}
+	.table_container_2 {
+	    width:500px;
+	    margin-bottom:50px;
 	}
 
 </style>
