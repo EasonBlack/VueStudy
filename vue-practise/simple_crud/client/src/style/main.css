@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial; }
+
+ul {
+  list-style: none; }
+
+.form__section {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.form__row {
+  display: flex;
+  padding: 0 10px;
+  margin-bottom: 10px; }
+  .form__row .form__left {
+    flex: 1;
+    display: inline-block;
+    color: white;
+    font-size: 1.1em; }
+  .form__row label {
+    color: white; }
+  .form__row .form__right {
+    width: 100px;
+    display: inline-block; }
+    .form__row .form__right li {
+      margin-bottom: 10px; }
+
+/*# sourceMappingURL=main.css.map */

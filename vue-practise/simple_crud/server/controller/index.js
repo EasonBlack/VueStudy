@@ -1,6 +1,5 @@
 
 const pg = require('pg');
-const conString = "postgres://eason:admin@localhost:5432/workflow";
 const pgConfig = {
     user: 'eason', //env var: PGUSER
     database: 'database', //env var: PGDATABASE
@@ -14,8 +13,10 @@ const pgConfig = {
 const client = new pg.Pool(pgConfig);
 client.connect();
 const visitorService = require('./visitor.service')(client);
+const siteService = require('./site.service')(client);
 
 
 module.exports = {
-    visitorService
+    visitorService,
+    siteService
 }

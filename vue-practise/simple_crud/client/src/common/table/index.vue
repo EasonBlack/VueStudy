@@ -1,9 +1,9 @@
 <template>
     <div class='table__container'>
         <div class='table__title'>
-            <div class='left'>Visitor</div>
+            <div class='left'>{{title}}</div>
             <div class='right'>
-                <a class="tb__button btn__add" v-on:click="addActive=true">NEW</a>
+                <a class="tb__button btn__add" v-on:click="activeAdd">NEW</a>
             </div>
         </div>
         <div class='table__wrapper'>
@@ -19,33 +19,40 @@
                         {{row[col.id]}}
                     </td>
                     <td>
-                        <a class='tb__button btn__edit'>Edit</a>
+                        <a class='tb__button btn__edit' v-on:click="editHandle(row)">Edit</a>
                     </td>
                 </tr>
             </template>
             </tbody>
         </table>
         </div>
-        <add-panel :active='addActive' v-on:closeHandle="closeHandle"></add-panel>
+        <div class='add-panel__container'
+             v-bind:class="{
+            active: addactive
+         }">
+            <slot name="addpanel"></slot>
+        </div>
     </div>
 </template>
 
 <script>
-     import addPanel from './add_panel.vue';
      export default{
-        components: {addPanel},
-        props: ['columns', 'rows'],
+
+        props: ['title','columns', 'rows', 'addactive'],
         data(){
             return{
-                addActive: false
+
             }
         },
         methods: {
-            closeHandle:function(){
-                this.addActive = false;
+            activeAdd: function() {
+                this.$emit('toggleAddPanel', {flag: true})
+            },
+            editHandle: function(item) {
+                let _item = JSON.parse(JSON.stringify(item))
+                this.$emit('editHandle', _item)
             }
         }
-
     }
 </script>
 
@@ -135,6 +142,18 @@
         background-color: rgba(salmon, 0.5);
         &:hover {
             background-color:rgba(salmon, 0.9);
+        }
+    }
+    .add-panel__container {
+        width: 200px;
+        height: 100%;
+        background-color: rgba(grey, 0.6);
+        position: absolute;
+        left: -200px;
+        top: 0;
+        transition: all 0.3s ease;
+        &.active {
+            left: 0px;
         }
     }
 

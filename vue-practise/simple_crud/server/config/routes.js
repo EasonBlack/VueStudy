@@ -3,9 +3,13 @@ var fs = require('fs');
 const appCtrl = require('../controller');
 
 module.exports = function (app) {
-    app.get(/\/(index|edit)?$/, function(req, res) {
+    app.get(/\/(index|site)?$/, function(req, res) {
         res.sendFile(path.join(__dirname,  '../../client/index.html'));
     });
-    app.get('/visitors', appCtrl.visitorService.VisitorAll);
+    app.get('/api/visitors', appCtrl.visitorService.VisitorAll);
+    app.post('/api/visitors', appCtrl.visitorService.VisitorAdd);
+
+    app.get('/api/sites', appCtrl.siteService.SiteAll);
+    app.post('/api/sites', appCtrl.siteService.SiteAdd);
 }
 
