@@ -6,6 +6,7 @@
         <app-table :columns='columns' :rows='visitors' :addactive="addActive"
                     v-on:toggleAddPanel = "toggleAddPanel"
                     v-on:editHandle = "editHandle"
+                    v-on:deleteHandle = "deleteHandle"
                      :title="'Visitor'"
         >
             <add-panel
@@ -50,7 +51,8 @@
 		},
 		methods: {
 		    ...mapActions({
-                postVisitors: 'postVisitors'
+                postVisitors: 'postVisitors',
+                deleteVisitors: 'deleteVisitors'
             }),
 		    confirmHandle: function(req) {
 		        console.log(req);
@@ -72,6 +74,9 @@
                 this.currentSites = item.auth;
                 this.addActive = true;
                 console.log(this.currentId);
+		    },
+		    deleteHandle: function(item) {
+		         this.deleteVisitors({id: item.id});
 		    }
 		},
 		computed:{

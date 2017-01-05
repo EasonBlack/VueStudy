@@ -21,6 +21,11 @@ const actions = {
         Vue.http.post('/api/visitors', req).then((response) => {
             commit('getVisitors', response.body.data)
         })
+    },
+    deleteVisitors ({commit, state}, req) {
+        Vue.http.delete(`/api/visitors/${req.id}`, req).then((response) => {
+            commit('getVisitors', response.body.data)
+        })
     }
 }
 

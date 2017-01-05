@@ -20,6 +20,7 @@
                     </td>
                     <td>
                         <a class='tb__button btn__edit' v-on:click="editHandle(row)">Edit</a>
+                        <a class='tb__button btn__del' v-on:click="deleteHandle(row)">Delete</a>
                     </td>
                 </tr>
             </template>
@@ -51,6 +52,9 @@
             editHandle: function(item) {
                 let _item = JSON.parse(JSON.stringify(item))
                 this.$emit('editHandle', _item)
+            },
+            deleteHandle: function(item) {
+                this.$emit('deleteHandle', item)
             }
         }
     }
@@ -142,6 +146,12 @@
         background-color: rgba(salmon, 0.5);
         &:hover {
             background-color:rgba(salmon, 0.9);
+        }
+    }
+    .btn__del {
+        background-color: rgba(red, 0.5);
+        &:hover {
+            background-color:rgba(red, 0.9);
         }
     }
     .add-panel__container {

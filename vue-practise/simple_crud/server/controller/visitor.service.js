@@ -51,5 +51,18 @@ module.exports = function (client) {
                 VisitorAll
             ])
         },
+        VisitorDelete: function(req, res) {
+            async.waterfall([
+                function (next) {
+                    client.query({
+                        text: 'DELETE FROM visitor WHERE id=$1',
+                        values: [req.params.id]
+                    }, function (error, results) {
+                        next(null, req, res)
+                    })
+                },
+                VisitorAll
+            ])
+        }
     }
 }
