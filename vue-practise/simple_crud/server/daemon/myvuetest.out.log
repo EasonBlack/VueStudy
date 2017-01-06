@@ -1,0 +1,22 @@
+dev webpack
+connect success!
+webpack built 6ca6f87f658a6eb993a3 in 51ms
+Hash: 6ca6f87f658a6eb993a3
+Version: webpack 1.13.3
+Time: 51ms
+   Asset     Size  Chunks             Chunk Names
+build.js  21.4 kB       0  [emitted]  main
+chunk    {0} build.js (main) 40 bytes [rendered]
+    [0] multi main 40 bytes {0} [built] [2 errors]
+
+ERROR in multi main
+Module not found: Error: Cannot resolve module 'webpack-hot-middleware/client' in C:\Windows\system32
+ @ multi main
+
+ERROR in multi main
+Module not found: Error: Cannot resolve module 'babel' in C:\Windows\system32
+ @ multi main
+Cookies:  {}
+undefined
+Cookies:  {}
+hello world

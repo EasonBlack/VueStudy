@@ -14,7 +14,8 @@ ul {
 .form__row {
   display: flex;
   padding: 0 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  position: relative; }
   .form__row .form__left {
     flex: 1;
     display: inline-block;
@@ -27,5 +28,13 @@ ul {
     display: inline-block; }
     .form__row .form__right li {
       margin-bottom: 10px; }
+
+.display__row {
+  display: block;
+  padding: 0 10px;
+  margin-bottom: 10px; }
+  .display__row .display__image {
+    width: 100%;
+    height: auto; }
 
 /*# sourceMappingURL=main.css.map */

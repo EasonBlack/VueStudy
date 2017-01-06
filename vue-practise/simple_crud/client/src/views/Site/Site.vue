@@ -7,9 +7,12 @@
                    :title="'Sites'"
                    :addactive="addActive"
                    v-on:toggleAddPanel = "toggleAddPanel"
+                   v-on:editHandle = "editHandle"
+                   v-on:deleteHandle = "deleteHandle"
         >
             <add-panel
                     slot="addpanel"
+                    :currentItem = "currentItem"
                     v-on:closeHandle="toggleAddPanel"
                     v-on:confirmHandle="confirmHandle"
             ></add-panel>
@@ -31,15 +34,22 @@
         data() {
 			return {
 			    addActive: false,
+			    currentItem: {
+			        id: '',
+			        name: '',
+			        image: ''
+			    },
                 columns: [
                     {id:'id', name: 'ID'},
-                    {id:'name', name: 'Name'}
+                    {id:'name', name: 'Name'},
+                    {id:'image', name: 'Image'}
                 ]
 			}
 		},
 		methods: {
 		    ...mapActions({
-                postSites: 'postSites'
+                postSites: 'postSites',
+                deleteSites: 'deleteSites'
             }),
 		    confirmHandle: function(req) {
                 this.postSites(req);
@@ -47,6 +57,16 @@
 		    },
 		    toggleAddPanel: function({flag}) {
                 this.addActive = flag;
+                if(flag) {
+                    this.currentItem = {};
+                }
+		    },
+		    editHandle: function(item) {
+		        this.currentItem = item;
+                this.addActive = true;
+		    },
+		    deleteHandle: function(item) {
+		         this.deleteSites({id: item.id});
 		    }
 		},
 		computed:{
