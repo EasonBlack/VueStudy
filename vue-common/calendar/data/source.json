@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2017-01-05",
+    "events": [
+      {"name": "aaaaaa"},
+      {"name": "bbbbbb"}
+    ]
+  },
+  {
+    "date": "2017-01-15",
+    "events": [
+      {"name": "cccccc"},
+      {"name": "dddddd"}
+    ]
+  },
+  {
+    "date": "2017-02-15",
+    "events": [
+      {"name": "eeeeee"},
+      {"name": "ffffff"}
+    ]
+  }
+]
