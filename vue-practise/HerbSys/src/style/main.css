@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'nva_fontello';
+  src: url("../font/nav_fontello.woff2?123") format("woff2");
+  font-weight: normal;
+  font-style: normal; }
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "nva_fontello";
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center; }
+
+.icon-plus:before {
+  content: '\e800'; }
+
+.icon-left-open:before {
+  content: '\e801'; }
+
+.icon-calendar:before {
+  content: '\e802'; }
+
+.icon-right-open:before {
+  content: '\e803'; }
+
+.icon-table:before {
+  content: '\f0ce'; }
+
+.icon-quora:before {
+  content: '\f2c4'; }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: bootstrap, Arial; }
+
+ul {
+  list-style: none; }
+
+.form__section {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.form__row {
+  display: flex;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  position: relative; }
+  .form__row .form__left {
+    flex: 1;
+    display: inline-block;
+    color: white;
+    font-size: 1.1em; }
+  .form__row label {
+    color: white; }
+  .form__row .form__right {
+    width: 100px;
+    display: inline-block; }
+    .form__row .form__right li {
+      margin-bottom: 10px; }
+
+.display__row {
+  display: block;
+  padding: 0 10px;
+  margin-bottom: 10px; }
+  .display__row .display__image {
+    width: 100%;
+    height: auto; }
+
+/*# sourceMappingURL=main.css.map */
