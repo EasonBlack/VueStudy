@@ -1,5 +1,6 @@
 <template>
     <div class='calendar__container'>
+       <weekend-div></weekend-div>
        <div class='date__container' v-for='i in countDays'>
             <date-div
             :dateMoment='getDateMoment(i)'
@@ -12,8 +13,9 @@
 <script>
     import moment from 'moment';
     import dateDiv from './date.vue';
+    import weekendDiv from './weekend.vue';
     export default{
-        components: {dateDiv},
+        components: {dateDiv, weekendDiv},
         props: ['currentYear','currentMonth', 'source'],
         data:function(){
             return {

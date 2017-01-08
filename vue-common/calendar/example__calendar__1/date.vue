@@ -13,6 +13,7 @@
 <script>
     import moment from 'moment';
     import eventDiv from './event.vue';
+
     export default {
         props: ['dateMoment', 'currentMonth', 'dateSource'],
         components: {eventDiv},
@@ -36,6 +37,7 @@
         border-bottom: 1px solid rgba(grey, 0.5);
         border-right: 1px solid rgba(grey, 0.5);
         height:100px;
+        position:relative;
     }
     .title__section {
         height:30px;
@@ -53,5 +55,6 @@
         position:relative;
         width:100%;
         padding:10px 10px;
+        box-sizing: border-box;
     }
 </style>
