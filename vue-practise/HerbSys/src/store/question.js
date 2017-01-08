@@ -17,6 +17,12 @@ const actions = {
             commit('getQuestions', response.body.data)
         })
     },
+    postQuestion ({commit, state}, req) {
+        console.log(req);
+        Vue.http.post('http://localhost:3000/api/herb/question', req).then((response) => {
+            commit('getQuestions', response.body.data)
+        })
+    }
 }
 
 

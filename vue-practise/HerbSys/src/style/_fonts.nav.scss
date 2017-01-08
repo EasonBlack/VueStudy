@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'nva_fontello';
-  src: url('../font/nav_fontello.woff2?123') format('woff2');
+  src: url('../font/fontello.woff2?123') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,3 +20,4 @@
 .icon-right-open:before { content: '\e803'; }
 .icon-table:before { content: '\f0ce'; }
 .icon-quora:before { content: '\f2c4'; }
+.icon-minus:before { content: '\e804'; }

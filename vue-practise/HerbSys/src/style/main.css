@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'nva_fontello';
-  src: url("../font/nav_fontello.woff2?123") format("woff2");
+  src: url("../font/fontello.woff2?123") format("woff2");
   font-weight: normal;
   font-style: normal; }
 [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -29,6 +29,9 @@
 .icon-quora:before {
   content: '\f2c4'; }
 
+.icon-minus:before {
+  content: '\e804'; }
+
 * {
   padding: 0;
   margin: 0;
@@ -44,7 +47,7 @@ ul {
 
 .form__row {
   display: flex;
-  padding: 0 10px;
+  padding: 0 20px;
   margin-bottom: 10px;
   position: relative; }
   .form__row .form__left {
@@ -52,20 +55,54 @@ ul {
     display: inline-block;
     color: white;
     font-size: 1.1em; }
-  .form__row label {
-    color: white; }
   .form__row .form__right {
     width: 100px;
     display: inline-block; }
     .form__row .form__right li {
+      color: white;
       margin-bottom: 10px; }
 
-.display__row {
-  display: block;
-  padding: 0 10px;
+.form__col-row {
+  flex-direction: column; }
+
+.form__title {
+  font-size: 1.1em;
+  color: white;
   margin-bottom: 10px; }
-  .display__row .display__image {
-    width: 100%;
-    height: auto; }
+
+.form__textarea {
+  min-height: 100px;
+  padding: 10px; }
+
+.form__wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px; }
+
+.form__new_input {
+  width: 80%;
+  margin-right: 10px; }
+
+.form__icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 50%; }
+  .form__icon a:before {
+    margin-right: 0; }
+
+.form__wrapper label {
+  width: 80%;
+  color: white;
+  margin-right: 10px; }
+
+.form__add {
+  background-color: lightcoral; }
+
+.form__delete {
+  background-color: steelblue; }
 
 /*# sourceMappingURL=main.css.map */

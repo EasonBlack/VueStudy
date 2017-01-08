@@ -5,7 +5,7 @@
 
 .form__row {
   display: flex;
-  padding: 0 10px;
+  padding: 0 20px;
   margin-bottom: 10px;
   position: relative;
   .form__left {
@@ -14,24 +14,66 @@
     color: white;
     font-size: 1.1em;
   }
-  label {
-    color: white;
-  }
   .form__right {
     width: 100px;
     display: inline-block;
     li {
+      color:white;
       margin-bottom: 10px;
     }
   }
 }
 
-.display__row {
-  display: block;
-  padding: 0 10px;
-  margin-bottom: 10px;
-  .display__image {
-    width:100%;
-    height:auto;
+.form__col-row {
+  flex-direction: column;
+}
+
+.form__title {
+  font-size:1.1em;
+  color:white;
+  margin-bottom:10px;
+}
+.form__textarea {
+  min-height:100px;
+  padding:10px;
+}
+
+.form__wrapper {
+  display:flex;
+  flex-direction:row;
+  margin-bottom:10px;
+}
+
+.form__new_input {
+  width:80%;
+  margin-right:10px;
+}
+.form__icon {
+  width:30px;
+  height:30px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  border-radius:50%;
+  a:before {
+    margin-right:0;
   }
+}
+
+.form__wrapper {
+  label {
+    width:80%;
+    color:white;
+    margin-right:10px;
+  }
+}
+
+.form__add {
+  background-color: lightcoral;
+}
+
+
+.form__delete {
+  background-color: steelblue;
 }

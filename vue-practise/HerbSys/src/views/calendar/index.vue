@@ -94,6 +94,5 @@
     .calendar__content {
         height: calc(100% - 60px);
         overflow:auto;
-        padding:0 10px;
     }
 </style>

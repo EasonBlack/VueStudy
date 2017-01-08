@@ -3,7 +3,7 @@
         <div class='table__title'>
             <div class='left'>{{title}}</div>
             <div class='right'>
-                <a class="tb__button btn__add" v-on:click="activeAdd">NEW</a>
+                <a class="btn__add icon-plus" v-on:click="activeAdd"></a>
             </div>
         </div>
         <div class='table__wrapper'>
@@ -68,9 +68,9 @@
     }
     .table__title {
         width:100%;
-        height:40px;
+        height:60px;
         display:flex;
-        background-color:#242E35;
+        background-color:white;
         .left {
             display:flex;
             flex:1;
@@ -78,14 +78,12 @@
             align-items: center;
             padding:0 10px;
             font-size:1.1em;
-            color:white;
         }
         .right {
             display:flex;
             flex:1;
             justify-content : flex-end;
             align-items: center;
-            padding:0 10px;
         }
     }
 
@@ -143,9 +141,14 @@
         }
     }
     .btn__add {
-        background-color: rgba(salmon, 0.5);
+        width:60px;
+        height:60px;
+        line-height:60px;
+        text-align:center;
+        background-color: #00AECD;
+        color: white;
         &:hover {
-            background-color:rgba(salmon, 0.9);
+            background-color:rgba(#00AECD, 0.9);
         }
     }
     .btn__del {

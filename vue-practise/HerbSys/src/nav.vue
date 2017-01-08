@@ -2,7 +2,7 @@
     <ul class='nav__container'>
         <li v-for='(item,index) in items' v-on:click='goto(item, index)'
             v-bind:class="{
-                active: index==currentIndex
+                active: item.href==currenthref
             }">
             <span v-bind:class="'icon-' + item.icon"></span>
             {{item.name}}
@@ -13,7 +13,7 @@
     export default {
         data: function() {
             return {
-                currentIndex : 1,
+                currenthref : this.$route.path.split('/')[1],
                 items: [
                     {name: "New" , href: 'new', icon: 'plus'},
                     {name: "Calendar", href: 'calendar', icon: 'calendar'},
@@ -24,7 +24,7 @@
         },
         methods: {
             goto: function(item, index) {
-               this.currentIndex = index;
+               this.currenthref = item.href;
                this.$router.push(`/${item.href}`);
             }
         }
@@ -44,16 +44,5 @@
             }
 
         }
-         li.active:after {
-             content: ' ';
-             position: absolute;
-             right: 0px;
-             top: 15px;
-             width: 0;
-             height: 0;
-             border-top: 10px solid transparent;
-             border-right: 10px solid white;
-             border-bottom: 10px solid transparent;
-         }
     }
 </style>
