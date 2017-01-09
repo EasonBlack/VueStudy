@@ -60,6 +60,7 @@
         methods: {
             addAnswer :function() {
                 this.answers.push({ title: this.newAnswer });
+                this.newAnswer = '';
             },
             delAnswer: function(item, index) {
                 this.answers.splice(index, 1);
@@ -70,9 +71,17 @@
                     type: this.newType,
                     answers: this.answers
                 })
+                this.clearNew();
             },
             closeHandle: function() {
                 this.$emit('closeHandle');
+                this.clearNew();
+            },
+            clearNew: function(){
+                this.newTitle = '';
+                this.newType = '';
+                this.answers=[];
+                this.newAnswer = '';
             }
 
         }

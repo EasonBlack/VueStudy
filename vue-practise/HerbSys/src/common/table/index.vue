@@ -16,8 +16,17 @@
             <template v-for='row in rows'>
                 <tr>
                     <td v-for='col in columns'>
-                        {{row[col.id]}}
+                        <span  v-if='Array.isArray(row[col.id])'>
+                            <p v-for='o in row[col.id]'>
+                                {{o}}
+                            </p>
+                        </span>
+                        <span v-else>
+                             {{row[col.id]}}
+                        </span>
+
                     </td>
+
                     <td>
                         <a class='tb__button btn__edit' v-on:click="editHandle(row)">Edit</a>
                         <a class='tb__button btn__del' v-on:click="deleteHandle(row)">Delete</a>
@@ -55,6 +64,9 @@
             },
             deleteHandle: function(item) {
                 this.$emit('deleteHandle', item)
+            },
+            isarray:function(obj){
+                return Array.isArray(obj);
             }
         }
     }

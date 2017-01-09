@@ -27,7 +27,7 @@
                      {id:'id', name: 'ID'},
                      {id:'title', name: 'Title'},
                      {id:'type', name: 'Type'},
-                     {id:'answer', name: 'Answer'},
+                     {id:'answer_title', name: 'Answer'},
                  ]
             }
         },

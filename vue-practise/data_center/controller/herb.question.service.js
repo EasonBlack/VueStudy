@@ -4,10 +4,20 @@ var path = require('path');
 var fs = require('fs');
 
 module.exports = function (client) {
+    let questionJoinAnswerQuery = `
+        select q.*, t.answer_title
+        from herb.question q
+        , lateral (
+        	select array(select a.title 
+        	from unnest(q.answer) unan
+        	left join herb.answer a on unan=a.id 
+        )) t(answer_title)
+        order by q.id
+    `;
 
     let questionAll = function (req, res) {
         client.query({
-            text: 'select * from herb.question order by id'
+            text: questionJoinAnswerQuery
         }, function (error, results) {
             if (error) {
                 console.log(error);
