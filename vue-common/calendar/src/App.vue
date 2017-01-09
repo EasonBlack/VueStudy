@@ -1,5 +1,8 @@
 <template>
 	<div id="app">
+        <div class='main_container'>
+            <example-input-calendar></example-input-calendar>
+        </div>
 		<div class='main_container'>
 		    <div class='calendar__nav'>
 		        <a class='nav__prev' v-on:click='prev'>Prev</a>
@@ -20,9 +23,10 @@
     import Vue from 'vue';
     import moment from 'moment';
     import exampleCalendar from '../example__calendar__1/index.vue';
+    import exampleInputCalendar from '../example__input_calendar/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar},
+	    components: {exampleCalendar, exampleInputCalendar},
 		data() {
 			return {
 			    current: moment().startOf('month'),
@@ -67,7 +71,7 @@
     }
 
     .main_container {
-
+        margin-bottom:50px;
     }
 
     .calendar__nav {

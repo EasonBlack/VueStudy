@@ -1,1 +1,19 @@
 (node:9804) DeprecationWarning: Using Buffer without `new` will soon stop working. Use `new Buffer()`, or preferably `Buffer.from()`, `Buffer.allocUnsafe()` or `Buffer.alloc()` instead.
+events.js:160
+      throw er; // Unhandled 'error' event
+      ^
+
+error: terminating connection due to administrator command
+    at Connection.parseE (C:\Eason\Work\myproject\Vue-Study\node_modules\pg\lib\connection.js:554:11)
+    at Connection.parseMessage (C:\Eason\Work\myproject\Vue-Study\node_modules\pg\lib\connection.js:381:17)
+    at Socket.<anonymous> (C:\Eason\Work\myproject\Vue-Study\node_modules\pg\lib\connection.js:117:22)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at TCP.onread (net.js:551:20)
+(node:4368) DeprecationWarning: Using Buffer without `new` will soon stop working. Use `new Buffer()`, or preferably `Buffer.from()`, `Buffer.allocUnsafe()` or `Buffer.alloc()` instead.
+(node:4368) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: connect ECONNREFUSED 127.0.0.1:5432
+(node:4368) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:2936) DeprecationWarning: Using Buffer without `new` will soon stop working. Use `new Buffer()`, or preferably `Buffer.from()`, `Buffer.allocUnsafe()` or `Buffer.alloc()` instead.
+(node:2936) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: connect ECONNREFUSED 127.0.0.1:5432
+(node:2936) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
