@@ -5,13 +5,18 @@ var fs = require('fs');
 
 module.exports = function (client) {
     let questionJoinAnswerQuery = `
-        select q.*, t.answer_title
+        select q.*, t.answer_title, tt.answer_type
         from herb.question q
         , lateral (
         	select array(select a.title 
         	from unnest(q.answer) unan
         	left join herb.answer a on unan=a.id 
         )) t(answer_title)
+        ,lateral (
+		    select name
+		    from herb.item i
+		    where i.id =q.type
+        ) tt(answer_type)
         order by q.id
     `;
 
@@ -30,6 +35,18 @@ module.exports = function (client) {
 
     return {
         questionAll,
+        questionType: function(req, res) {
+            client.query({
+                text: "select * from herb.item where type='answer_type'"
+            }, function (error, results) {
+                if (error) {
+                    console.log(error);
+                }
+                res.send({
+                    data: results.rows
+                });
+            });
+        },
         questionAdd: function(req, res) {
             let answers = req.body.answers;
             let questiontitle = req.body.title;
