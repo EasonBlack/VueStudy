@@ -1,9 +1,9 @@
 <template>
     <div class='m__container'>
         <span class='input__wrapper'>
-            <input type='text' v-on:click='toggleCalendar' />
+            <input type='text' v-on:click='toggleCalendar' :value='selectDate' />
         </span>
-        <calendar v-if='showCalendar'></calendar>
+        <calendar v-if='showCalendar' v-on:confirmHandle='confirmHandle'></calendar>
     </div>
 </template>
 
@@ -13,12 +13,16 @@
         components: {calendar},
         data(){
             return{
-                showCalendar: false
+                showCalendar: false,
+                selectDate: ''
             }
         },
         methods: {
             toggleCalendar:function() {
                 this.showCalendar = !this.showCalendar;
+            },
+            confirmHandle: function(obj) {
+                this.selectDate = obj.date;
             }
         }
     }

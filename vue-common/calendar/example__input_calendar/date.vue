@@ -1,5 +1,6 @@
 <template>
     <div class='date__container'
+         v-on:click='confirmHandle'
          v-bind:class="{
                 notcurrent: !isCurrentMonth
              }">
@@ -14,6 +15,11 @@
         data: function(){
             return {}
         },
+        methods: {
+            confirmHandle: function() {
+                this.$emit('confirmHandle', {date: this.dateMoment.format('YYYY-MM-DD')});
+            }
+        },
         computed: {
             'date': function() {
                 if(!this.dateMoment) {
@@ -25,7 +31,6 @@
                 if(!this.dateMoment) {
                     return false;
                 }
-                console.log(this.dateMoment.format('MM'), this.currentMonth)
                 return this.dateMoment.format('MM') == this.currentMonth;
             }
         }

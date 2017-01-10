@@ -12,6 +12,7 @@
         <div class='calendar__content-section'>
             <date-div
                     v-for='i in countDays'
+                    v-on:confirmHandle='confirmHandle'
                     :dateMoment='getDateMoment(i)'
                     :currentMonth='currentMonth'>
             </date-div>
@@ -28,35 +29,40 @@
             return{
                 current: moment(),
                 currentYear: moment().year(),
-                currentMonth: moment().format('MM')
+                currentMonth: moment().format('MM'),
+                currentIntMonth : moment().month()
             }
         },
         methods: {
             getDateMoment: function(i) {
-                console.log(moment(this.startDate).add(i-1,'days'));
+                console.log(this.startDate);
                 return moment(this.startDate).add(i-1,'days');
             },
             prev:function() {
                 this.current = this.current.subtract(1,'month');
                 this.currentYear = this.current.year();
                 this.currentMonth = this.current.format('MM');
+                this.currentIntMonth = this.current.month();
             },
             next:function() {
                 this.current = this.current.add(1,'month');
-                 this.currentYear = this.current.year();
+                this.currentYear = this.current.year();
                 this.currentMonth = this.current.format('MM');
+                this.currentIntMonth = this.current.month();
+            },
+            confirmHandle:function(obj) {
+                this.$emit('confirmHandle',obj);
             }
         },
         computed: {
             'startDate': function() {
                  let _year = this.currentYear;
-                 let _month = this.current.month();
-                 console.log(moment({y: _year, month: _month, d:1}).startOf('week').format('YYYY-MM-DD'))
+                 let _month = this.currentIntMonth;
                  return  moment({y: _year, month: _month, d:1}).startOf('week').format('YYYY-MM-DD');
             },
              'endDate': function(){
                  let _year = this.currentYear;
-                 let _month =  this.current.month();
+                 let _month =  this.currentIntMonth;
                  let monthEnd = moment({y: _year, month: _month, d:1}).endOf('month').format('YYYY-MM-DD');
                  let _end = moment(monthEnd).endOf('week').format('YYYY-MM-DD');
                  return _end;
@@ -64,7 +70,6 @@
              'countDays': function() {
                  let _end = moment(this.endDate);
                  let _start = moment(this.startDate);
-                 console.log(_end.diff(_start, 'days') + 1)
                  return _end.diff(_start, 'days') + 1;
              }
         }
