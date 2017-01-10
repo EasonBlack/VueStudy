@@ -11,13 +11,9 @@
          <div class='form__row'>
             <label class='form__left'>Type  :</label>
             <ul class='form__right'>
-                <li>
-                    <input id="chktext" type="radio" value="1" v-model="newType"/>
-                    <label for="chktext">Text</label>
-                </li>
-                <li>
-                    <input id="chkradio" type="radio" value="2" v-model="newType"/>
-                    <label for="chkradio">Radio</label>
+                <li v-for='type in questionType'>
+                    <input :id="'chk'+ type.id" type="radio" :value="type.id" v-model="newType"/>
+                    <label :for="'chk'+ type.id">{{type.name}}</label>
                 </li>
             </ul>
          </div>
@@ -48,7 +44,7 @@
 </template>
 <script>
     export default {
-        props: ['active'],
+        props: ['active', 'questionType'],
         data: function() {
             return {
                 newTitle: '',

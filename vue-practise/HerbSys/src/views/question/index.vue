@@ -1,6 +1,7 @@
 <template>
     <div class='question__container'>
         <add-panel :active='editActive'
+                    :questionType='question_types'
                     v-on:confirmHandle='confirmHandle'
                     v-on:closeHandle='closeHandle'></add-panel>
         <table-div :columns='columns'  :rows='questions'
@@ -16,8 +17,11 @@
     export default {
         components:{tableDiv, addPanel},
         beforeCreate:function() {
-             if(!this.$store.state.question.length) {
+             if(!this.$store.state.question.all.length) {
                this.$store.dispatch('fetchQuestions');
+            }
+            if(!this.$store.state.question.type.length) {
+                 this.$store.dispatch('fetchQuestionsType');
             }
         },
         data: function() {
@@ -26,7 +30,7 @@
                  columns: [
                      {id:'id', name: 'ID'},
                      {id:'title', name: 'Title'},
-                     {id:'type', name: 'Type'},
+                     {id:'answer_type', name: 'Type'},
                      {id:'answer_title', name: 'Answer'},
                  ]
             }
@@ -50,6 +54,9 @@
             ...mapState({
                 questions: (state) => {
                     return state.question.all;
+                },
+                question_types: (state)=> {
+                    return state.question.type;
                 }
             })
         },
