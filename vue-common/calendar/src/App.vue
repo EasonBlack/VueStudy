@@ -1,5 +1,8 @@
 <template>
 	<div id="app">
+		<div class='main_container'>
+            <example-calendar-git :source='source' v-if='source.length'></example-calendar-git>
+		</div>
         <div class='main_container'>
             <example-input-calendar></example-input-calendar>
         </div>
@@ -24,9 +27,10 @@
     import moment from 'moment';
     import exampleCalendar from '../example__calendar__1/index.vue';
     import exampleInputCalendar from '../example__input_calendar/index.vue';
+    import exampleCalendarGit from '../example__calendar_gitlike/index.vue'
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar, exampleInputCalendar},
+	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit},
 		data() {
 			return {
 			    current: moment().startOf('month'),
@@ -44,7 +48,6 @@
         methods: {
             prev: function() {
                 this.current =this.current.subtract(1, 'months');
-
                 this.currentMonth = this.current.month();
                 this.currentYear = this.current.year();
             },
