@@ -1,25 +1,29 @@
 <template>
     <div class='feedback-new__container'>
         <div class='header__container'>
-
+            <a class='btn btn__confirm'>Confirm</a>
+            <a class='btn btn__reset'>Reset</a>
         </div>
-        <div class='content__container'>
-            <ul>
-                <li
-                 v-bind:class="{
-                    active: currentTab=='basic'
-                 }"
-                 v-on:click='currentTab="basic"'>Basic</li>
-                <li
-                 v-bind:class="{
-                    active: currentTab=='detail'
-                 }"
-                 v-on:click='currentTab="detail"'>Detail</li>
-            </ul>
-            <basic-question v-show='currentTab == "basic"'></basic-question>
-            <detail-question v-show='currentTab == "detail"'></detail-question>
 
+        <ul class='tab__container'>
+            <li
+             v-bind:class="{
+                active: currentTab=='basic'
+             }"
+             v-on:click='currentTab="basic"'>Basic</li>
+            <li
+             v-bind:class="{
+                active: currentTab=='detail'
+             }"
+             v-on:click='currentTab="detail"'>Detail</li>
+        </ul>
+        <div  class='content__container'>
+             <basic-question v-show='currentTab == "basic"'></basic-question>
+             <detail-question v-show='currentTab == "detail"'></detail-question>
         </div>
+
+
+
 
     </div>
 </template>
@@ -59,16 +63,37 @@
     .header__container {
         height:60px;
         display: flex;
-        align-items: center;
-        padding: 0 60px;
-        font-size: 1.2em
-    }
-    .content__container {
-        overflow:auto;
-        height:calc(100vh - 60px);
-        ul {
-            list-style:none;
+        align-items: left;
+        padding: 10px 10px;
+        font-size: 1.2em;
+        .btn {
+            display:inline-block;
+            padding: 0px 20px;
+            font-size: 1.1em;
+            height:40px;
+            line-height:40px;
+            border-radius: 5px;
+            color:white;
+            margin-right:10px;
+        }
+        .btn__confirm {
+            background-color: rgba(steelblue,0.7);
+            &:hover {
+                background-color: rgba(steelblue,1);
+            }
 
+        }
+        .btn__reset {
+             background-color: rgba(lightsalmon, 0.7);
+             &:hover {
+                background-color: rgba(lightsalmon,1);
+             }
+        }
+    }
+    .tab__container {
+        padding:0px 10px;
+        ul {
+           list-style:none;
         }
         li {
             display:inline-block;
@@ -88,6 +113,12 @@
                 background-color: rgba(70, 183, 162, 0.9);
             }
         }
+    }
+    .content__container {
+        overflow:auto;
+        height:calc(100vh - 120px);
+        padding:0px 10px;
+
     }
 
 </style>
