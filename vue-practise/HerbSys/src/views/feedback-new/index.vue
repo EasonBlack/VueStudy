@@ -1,46 +1,46 @@
 <template>
     <div class='feedback-new__container'>
         <div class='header__container'>
-            New Feedback
+
         </div>
         <div class='content__container'>
-             <div class='basic__container'>
-                 <div class='feedback__row'>
-                     <label>Name</label>
-                     <input type=text v-model='newName' />
-                 </div>
-                 <div class='feedback__row'>
-                     <label>Date</label>
-                     <input type=text v-model='newDate' />
-                 </div>
-             </div>
-             <div class='detail__container'>
-                  <div class='feedback__row' v-for='question in questions'>
-                     <label class='question__title'>{{question.title}}</label>
-                     <textarea v-if='question.type==1' />
-                     <template v-else-if='question.type==2'>
-                         <div v-for='an in question.answer_title'>
-                             <input type=checkbox />
-                             <label>{{an}}</label>
-                         </div>
-                     </template>
+            <ul>
+                <li
+                 v-bind:class="{
+                    active: currentTab=='basic'
+                 }"
+                 v-on:click='currentTab="basic"'>Basic</li>
+                <li
+                 v-bind:class="{
+                    active: currentTab=='detail'
+                 }"
+                 v-on:click='currentTab="detail"'>Detail</li>
+            </ul>
+            <basic-question v-show='currentTab == "basic"'></basic-question>
+            <detail-question v-show='currentTab == "detail"'></detail-question>
 
-                  </div>
-             </div
         </div>
 
     </div>
 </template>
 <script>
+    import basicQuestion from './basic.vue';
+    import detailQuestion from './detail.vue';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     export default {
+        components: {basicQuestion, detailQuestion},
         beforeCreate:function() {
              if(!this.$store.state.question.all.length) {
                this.$store.dispatch('fetchQuestions');
             }
         },
         data:function() {
-            return {}
+            return {
+                currentTab: 'basic'
+            }
+        },
+        methods: {
+
         },
         computed:{
             ...mapState({
@@ -66,48 +66,27 @@
     .content__container {
         overflow:auto;
         height:calc(100vh - 60px);
-    }
-    .basic__container, .detail__container {
-        padding:0px 60px;
-
-        .feedback__row {
-            width:100%;
-            display:flex;
-            height:50px;
-            margin-bottom:30px;
-            label {
-                display:inline-block;
-                width:100px;
-                height:40px;
-                line-height:40px;
-            }
-            input[type=text] {
-                width: 200px;
-                height: 40px;
-                line-height: 40px;
-                padding:0 10px;
-            }
+        ul {
+            list-style:none;
 
         }
-    }
-    .detail__container {
-        .feedback__row {
-            height:auto;
-            display:flex;
-            flex-direction:column;
-        }
-        .question__title {
-            display:block;
-        }
-        label {
+        li {
             display:inline-block;
-            width:100px;
+            width:150px;
             height:40px;
             line-height:40px;
-         }
-        textarea {
-           width:300px;
-           height:80px;
+            text-align:center;
+            font-size:1.1em;
+            background-color: rgba(steelblue, 0.5);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            color:white;
+            &:hover {
+                background-color: rgba(steelblue, 0.9);
+            }
+            &.active {
+                background-color: rgba(70, 183, 162, 0.9);
+            }
         }
     }
 

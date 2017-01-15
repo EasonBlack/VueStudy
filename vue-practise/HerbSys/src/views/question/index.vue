@@ -2,11 +2,13 @@
     <div class='question__container'>
         <add-panel :active='editActive'
                     :questionType='question_types'
+                    :questionCurrent = 'question_current'
                     v-on:confirmHandle='confirmHandle'
                     v-on:closeHandle='closeHandle'></add-panel>
         <table-div :columns='columns'  :rows='questions'
                     :title="'Question Manage'"
                     v-on:toggleAddPanel= 'toggleAddPanel'
+                    v-on:editHandle= 'editHandle'
         ></table-div>
     </div>
 </template>
@@ -20,33 +22,45 @@
              if(!this.$store.state.question.all.length) {
                this.$store.dispatch('fetchQuestions');
             }
-            if(!this.$store.state.question.type.length) {
-                 this.$store.dispatch('fetchQuestionsType');
-            }
         },
         data: function() {
             return {
                  editActive: false,
+                 question_current: {
+                    id: '',
+                    title: '',
+                    display: ''
+                 },
                  columns: [
                      {id:'id', name: 'ID'},
                      {id:'title', name: 'Title'},
-                     {id:'answer_type', name: 'Type'},
-                     {id:'answer_title', name: 'Answer'},
+                     {id:'display', name: 'Display'}
                  ]
             }
         },
         methods: {
             ...mapActions({
-                postQuestion: 'postQuestion'
+                postQuestion: 'postQuestion',
+                updateQuestion: 'updateQuestion'
             }),
             toggleAddPanel: function() {
                 this.editActive = true;
+            },
+            editHandle: function(item) {
+                console.log(item);
+                this.editActive = true;
+                this.question_current = item
             },
             closeHandle: function() {
                 this.editActive = false;
             },
             confirmHandle: function(req){
-                this.postQuestion(req);
+                if(req.id) {
+                    this.updateQuestion(req);
+                } else {
+                    this.postQuestion(req);
+                }
+                this.question_current = {};
                 this.editActive = false;
             }
         },
@@ -54,9 +68,6 @@
             ...mapState({
                 questions: (state) => {
                     return state.question.all;
-                },
-                question_types: (state)=> {
-                    return state.question.type;
                 }
             })
         },

@@ -4,25 +4,23 @@ var path = require('path');
 var fs = require('fs');
 
 module.exports = function (client) {
-    let questionJoinAnswerQuery = `
-        select q.*, t.answer_title, tt.answer_type
-        from herb.question q
-        , lateral (
-        	select array(select a.title 
-        	from unnest(q.answer) unan
-        	left join herb.answer a on unan=a.id 
-        )) t(answer_title)
-        ,lateral (
-		    select name
-		    from herb.item i
-		    where i.id =q.type
-        ) tt(answer_type)
-        order by q.id
-    `;
 
     let questionAll = function (req, res) {
+        let _display = req.params.display;
+        let queryDisplay = '';
+        switch(_display) {
+            case '1':
+                queryDisplay= '(true)';
+                break;
+            case '0':
+                queryDisplay= '(false)';
+                break;
+            default :
+                queryDisplay= '(true,false)';
+                break;
+        }
         client.query({
-            text: questionJoinAnswerQuery
+            text: `select * from herb.question where display in ` + queryDisplay + ` order by id`
         }, function (error, results) {
             if (error) {
                 console.log(error);
@@ -35,52 +33,36 @@ module.exports = function (client) {
 
     return {
         questionAll,
-        questionType: function(req, res) {
-            client.query({
-                text: "select * from herb.item where type='answer_type'"
-            }, function (error, results) {
-                if (error) {
-                    console.log(error);
-                }
-                res.send({
-                    data: results.rows
-                });
-            });
-        },
         questionAdd: function(req, res) {
-            let answers = req.body.answers;
-            let questiontitle = req.body.title;
-            let questiontype = req.body.type;
-            let addAnswerTextRoot = 'insert into herb.answer(title) values ';
-            let addAnswerText = '';
-            if(answers.length) {
-                addAnswerText = answers.reduce((a,b)=> {return a + ` ('${b.title}'),`} , addAnswerTextRoot);
-                addAnswerText = addAnswerText.substring(0, addAnswerText.length-1);
-                addAnswerText = addAnswerText +  ' RETURNING id';
-            }
+            let questionTitle = req.body.title;
+            let questionDisplay = req.body.display
             async.waterfall([
-                function (next) {
-                    if(!addAnswerText) {
-                        next(null, []);
-                    } else {
-                        client.query({
-                            text: addAnswerText
-                        }, function (error, result) {
-                            let ids = result ? result.rows.map((o)=> {return o.id}) : [];
-                            if(error) {
-                                console.log(error);
-                                return;
-                            }
-                            next(null, ids)
-                        })
-                    }
-
-
-                },
-                function(newids,next) {
-                    let addQuestionText = `insert into herb.question(title,type, answer) values('${questiontitle}', '${questiontype}', ARRAY[`+  newids.join(',') +`]::integer[])`
+                function(next) {
+                    let addQuestionText = `insert into herb.question(title,display) values('${questionTitle}', '${questionDisplay}')`
                     client.query({
                         text: addQuestionText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+                },
+                questionAll
+            ]);
+        },
+        questionUpdate:function(req,res) {
+            let qTitle = req.body.title;
+            let qId = req.params.id;
+            let qDisplay= req.body.display;
+            console.log(qTitle,qId,qDisplay);
+            async.waterfall([
+                function(next) {
+                    let updateQuestionText = `update herb.question set title='${qTitle}', display='${qDisplay}' where id = ${qId}`
+                    console.log(updateQuestionText);
+                    client.query({
+                        text: updateQuestionText
                     }, function (error) {
                         if(error) {
                             console.log(error);

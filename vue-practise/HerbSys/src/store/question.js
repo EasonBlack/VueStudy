@@ -2,16 +2,12 @@ import Vue from 'vue';
 
 
 const state = {
-    all: [],
-    type: [],
+    all: []
 }
 
 const mutations = {
     getQuestions: function (state, questions) {
         state.all = questions
-    },
-    getQuestionsType : function(state , type) {
-        state.type = type;
     }
 }
 
@@ -27,9 +23,10 @@ const actions = {
             commit('getQuestions', response.body.data)
         })
     },
-    fetchQuestionsType({commit, state}){
-        Vue.http.get('http://localhost:3000/api/herb/question_type').then((response) => {
-            commit('getQuestionsType', response.body.data)
+    updateQuestion ({commit, state}, req) {
+        let _id = req.id;
+        Vue.http.put('http://localhost:3000/api/herb/question/' + _id,  req).then((response) => {
+            commit('getQuestions', response.body.data)
         })
     }
 }

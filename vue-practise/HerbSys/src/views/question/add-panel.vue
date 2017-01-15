@@ -5,33 +5,23 @@
         }"
     >
         <div class='form__row form__col-row'>
-             <label class='form__title'>Name  :</label>
+             <label class='form__title'>Content  :</label>
              <textarea class='form__textarea' type=text name='name' v-model='newTitle'/>
         </div>
          <div class='form__row'>
-            <label class='form__left'>Type  :</label>
+            <label class='form__left'>Status  :</label>
             <ul class='form__right'>
-                <li v-for='type in questionType'>
-                    <input :id="'chk'+ type.id" type="radio" :value="type.id" v-model="newType"/>
-                    <label :for="'chk'+ type.id">{{type.name}}</label>
+                <li>
+                    <input id="chk1" type="radio" value=1 name='question_display'  v-model="newDisplay"/>
+                    <label for="chk1">有效</label>
+                </li>
+                <li>
+                     <input id="chk0" type="radio" value=0 name='question_display'  v-model="newDisplay"/>
+                     <label for="chk0">无效</label>
                 </li>
             </ul>
          </div>
-         <div class='form__row form__col-row' v-if='newType == "2"'>
-             <label class='form__title'>Answer  :</label>
-             <div class='form__wrapper'>
-                <input type='text' class='form__new_input' v-model='newAnswer' />
-                <div class='form__icon form__add'>
-                    <a class='icon-plus' v-on:click='addAnswer'></a>
-                </div>
-             </div>
-             <div class='form__wrapper' v-for='(an,index) in answers'>
-                 <label>{{an.title}}</label>
-                 <div class='form__icon form__delete'>
-                     <a class='icon-minus' v-on:click='delAnswer(an, index)'></a>
-                 </div>
-             </div>
-         </div>
+
          <div class='bottom__section'>
              <div class='btn__wrapper'>
                  <a class='btn__confirm' v-on:click='confirmHandle'>Confirm</a>
@@ -44,28 +34,29 @@
 </template>
 <script>
     export default {
-        props: ['active', 'questionType'],
+        props: ['active', 'questionCurrent'],
         data: function() {
             return {
+                currentId : '',
                 newTitle: '',
-                newType: '',
-                newAnswer: '',
-                answers: []
+                newDisplay: true
             }
         },
+        watch: {
+            'questionCurrent': function(val) {
+                this.currentId = val.id;
+                this.newTitle = val.title;
+                this.newDisplay = val.display;
+            }
+        },
+
         methods: {
-            addAnswer :function() {
-                this.answers.push({ title: this.newAnswer });
-                this.newAnswer = '';
-            },
-            delAnswer: function(item, index) {
-                this.answers.splice(index, 1);
-            },
+
             confirmHandle: function() {
                 this.$emit('confirmHandle', {
+                    id: this.currentId,
                     title: this.newTitle,
-                    type: this.newType,
-                    answers: this.answers
+                    display: this.newDisplay
                 })
                 this.clearNew();
             },
@@ -75,9 +66,7 @@
             },
             clearNew: function(){
                 this.newTitle = '';
-                this.newType = '';
-                this.answers=[];
-                this.newAnswer = '';
+                this.newDisplay= true;
             }
 
         }
@@ -109,7 +98,7 @@
 
      .btn__confirm {
          display: block;
-         width: 80px;
+         width: 50%;
          height: 30px;
          line-height: 30px;
          background-color: steelblue;
@@ -119,7 +108,7 @@
 
      .close__confirm {
          display: block;
-         width: 80px;
+         width: 50%;
          height: 30px;
          line-height: 30px;
          background-color: coral;
