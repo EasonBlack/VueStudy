@@ -1,6 +1,9 @@
 <template>
 	<div id="app">
 		<div class='main_container'>
+			<example-gantt1 :source='ganttSource' v-if='ganttSource'></example-gantt1>
+		</div>
+		<div class='main_container'>
             <example-calendar-git :source='source' v-if='source.length'></example-calendar-git>
 		</div>
         <div class='main_container'>
@@ -27,22 +30,28 @@
     import moment from 'moment';
     import exampleCalendar from '../example__calendar__1/index.vue';
     import exampleInputCalendar from '../example__input_calendar/index.vue';
-    import exampleCalendarGit from '../example__calendar_gitlike/index.vue'
+    import exampleCalendarGit from '../example__calendar_gitlike/index.vue';
+    import exampleGantt1 from '../example__gantt_1/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit},
+	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit, exampleGantt1},
 		data() {
 			return {
 			    current: moment().startOf('month'),
 			    currentText: moment().startOf('month').format('YYYY-MM-DD'),
                 currentMonth: moment().month(),
                 currentYear: moment().year(),
-                source: []
+                source: [],
+                ganttSource: {}
             }
 		},
 		created: function(){
 		    Vue.http.get('../data/source.json').then((response) => {
                 this.source = response.body;
+            })
+             Vue.http.get('../data/gantt1.json').then((response) => {
+                console.log(response.body);
+                this.ganttSource = response.body;
             })
 		},
         methods: {
