@@ -17,9 +17,9 @@
              }"
              v-on:click='currentTab="detail"'>Detail</li>
         </ul>
-        <div  class='content__container'>
+        <div  class='content__container' v-if='questions.length'>
              <basic-question v-show='currentTab == "basic"'></basic-question>
-             <detail-question v-show='currentTab == "detail"'></detail-question>
+             <detail-question v-show='currentTab == "detail"' :questions='questions' ></detail-question>
         </div>
 
 
@@ -115,7 +115,7 @@
         }
     }
     .content__container {
-        overflow:auto;
+        overflow:hidden;
         height:calc(100vh - 120px);
         padding:0px 10px;
 

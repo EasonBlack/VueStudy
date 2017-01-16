@@ -9,7 +9,11 @@
         <div class='table__wrapper'>
         <table>
             <thead>
-            <th v-for='col in columns'>{{col.name}}</th>
+            <th v-for='col in columns'
+                :style='{width: col.width ? col.width : "auto" }''
+                >
+                {{col.name}}
+            </th>
             <th>Action</th>
             </thead>
             <tbody>

@@ -29,11 +29,13 @@
                  question_current: {
                     id: '',
                     title: '',
+                    type: '',
                     display: ''
                  },
                  columns: [
                      {id:'id', name: 'ID'},
-                     {id:'title', name: 'Title'},
+                     {id:'title', name: 'Title', width:'30%'},
+                     {id:'type', name: 'Type'},
                      {id:'display', name: 'Display'}
                  ]
             }

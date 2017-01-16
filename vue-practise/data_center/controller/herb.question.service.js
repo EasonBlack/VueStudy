@@ -35,10 +35,11 @@ module.exports = function (client) {
         questionAll,
         questionAdd: function(req, res) {
             let questionTitle = req.body.title;
-            let questionDisplay = req.body.display
+            let questionDisplay = req.body.display;
+            let questionType = req.body.type;
             async.waterfall([
                 function(next) {
-                    let addQuestionText = `insert into herb.question(title,display) values('${questionTitle}', '${questionDisplay}')`
+                    let addQuestionText = `insert into herb.question(title,type, display) values('${questionTitle}','${questionType}', '${questionDisplay}')`
                     client.query({
                         text: addQuestionText
                     }, function (error) {
@@ -55,12 +56,11 @@ module.exports = function (client) {
         questionUpdate:function(req,res) {
             let qTitle = req.body.title;
             let qId = req.params.id;
+            let qType = req.body.type;
             let qDisplay= req.body.display;
-            console.log(qTitle,qId,qDisplay);
             async.waterfall([
                 function(next) {
-                    let updateQuestionText = `update herb.question set title='${qTitle}', display='${qDisplay}' where id = ${qId}`
-                    console.log(updateQuestionText);
+                    let updateQuestionText = `update herb.question set title='${qTitle}', type='${qType}' , display='${qDisplay}' where id = ${qId}`
                     client.query({
                         text: updateQuestionText
                     }, function (error) {

@@ -8,6 +8,19 @@
              <label class='form__title'>Content  :</label>
              <textarea class='form__textarea' type=text name='name' v-model='newTitle'/>
         </div>
+        <div class='form__row'>
+            <label class='form__left'>Type  :</label>
+            <ul class='form__right'>
+                <li>
+                    <input id="chkt" type="radio" value="t" name='question_type'  v-model="newType"/>
+                    <label for="chkt">Text</label>
+                </li>
+                <li>
+                     <input id="chka" type="radio" value="a" name='question_type'  v-model="newType"/>
+                     <label for="chka">Array</label>
+                </li>
+            </ul>
+         </div>
          <div class='form__row'>
             <label class='form__left'>Status  :</label>
             <ul class='form__right'>
@@ -39,6 +52,7 @@
             return {
                 currentId : '',
                 newTitle: '',
+                newType: 't',
                 newDisplay: true
             }
         },
@@ -46,6 +60,7 @@
             'questionCurrent': function(val) {
                 this.currentId = val.id;
                 this.newTitle = val.title;
+                this.newType = val.type;
                 this.newDisplay = val.display;
             }
         },
@@ -56,6 +71,7 @@
                 this.$emit('confirmHandle', {
                     id: this.currentId,
                     title: this.newTitle,
+                    type: this.newType,
                     display: this.newDisplay
                 })
                 this.clearNew();
@@ -66,6 +82,7 @@
             },
             clearNew: function(){
                 this.newTitle = '';
+                this.newType = 't';
                 this.newDisplay= true;
             }
 
