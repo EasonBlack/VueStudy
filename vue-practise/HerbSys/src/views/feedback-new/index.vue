@@ -1,8 +1,7 @@
 <template>
     <div class='feedback-new__container'>
         <div class='header__container'>
-            <a class='btn btn__confirm'>Confirm</a>
-            <a class='btn btn__reset'>Reset</a>
+            <a class='btn btn__confirm' v-on:click='confirm'>Confirm</a>
         </div>
 
         <ul class='tab__container'>
@@ -18,8 +17,8 @@
              v-on:click='currentTab="detail"'>Detail</li>
         </ul>
         <div  class='content__container' v-if='questions.length'>
-             <basic-question v-show='currentTab == "basic"'></basic-question>
-             <detail-question v-show='currentTab == "detail"' :questions='questions' ></detail-question>
+             <basic-question v-show='currentTab == "basic"' :feedback='feedback' ></basic-question>
+             <detail-question v-show='currentTab == "detail"' :questions='questions'  ></detail-question>
         </div>
 
 
@@ -40,16 +39,30 @@
         },
         data:function() {
             return {
-                currentTab: 'basic'
+                currentTab: 'basic',
+                feedback: {
+                    name: '',
+                    time:'',
+                    date:'',
+                    next:''
+                }
             }
         },
         methods: {
-
+            confirm: function() {
+                console.log(this.feedback, this.answers);
+            }
         },
         computed:{
             ...mapState({
                 questions: (state) => {
                     return state.question.all;
+                },
+                feedback: (state) => {
+                    return state.feedback.feedback;
+                },
+                answers: (state) => {
+                    return state.feedback.answers;
                 }
             })
         }
@@ -82,12 +95,6 @@
                 background-color: rgba(steelblue,1);
             }
 
-        }
-        .btn__reset {
-             background-color: rgba(lightsalmon, 0.7);
-             &:hover {
-                background-color: rgba(lightsalmon,1);
-             }
         }
     }
     .tab__container {

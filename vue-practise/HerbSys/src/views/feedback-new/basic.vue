@@ -5,7 +5,7 @@
                 <label>Name</label>
             </div>
             <div class='right'>
-                <input type=text />
+                <input type=text v-model='feedback.name' />
             </div>
         </div>
         <div class='row'>
@@ -14,7 +14,7 @@
             </div>
             <div class='right'>
                 <div class='datepicker__container'>
-                    <date-picker></date-picker>
+                    <date-picker v-model='feedback.date'></date-picker>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                  <label>Time</label>
             </div>
             <div class='right'>
-                <input type=text />
+                <input type=text v-model='feedback.time' />
             </div>
          </div>
          <div class='row'>
@@ -32,16 +32,18 @@
             </div>
             <div class='right'>
                  <div class='datepicker__container'>
-                       <date-picker></date-picker>
+                       <date-picker v-model='feedback.next'></date-picker>
                   </div
             </div>
          </div>
     </div>
 </template>
 <script>
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import datePicker from '../../common/datepicker/index.vue';
     export default {
         components : {datePicker},
+        props:['feedback'],
         data:function() {
             return {
             }
@@ -75,10 +77,10 @@
             .left {
                 flex:1;
                 display:flex;
-                justify-content:flex-end;
+
             }
             label {
-                width:100px;
+                margin-left: 50%;
                 line-height: 40px;
             }
             input {

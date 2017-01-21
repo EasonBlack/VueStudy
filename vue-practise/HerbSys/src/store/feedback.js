@@ -2,7 +2,13 @@ import Vue from 'vue';
 
 
 const state = {
-    all: []
+    feedback: {
+        name: '',
+        time: '',
+        date: '',
+        next: ''
+    },
+    answers: []
 }
 
 const mutations = {

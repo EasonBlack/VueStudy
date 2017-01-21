@@ -1,7 +1,7 @@
 <template>
     <div class='m__container'>
         <span class='input__wrapper'>
-            <input type='text' v-on:click='toggleCalendar' :value='selectDate' />
+            <input type='text' v-on:click='toggleCalendar' :value='value'  @input="$emit('input', $event.target.value)" />
         </span>
         <date-calendar v-if='showCalendar' v-on:confirmHandle='confirmHandle'></date-calendar>
     </div>
@@ -10,6 +10,7 @@
 <script>
     import dateCalendar from './calendar.vue';
     export default{
+        props: ['value'],
         components: {dateCalendar},
         data(){
             return{
@@ -22,7 +23,7 @@
                 this.showCalendar = !this.showCalendar;
             },
             confirmHandle: function(obj) {
-                this.selectDate = obj.date;
+                this.$emit('input', obj.date)
                 this.showCalendar = false;
             }
         }
