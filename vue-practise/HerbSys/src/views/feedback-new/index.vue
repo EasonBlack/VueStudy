@@ -18,7 +18,7 @@
         </ul>
         <div  class='content__container' v-if='questions.length'>
              <basic-question v-show='currentTab == "basic"' :feedback='feedback' ></basic-question>
-             <detail-question v-show='currentTab == "detail"' :questions='questions'  ></detail-question>
+             <detail-question v-show='currentTab == "detail"' :questions='questions' :answers='answers' ></detail-question>
         </div>
 
 
@@ -27,6 +27,7 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue';
     import basicQuestion from './basic.vue';
     import detailQuestion from './detail.vue';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
@@ -45,24 +46,27 @@
                     time:'',
                     date:'',
                     next:''
-                }
+                },
+                answers: {}
             }
         },
+
         methods: {
             confirm: function() {
                 console.log(this.feedback, this.answers);
+                let obj = {
+                    feedback : this.feedback,
+                    answers: this.answers
+                }
+                Vue.http.post('http://localhost:3000/api/herb/feedback', obj).then((response) => {
+                    console.log(response);
+                })
             }
         },
         computed:{
             ...mapState({
                 questions: (state) => {
                     return state.question.all;
-                },
-                feedback: (state) => {
-                    return state.feedback.feedback;
-                },
-                answers: (state) => {
-                    return state.feedback.answers;
                 }
             })
         }

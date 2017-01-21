@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class='down'>
-                <textarea v-if='q.type=="t"' />
+                <textarea v-if='q.type=="t"'  v-model='answers[q.id][0]' />
                 <template v-else-if='q.type=="a"'>
                     <input type='text' v-model='currents[q.id]' />
                     <span class='icon-plus list__add' v-on:click='addCurrentToAnswer(q.id)'></span>
@@ -23,27 +23,21 @@
 </template>
 <script>
     export default {
-        props: ['questions'],
+        props: ['questions', 'answers'],
         data: function() {
             return {
-                answers: {
-                },
                 currents: {
                 }
             }
         },
         created: function() {
             for(let q in this.questions) {
-                this.$set(this.answers, this.questions[q].id, [])
-                this.$set(this.currents, this.questions[q].id, '')
+                this.$set(this.answers, this.questions[q].id, []);
+                this.$set(this.currents, this.questions[q].id, '');
             }
         },
         methods: {
             addCurrentToAnswer:function(id) {
-                if(!this.answers[id]) {
-                    this.answers[id] = [];
-                }
-
                 this.answers[id].push(this.currents[id]);
                 this.currents[id] = '';
             },
