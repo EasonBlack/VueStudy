@@ -117,7 +117,7 @@
 
     .content__container {
         width:100vw;
-       
+
     }
 
     .btn__save {
