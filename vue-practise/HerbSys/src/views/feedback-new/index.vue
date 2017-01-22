@@ -15,10 +15,16 @@
                 active: currentTab=='detail'
              }"
              v-on:click='currentTab="detail"'>Detail</li>
+             <li
+             v-bind:class="{
+                active: currentTab=='body'
+             }"
+             v-on:click='currentTab="body"'>Body</li>
         </ul>
         <div  class='content__container' v-if='questions.length'>
              <basic-question v-show='currentTab == "basic"' :feedback='feedback' ></basic-question>
              <detail-question v-show='currentTab == "detail"' :questions='questions' :answers='answers' ></detail-question>
+             <body-question v-show='currentTab=="body"' ></body-question>
         </div>
 
 
@@ -30,9 +36,10 @@
     import Vue from 'vue';
     import basicQuestion from './basic.vue';
     import detailQuestion from './detail.vue';
+    import bodyQuestion from './body.vue';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     export default {
-        components: {basicQuestion, detailQuestion},
+        components: {basicQuestion, detailQuestion, bodyQuestion},
         beforeCreate:function() {
              if(!this.$store.state.question.all.length) {
                this.$store.dispatch('fetchQuestions');
@@ -53,14 +60,16 @@
 
         methods: {
             confirm: function() {
-                console.log(this.feedback, this.answers);
+                let dataURL = document.getElementById('canvas').toDataURL();
                 let obj = {
                     feedback : this.feedback,
-                    answers: this.answers
+                    answers: this.answers,
+                    image: dataURL
                 }
                 Vue.http.post('http://localhost:3000/api/herb/feedback', obj).then((response) => {
                     console.log(response);
                 })
+
             }
         },
         computed:{

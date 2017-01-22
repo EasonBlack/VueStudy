@@ -30,7 +30,7 @@
             },
             getDateSource: function(i) {
                 let _d = moment(this.startDate).add(i-1,'days').format('YYYY-MM-DD');
-                return this.source.find((o)=> o.date == _d) || {}
+                return this.source.filter((o)=> o.date == _d) || {}
             }
         },
 

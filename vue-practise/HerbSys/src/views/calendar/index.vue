@@ -16,22 +16,28 @@
         <div class='calendar__content'>
             <calendar  :currentYear='currentYear'
                    :currentMonth='currentMonth'
-                   :source='source'></calendar>
+                   :source='feedbacks'
+                   ></calendar>
         </div>
     </div>
 </template>
 <script>
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import calendar from './calendar/index.vue';
     import moment from 'moment';
 
     export default {
         components: {calendar},
+        beforeCreate:function() {
+             if(!this.$store.state.feedback.all.length) {
+               this.$store.dispatch('fetchFeedbacks');
+            }
+        },
         data:function() {
         	 return {
         	     current: moment().startOf('month'),
                  currentMonth: moment().month(),
-                 currentYear: moment().year(),
-                 source: []
+                 currentYear: moment().year()
              }
         },
         methods: {
@@ -45,7 +51,14 @@
                 this.currentMonth = this.current.month();
                 this.currentYear = this.current.year();
             }
-        }
+        },
+        computed:{
+            ...mapState({
+                feedbacks: (state) => {
+                    return state.feedback.all;
+                }
+            })
+        },
     }
 
 </script>

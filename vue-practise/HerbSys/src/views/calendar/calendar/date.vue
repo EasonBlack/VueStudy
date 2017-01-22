@@ -6,7 +6,7 @@
              }"
             >{{date}}</div>
         <div class='content__section'>
-            <event-div v-for='event in dateSource.events' :event='event'></event-div>
+            <event-div v-for='event in dateSource' :event='event'></event-div>
         </div>
     </div>
 </template>
