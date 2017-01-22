@@ -1,5 +1,8 @@
 <template>
 	<div id="app">
+        <div class='card_container'>
+            <example-card1 :item='item'></example-card1>
+        </div>
 		<div class='card_container'>
             <example-card :item='item'></example-card>
         </div>
@@ -17,19 +20,22 @@
 
 <script>
     import exampleCard from '../example__1/index.vue';
+    import exampleCard1 from '../example__card__1/index.vue';
     import exampleColCard from '../example__col__1/index.vue';
     import exampleUlCard from '../example__ul__1/index.vue';
     import exampleCoupon from '../example__coupon__1/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCard, exampleColCard, exampleUlCard, exampleCoupon},
+	    components: {exampleCard,exampleCard1, exampleColCard, exampleUlCard, exampleCoupon},
 		data() {
 			return {
                 item : {
                     src:  "http://placehold.it/500x700&text=Item",
                     lvl1: "Dancing Party",
                     lvl2: "Donec facilisis tortor ut augue lacina, at vive",
-                    lvl3: "2016.11.20"
+                    lvllong2: "aaaa aaa aaa a aaaaa aaa aaa aaaa aaa aaa a aaaaa aaa aaa aaaa aaa aaa a aaaaa aaa aaa aaaa aaa aaa a aaaaa aaa aaa aaaa aaa aaa a aaaaa aaa aaa aaa aaaaa aaaaa aaa aa a aaa aaa bbbb aaaaa aaa aa bbb",
+                    lvl3: "2016.11.20",
+                    bgc: '#e9f964'
                 },
                 coupon: {
                     title: "2015盛夏来袭，重磅来袭！手快有，手慢无 ~",
