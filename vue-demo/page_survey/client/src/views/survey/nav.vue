@@ -1,29 +1,45 @@
 <template>
     <div class='nav__container'>
-        <a class='nav__button left__button'>
-            <img src='../../assets/left.png' />
-        </a>
+
         <ul class='num__container'>
+            <li>
+                <a class='nav__button quit__button'   @click='quit'>
+                    Quit
+                </a>
+            </li>
             <li v-for='i in count'>
-                <a>{{i}}</a>
-                <div class='line__container' v-if='i!=count'>
-                    <div class='line'></div>
-                </div>
+                <a
+                v-bind:class="{
+                    link : i != count
+                }"
+                >{{i}}</a>
+            </li>
+            <li>
+                <a class='nav__button save__button'   @click='submit'>
+                    Submit
+                </a>
             </li>
         </ul>
-        <a class='nav__button right__button'>
-            <img src='../../assets/right.png' />
-        </a>
+
+
     </div>
 </template>
 
 <script>
 
     export default{
-        props: ['count','current'],
+        props: ['count', 'current'],
         data(){
             return{
                 msg:'hello vue'
+            }
+        },
+        methods: {
+            quit: function() {
+                this.$emit('openQuitMessage');
+            },
+            submit: function() {
+                this.$emit('submitHandle');
             }
         }
     }
@@ -35,13 +51,14 @@
         display:flex;
 
     }
-    .nav__button {
-        display:block;
-        width:100px;
-        text-align: center;
-        img {
-            width:1.5em;
-        }
+
+    .save__button {
+        background-color:lightcoral;
+        color:white;
+    }
+    .quit__button {
+        background-color: lightgreen;
+        color:white;
     }
     .num__container {
         flex:1;
@@ -65,6 +82,7 @@
                 border-top: 1px dotted #41A160;
             }
             a {
+                position:relative;
                 display:flex;
                 color:white;
                 background-color: #41A160;
@@ -73,6 +91,17 @@
                 border-radius: 50%;
                 justify-content: center;
                 align-items: center;
+
+                &.link:after {
+                    position:absolute;
+                    content: '';
+                    background: url(../../assets/more.png);
+                    top: -11px;
+                    left: 150%;
+                    width: 400%;
+                    background-repeat: repeat-x;
+                    height: 50px
+                }
             }
         }
 
