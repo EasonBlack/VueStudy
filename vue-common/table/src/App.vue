@@ -1,5 +1,8 @@
 <template>
 	<div id="app">
+        <div class='table_container'>
+            <example-table-colmerge  :columns='columns' :rows='rows'></example-table-colmerge>
+        </div>
 		<div class='table_container'>
             <example-table :columns='columns' :rows='rows'></example-table>
         </div>
@@ -13,22 +16,23 @@
 <script>
     import exampleTable from '../example__table__1/index.vue';
     import exampleTable2 from '../example__table__2__crud/index.vue';
+    import exampleTableColmerge from '../example__table_colmerge/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleTable, exampleTable2},
+	    components: {exampleTable, exampleTable2,exampleTableColmerge},
 		data() {
 			return {
                 columns: [
                     {id:'id', name: 'ID'},
                     {id:'name', name: 'Name'},
-                    {id:'auth', name: 'AUTH'}
+                    {id:'state', name: 'STATE'}
                 ],
                 rows: [
                     {id: '1',name: 'aaa' , state: '1'},
                     {id: '2',name: 'bbb' , state: '2'},
-                    {id: '3',name: 'ccc' , state: '3'},
+                    {id: '3',name: 'bbb' , state: '3'},
                     {id: '4',name: 'ddd' , state: '4'},
-                    {id: '5',name: 'eee' , state: '1'},
+                    {id: '5',name: 'ddd' , state: '1'},
                     {id: '6',name: 'fff' , state: '1'},
                     {id: '6',name: 'fff' , state: '1'},
                     {id: '6',name: 'fff' , state: '1'},
