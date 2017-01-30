@@ -4,7 +4,10 @@ import router from './router'
 import store from './store/index.js'
 
 import resource from 'vue-resource';
+import VeeValidate from 'vee-validate';
+
 Vue.use(resource);
+Vue.use(VeeValidate);
 
 new Vue({
     el: '#app',

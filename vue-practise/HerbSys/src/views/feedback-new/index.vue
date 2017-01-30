@@ -68,6 +68,14 @@
                 }
                 Vue.http.post('http://localhost:3000/api/herb/feedback', obj).then((response) => {
                     console.log(response);
+                    this.feedback = {
+                        name: '',
+                        time:'',
+                        date:'',
+                        next:''
+                    }
+                    this.answers = {};
+                    this.currentTab = 'basic';
                 })
 
             }

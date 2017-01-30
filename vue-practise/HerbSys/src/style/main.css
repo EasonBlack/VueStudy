@@ -114,4 +114,16 @@ ul {
 .flex__h_end {
   justify-content: flex-end; }
 
+.header__container {
+  height: 60px;
+  display: flex;
+  padding: 10px 10px;
+  font-size: 1.2em; }
+
+.error__msg {
+  display: block;
+  color: red;
+  font-size: 0.8em;
+  padding: 10px; }
+
 /*# sourceMappingURL=main.css.map */

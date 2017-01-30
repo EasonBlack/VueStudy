@@ -23,7 +23,8 @@
                  <label>Time</label>
             </div>
             <div class='right'>
-                <input type=text v-model='feedback.time' />
+                <input type=text name='time' v-model='feedback.time' v-validate="'required|decimal'" />
+                <span class='error__msg' v-show="errors.has('time')">Time的内容必须是数字</span>
             </div>
          </div>
          <div class='row'>
@@ -67,7 +68,6 @@
             }
             .right {
                 flex:2;
-                display:flex;
                 justify-content:flex-start;
             }
             .datepicker__container {

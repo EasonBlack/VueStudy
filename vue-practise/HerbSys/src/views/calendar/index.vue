@@ -28,10 +28,11 @@
 
     export default {
         components: {calendar},
-        beforeCreate:function() {
-             if(!this.$store.state.feedback.all.length) {
-               this.$store.dispatch('fetchFeedbacks');
-            }
+        created:function() {
+            this.fetchFeedBack()
+        },
+        watch: {
+            '$route': 'fetchFeedBack'
         },
         data:function() {
         	 return {
@@ -50,6 +51,9 @@
                 this.current = this.current.add(1, 'months');
                 this.currentMonth = this.current.month();
                 this.currentYear = this.current.year();
+            },
+            fetchFeedBack: function() {
+                this.$store.dispatch('fetchFeedbacks');
             }
         },
         computed:{
