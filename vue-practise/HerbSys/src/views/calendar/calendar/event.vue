@@ -1,13 +1,19 @@
 <template>
-    <div class='event__container'>
+    <div class='event__container' @click='eventHandle(event)'>
         {{event.name}}
     </div>
 </template>
 <script>
+    import bus from '../../../bus.js'
     export default {
         props: ['event'],
         data: function() {
             return {}
+        },
+        methods: {
+            eventHandle:function(event) {
+                bus.$emit('eventHandle', {val: event.id})
+            }
         }
     }
 </script>

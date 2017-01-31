@@ -6,7 +6,7 @@
             </thead>
             <tbody>
                 <template v-for='row in rows'>
-                    <tr>
+                    <tr @click='rowHandle(row["id"])'>
                        <td v-for='col in columns'>
                            {{row[col.id]}}
                        </td>
@@ -22,6 +22,11 @@
         props: ['columns', 'rows'],
         data: function() {
             return {}
+        },
+        methods: {
+            rowHandle: function(id) {
+                this.$emit('rowHandle', {val: id});
+            }
         }
     }
 </script>
@@ -50,13 +55,11 @@
             border-bottom: 1px solid rgba(grey, 0.2);
             &:hover {
                 background-color: rgba(#00A2BF, 0.3);
-               
             }
         }
         td {
              padding-left:20px;
              text-align:left;
-
         }
      }
 </style>

@@ -17,25 +17,30 @@
             <calendar  :currentYear='currentYear'
                    :currentMonth='currentMonth'
                    :source='feedbacks'
+                   :eventHandle='eventHandle'
                    ></calendar>
         </div>
+        <feedback-detail v-if='detail.length>0 && showDetail' :detail = 'detail' @closeHandle='closeHandle' ></feedback-detail>
     </div>
 </template>
 <script>
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import calendar from './calendar/index.vue';
+    import feedbackDetail from '../feedback-detail/index.vue';
     import moment from 'moment';
-
+    import bus from '../../bus.js'
     export default {
-        components: {calendar},
+        components: {calendar, feedbackDetail},
         created:function() {
-            this.fetchFeedBack()
+            this.fetchFeedBack();
+            bus.$on('eventHandle', this.eventHandle)
         },
         watch: {
             '$route': 'fetchFeedBack'
         },
         data:function() {
         	 return {
+        	     showDetail: false,
         	     current: moment().startOf('month'),
                  currentMonth: moment().month(),
                  currentYear: moment().year()
@@ -54,13 +59,24 @@
             },
             fetchFeedBack: function() {
                 this.$store.dispatch('fetchFeedbacks');
+            },
+            eventHandle : function(obj) {
+                 this.$store.dispatch('fetchFeedBackDetailById', obj.val);
+                 this.showDetail = true;
+            },
+            closeHandle: function() {
+                 this.showDetail = false;
             }
         },
         computed:{
             ...mapState({
                 feedbacks: (state) => {
                     return state.feedback.all;
+                },
+                detail: (state)=> {
+                    return state.feedback.detail;
                 }
+
             })
         },
     }
@@ -69,6 +85,7 @@
 <style lang='scss' scoped>
     .container {
         height:100vh;
+        position:relative;
     }
     .calendar__header {
         height:60px;

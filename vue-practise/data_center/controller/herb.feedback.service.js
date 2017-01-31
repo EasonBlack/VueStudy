@@ -27,6 +27,24 @@ module.exports = function (client) {
     }
 
     return {
+        feedbackDetailById : function(req,res) {
+            let _id = req.params.id;
+            let _queryText = `
+            select f.*,a.*,q.title from herb.feedback f 
+            left join herb.answer a on f.id=a.feed_id
+            inner join herb.question q on a.question_id = q.id
+            where f.id = ${_id}
+            `
+            client.query({
+                text: _queryText
+            }, function (error, result) {
+                if(error) {
+                    console.log(error);
+                    return;
+                }
+                res.send(result.rows);
+            })
+        },
         feedbackAll: function(req,res) {
             let startdate = req.params.startdate !=0 ?  req.params.startdate : moment().startOf('month').format('YYYY-MM-DD');
             let enddate = req.params.enddate !=0 ? req.params.enddate : moment().add(1,'month').startOf('month').format('YYYY-MM-DD');
