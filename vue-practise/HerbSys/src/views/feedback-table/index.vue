@@ -6,6 +6,7 @@
         <div class='content__container'>
             <feedback-table :columns='columns' :rows='feedbacks' @rowHandle='rowHandle' ></feedback-table>
         </div>
+        <feedback-pager :count="pagernum" v-if='feedbacks.length'></feedback-pager>
         <feedback-detail v-if='detail.length>0 && showDetail' :detail = 'detail' @closeHandle='closeHandle' ></feedback-detail>
     </div>
 
@@ -14,8 +15,9 @@
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import feedbackTable from './table/index.vue';
     import feedbackDetail from '../feedback-detail/index.vue';
+    import feedbackPager from './pager/index.vue';
     export default {
-        components: {feedbackTable, feedbackDetail},
+        components: {feedbackTable, feedbackDetail, feedbackPager},
         created: function() {
             this.fetchFeedBack()
         },
@@ -54,7 +56,10 @@
                detail: (state)=> {
                    return state.feedback.detail;
                }
-           })
+           }),
+           pagernum: function() {
+                return Math.ceil(this.feedbacks.length / 10);
+           },
         }
     }
 </script>
@@ -64,5 +69,9 @@
     }
     .header__container {
 
+    }
+    .content__container {
+        height:500px;
+        overflow:hidden;
     }
 </style>
