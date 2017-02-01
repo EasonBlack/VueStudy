@@ -17,12 +17,14 @@ const mutations = {
 
 const actions = {
     fetchFeedbacks ({commit, state}) {
-        Vue.http.get('http://localhost:3000/api/herb/feedback/0/0').then((response) => {
+        console.log(Vue.config);
+        console.log(Vue.pconfig);
+        Vue.http.get(Vue.pconfig.apiHost + 'api/herb/feedback/0/0').then((response) => {
             commit('getFeedbacks', response.body)
         })
     },
     fetchFeedBackDetailById ({commit, state}, id) {
-        Vue.http.get('http://localhost:3000/api/herb/feedback/'+ id).then((response) => {
+        Vue.http.get(Vue.pconfig.apiHost + 'api/herb/feedback/'+ id).then((response) => {
             commit('getFeedbackDetail', response.body)
         })
     }

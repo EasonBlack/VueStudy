@@ -66,7 +66,7 @@
                     answers: this.answers,
                     image: dataURL
                 }
-                Vue.http.post('http://localhost:3000/api/herb/feedback', obj).then((response) => {
+                Vue.http.post(Vue.pconfig.apiHost + 'api/herb/feedback', obj).then((response) => {
                     console.log(response);
                     this.feedback = {
                         name: '',

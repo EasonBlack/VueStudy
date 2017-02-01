@@ -6,7 +6,8 @@
              }"
             >{{date}}</div>
         <div class='content__section'>
-            <event-div v-for='event in dateSource' :event='event'></event-div>
+            <event-div v-for='event in dateSource' :event='event' :type='"event"'></event-div>
+            <event-div v-for='next in dateNext' :event='next' :type='"next"'></event-div>
         </div>
     </div>
 </template>
@@ -15,7 +16,7 @@
     import eventDiv from './event.vue';
 
     export default {
-        props: ['dateMoment', 'currentMonth', 'dateSource'],
+        props: ['dateMoment', 'currentMonth', 'dateSource', 'dateNext'],
         components: {eventDiv},
         data: function(){
             return {}

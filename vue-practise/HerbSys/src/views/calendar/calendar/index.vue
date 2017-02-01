@@ -5,6 +5,7 @@
             <date-div
             :dateMoment='getDateMoment(i)'
             :dateSource = 'getDateSource(i)'
+            :dateNext = 'getNext(i)'
             :currentMonth='currentMonth'></date-div>
        </div>
     </div>
@@ -31,6 +32,13 @@
             getDateSource: function(i) {
                 let _d = moment(this.startDate).add(i-1,'days').format('YYYY-MM-DD');
                 return this.source.filter((o)=> o.date == _d) || {}
+            },
+            getNext : function(i) {
+                let _d = moment(this.startDate).add(i-1,'days').format('YYYY-MM-DD');
+                if(_d < moment().format('YYYY-MM-DD')) {
+                    return {}
+                }
+                return this.source.filter((o)=> o.next == _d) || {}
             }
         },
 

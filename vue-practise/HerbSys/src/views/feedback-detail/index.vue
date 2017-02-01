@@ -7,7 +7,7 @@
          </div>
          <div class='detail__content'>
              <div class='detail__body'>
-                <img :src='"http://localhost:3000/site_images/" + detail[0].feed_id + "_body.png"'/>
+                <img :src='config.apiHost + "site_images/" + detail[0].feed_id + "_body.png"'/>
              </div>
              <div class='detail__answer'>
                  <detail-answer v-for='d in detail' :title='d.title' :contents='d.answers'></detail-answer>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import detailCell from './cell.vue';
     import detailAnswer from './answer_cell.vue';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
@@ -26,6 +27,7 @@
         props: ['detail'],
         data: function() {
             return  {
+                config : Vue.pconfig
             }
         },
         methods: {

@@ -50,8 +50,8 @@ module.exports = function (client) {
             let enddate = req.params.enddate !=0 ? req.params.enddate : moment().add(1,'month').startOf('month').format('YYYY-MM-DD');
             console.log(startdate, enddate);
             client.query({
-                text: 'select * from herb.feedback where date >= $1 and date < $2',
-                values: [startdate, enddate]
+                text: 'select * from herb.feedback ',   //where date >= $1 and date < $2
+                //values: [startdate, enddate]
             }, function (error, result) {
                 if(error) {
                     console.log(error);

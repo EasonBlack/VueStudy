@@ -13,19 +13,19 @@ const mutations = {
 
 const actions = {
     fetchQuestions ({commit, state}) {
-        Vue.http.get('http://localhost:3000/api/herb/question').then((response) => {
+        Vue.http.get(Vue.pconfig.apiHost +'api/herb/question').then((response) => {
             commit('getQuestions', response.body.data)
         })
     },
     postQuestion ({commit, state}, req) {
         console.log(req);
-        Vue.http.post('http://localhost:3000/api/herb/question', req).then((response) => {
+        Vue.http.post(Vue.pconfig.apiHost + 'api/herb/question', req).then((response) => {
             commit('getQuestions', response.body.data)
         })
     },
     updateQuestion ({commit, state}, req) {
         let _id = req.id;
-        Vue.http.put('http://localhost:3000/api/herb/question/' + _id,  req).then((response) => {
+        Vue.http.put(Vue.pconfig.apiHost + 'api/herb/question/' + _id,  req).then((response) => {
             commit('getQuestions', response.body.data)
         })
     }
