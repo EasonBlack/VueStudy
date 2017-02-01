@@ -4,8 +4,14 @@
              v-bind:class="{
                 notcurrent: !isCurrentMonth
              }"
-            >{{date}}</div>
-        <div class='content__section'>
+            >
+            {{date}}
+            <span v-if='dateSource.length > 3 || dateNext.length > 3' @click='toggleAllEvents'>...</span>
+        </div>
+        <div class='content__section'
+            v-bind:class="{
+                expand: showAll
+            }">
             <event-div v-for='event in dateSource' :event='event' :type='"event"'></event-div>
             <event-div v-for='next in dateNext' :event='next' :type='"next"'></event-div>
         </div>
@@ -19,7 +25,14 @@
         props: ['dateMoment', 'currentMonth', 'dateSource', 'dateNext'],
         components: {eventDiv},
         data: function(){
-            return {}
+            return {
+                showAll: false
+            }
+        },
+        methods: {
+            toggleAllEvents: function() {
+                this.showAll = !this.showAll;
+            }
         },
         computed: {
             'date': function() {
@@ -57,5 +70,11 @@
         width:100%;
         padding:10px 10px;
         box-sizing: border-box;
+        overflow:hidden;
+        background-color:white;
+        &.expand {
+            overflow:initial;
+            z-index:100;
+        }
     }
 </style>

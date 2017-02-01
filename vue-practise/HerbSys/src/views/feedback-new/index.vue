@@ -67,14 +67,16 @@
                     image: dataURL
                 }
                 Vue.http.post(Vue.pconfig.apiHost + 'api/herb/feedback', obj).then((response) => {
-                    console.log(response);
+                    console.log(this.answers);
                     this.feedback = {
                         name: '',
                         time:'',
                         date:'',
                         next:''
                     }
-                    this.answers = {};
+                    for(let o in this.answers) {
+                        this.answers[o]= [];
+                    }
                     this.currentTab = 'basic';
                 })
 
