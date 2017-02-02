@@ -4,9 +4,9 @@
 
         </div>
         <div class='content__container'>
-            <feedback-table :columns='columns' :rows='feedbacks' @rowHandle='rowHandle' ></feedback-table>
+            <feedback-table :columns='columns' :rows='pagerRows' @rowHandle='rowHandle' ></feedback-table>
         </div>
-        <feedback-pager :count="pagernum" v-if='feedbacks.length'></feedback-pager>
+        <feedback-pager :count="pagernum" v-if='feedbacks.length' @pagerHandle='pagerHandle'></feedback-pager>
         <feedback-detail v-if='detail.length>0 && showDetail' :detail = 'detail' @closeHandle='closeHandle' ></feedback-detail>
     </div>
 
@@ -26,6 +26,8 @@
         },
         data:function() {
             return {
+                perPage: 10,
+                currentPage : 1,
                 showDetail: false,
                 columns: [
                     {id:'id', name: 'ID'},
@@ -45,6 +47,9 @@
             },
             closeHandle: function() {
                this.showDetail = false;
+            },
+            pagerHandle: function(obj) {
+                this.currentPage = obj.val;
             }
 
         },
@@ -57,6 +62,10 @@
                    return state.feedback.detail;
                }
            }),
+           pagerRows: function() {
+                let _rows = this.feedbacks.slice( (this.currentPage-1) * this.perPage,  (this.currentPage-1) * this.perPage + 10 );
+                return _rows;
+           },
            pagernum: function() {
                 return Math.ceil(this.feedbacks.length / 10);
            },
@@ -66,6 +75,7 @@
 <style lang='scss' scoped>
     .table__container {
         position:relative;
+        height:100vh;
     }
     .header__container {
 
