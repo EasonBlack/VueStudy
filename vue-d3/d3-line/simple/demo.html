@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../../vendor/vue.js"></script>
+    <script src="../../../vendor/d3.4.2.6.js"></script>
+    <script src="line.js"></script>
+    <style>
+        .chart__container {
+            margin-top:50px;
+            padding:30px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <app-chart  v-bind:months="months"></app-chart>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            months: [30,50,100]
+        }
+    })
+</script>
+</html>
