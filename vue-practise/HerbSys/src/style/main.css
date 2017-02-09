@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'nva_fontello';
-  src: url("../font/fontello.woff2?123") format("woff2");
+  src: url("../font/fontello.woff2?1234") format("woff2");
   font-weight: normal;
   font-style: normal; }
 [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -14,14 +14,8 @@
 .icon-plus:before {
   content: '\e800'; }
 
-.icon-left-open:before {
-  content: '\e801'; }
-
 .icon-calendar:before {
   content: '\e802'; }
-
-.icon-right-open:before {
-  content: '\e803'; }
 
 .icon-table:before {
   content: '\f0ce'; }
@@ -31,6 +25,18 @@
 
 .icon-minus:before {
   content: '\e804'; }
+
+.icon-left-open:before {
+  content: '\e801'; }
+
+.icon-right-open:before {
+  content: '\e803'; }
+
+.icon-up-open:before {
+  content: '\e805'; }
+
+.icon-down-open:before {
+  content: '\e806'; }
 
 * {
   padding: 0;
@@ -55,8 +61,10 @@ ul {
     display: inline-block;
     color: white;
     font-size: 1.1em; }
+  .form__row .form__right_100 {
+    flex: 0 0 100px !important; }
   .form__row .form__right {
-    width: 100px;
+    flex: 1;
     display: inline-block; }
     .form__row .form__right li {
       color: white;

@@ -102,6 +102,13 @@ module.exports = function (client) {
                 returnMsg
             ]);
 
+        },
+        //Not Implement
+        feedbackModify: function(req, res) {
+            let _id = req.params.id;
+            let { name,time, date} = req.body.feedback;
+            let nextdate = req.body.feedback.next;
+            let answers = req.body.answers;
         }
     }
 }

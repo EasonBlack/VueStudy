@@ -73,6 +73,21 @@ module.exports = function (client) {
                 },
                 questionAll
             ]);
+        },
+        answerGetById: function(req, res) {
+            let qId = req.params.id;
+            let getAnswerText = `select distinct unnest(an.answers) answer from herb.answer as an where question_id=${qId}  LIMIT 10`
+            client.query({
+                text: getAnswerText
+            }, function (error, results) {
+                if(error) {
+                    console.log(error);
+                    return;
+                }
+                res.send({
+                    data: results.rows
+                });
+            })
         }
     }
 }

@@ -10,7 +10,7 @@
         </div>
         <div class='form__row'>
             <label class='form__left'>Type  :</label>
-            <ul class='form__right'>
+            <ul class='form__right form__right_100'>
                 <li>
                     <input id="chkt" type="radio" value="t" name='question_type'  v-model="newType"/>
                     <label for="chkt">Text</label>
@@ -23,7 +23,7 @@
          </div>
          <div class='form__row'>
             <label class='form__left'>Status  :</label>
-            <ul class='form__right'>
+            <ul class='form__right form__right_100'>
                 <li>
                     <input id="chk1" type="radio" value=1 name='question_display'  v-model="newDisplay"/>
                     <label for="chk1">有效</label>
@@ -33,6 +33,19 @@
                      <label for="chk0">无效</label>
                 </li>
             </ul>
+         </div>
+         <div class='form__row'>
+             <label class='form__left'>Answer  :</label>
+             <div class='form__right form__right_100'>
+                 <drop-down-answer :id='currentId' @emitAnswerHandle='emitAnswerHandle'></drop-down-answer>
+             </div>
+         </div>
+         <div class='form__row'>
+             <label class='form__left'></label>
+             <ul class='form__right'>
+                 <li v-for='item in defaultAnswer'>{{item}}</li>
+             </ul>
+
          </div>
 
          <div class='bottom__section'>
@@ -46,14 +59,18 @@
     </div>
 </template>
 <script>
+    import dropDownAnswer from '../../common/dropdownanswer/index.vue';
+
     export default {
+      components: {dropDownAnswer},
         props: ['active', 'questionCurrent'],
         data: function() {
             return {
                 currentId : '',
                 newTitle: '',
                 newType: 't',
-                newDisplay: true
+                newDisplay: true,
+                defaultAnswer: []
             }
         },
         watch: {
@@ -62,6 +79,7 @@
                 this.newTitle = val.title;
                 this.newType = val.type;
                 this.newDisplay = val.display;
+                this.defaultAnswer = val.defaultAnswer || [];
             }
         },
 
@@ -84,6 +102,10 @@
                 this.newTitle = '';
                 this.newType = 't';
                 this.newDisplay= true;
+            },
+            emitAnswerHandle: function(obj){
+                console.log(obj);
+                this.defaultAnswer.push(obj.val);
             }
 
         }

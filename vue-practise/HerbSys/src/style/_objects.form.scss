@@ -14,8 +14,12 @@
     color: white;
     font-size: 1.1em;
   }
+  .form__right_100 {
+    flex:0 0 100px !important;
+  }
+
   .form__right {
-    width: 100px;
+    flex: 1;
     display: inline-block;
     li {
       color:white;

@@ -7,6 +7,8 @@ module.exports = function (app) {
     app.post('/api/herb/question', appCtrl.herbQuestionService.questionAdd);
     app.put('/api/herb/question/:id', appCtrl.herbQuestionService.questionUpdate);
 
+    app.get('/api/herb/question_answer/:id', appCtrl.herbQuestionService.answerGetById);
+
     app.get('/api/herb/feedback/:startdate/:enddate', appCtrl.herbFeedbackService.feedbackAll);
     app.get('/api/herb/feedback/:id', appCtrl.herbFeedbackService.feedbackDetailById);
     app.post('/api/herb/feedback', appCtrl.herbFeedbackService.feedbackAdd);
