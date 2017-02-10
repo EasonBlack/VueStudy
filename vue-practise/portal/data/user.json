@@ -1,0 +1,18 @@
+[
+  {
+    "id": null,
+    "nickName": "jay",
+    "password": "aaaaa",
+    "email": "bbbbb@qq.com",
+    "crateTime": 1486719381860,
+    "birth": 1486719381860
+  },
+  {
+    "id": null,
+    "nickName": "xxxxx",
+    "password": null,
+    "email": null,
+    "crateTime": 1486719381860,
+    "birth": 1486719381860
+  }
+]

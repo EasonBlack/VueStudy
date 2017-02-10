@@ -1,0 +1,19 @@
+
+.flex__1 {
+  flex:1;
+}
+
+.flex__2 {
+  flex:2;
+}
+.flex__h_end {
+  justify-content: flex-end;
+}
+
+
+.header__container {
+  height:60px;
+  display: flex;
+  padding: 10px 10px;
+  font-size: 1.2em;
+}
