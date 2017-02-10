@@ -12,5 +12,8 @@ module.exports = function (app) {
     app.get('/api/herb/feedback/:startdate/:enddate', appCtrl.herbFeedbackService.feedbackAll);
     app.get('/api/herb/feedback/:id', appCtrl.herbFeedbackService.feedbackDetailById);
     app.post('/api/herb/feedback', appCtrl.herbFeedbackService.feedbackAdd);
+
+    app.get('/api/test/checkAccount',appCtrl.testUserSerivce.checkAccount);
+    app.post('/api/test/loginAccount',appCtrl.testUserSerivce.loginAccount);
 }
 

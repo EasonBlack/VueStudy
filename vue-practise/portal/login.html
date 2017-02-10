@@ -6,7 +6,36 @@
 </head>
 <body>
 <div>
-    This is login page
+    <div class='login__container'>
+        <div class="login__row">
+            <label>Account:</label>
+            <input type="text" id="txtAccount" />
+        </div>
+        <div class="login__row">
+            <label>Password:</label>
+            <input type="text"  id="txtPassword" />
+        </div>
+        <div class="login__row">
+            <button id="btnLogin">Login</button>
+        </div>
+
+    </div>
 </div>
 </body>
+<script src="vendor/jquery.min.js"></script>
+<script>
+    $('#btnLogin').click(function(){
+        var obj = {
+            account: $('#txtAccount').val(),
+            password: $('#txtPassword').val()
+        }
+        console.log(obj);
+        $.post('http://localhost:3000/api/test/loginAccount', obj, function(res){
+            if(res=='success') {
+                document.cookie="token=123";
+                location.href='/#/home'
+            }
+        })
+    })
+</script>
 </html>

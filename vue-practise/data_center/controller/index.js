@@ -14,8 +14,10 @@ const client = new pg.Pool(pgConfig);
 client.connect();
 const herbQuestionService = require('./herb.question.service')(client);
 const herbFeedbackService = require('./herb.feedback.service')(client);
+const testUserSerivce = require('./test.user.service')(client);
 
 module.exports = {
     herbQuestionService,
-    herbFeedbackService
+    herbFeedbackService,
+    testUserSerivce
 }
