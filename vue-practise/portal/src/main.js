@@ -7,11 +7,20 @@ import router from './router';
 import store from './store/index.js'
 import App from './App.vue';
 import Auth from './common/auth.js';
+import Config from './common/config'
 
-new Vue({
-    el: '#app',
-    router,
-    store,
-    template: `<App></App>`,
-    components: {App}
+Auth.checkAccount(function(res){
+    if(res=='success') {
+        let vm = new Vue({
+            el: '#app',
+            router,
+            store,
+            template: `<App></App>`,
+            components: {App}
+        })
+    } else {
+        location.href= Config.LOGIN_URL;
+    }
 })
+
+
