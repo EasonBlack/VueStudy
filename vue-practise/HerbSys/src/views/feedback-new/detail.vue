@@ -11,6 +11,12 @@
                 <template v-else-if='q.type=="a"'>
                     <input type='text' v-model='currents[q.id]' />
                     <span class='icon-plus list__add' v-on:click='addCurrentToAnswer(q.id)'></span>
+                    <span class='icon-down-open' @click='toggleDefaultAnswer(q.id)'  v-if='q.default_answer && q.default_answer.length' />
+                    <ul class='form__array default_answer__container' v-if='showDefault[q.id]'>
+                        <li v-for="(a, index) in q.default_answer" @click='setToAnswer(q.id, a)'>
+                           {{a}}
+                        </li>
+                    </ul>
                     <ul class='form__array'>
                         <li v-for="(a, index) in answers[q.id]">
                             <span class='icon-minus list__minus'  v-on:click='removeAnswer(q.id, index)'></span>{{a}}
@@ -27,6 +33,8 @@
         data: function() {
             return {
                 currents: {
+                },
+                showDefault : {
                 }
             }
         },
@@ -34,6 +42,7 @@
             for(let q in this.questions) {
                 this.$set(this.answers, this.questions[q].id, []);
                 this.$set(this.currents, this.questions[q].id, '');
+                this.$set(this.showDefault, this.questions[q].id, false);
             }
         },
         methods: {
@@ -46,6 +55,13 @@
             },
             removeAnswer: function(id, index) {
                 this.answers[id].splice(index, 1);
+            },
+            toggleDefaultAnswer: function(id) {
+                this.showDefault[id] = !this.showDefault[id];
+            },
+            setToAnswer: function(id, a) {
+                this.currents[id] = a;
+                this.showDefault[id] = false;
             }
         }
     }
@@ -125,9 +141,37 @@
                     &:first-child {
                         margin-top:5px;
                     }
-
                 }
             }
          }
+    }
+    .icon-down-open {
+         width: 30px;
+         height: 30px;
+         margin-left: 10px;
+         color: white;
+         background-color: steelblue;
+         border-radius: 50%;
+         display:inline-block;
+         padding-left: 7px;
+         padding-top: 6px;
+         &:before {
+             margin-right:0px;
+         }
+     }
+    .default_answer__container {
+        position: absolute;
+        background-color: white;
+        z-index: 100;
+        width: 300px;
+        border: 1px solid grey;
+        border-top: none;
+        li {
+           height:20px;
+           line-height:20px;
+        }
+        li:hover {
+            background-color: rgba(grey, 0.5);
+        }
     }
 </style>

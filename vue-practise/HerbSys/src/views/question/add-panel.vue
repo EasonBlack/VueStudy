@@ -34,16 +34,19 @@
                 </li>
             </ul>
          </div>
-         <div class='form__row'>
+         <div class='form__row' v-if='newType=="a"'>
              <label class='form__left'>Answer  :</label>
-             <div class='form__right form__right_100'>
-                 <drop-down-answer :id='currentId' @emitAnswerHandle='emitAnswerHandle'></drop-down-answer>
+             <div class='form__right flex__2 '>
+                <input type='text' class='txt__defaultanswer'  v-model='currentsDefault'/>
+                <span class='icon-plus list__add' v-on:click='addCurrentToDefaultAnswer()'></span>
              </div>
          </div>
          <div class='form__row'>
              <label class='form__left'></label>
-             <ul class='form__right'>
-                 <li v-for='item in defaultAnswer'>{{item}}</li>
+             <ul class='form__right flex__2'>
+                 <li v-for='(item, index) in defaultAnswer'>
+                    <span class='icon-minus list__minus'  v-on:click='deleteFromDefaultAnswer(index)'></span>{{item}}
+                 </li>
              </ul>
 
          </div>
@@ -70,7 +73,8 @@
                 newTitle: '',
                 newType: 't',
                 newDisplay: true,
-                defaultAnswer: []
+                currentsDefault: '',
+                defaultAnswer: [],
             }
         },
         watch: {
@@ -79,7 +83,8 @@
                 this.newTitle = val.title;
                 this.newType = val.type;
                 this.newDisplay = val.display;
-                this.defaultAnswer = val.defaultAnswer || [];
+                this.defaultAnswer = val.default_answer || [];
+                this.currentsDefault = '';
             }
         },
 
@@ -90,9 +95,17 @@
                     id: this.currentId,
                     title: this.newTitle,
                     type: this.newType,
-                    display: this.newDisplay
+                    display: this.newDisplay,
+                    answers: this.defaultAnswer
                 })
                 this.clearNew();
+            },
+            addCurrentToDefaultAnswer: function() {
+                this.defaultAnswer.push(this.currentsDefault);
+                this.currentsDefault = '';
+            },
+            deleteFromDefaultAnswer: function(i) {
+                 this.defaultAnswer.splice(i, 1);
             },
             closeHandle: function() {
                 this.$emit('closeHandle');
@@ -128,6 +141,12 @@
         }
     }
 
+    .txt__defaultanswer {
+         width: 80%;
+         height: 30px;
+         padding-left: 5px;
+    }
+
      .btn__wrapper {
             display: flex;
             justify-content: center;
@@ -154,4 +173,26 @@
          color: white;
          text-align: center;
      }
+
+      .list__add {
+          width: 30px;
+          height: 30px;
+          background-color: steelblue;
+          border-radius: 50%;
+          color: white;
+          padding-left: 7px;
+          padding-top: 6px;
+          display: inline-block;
+      }
+      .list__minus {
+          width: 20px;
+          height: 20px;
+          background-color: coral;
+          border-radius: 50%;
+          color: white;
+          padding-left: 2px;
+          padding-top:2px;
+          display: inline-block;
+          margin-right:5px;
+      }
 </style>

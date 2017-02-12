@@ -37,9 +37,12 @@ module.exports = function (client) {
             let questionTitle = req.body.title;
             let questionDisplay = req.body.display;
             let questionType = req.body.type;
+            let questionAnswers= req.body.answers;
             async.waterfall([
                 function(next) {
-                    let addQuestionText = `insert into herb.question(title,type, display) values('${questionTitle}','${questionType}', '${questionDisplay}')`
+                    let _answers = `ARRAY[${questionAnswers.map(o=>{return "'" + o +"'"}).join(',')}]::text[]`;
+                    let addQuestionText = `insert into herb.question(title,type, display , default_answer) values('${questionTitle}','${questionType}', '${questionDisplay}', ${_answers})`
+                    console.log(addQuestionText);
                     client.query({
                         text: addQuestionText
                     }, function (error) {
@@ -58,9 +61,17 @@ module.exports = function (client) {
             let qId = req.params.id;
             let qType = req.body.type;
             let qDisplay= req.body.display;
+            let qAnswers= req.body.answers;
             async.waterfall([
                 function(next) {
-                    let updateQuestionText = `update herb.question set title='${qTitle}', type='${qType}' , display='${qDisplay}' where id = ${qId}`
+                    let _answers = `ARRAY[${qAnswers.map(o=>{return "'" + o +"'"}).join(',')}]::text[]`;
+                    let updateQuestionText = `update herb.question 
+                    set 
+                    title='${qTitle}', 
+                    type='${qType}' , 
+                    display='${qDisplay}' ,  
+                    default_answer = ${_answers}
+                    where id = ${qId}`
                     client.query({
                         text: updateQuestionText
                     }, function (error) {
