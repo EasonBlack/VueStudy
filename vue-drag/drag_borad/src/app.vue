@@ -1,6 +1,5 @@
 <template>
-    <div class='main__container'   @mouseup='mouseUpHandle($event)'
-                                   @mousemove='mouseMoveHandle($event)'>
+    <div class='main__container' onselectstart="return false" @mouseup='mouseUpHandle' @mousemove='mouseMoveHandle($event)'>
         <board></board>
         <card :defaultTop="'6px'"   :defaultLeft="'6px'" :color="'red'"  @mouseDownHandle='mouseDownHandle'></card>
         <card :defaultTop="'116px'" :defaultLeft="'6px'" :color="'steelblue'" @mouseDownHandle='mouseDownHandle'></card>
@@ -14,7 +13,7 @@
     export default {
         components: {card, board},
         created: function(){
-
+             bus.$on('boxMouseUpHandle', this.boxMouseUpHandle)
         },
         data() {
             return {
@@ -27,7 +26,8 @@
             mouseDownHandle: function(o) {
                 this.dragObject = o.el;
                 this.firstTop = o.e.offsetY;
-                this.firstLeft = o.e.offsetX
+                this.firstLeft = o.e.offsetX;
+                this.dragObject.style['pointer-events'] = 'none';
             },
 
             mouseMoveHandle:function(e) {
@@ -36,24 +36,14 @@
                      this.dragObject.style.left = e.clientX - this.firstLeft + 'px';
                  }
             },
-            mouseUpHandle: function(e) {
-                let pos = this.checkBox(e);
 
-                this.dragObject.style.top = pos.y;
-                this.dragObject.style.left = pos.x;
-                this.dragObject  = null;
+            boxMouseUpHandle : function(o) {
+                 this.dragObject.style.top = o.top + 'px';
+                 this.dragObject.style.left = o.left + 'px';
+                 this.dragObject.style['pointer-events'] = 'auto';
             },
-            checkBox: function(e) {
-                let top = e.clientY;
-                let left = e.clientX;
-
-                let _t = Math.floor(top/110);
-                let _l = Math.floor(left/110);
-                return {
-                    y: (6 + (_t)* 10 + _t*100)+'px',
-                    x: (6 + (_l)* 10 + _l*100)+'px'
-                }
-
+            mouseUpHandle: function() {
+                 this.dragObject  = null;
             }
         },
         mounted: function() {

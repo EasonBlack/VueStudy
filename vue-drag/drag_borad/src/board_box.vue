@@ -7,11 +7,17 @@
         props: ['index'],
         data() {
             return {
-                top: Math.floor(this.index/3)*5 + (this.index-1)*100,
-                left: (this.index/3)? (this.index/3)*5:3*5  + (this.index-1)*100
+                top: 6 + Math.floor((this.index-1)/3)*10 + Math.floor((this.index-1)/3)*100,
+                left: 6 + ((this.index-1)%3)*10  + ((this.index-1)%3)*100
             }
         },
         methods: {
+
+        },
+        mounted: function() {
+             this.$el.addEventListener('mouseup', ()=>{
+                 bus.$emit('boxMouseUpHandle', {top: this.top, left: this.left})
+             } )
 
         }
     }
