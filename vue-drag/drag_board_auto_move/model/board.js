@@ -1,5 +1,5 @@
 class Board {
-    constructor(opts) {
+    constructor() {
         this.layout = [
             [0, 0, 0],
             [0, 0, 0],
@@ -7,9 +7,8 @@ class Board {
         ]
         this.maxRow = this.layout.length;
         this.maxCol = this.layout[0].length;
-        this.cellWidth = '100';
-        this.cellHeight = '100';
-        this.cards = opts.cards;
+        this.current = null;
+        this.cards = []
     }
 
     getPosition(x, y) {
@@ -28,12 +27,13 @@ class Board {
             [0, 0, 0]
         ]
         this.cards.forEach((c)=> {
-            this.layout[c.x][c.y] = 1;
+            if(c.y <0 && c.x<0) return;
+            this.layout[c.y][c.x] = c.id;
         });
     }
 
     hasOccupied(x,y) {
-        return this.layout[x][y];
+        return this.layout[y][x];
     }
     moveOccupied(x,y) {
         let _c = this.cards.find(o=>{
@@ -48,13 +48,10 @@ class Board {
             _c.y -=1;
         }
         this.refactor();
+        console.log('after refater' , this.layout.toString());
         return _c;
-    }
-
-    redraw(x,y) {
-
     }
 
 }
 
-export default Board;
+export default new Board();

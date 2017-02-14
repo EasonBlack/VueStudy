@@ -1,10 +1,8 @@
 <template>
     <div class='main__container' onselectstart="return false"  @mousemove='mouseMoveHandle($event)'>
-        <board :b='theBoard' :current='dragCard?dragCard.id:0'></board>
+        <board></board>
         <card v-for='c in cards' :c='c'  @mouseDownHandle='mouseDownHandle'
-              :current='dragCard?dragCard.id:0'
-              :board='theBoard'
-              :redrawId='redrawId'
+              :redrawId='redrawId' @clearRedraw='clearRedraw'
         ></card>
 
 
@@ -15,8 +13,8 @@
     import card from './card.vue';
     import bus from '../bus.js'
     import CardModel from '../model/card.js';
-    import BoardModel from '../model/board.js';
-    import $ from 'jquery';
+    import theBoard from '../model/board.js';
+
     export default {
         components: {card, board},
         created: function(){
@@ -26,9 +24,9 @@
                  new CardModel({id: 'c1',color: 'red', x:0, y:0}),
                  new CardModel({id: 'c2',color: 'steelblue', x:1, y:2})
              ]
-
-             this.theBoard = new BoardModel({cards: this.cards});
-             this.theBoard.refactor();
+             this.bb = theBoard;
+             theBoard.cards = this.cards;
+             theBoard.refactor();
         },
         data() {
             return {
@@ -36,13 +34,15 @@
                 dragCard: null,
                 firstTop: null,
                 firstLeft: null,
-                redrawId : null
+                redrawId : null,
+                bb:null
             }
         },
         methods: {
             mouseDownHandle: function(o) {
                 this.dragObject = o.el;
                 this.dragCard = o.c;
+                theBoard.current = o.c.x + '_' + o.c.y;
 
                 this.firstTop = o.e.offsetY;
                 this.firstLeft = o.e.offsetX;
@@ -66,13 +66,16 @@
 
                  this.dragObject  = null;
                  this.dragCard = null;
+                 theBoard.current = null;
 
-                this.theBoard.refactor();
-
+                 theBoard.refactor();
+                 console.log(theBoard.layout);
             },
             cardRedraw: function(o) {
-                console.log(o.c.id);
                 this.redrawId = o.c.id;
+            },
+            clearRedraw: function() {
+                this.redrawId = null;
             }
 
         },

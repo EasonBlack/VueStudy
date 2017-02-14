@@ -5,19 +5,19 @@
     :style='{
         top: pos.top,
         left: pos.left,
-        backgroundColor: color,
-        pointerEvents: movable ? "auto": "none"
+        backgroundColor: color
     }'
     >
     </div>
 </template>
 <script>
+     import theBoard from '../model/board.js'
      export default {
-            props:['c', 'board', 'current', 'redrawId'],
+            props:['c',  'redrawId'],
             data() {
                 return {
                     dragObject : null,
-                    pos: this.board.getPosition(this.c.x, this.c.y),
+                    pos:  theBoard.getPosition(this.c.x, this.c.y),
                     color: this.c.color
 
                 }
@@ -25,29 +25,21 @@
             watch:{
                 'redrawId': function(val){
                     if(val==this.c.id) {
-                        this.pos = this.board.getPosition(this.c.x, this.c.y);
+                        console.log(this.c.id, ' is redrawed');
+                        this.pos = theBoard.getPosition(this.c.x, this.c.y);
                         this.$forceUpdate();
+                        this.$emit('clearRedraw',{});
                     }
                 }
             },
             methods: {
                 mouseDownHandle: function(event) {
+                    theBoard.layout[this.c.y][this.c.x] = 0;
+                    this.c.y = -1;
+                    this.c.x = -1 ;
+                    console.log(theBoard.layout);
                     this.$emit('mouseDownHandle', {e:event, el: this.$el, c: this.c})
                 },
-
-
-            },
-            mounted: function() {
-            },
-            computed:  {
-                movable: function() {
-                    if(!this.current) {
-                        return true
-                    } else {
-                       return false
-                    }
-
-                }
             }
         }
 </script>

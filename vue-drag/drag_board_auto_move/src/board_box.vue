@@ -3,8 +3,9 @@
 </template>
 <script>
     import bus from '../bus.js'
+    import b from '../model/board.js';
     export default {
-        props: ['index', 'b', 'current'],
+        props: ['index'],
         data() {
             return {
                 position: {
@@ -13,15 +14,16 @@
                 },
                 top: 6 + Math.floor((this.index-1)/3)*10 + Math.floor((this.index-1)/3)*100,
                 left: 6 + ((this.index-1)%3)*10  + ((this.index-1)%3)*100,
-
             }
         },
         methods: {
              mouseOverHandle: function() {
-
-                if(this.b.hasOccupied(this.position.x, this.position.y, this.current)) {
-                    let _c = this.b.moveOccupied(this.position.x, this.position.y);
-                    console.log(_c.id)
+                if(!b.current || b.current == this.position.x + '_' + this.position.y) {
+                    return ;
+                }
+                if( b.hasOccupied(this.position.x, this.position.y, this.current)) {
+                    let _c =  b.moveOccupied(this.position.x, this.position.y);
+                    console.log(this.position.x , this.position.y);
                     bus.$emit('cardRedraw', {c: _c});
                 }
              },
