@@ -1,0 +1,7 @@
+# DB
+
+create schema home;
+
+CREATE TABLE home.EVENT_TYPE (id SERIAL  PRIMARY KEY, Name VARCHAR(20));
+create table home.event_item (id serial primary key, name varchar(50), status integer, type bigint);
+create table home.event_daily (id serial primary key, event_id bigint, time numeric, trophy numeric, date text);
