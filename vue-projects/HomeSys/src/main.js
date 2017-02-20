@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/index.js'
 
+import '$style/fonts.fonttello.css';
 
 import resource from 'vue-resource';
 

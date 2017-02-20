@@ -16,10 +16,12 @@ const herbQuestionService = require('./herb.question.service')(client);
 const herbFeedbackService = require('./herb.feedback.service')(client);
 const testUserSerivce = require('./test.user.service')(client);
 const testDataSerivce = require('./test.data.service')(client);
+const homeEventsSerivce = require('./home.events.service')(client);
 
 module.exports = {
     herbQuestionService,
     herbFeedbackService,
     testUserSerivce,
-    testDataSerivce
+    testDataSerivce,
+    homeEventsSerivce
 }

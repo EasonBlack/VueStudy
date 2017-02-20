@@ -16,5 +16,7 @@ module.exports = function (app) {
     app.get('/api/test/checkAccount',appCtrl.testUserSerivce.checkAccount);
     app.post('/api/test/loginAccount',appCtrl.testUserSerivce.loginAccount);
     app.get('/api/test/fetchData',appCtrl.testDataSerivce.fetchData);
+
+    app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
 }
 

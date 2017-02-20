@@ -1,0 +1,27 @@
+
+@font-face {
+  font-family: 'nva_fontello';
+  src: url('../fonts/fontello.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "nva_fontello";
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+}
+
+.icon-plus:before { content: '\e800'; }
+.icon-calendar:before { content: '\e802'; }
+.icon-table:before { content: '\f0ce'; }
+.icon-quora:before { content: '\f2c4'; }
+.icon-minus:before { content: '\e804'; }
+
+.icon-left-open:before { content: '\e801'; }
+.icon-right-open:before { content: '\e803'; }
+.icon-up-open:before { content: '\e805'; }
+.icon-down-open:before { content: '\e806'; }
