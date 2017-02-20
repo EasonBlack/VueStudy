@@ -21,6 +21,9 @@ ul {
 .flex__h_end {
   justify-content: flex-end; }
 
+.full__width {
+  width: 100%; }
+
 .header__container {
   height: 60px;
   display: flex;
@@ -40,5 +43,18 @@ ul {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+.btn {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0 10px; }
+
+.btn__full_width {
+  width: 100%; }
+
+.btn__add {
+  background-color: steelblue;
+  color: white; }
 
 /*# sourceMappingURL=main.css.map */

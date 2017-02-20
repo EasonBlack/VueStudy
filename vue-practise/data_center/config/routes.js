@@ -18,5 +18,7 @@ module.exports = function (app) {
     app.get('/api/test/fetchData',appCtrl.testDataSerivce.fetchData);
 
     app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
+    app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);
+    app.post('/api/home/postEventItem',appCtrl.homeEventsSerivce.postEventItem);
 }
 
