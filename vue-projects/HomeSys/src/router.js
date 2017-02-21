@@ -11,6 +11,7 @@ const router = new VueRouter({
     routes: [
         { path: '/calendar', component: Calendar },
         { path: '/daily/:date', component: Daily },
+        { path: '/daily', component: Daily },
         { path: '/event_maintenance', component: EventMaintenance },
         { path: '/', redirect: '/calendar' }
     ]

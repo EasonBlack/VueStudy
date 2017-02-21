@@ -7,12 +7,14 @@ import feedback from './feedback';
 import question from './question';
 import eventType from './event_type';
 import eventItem from './event_item';
+import eventDaily from './event_daily';
 
 export default new Vuex.Store({
     modules: {
         feedback,
         question,
         eventType,
-        eventItem
+        eventItem,
+        eventDaily
     }
 })

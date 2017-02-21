@@ -1,14 +1,12 @@
 <template>
     <div class='add-panel__container'>
         <div class='panel__row'>
-            <label>Name:</label>
-            <input type='text' v-model='eventName'/>
+            <label>Time:</label>
+            <input type='text' v-model='dailyTime'/>
         </div>
         <div class='panel__row'>
-            <label>Type:</label>
-            <select v-model='eventType'>
-                <option v-for='item in items' :value='item.id'>{{item.name}}</option>
-            </select>
+            <label>Trophy:</label>
+            <input type='text' v-model='dailyTrophy'/>
         </div>
         <div class='panel__row'>
             <a class='btn btn__full_width btn__add' @click='clickHandle'>ADD</a>
@@ -16,22 +14,24 @@
     </div>
 </template>
 <script>
+
     export default {
-        props: ['items'],
+
         data() {
             return {
-                eventName: '',
-                eventType: ''
+                dailyTime: 0,
+                dailyTrophy: 0
             }
         },
         methods: {
             clickHandle: function() {
                 this.$emit('clickHandle', {
-                    name: this.eventName,
-                    type: this.eventType
+                    time: this.dailyTime,
+                    trophy: this.dailyTrophy
                 })
             }
-        }
+        },
+
     }
 </script>
 <style lang='scss' scoped>
@@ -47,10 +47,10 @@
         width:100%;
         label {
             display:inline-block;
-            width:40px;
+            width:50px;
         }
         input {
-            width:120px;
+            width:60px;
             height:30px;
             line-height:30px;
         }

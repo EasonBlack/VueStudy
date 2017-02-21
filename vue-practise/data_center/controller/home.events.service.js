@@ -16,7 +16,22 @@ module.exports = function (client) {
         });
     }
 
+    let fetchDaily = function(req, res) {
+        let _date = req.params.date;
+        client.query({
+            text: `select * from home.event_daily where date='${_date}' order by id`
+        }, function (error, results) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                data: results.rows
+            });
+        });
+    }
+
     return {
+        fetchDaily,
         fetchEventItemsActive,
         fetchEventType: function(req, res) {
             client.query({
@@ -48,6 +63,28 @@ module.exports = function (client) {
                     })
                 },
                 fetchEventItemsActive
+            ])
+        },
+        postDaily: function(req, res){
+            let dailyTime = req.body.time;
+            let dailyTrophy = req.body.trophy;
+            let dailyType = req.body.type;
+            let dailyDate = req.params.date;
+            async.waterfall([
+                function(next) {
+                    let addDailyText = `insert into home.event_daily(event_id, date, time, trophy ) values(${dailyType},'${dailyDate}', ${dailyTime},  ${dailyTrophy})`
+                    console.log(addDailyText);
+                    client.query({
+                        text: addDailyText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+                },
+                fetchDaily
             ])
         }
     }

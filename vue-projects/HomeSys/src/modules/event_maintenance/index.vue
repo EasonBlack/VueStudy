@@ -3,7 +3,7 @@
         <div class='panel__container'>
             <add-panel :items='eventTypes' v-if='eventTypes && eventTypes.length' @clickHandle='clickHandle'></add-panel>
         </div>
-        <div class='item__container'>
+        <div class='item__container'  v-if='eventTypes && eventTypes.length'>
             <div class='col__container col1'>
                <type-group v-for='g in colGroups[0].items' :group='g'></type-group>
             </div>
