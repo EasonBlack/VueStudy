@@ -7,3 +7,8 @@ create table home.event_item (id serial primary key, name varchar(50), status in
 create table home.event_daily (id serial primary key, event_id bigint, time numeric, trophy numeric, date text);
 
 CREATE INDEX event_daily_date_index ON home.event_daily (date);
+
+CREATE OR REPLACE view event_daily_view AS
+select d.*,i.name as item_name , t.name as type_name from home.event_daily d
+left join home.event_item i on d.event_id = i.id
+left join home.event_type t on i.type = t.id

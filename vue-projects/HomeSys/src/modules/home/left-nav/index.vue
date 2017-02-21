@@ -18,6 +18,10 @@
                 activeName: 'calendar'
             }
         },
+        created: function() {
+            this.activeName = this.$route.name;
+            console.log(this.$route)
+        },
         methods: {
             activeMenu:function(o) {
                 this.activeName = o;

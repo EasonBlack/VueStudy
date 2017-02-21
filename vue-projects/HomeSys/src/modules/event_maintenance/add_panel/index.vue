@@ -30,6 +30,8 @@
                     name: this.eventName,
                     type: this.eventType
                 })
+                this.eventName = '';
+                this.eventType = '';
             }
         }
     }

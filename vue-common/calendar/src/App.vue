@@ -1,8 +1,11 @@
 <template>
 	<div id="app">
 		<div class='main_container'>
-			<example-gantt1 :source='ganttSource' v-if='ganttSource'></example-gantt1>
-		</div>
+    		<example-daily-arrange :source='dailyArrange' :start="'800'" :end="'1900'" v-if='dailyArrange.length'></example-daily-arrange>
+    	</div>
+	    <div class='main_container'>
+        	<example-gantt1 :source='ganttSource' v-if='ganttSource'></example-gantt1>
+        </div>
 		<div class='main_container'>
             <example-calendar-git :source='source' v-if='source.length'></example-calendar-git>
 		</div>
@@ -32,9 +35,10 @@
     import exampleInputCalendar from '../example__input_calendar/index.vue';
     import exampleCalendarGit from '../example__calendar_gitlike/index.vue';
     import exampleGantt1 from '../example__gantt_1/index.vue';
+    import exampleDailyArrange from '../example__daily_arrange/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit, exampleGantt1},
+	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit, exampleGantt1, exampleDailyArrange},
 		data() {
 			return {
 			    current: moment().startOf('month'),
@@ -42,17 +46,21 @@
                 currentMonth: moment().month(),
                 currentYear: moment().year(),
                 source: [],
-                ganttSource: {}
+                ganttSource: {},
+                dailyArrange: []
             }
 		},
 		created: function(){
 		    Vue.http.get('../data/source.json').then((response) => {
                 this.source = response.body;
             })
-             Vue.http.get('../data/gantt1.json').then((response) => {
-                console.log(response.body);
+            Vue.http.get('../data/gantt1.json').then((response) => {
                 this.ganttSource = response.body;
             })
+            Vue.http.get('../data/daily_arrange.json').then((response) => {
+                this.dailyArrange = response.body;
+            })
+
 		},
         methods: {
             prev: function() {

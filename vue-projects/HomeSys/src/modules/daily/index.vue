@@ -7,6 +7,7 @@
          <div class='daily__content'>
              <div class='panel__container'>
                  <add-panel @clickHandle='dailySave'></add-panel>
+                 <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length'></daily-list>
              </div>
              <div class='event-list__container'>
                 <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick'></event-item>
@@ -20,16 +21,19 @@
     import moment from 'moment';
     import addPanel from './add_panel/index.vue';
     import eventItem from './event_item/index.vue';
+    import dailyList from './daily_list/index.vue';
     export default {
-        components:{addPanel, eventItem},
-        beforeCreate:function() {
-             this.$store.dispatch('fetchEventItemsActive');
-        },
+        components:{addPanel, eventItem, dailyList},
+
         data() {
             return {
                  current: moment().format('YYYY-MM-DD'),
                  selectedEventItem: null
             }
+        },
+        created:function() {
+            this.$store.dispatch('fetchEventItemsActive');
+            this.$store.dispatch('fetchDaily', this.current);
         },
         methods: {
             ...mapActions({
@@ -47,6 +51,9 @@
             ...mapState({
                eventItems: (state) => {
                     return state.eventItem.all;
+               },
+               dailyItems: (state) => {
+                    return state.eventDaily.current;
                }
             })
         }
@@ -61,6 +68,7 @@
         width:100%;
         height:50px;
         line-height:50px;
+        padding:0 10px;
     }
     .daily__content {
         height:calc(100vh - 50px);

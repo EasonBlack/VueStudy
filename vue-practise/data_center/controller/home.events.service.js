@@ -19,7 +19,7 @@ module.exports = function (client) {
     let fetchDaily = function(req, res) {
         let _date = req.params.date;
         client.query({
-            text: `select * from home.event_daily where date='${_date}' order by id`
+            text: `select * from home.event_daily_view where date='${_date}' order by id`
         }, function (error, results) {
             if (error) {
                 console.log(error);

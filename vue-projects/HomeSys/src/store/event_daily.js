@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Config from '../common/config.js';
 
 const state = {
-    all: []
+    current: []
 }
 
 const mutations = {

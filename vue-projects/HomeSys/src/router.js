@@ -9,10 +9,10 @@ import EventMaintenance from './modules/event_maintenance/index.vue'
 
 const router = new VueRouter({
     routes: [
-        { path: '/calendar', component: Calendar },
-        { path: '/daily/:date', component: Daily },
-        { path: '/daily', component: Daily },
-        { path: '/event_maintenance', component: EventMaintenance },
+        { path: '/calendar', name: 'calendar',component: Calendar },
+        { path: '/daily/:date',name: 'daily', component: Daily },
+        { path: '/daily', name: 'daily', component: Daily },
+        { path: '/event_maintenance', name:'event_maintenance', component: EventMaintenance },
         { path: '/', redirect: '/calendar' }
     ]
 })

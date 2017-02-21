@@ -1,11 +1,11 @@
 <template>
     <div class='add-panel__container'>
         <div class='panel__row'>
-            <label>Time:</label>
+            <label class='time'>Time:</label>
             <input type='text' v-model='dailyTime'/>
         </div>
         <div class='panel__row'>
-            <label>Trophy:</label>
+            <label class='trophy'>Trophy:</label>
             <input type='text' v-model='dailyTrophy'/>
         </div>
         <div class='panel__row'>
@@ -28,13 +28,16 @@
                 this.$emit('clickHandle', {
                     time: this.dailyTime,
                     trophy: this.dailyTrophy
-                })
+                });
+                this.dailyTime = 0;
+                this.dailyTrophy = 0;
             }
         },
 
     }
 </script>
 <style lang='scss' scoped>
+     @import 'styles/settings.variable.scss';
     .add-panel__container {
         width:100%;
         border:2px solid steelblue;
@@ -48,6 +51,13 @@
         label {
             display:inline-block;
             width:50px;
+
+        }
+        .time {
+            color: #{$time_color};
+        }
+        .trophy {
+            color: #{$trophy_color};
         }
         input {
             width:60px;
