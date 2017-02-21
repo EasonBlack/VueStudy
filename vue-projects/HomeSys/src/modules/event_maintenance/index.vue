@@ -54,24 +54,21 @@
                     groups[o.type].push(o);
                 });
 
-                var groupsArr =  Object.keys(groups).map((group)=>{
-                    return groups[group];
+                var groupsArr = Object.keys(groups).map((group)=>{
+                    return {name: group, items: groups[group]};
                 })
 
                 var colGroups = [
-                    {name: 'col1', len: 0, items:[]},
-                    {name: 'col2', len: 0, items:[]},
+                    {name: 'col1', len: 0, items: []},
+                    {name: 'col2', len: 0, items: []},
                     {name: 'col3', len: 0, items: []}
                 ]
                 groupsArr.forEach((o)=>{
                     let min = colGroups.reduce(function (p, v) {
-                         return ( p.len <= v.len ? p.len : v.len );
+                         return  p.len <= v.len ? p:v;
                     });
-                    let current = colGroups.find(o=> {
-                        return o.len == min
-                    })
-                    current.len += o.length;
-                    current.items.push(o);
+                    min.len += o.items.length;
+                    min.items.push(o);
                 });
                 console.log(colGroups);
                 return colGroups
@@ -88,6 +85,7 @@
     }
     .panel__container {
         width:200px;
+        padding:10px;
     }
     .item__container {
         flex:1;
