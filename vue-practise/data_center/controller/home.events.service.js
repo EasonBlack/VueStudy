@@ -65,6 +65,28 @@ module.exports = function (client) {
                 fetchEventItemsActive
             ])
         },
+        closeEventItem: function(req, res) {
+            let eventId = req.params.id;
+            let eventName = req.body.name;
+            let eventType = req.body.type;
+            let eventStatus = req.body.status;
+            async.waterfall([
+                function(next) {
+                    let closeEventItemText = `update home.event_item set status=2 where id=${eventId}`
+                    client.query({
+                        text: closeEventItemText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+                },
+                fetchEventItemsActive
+            ])
+
+        },
         postDaily: function(req, res){
             let dailyTime = req.body.time;
             let dailyTrophy = req.body.trophy;

@@ -10,7 +10,7 @@
                  <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length'></daily-list>
              </div>
              <div class='event-list__container'>
-                <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick'></event-item>
+                <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
              </div>
          </div>
 
@@ -28,7 +28,8 @@
         data() {
             return {
                  current: moment().format('YYYY-MM-DD'),
-                 selectedEventItem: null
+                 selectedEventItem: null,
+                 activeId: null
             }
         },
         created:function() {
@@ -45,6 +46,7 @@
             },
             eventItemClick : function(o) {
                 this.selectedEventItem = o.val;
+                this.activeId = o.val.id;
             }
         },
         computed: {

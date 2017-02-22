@@ -21,6 +21,11 @@ ul {
 .flex__h_end {
   justify-content: flex-end; }
 
+.flex__center {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .full__width {
   width: 100%; }
 

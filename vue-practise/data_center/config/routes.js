@@ -20,8 +20,11 @@ module.exports = function (app) {
     app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
     app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);
     app.post('/api/home/postEventItem',appCtrl.homeEventsSerivce.postEventItem);
+    app.put('/api/home/closeEventItem/:id',appCtrl.homeEventsSerivce.closeEventItem);
 
     app.get('/api/home/fetchDaily/:date', appCtrl.homeEventsSerivce.fetchDaily);
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
+
+
 }
 
