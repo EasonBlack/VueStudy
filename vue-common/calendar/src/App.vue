@@ -9,6 +9,9 @@
 		<div class='main_container'>
             <example-calendar-git :source='source' v-if='source.length'></example-calendar-git>
 		</div>
+		<div class='main_container'>
+			<example-input-calendar2></example-input-calendar2>
+		</div>
         <div class='main_container'>
             <example-input-calendar></example-input-calendar>
         </div>
@@ -33,12 +36,13 @@
     import moment from 'moment';
     import exampleCalendar from '../example__calendar__1/index.vue';
     import exampleInputCalendar from '../example__input_calendar/index.vue';
+    import exampleInputCalendar2 from '../example__input_calendar_2/index.vue';
     import exampleCalendarGit from '../example__calendar_gitlike/index.vue';
     import exampleGantt1 from '../example__gantt_1/index.vue';
     import exampleDailyArrange from '../example__daily_arrange/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar, exampleInputCalendar, exampleCalendarGit, exampleGantt1, exampleDailyArrange},
+	    components: {exampleCalendar, exampleInputCalendar,exampleInputCalendar2, exampleCalendarGit, exampleGantt1, exampleDailyArrange},
 		data() {
 			return {
 			    current: moment().startOf('month'),

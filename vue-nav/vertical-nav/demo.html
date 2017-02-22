@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <script src="menu-list.js"></script>
+    <style>
+        * {
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            font-family: Helvetica;
+        }
+        #app {
+            width:100vw;
+            height: 100vh;
+        }
+        .menu__list {
+            width:100%;
+        }
+
+        .title__container {
+            height:30px;
+            line-height:30px;
+            background-color: #F7F7F7;
+            border-bottom: 1px solid grey;
+        }
+        .content__container {
+            height:100px;
+            bakcground-color: black;
+            max-height:0px;
+            transition: all .5s ease;
+        }
+        .content__container.active {
+            max-height:100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <menu-list :menus="menus"></menu-list>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            menus: [
+                {id: 1, name: 'Schedule'},
+                {id: 2, name: 'Booked'},
+                {id: 3, name: 'AAAAAA'},
+                {id: 4, name: 'BBBBBB'},
+                {id: 5, name: 'CCCCCC'}
+            ]
+        },
+        methods: {
+        }
+    })
+
+</script>
+</html>
