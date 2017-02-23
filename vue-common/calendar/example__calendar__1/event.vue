@@ -14,6 +14,7 @@
 <style lang='scss' scope>
     .event__container {
         width: 100%;
+        min-width: 0;
         height:15px;
         line-height:15px;
         padding: 0 10px;
@@ -21,5 +22,7 @@
         background-color:steelblue;
         color:white;
         margin-bottom:5px;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
 </style>

@@ -16,12 +16,13 @@
         <example-calendar
                 :currentYear='currentYear'
                 :currentMonth='currentMonth'
-                :source='source'></example-calendar>
+                :source='monthGroup'></example-calendar>
     </div>
 </template>
 
 <script>
     import moment from 'moment';
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import exampleCalendar from 'common/calendar/example__calendar__1/index.vue';
     export default{
         components: {exampleCalendar},
@@ -32,6 +33,9 @@
                 currentYear: moment().year(),
                 source: []
             }
+        },
+        created:function() {
+            this.$store.dispatch('fetchDailyByDate', {startDate: this.startDate, endDate: this.endDate});
         },
          methods: {
              prev: function() {
@@ -45,6 +49,39 @@
                  this.currentYear = this.current.year();
              },
          },
+         computed: {
+            ...mapState({
+               monthItems: (state) => {
+                    console.log(state.eventDaily.month);
+                    return state.eventDaily.month.map((o)=> {
+                        o.name = o.item_name;
+                        return o;
+                    });
+               }
+            }),
+            monthGroup: function() {
+                let groups = {};
+                if(!this.monthItems) return null;
+                for(let m of this.monthItems) {
+                    groups[m.date] = groups[m.date] || [];
+                    groups[m.date].push(m);
+                }
+                let monthGroup = Object.keys(groups).map((o)=>{
+                    return {
+                        date: o,
+                        events: groups[o]
+                    }
+                })
+                return monthGroup;
+            },
+            startDate: function() {
+                return this.current.format('YYYY-MM-DD');
+            },
+            endDate : function() {
+                return this.current.endOf('month').format('YYYY-MM-DD');
+            }
+
+         }
     }
 </script>
 

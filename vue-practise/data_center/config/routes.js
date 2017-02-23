@@ -23,6 +23,7 @@ module.exports = function (app) {
     app.put('/api/home/closeEventItem/:id',appCtrl.homeEventsSerivce.closeEventItem);
 
     app.get('/api/home/fetchDaily/:date', appCtrl.homeEventsSerivce.fetchDaily);
+    app.get('/api/home/fetchDaily/:date/:enddate', appCtrl.homeEventsSerivce.fetchDaily);
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
 
 

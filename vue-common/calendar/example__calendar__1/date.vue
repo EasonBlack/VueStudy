@@ -5,7 +5,11 @@
                 notcurrent: !isCurrentMonth
              }"
             >{{date}}</div>
-        <div class='content__section'>
+        <div class='content__section' @click='activeContent'
+            v-bind:class='{
+                active: active
+            }'
+        >
             <event-div v-for='event in dateSource.events' :event='event'></event-div>
         </div>
     </div>
@@ -18,7 +22,14 @@
         props: ['dateMoment', 'currentMonth', 'dateSource'],
         components: {eventDiv},
         data: function(){
-            return {}
+            return {
+                active: false
+            }
+        },
+        methods: {
+            activeContent: function() {
+                this.active = !this.active;
+            }
         },
         computed: {
             'date': function() {
@@ -56,5 +67,17 @@
         width:100%;
         padding:10px 10px;
         box-sizing: border-box;
+        overflow:auto;
+        &.active {
+           background-color: white;
+           overflow: inherit;
+           z-index: 111;
+           white-space: nowrap;
+           white-space: no=wrap;
+           width: auto;
+           position: absolute;
+           top: 30px;
+           left: 0px;
+         }
     }
 </style>
