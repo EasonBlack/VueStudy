@@ -1,7 +1,7 @@
 <template>
     <div class='daily__container'>
          <div class='daily__current'>
-             {{current}}
+            <daily-header :title='current' @updateCurrent='updateCurrent'></daily-header>
          </div>
 
          <div class='daily__content'>
@@ -22,8 +22,9 @@
     import addPanel from './add_panel/index.vue';
     import eventItem from './event_item/index.vue';
     import dailyList from './daily_list/index.vue';
+    import dailyHeader from './daily_header/index.vue';
     export default {
-        components:{addPanel, eventItem, dailyList},
+        components:{addPanel, eventItem, dailyList, dailyHeader},
 
         data() {
             return {
@@ -47,6 +48,10 @@
             eventItemClick : function(o) {
                 this.selectedEventItem = o.val;
                 this.activeId = o.val.id;
+            },
+            updateCurrent: function(o){
+                this.current = moment(this.current).add(o, 'days').format('YYYY-MM-DD');
+                this.$store.dispatch('fetchDaily', this.current);
             }
         },
         computed: {
@@ -69,7 +74,6 @@
     .daily__current {
         width:100%;
         height:50px;
-        line-height:50px;
         padding:0 10px;
     }
     .daily__content {
