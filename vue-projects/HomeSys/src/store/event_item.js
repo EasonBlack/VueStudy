@@ -18,7 +18,7 @@ const mutations = {
 const actions = {
     fetchEventItemsActive ({commit, state}) {
         Vue.http.get(Config.API_ROOT +'/api/home/fetchEventItemsActive').then((response) => {
-            commit('fetchEventItemsByStatus', response.body.data)
+            commit('fetchEventItemsActive', response.body.data)
         })
     },
     fetchEventItems ({commit, state}, obj) {
@@ -28,7 +28,7 @@ const actions = {
     },
     postEventItem ({commit, state}, req) {
         Vue.http.post(Config.API_ROOT + '/api/home/postEventItem', req).then((response) => {
-            commit('fetchEventItemsActive', response.body.data)
+            commit('fetchEventItemsByStatus', response.body.data)
         })
     },
     closeEventItem ({commit, state}, id) {

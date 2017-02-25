@@ -27,7 +27,7 @@
         components: {addPanel, typeGroup, selectPanel},
         beforeCreate:function() {
              this.$store.dispatch('fetchEventType');
-             this.$store.dispatch('fetchEventItemsActive');
+             this.$store.dispatch('fetchEventItems', {status: 1});
         },
         data() {
             return {}
