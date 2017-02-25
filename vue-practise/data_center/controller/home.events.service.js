@@ -16,6 +16,32 @@ module.exports = function (client) {
         });
     }
 
+    let fetchEventItems = function (req, res) {
+        let _status = req.query.status ;
+        let _type = req.query.type;
+        console.log(req.body);
+        console.log(req.query);
+
+        let _queryTxt = 'select * from home.event_item where 1=1 ';
+        if(_status) {
+            _queryTxt = _queryTxt +  'and  status=' + _status;
+        }
+        if(_type) {
+            _queryTxt =  _queryTxt + 'and  type=' + _type;
+        }
+        console.log(_queryTxt);
+        client.query({
+            text: _queryTxt +  ' order by id'
+        }, function (error, results) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                data: results.rows
+            });
+        });
+    }
+
     let fetchDaily = function(req, res) {
         let _date = req.params.date;
         let _enddate = req.params.enddate;
@@ -37,6 +63,7 @@ module.exports = function (client) {
     return {
         fetchDaily,
         fetchEventItemsActive,
+        fetchEventItems,
         fetchEventType: function(req, res) {
             client.query({
                 text: 'select * from home.event_type;'

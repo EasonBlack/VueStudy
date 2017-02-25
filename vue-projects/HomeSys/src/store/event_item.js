@@ -2,19 +2,28 @@ import Vue from 'vue';
 import Config from '../common/config.js';
 
 const state = {
-    all: []
+    all: [],
+    current: []
 }
 
 const mutations = {
     fetchEventItemsActive: function (state, items) {
         state.all = items
-    }
+    },
+    fetchEventItemsByStatus: function (state, items) {
+        state.current = items
+    },
 }
 
 const actions = {
     fetchEventItemsActive ({commit, state}) {
         Vue.http.get(Config.API_ROOT +'/api/home/fetchEventItemsActive').then((response) => {
-            commit('fetchEventItemsActive', response.body.data)
+            commit('fetchEventItemsByStatus', response.body.data)
+        })
+    },
+    fetchEventItems ({commit, state}, obj) {
+        Vue.http.get(Config.API_ROOT +'/api/home/fetchEventItems', {params: obj}).then((response) => {
+            commit('fetchEventItemsByStatus', response.body.data)
         })
     },
     postEventItem ({commit, state}, req) {

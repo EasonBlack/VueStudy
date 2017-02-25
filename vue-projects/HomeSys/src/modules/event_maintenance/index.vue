@@ -1,6 +1,7 @@
 <template>
     <div class='event_maintenance__container'>
         <div class='panel__container'>
+            <select-panel @statusChange='statusChange'></select-panel>
             <add-panel :items='eventTypes' v-if='eventTypes && eventTypes.length' @clickHandle='clickHandle'></add-panel>
         </div>
         <div class='item__container'  v-if='eventTypes && eventTypes.length'>
@@ -21,8 +22,9 @@
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import addPanel from './add_panel/index.vue';
     import typeGroup from './type_group/index.vue';
+    import selectPanel from './select_panel/index.vue';
     export default {
-        components: {addPanel, typeGroup},
+        components: {addPanel, typeGroup, selectPanel},
         beforeCreate:function() {
              this.$store.dispatch('fetchEventType');
              this.$store.dispatch('fetchEventItemsActive');
@@ -36,6 +38,9 @@
             }),
             clickHandle: function(o) {
                 this.postEventItem(o);
+            },
+            statusChange: function(o) {
+                this.$store.dispatch('fetchEventItems', {status: o});
             }
         },
         computed: {
@@ -44,7 +49,7 @@
                     return state.eventType.all;
                },
                eventItems: (state) => {
-                    return state.eventItem.all;
+                    return state.eventItem.current;
                }
             }),
             colGroups: function() {

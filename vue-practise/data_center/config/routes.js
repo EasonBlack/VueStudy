@@ -19,6 +19,7 @@ module.exports = function (app) {
 
     app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
     app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);
+    app.get('/api/home/fetchEventItems',appCtrl.homeEventsSerivce.fetchEventItems);
     app.post('/api/home/postEventItem',appCtrl.homeEventsSerivce.postEventItem);
     app.put('/api/home/closeEventItem/:id',appCtrl.homeEventsSerivce.closeEventItem);
 
