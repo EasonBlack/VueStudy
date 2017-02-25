@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 import Calendar from './modules/calendar/index.vue'
 import Daily from './modules/daily/index.vue'
 import EventMaintenance from './modules/event_maintenance/index.vue'
+import Story from './modules/story/index.vue'
 
 
 const router = new VueRouter({
@@ -13,6 +14,7 @@ const router = new VueRouter({
         { path: '/daily/:date',name: 'daily', component: Daily },
         { path: '/daily', name: 'daily', component: Daily },
         { path: '/event_maintenance', name:'event_maintenance', component: EventMaintenance },
+        { path: '/story', name:'story', component: Story },
         { path: '/', redirect: '/calendar' }
     ]
 })

@@ -19,7 +19,8 @@
 	    		  menus: [
 		            {name: 'calendar',title: "Calendar" },
 		            {name: 'daily',title: "Daily"},
-		            {name: 'event_maintenance', title: 'Event Maintenance'}
+		            {name: 'event_maintenance', title: 'Event Maintenance'},
+		            {name: 'story', title: 'Story'}
 		        ],
 	    	}
 	    }
