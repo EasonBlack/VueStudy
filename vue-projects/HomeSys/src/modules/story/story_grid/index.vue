@@ -9,18 +9,21 @@
                   @drop="onDrop(i,j,$event)"
                   @dragover='onDragover(i,j,$event)'
              >
-
+                 <story-card :item='setCard(i,j)'></story-card>
              </div>
          </div>
     </div>
 </template>
 <script>
+    import storyCard from '../card.vue';
     export default {
-        props: ['rowNum', 'colNum', 'cards'],
+        components: {storyCard},
+        props: ['rowNum', 'colNum'],
         data() {
             return {
                 activeX: '',
-                activeY: ''
+                activeY: '',
+                cards: []
             }
         },
         methods: {
@@ -35,7 +38,7 @@
                 if(_hasItem) {
                     return;
                 }
-                let _id = ev.dataTransfer.getData("card_id");
+                let _id = ev.dataTransfer.getData("card_content");
                 let _item = this.cards.find(item=> { return item.id == _id});
                 _item.x = i;
                 _item.y = j;

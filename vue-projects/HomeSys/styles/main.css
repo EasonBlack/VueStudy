@@ -64,6 +64,12 @@ ul {
 
 .btn__add {
   background-color: steelblue;
-  color: white; }
+  color: white;
+  font-size: 0.9em; }
+
+.btn__save {
+  background-color: #B44991;
+  color: white;
+  font-size: 0.9em; }
 
 /*# sourceMappingURL=main.css.map */
