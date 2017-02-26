@@ -3,18 +3,19 @@
          <div v-for='i in rowNum' class='row__wrapper' >
              <div class='card__wrapper' v-for='(j, index) in colNum'
                   v-bind:class="{
-                     active: i==activeX && j == activeY
+                     active: j==activeX && i== activeY
                   }"
                   @dragover.prevent
                   @drop="onDrop(i,j,$event)"
                   @dragover='onDragover(i,j,$event)'
              >
-                 <story-card :item='setCard(i,j)'></story-card>
+                 <story-card v-if='setCard(i,j)' :card='setCard(i,j)'></story-card>
              </div>
          </div>
     </div>
 </template>
 <script>
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import storyCard from '../card.vue';
     export default {
         components: {storyCard},
@@ -22,31 +23,36 @@
         data() {
             return {
                 activeX: '',
-                activeY: '',
-                cards: []
+                activeY: ''
             }
         },
         methods: {
             setCard: function(i,j) {
-                let _item = this.cards.find(item=> { return item.x == i && item.y ==j});
+                let _item = this.storyPieces.find(item=> { return item.x == j && item.y ==i});
                 return _item
             },
             onDrop: function(i,j,ev) {
-                let _hasItem = this.cards.find(item=> { return item.x == i && item.y ==j});
+                let _hasItem = this.storyPieces.find(item=> { return item.x == j && item.y ==i});
                 this.activeX = '';
                 this.activeY = '';
                 if(_hasItem) {
                     return;
                 }
-                let _id = ev.dataTransfer.getData("card_content");
-                let _item = this.cards.find(item=> { return item.id == _id});
-                _item.x = i;
-                _item.y = j;
+                let _tempid = ev.dataTransfer.getData("card_content");
+
+                this.$store.commit('setStoryPiece', {tempid: _tempid,  x:j, y:i})
             },
             onDragover:function(i,j,ev) {
-                this.activeX = i;
-                this.activeY = j;
+                this.activeX = j;
+                this.activeY = i;
             }
+        },
+        computed: {
+            ...mapState({
+               storyPieces: (state) => {
+                    return state.storyPiece.current.filter((o)=> { return o.x !=-1 && o.y !=-1});
+               }
+            }),
         }
     }
 </script>

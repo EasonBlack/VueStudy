@@ -12,12 +12,11 @@
 </template>
 <script>
     export default {
-        props: ['card', 'index'],
+        props: ['card'],
         methods: {
             handleDragstart: function(ev) {
                 this.active = true;
-                ev.dataTransfer.setData("card_content",  this.card.content);
-                //ev.dataTransfer.setDragImage(this.$el, 0, 0);
+                ev.dataTransfer.setData("card_content",  this.card.tempid);
             },
             handleDragend: function(ev) {
                 this.active = false;

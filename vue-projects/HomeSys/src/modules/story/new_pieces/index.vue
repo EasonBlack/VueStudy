@@ -2,7 +2,7 @@
     <transition-group class='piece-list__wrapper' name="flip-list" tag="ul">
         <li v-for='(c, index) in pieces' class='new-piece__wrapper flex__center'  v-bind:key="c">
             <piece-card :card='c' :index='index'></piece-card>
-            <a class='btn__close flex__center' @click='deletePiece(index)'>x</a>
+            <a class='btn__close flex__center' @click='deletePiece(c)'>x</a>
         </li>
     </transition-group>
 </template>
@@ -12,8 +12,8 @@
         components: {PieceCard},
         props:['pieces'],
         methods: {
-            deletePiece : function(index) {
-              this.$emit('deletePiece', index)
+            deletePiece : function(c) {
+              this.$emit('deletePiece', c)
             }
         }
     }

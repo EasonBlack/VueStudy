@@ -26,9 +26,11 @@
     </div>
 </template>
 <script>
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     import storyGrid from './story_grid/index.vue';
     import newPiecesList from './new_pieces/index.vue';
     import newPiecePanel from './new_piece_panel.vue';
+
     export default {
         components: {storyGrid, newPiecesList, newPiecePanel},
         data() {
@@ -44,14 +46,19 @@
                 this.showNewPiecePanel = !this.showNewPiecePanel;
             },
             deletePiece: function(index) {
-                this.newPieces.splice(index, 1);
+                //this.newPieces.splice(index, 1);
             },
             AddPieceHandle: function(c) {
-                this.newPieces.unshift({content: c});
+                this.$store.commit('addNewStoryPiece', {tempid: this.newPieces.length +1 , content: c, x:-1, y:-1});
                 this.showNewPiecePanel = false;
             }
         },
         computed: {
+            ...mapState({
+               newPieces: (state) => {
+                    return state.storyPiece.current.filter((o)=> { return o.x ==-1 || o.y ==-1});
+               }
+            }),
             newPiecesReverse: function() {
                 return this.newPieces.reverse();
             }
