@@ -11,13 +11,22 @@
             </div>
         </div>
         <div class='content__container'>
+            <div class='grid__container' >
+                <story-grid :colNum='colNum' :rowNum='rowNum'></story-grid>
+            </div>
+            <div class='right__container'></div>
         </div>
     </div>
 </template>
 <script>
+    import storyGrid from './story_grid/index.vue';
     export default {
+        components: {storyGrid},
         data() {
-            return {}
+            return {
+                colNum : 7,
+                rowNum: 7,
+            }
         }
     }
 </script>
@@ -41,5 +50,17 @@
     .content__container {
         width:100%;
         flex:1;
+        display:flex;
+        border-top: 1px solid rgba(grey, 0.8);
+    }
+    .grid__container {
+        flex:1 0;
+        position:relative;
+        background-color:rgba(grey, 0.5);
+        overflow:auto;
+    }
+    .right__container {
+        flex:0 0 150px;
+        background-color:white;
     }
 </style>
