@@ -7,7 +7,7 @@
                  </select>
             </div>
             <div class='right__wrapper flex__h-center '>
-                <a class='btn btn__save'>Save</a>
+                <a class='btn btn__save' @click='savePieces'>Save</a>
                 <a class='btn btn__add' @click='addNewPiecePanel'>Add</a>
                 <div class='new-panel__container' v-if='showNewPiecePanel'>
                     <new-piece-panel @AddPieceHandle='AddPieceHandle'></new-piece-panel>
@@ -37,9 +37,11 @@
             return {
                 colNum : 7,
                 rowNum: 7,
-                newPieces: [],
                 showNewPiecePanel: false
             }
+        },
+        created: function() {
+             this.$store.dispatch('fetchStoryPiece', this.allPieces);
         },
         methods: {
             addNewPiecePanel: function () {
@@ -51,10 +53,16 @@
             AddPieceHandle: function(c) {
                 this.$store.commit('addNewStoryPiece', {tempid: this.newPieces.length +1 , content: c, x:-1, y:-1});
                 this.showNewPiecePanel = false;
+            },
+            savePieces: function() {
+                this.$store.dispatch('saveStoryPiece', this.allPieces);
             }
         },
         computed: {
             ...mapState({
+               allPieces: (state)=> {
+                 return state.storyPiece.current;
+               },
                newPieces: (state) => {
                     return state.storyPiece.current.filter((o)=> { return o.x ==-1 || o.y ==-1});
                }

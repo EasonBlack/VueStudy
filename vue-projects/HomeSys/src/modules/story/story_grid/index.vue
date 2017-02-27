@@ -38,9 +38,9 @@
                 if(_hasItem) {
                     return;
                 }
-                let _tempid = ev.dataTransfer.getData("card_content");
+                let _id = ev.dataTransfer.getData("card_content");
 
-                this.$store.commit('setStoryPiece', {tempid: _tempid,  x:j, y:i})
+                this.$store.commit('setStoryPiece', {tempid: _id,  x:j, y:i})
             },
             onDragover:function(i,j,ev) {
                 this.activeX = j;

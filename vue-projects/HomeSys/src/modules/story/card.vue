@@ -16,7 +16,7 @@
         methods: {
             handleDragstart: function(ev) {
                 this.active = true;
-                ev.dataTransfer.setData("card_content",  this.card.tempid);
+                ev.dataTransfer.setData("card_content",  this.card.id + '_' + this.card.tempid );
             },
             handleDragend: function(ev) {
                 this.active = false;

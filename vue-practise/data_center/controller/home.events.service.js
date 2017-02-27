@@ -60,6 +60,19 @@ module.exports = function (client) {
         });
     }
 
+    let fetchStoryPiece = function(req, res) {
+        client.query({
+            text: `select * from home.story_piece where item_id=1`
+        }, function (error, results) {
+            if (error) {
+                console.log(error);
+            }
+            res.send({
+                data: results.rows
+            });
+        });
+    }
+
     return {
         fetchDaily,
         fetchEventItemsActive,
@@ -136,9 +149,62 @@ module.exports = function (client) {
                         }
                         next(null, req, res);
                     })
+
                 },
                 fetchDaily
             ])
+        },
+        fetchStoryPiece,
+        postStoryPiece: function(req, res) {
+            let pieces = req.body.pieces;
+            let newpieces =[]
+            let oldpieces =[];
+            for(p of pieces) {
+                if(p.id) {
+                    oldpieces.push(p);
+                }else {
+                    newpieces.push(p);
+                }
+            }
+            let newQueryTxt = '';
+            let oldQueryTxt ='';
+            if(newpieces.length) {
+                newQueryTxt= 'insert into home.story_piece(item_id, content,x,y,type) values'
+                    +  newpieces.map((o)=> {
+                        return `(1, '${o.content}', ${o.x}, ${o.y}, 5)`
+                    }).join(',')
+            }
+            if(oldpieces.length) {
+                let updateTxt = oldpieces.map((o)=> {
+                    return `( ${o.id},'${o.content}', ${o.x}, ${o.y}, 5)`
+                }).join(',')
+                oldQueryTxt = 'update home.story_piece as p set content=t.content, x=t.x, y=t.y, type=t.type from ( values'
+                            + updateTxt
+                            + ') t(id, content,x,y,type) where t.id=p.id';
+
+            }
+            console.log(newQueryTxt, oldQueryTxt);
+
+            client.query({
+                text: newQueryTxt
+            }, function (error) {
+                if(error) {
+                    console.log(error);
+                    return;
+                }
+                client.query({
+                    text: oldQueryTxt
+                }, function (error) {
+                    if(error) {
+                        console.log(error);
+                        return;
+                    }
+                    fetchStoryPiece(req, res);
+                })
+            })
+
+
+
         }
     }
 }

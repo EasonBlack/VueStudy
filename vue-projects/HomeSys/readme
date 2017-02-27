@@ -15,5 +15,5 @@ left join home.event_type t on i.type = t.id
 
 
 CREATE TABLE home.story_item (id SERIAL PRIMARY KEY, Name VARCHAR(20));
-CREATE TABLE home.story_piece (id SERIAL PRIMARY KEY, content text, x integer, y integer, type integer);
+CREATE TABLE home.story_piece (id SERIAL PRIMARY KEY, item_id bigint, content text, x integer, y integer, type integer);
 CREATE TABLE home.story_config (id SERIAL PRIMARY KEY, item_id integer , type_id integer, color VARCHAR(10));

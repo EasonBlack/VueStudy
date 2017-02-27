@@ -28,5 +28,9 @@ module.exports = function (app) {
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
 
 
+    app.get('/api/home/storyPiece',appCtrl.homeEventsSerivce.fetchStoryPiece);
+    app.post('/api/home/storyPiece',appCtrl.homeEventsSerivce.postStoryPiece);
+
+
 }
 
