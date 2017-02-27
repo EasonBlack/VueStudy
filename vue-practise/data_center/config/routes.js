@@ -27,9 +27,9 @@ module.exports = function (app) {
     app.get('/api/home/fetchDaily/:date/:enddate', appCtrl.homeEventsSerivce.fetchDaily);
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
 
-
-    app.get('/api/home/storyPiece',appCtrl.homeEventsSerivce.fetchStoryPiece);
-    app.post('/api/home/storyPiece',appCtrl.homeEventsSerivce.postStoryPiece);
+    app.get('/api/home/storyItem',appCtrl.homeEventsSerivce.fetchStoryItem);
+    app.get('/api/home/storyPiece/:id',appCtrl.homeEventsSerivce.fetchStoryPiece);
+    app.post('/api/home/storyPiece/:id',appCtrl.homeEventsSerivce.postStoryPiece);
 
 
 }

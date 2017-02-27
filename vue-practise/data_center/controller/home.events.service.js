@@ -61,8 +61,9 @@ module.exports = function (client) {
     }
 
     let fetchStoryPiece = function(req, res) {
+        let id = req.params.id;
         client.query({
-            text: `select * from home.story_piece where item_id=1`
+            text: `select * from home.story_piece where item_id=${id}`
         }, function (error, results) {
             if (error) {
                 console.log(error);
@@ -154,8 +155,21 @@ module.exports = function (client) {
                 fetchDaily
             ])
         },
+        fetchStoryItem: function(req,res) {
+            client.query({
+                text: `select * from home.story_item`
+            }, function (error, results) {
+                if (error) {
+                    console.log(error);
+                }
+                res.send({
+                    data: results.rows
+                });
+            });
+        },
         fetchStoryPiece,
         postStoryPiece: function(req, res) {
+            let id = req.params.id;
             let pieces = req.body.pieces;
             let newpieces =[]
             let oldpieces =[];
@@ -171,7 +185,7 @@ module.exports = function (client) {
             if(newpieces.length) {
                 newQueryTxt= 'insert into home.story_piece(item_id, content,x,y,type) values'
                     +  newpieces.map((o)=> {
-                        return `(1, '${o.content}', ${o.x}, ${o.y}, 5)`
+                        return `(${id}, '${o.content}', ${o.x}, ${o.y}, 5)`
                     }).join(',')
             }
             if(oldpieces.length) {
@@ -180,7 +194,7 @@ module.exports = function (client) {
                 }).join(',')
                 oldQueryTxt = 'update home.story_piece as p set content=t.content, x=t.x, y=t.y, type=t.type from ( values'
                             + updateTxt
-                            + ') t(id, content,x,y,type) where t.id=p.id';
+                            + ') t(id, content,x,y,type) where t.id=p.id and item_id=' + id;
 
             }
             console.log(newQueryTxt, oldQueryTxt);

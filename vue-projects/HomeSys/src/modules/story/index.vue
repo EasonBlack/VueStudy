@@ -2,8 +2,8 @@
     <div class='story__container'>
         <div class='header__container'>
             <div class='left__wrapper flex__h-center'>
-                 <select>
-                     <option>aaaa</option>
+                 <select v-if='storyItems && storyItems.length' v-model='selectStoryItemId' @change='storyItemChange'>
+                     <option v-for='(s,index) in storyItems'  :value='s.id'>{{s.name}}</option>
                  </select>
             </div>
             <div class='right__wrapper flex__h-center '>
@@ -37,13 +37,17 @@
             return {
                 colNum : 7,
                 rowNum: 7,
-                showNewPiecePanel: false
+                showNewPiecePanel: false,
+                selectStoryItemId:  null
             }
         },
         created: function() {
-             this.$store.dispatch('fetchStoryPiece', this.allPieces);
+             this.$store.dispatch('fetchStoryItems');
         },
         methods: {
+            storyItemChange: function() {
+                 this.$store.dispatch('fetchStoryPiece', this.selectStoryItemId);
+            },
             addNewPiecePanel: function () {
                 this.showNewPiecePanel = !this.showNewPiecePanel;
             },
@@ -55,11 +59,14 @@
                 this.showNewPiecePanel = false;
             },
             savePieces: function() {
-                this.$store.dispatch('saveStoryPiece', this.allPieces);
+                this.$store.dispatch('saveStoryPiece', {id: this.selectStoryItemId , pieces: this.allPieces});
             }
         },
         computed: {
             ...mapState({
+               storyItems: (state)=> {
+                    return state.storyPiece.items;
+               },
                allPieces: (state)=> {
                  return state.storyPiece.current;
                },

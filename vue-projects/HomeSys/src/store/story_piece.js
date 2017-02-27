@@ -2,12 +2,16 @@ import Vue from 'vue';
 import Config from '../common/config.js';
 
 const state = {
-    current: []
+    current: [],
+    items: [],
 }
 
 const mutations = {
     fetchStoryPiece: function (state, items) {
         state.current = items
+    },
+    fetchStoryItems: function(state, items) {
+        state.items = items;
     },
     addNewStoryPiece: function (state, p) {
         state.current.unshift(p);
@@ -27,13 +31,18 @@ const mutations = {
 }
 
 const actions = {
-    fetchStoryPiece({commit, state}) {
-        Vue.http.get(Config.API_ROOT + '/api/home/storyPiece').then((response) => {
+    fetchStoryItems({commit, state}){
+        Vue.http.get(Config.API_ROOT + '/api/home/storyItem').then((response) => {
+            commit('fetchStoryItems', response.body.data)
+        })
+    },
+    fetchStoryPiece({commit, state}, id) {
+        Vue.http.get(Config.API_ROOT + '/api/home/storyPiece/' + id).then((response) => {
             commit('fetchStoryPiece', response.body.data)
         })
     },
-    saveStoryPiece ({commit, state}, pieces) {
-        Vue.http.post(Config.API_ROOT + '/api/home/storyPiece', {pieces}).then((response) => {
+    saveStoryPiece ({commit, state}, o) {
+        Vue.http.post(Config.API_ROOT + '/api/home/storyPiece/' + o.id, {pieces: o.pieces}).then((response) => {
             commit('fetchStoryPiece', response.body.data)
         })
     }
