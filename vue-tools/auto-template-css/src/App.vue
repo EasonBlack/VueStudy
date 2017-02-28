@@ -148,11 +148,13 @@
     .html__section {
         height:50%;
         padding:10px;
+        overflow:auto;
         border-bottom:1px solid rgba(grey, 0.3);
     }
     .css__section {
         padding:10px;
         height:50%;
+        overflow:auto;
     }
 
 </style>

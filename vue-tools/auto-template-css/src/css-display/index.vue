@@ -17,24 +17,24 @@
                  let keyArray = a.split(':')[0];
                  let key = keyArray.split(/(?=[A-Z])/).map(o=> o.toLowerCase()).join('-');
                  console.log(key);
-                 let _cssTxt = tab + `${key} :  ${a.split(':')[1]};\n\r`;
+                 let _cssTxt = tab + `${key} :  ${a.split(':')[1]};\n`;
                  return _cssTxt;
             },
             this.buildCssArray= (tags) => {
                 let _cssTxt = '';
                 for(let o of tags){
-                    _cssTxt +=`.${o.text}__container { \n\r `;
+                    _cssTxt +=`.${o.text}__container { \n `;
                     for(let a of o.css) {
                         _cssTxt += this.recodeCss(a, '\t');
                     }
                     for(let c of o.children){
-                         _cssTxt += `\t${c.el} { \n\r`;
+                         _cssTxt += `\t${c.el} { \n`;
                          for(let a of c.css) {
                             _cssTxt += this.recodeCss(a, '\t\t');
                          }
-                         _cssTxt += `\t}\n\r`;
+                         _cssTxt += `\t}\n`;
                     }
-                    _cssTxt += `} \n\r`
+                    _cssTxt += `} \n`
                 }
                 return _cssTxt
             }
