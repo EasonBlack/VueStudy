@@ -1,6 +1,8 @@
 <template>
 	<div id="app">
+        <div class='row__section'>
 
+        </div>
         <div class='row__section'>
             <div class='table_container' style='overflow:hidden'>
                 <example-table-freeze-all1></example-table-freeze-all1>

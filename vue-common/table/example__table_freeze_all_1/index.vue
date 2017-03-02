@@ -30,7 +30,7 @@
                     {id:'state3', name: 'STATE3'}
                 ],
                 rows: [
-                    {id: '1',name: 'aaaaa' , state: '1', state1: '1', state2: '1', state3: '1'},
+                    {id: '1',name: 'aaaa aaaaaaaaaaaaaaaa' , state: '1', state1: '1', state2: '1', state3: '1'},
                     {id: '2',name: 'bbb' , state: '2', state1: '1', state2: '1', state3: '1'},
                     {id: '3',name: 'bbb' , state: '3', state1: '1', state2: '1', state3: '1'},
                     {id: '4',name: 'ddd' , state: '4', state1: '1', state2: '1', state3: '1'},
@@ -52,7 +52,17 @@
             }
         },
         mounted: function() {
+              var $table = $('#f1'),
+                  $bodyCells = $table.find('tbody tr:first').children(),
+                  colWidth;
 
+              colWidth = $bodyCells.map(function() {
+                  return $(this)[0].clientWidth;
+              }).get();
+
+              $table.find('thead th').each(function(i, v) {
+                  $(v).width(colWidth[i]);
+             });
         }
 
     }
@@ -67,19 +77,18 @@
     }
     table {
         position: relative;
-        width: 100%;
+        width:500px;
         background-color: #aaa;
         overflow: hidden;
-        border-collapse: collapse;
         border-spacing: 0;
+        border-top: 1px solid #222;
+        border-left: 1px solid #222;
     }
-
 
     /*thead*/
     thead {
         position: relative;
-        display: block; /*seperates the header from the body allowing it to be positioned*/
-        width: 100%;
+        display: flex;
         overflow: visible;
     }
 
@@ -87,37 +96,40 @@
         background-color: #99a;
         min-width: 120px;
         height: 32px;
-        border: 1px solid #222;
+        line-height:32px;
+        border-bottom: 1px solid #222;
+        border-right: 1px solid #222;
         display:inline-block;
     }
 
     thead th:nth-child(1) {/*first cell in the header*/
         position: relative;
-        display: inline-block; /*seperates the first cell in the header from the header*/
+        display: inline-block;
         background-color: #88b;
     }
 
-
-    /*tbody*/
     tbody {
         position: relative;
-        display: block; /*seperates the tbody from the header*/
-        width: 100%;
+        display: block;
+        width:  500px;
         height: 239px;
-
         overflow: scroll;
     }
 
     tbody td {
         background-color: #bbc;
         min-width: 120px;
-        border: 1px solid #222;
+        border-bottom: 1px solid #222;
+        border-right: 1px solid #222;
+        padding:0px 10px;
+        height: 40px;
     }
 
     tbody tr td:nth-child(1) {  /*the first cell in each tr*/
         position: relative;
         display: block; /*seperates the first column from the tbody*/
         height: 40px;
+        line-height:40px;
         background-color: #99a;
     }
 

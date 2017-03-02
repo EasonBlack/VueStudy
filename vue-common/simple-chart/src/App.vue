@@ -1,7 +1,7 @@
 <template>
 	<div  class='main__container'>
        <div class='chart__container'>
-            <circle-chart :num='30'></circle-chart>
+            <circle-chart :num="'75'"></circle-chart>
        </div>
 	</div>
 

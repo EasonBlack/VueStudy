@@ -2,7 +2,7 @@
     <div class='chart__wrapper'>
         <div  class="active-border"
         :style="{
-            'background-image': 'linear-gradient('+radio +'deg, transparent 50%, #A2ECFB 50%), linear-gradient(90deg, #A2ECFB 50%, transparent 50%)'
+            'background-image': 'linear-gradient('+radio +'deg, transparent 50%, '+ radioColor+' 50%), linear-gradient(90deg, #A2ECFB 50%, transparent 50%)'
         }">
               <div  class="circle">
                   {{num}}%
@@ -15,8 +15,22 @@
         props: ['num'],
         computed: {
             radio: function() {
-                return 90 + 360 * (this.num/100);
+                let r =  360 * (this.num/100);
+                if(r<=180) {
+                    return 90+r;
+                }else {
+                    return r-90;
+                }
+            },
+            radioColor: function() {
+                let r =  360 * (this.num/100);
+                if(r<=180) {
+                    return '#A2ECFB';
+                }else {
+                    return '#39B4CC';
+                }
             }
+
         }
     }
 </script>
