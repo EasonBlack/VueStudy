@@ -31,6 +31,11 @@ const actions = {
             commit('fetchDaily', response.body.data)
         })
     },
+    putDaily({commit, state}, req) {
+        Vue.http.put(Config.API_ROOT + '/api/home/putDaily/'+ req.id, req).then((response) => {
+            commit('fetchDaily', response.body.data)
+        })
+    }
 
 }
 

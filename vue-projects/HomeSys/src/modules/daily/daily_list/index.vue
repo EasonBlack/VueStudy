@@ -1,6 +1,6 @@
 <template>
     <ul class='daily-item__container'>
-        <li v-for='item in items'>
+        <li v-for='item in items' @click='showUpdateHandle(item)'>
             <span class='li__col1'>{{item.item_name}}</span>
             <span class='li__col2'>{{item.time}}</span>
             <span class='li__col3' >{{item.trophy}}</span>
@@ -16,6 +16,9 @@
             }
         },
         methods: {
+            showUpdateHandle: function(item) {
+                this.$emit('showUpdateHandle',item)
+            }
         },
     }
 </script>

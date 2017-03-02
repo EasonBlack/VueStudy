@@ -26,6 +26,7 @@ module.exports = function (app) {
     app.get('/api/home/fetchDaily/:date', appCtrl.homeEventsSerivce.fetchDaily);
     app.get('/api/home/fetchDaily/:date/:enddate', appCtrl.homeEventsSerivce.fetchDaily);
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
+    app.put('/api/home/putDaily/:id',appCtrl.homeEventsSerivce.putDaily);
 
     app.get('/api/home/storyItem',appCtrl.homeEventsSerivce.fetchStoryItem);
     app.get('/api/home/storyPiece/:id',appCtrl.homeEventsSerivce.fetchStoryPiece);

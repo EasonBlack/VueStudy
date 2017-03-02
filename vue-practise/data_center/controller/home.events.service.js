@@ -43,7 +43,7 @@ module.exports = function (client) {
     }
 
     let fetchDaily = function(req, res) {
-        let _date = req.params.date;
+        let _date = req.params.date || req.body.date;
         let _enddate = req.params.enddate;
         if(!_enddate) {
             _enddate = _date;
@@ -143,6 +143,28 @@ module.exports = function (client) {
                     console.log(addDailyText);
                     client.query({
                         text: addDailyText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+
+                },
+                fetchDaily
+            ])
+        },
+        putDaily: function(req, res){
+            let id = req.params.id;
+            let dailyTime = req.body.time;
+            let dailyTrophy = req.body.trophy;
+            async.waterfall([
+                function(next) {
+                    let updateDailyText = `update home.event_daily set time=${dailyTime}, trophy=${dailyTrophy} where id=${id}`;
+                    console.log(updateDailyText)
+                    client.query({
+                        text: updateDailyText
                     }, function (error) {
                         if(error) {
                             console.log(error);

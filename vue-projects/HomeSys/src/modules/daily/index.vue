@@ -7,7 +7,8 @@
          <div class='daily__content'>
              <div class='panel__container'>
                  <add-panel @clickHandle='dailySave'></add-panel>
-                 <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length'></daily-list>
+                 <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length' @showUpdateHandle='showUpdateHandle'></daily-list>
+                 <update-panel v-if='showUpdate' :item='currentItem' @updateCancel='updateCancel' @updateHandle='updateHandle'></update-panel>
              </div>
              <div class='event-list__container'>
                 <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
@@ -23,14 +24,17 @@
     import eventItem from './event_item/index.vue';
     import dailyList from './daily_list/index.vue';
     import dailyHeader from './daily_header/index.vue';
+    import updatePanel from './update_panel/index.vue';
     export default {
-        components:{addPanel, eventItem, dailyList, dailyHeader},
+        components:{addPanel, eventItem, dailyList, dailyHeader, updatePanel},
 
         data() {
             return {
                  current: moment().format('YYYY-MM-DD'),
                  selectedEventItem: null,
-                 activeId: null
+                 activeId: null,
+                 showUpdate: false,
+                 currentItem: null
             }
         },
         created:function() {
@@ -52,6 +56,17 @@
             updateCurrent: function(o){
                 this.current = moment(this.current).add(o, 'days').format('YYYY-MM-DD');
                 this.$store.dispatch('fetchDaily', this.current);
+            },
+            showUpdateHandle: function(item) {
+                this.showUpdate = true;
+                this.currentItem = item;
+            },
+            updateCancel: function() {
+                this.showUpdate = false;
+            },
+            updateHandle: function(item) {
+                this.$store.dispatch('putDaily', item);
+                this.showUpdate = false;
             }
         },
         computed: {
@@ -84,6 +99,7 @@
     .panel__container {
         width:200px;
         padding:10px;
+        position:relative;
     }
     .event-list__container {
         flex:1;

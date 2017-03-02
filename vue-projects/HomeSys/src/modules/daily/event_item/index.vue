@@ -65,6 +65,7 @@
             padding-left:20px;
             color:white;
             box-sizing:border-box;
+            overflow:hidden;
             &.active {
                  border: 2px solid steelblue;
             }
