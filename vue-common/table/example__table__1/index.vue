@@ -33,6 +33,7 @@
         tr {
             height:40px;
         }
+
     }
 
 </style>
