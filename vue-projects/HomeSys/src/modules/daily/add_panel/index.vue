@@ -9,6 +9,10 @@
             <input type='text' v-model='dailyTrophy'/>
         </div>
         <div class='panel__row'>
+            <label class='comment'>Comment:</label>
+            <input type='text' v-model='dailyComment'/>
+        </div>
+        <div class='panel__row'>
             <a class='btn btn__full_width btn__add' @click='clickHandle'>ADD</a>
         </div>
     </div>
@@ -20,17 +24,20 @@
         data() {
             return {
                 dailyTime: 0,
-                dailyTrophy: 0
+                dailyTrophy: 0,
+                dailyComment: ''
             }
         },
         methods: {
             clickHandle: function() {
                 this.$emit('clickHandle', {
                     time: this.dailyTime,
-                    trophy: this.dailyTrophy
+                    trophy: this.dailyTrophy,
+                    comment: this.dailyComment
                 });
                 this.dailyTime = 0;
                 this.dailyTrophy = 0;
+                this.dailyComment = '';
             }
         },
 
@@ -50,7 +57,7 @@
         width:100%;
         label {
             display:inline-block;
-            width:50px;
+            width:55px;
 
         }
         .time {
@@ -58,6 +65,10 @@
         }
         .trophy {
             color: #{$trophy_color};
+        }
+        .comment {
+            color: #{$comment_color};
+            font-size:0.8em;
         }
         input {
             width:60px;

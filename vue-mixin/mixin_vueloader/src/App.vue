@@ -14,6 +14,9 @@
 			return {
 				message: 'my vue'
 			}
+		},
+		created: function() {
+		    console.log('created!!');
 		}
 	}
 

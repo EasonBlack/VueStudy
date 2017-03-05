@@ -9,6 +9,10 @@
             <input type='text' v-model='dailyTrophy'/>
         </div>
         <div class='panel__row'>
+            <label class='comment'>Comment:</label>
+            <input type='text' v-model='dailyComment'/>
+        </div>
+        <div class='panel__row'>
             <a class='btn  btn__add ' @click='updateHandle'>Update</a>
             <a class='btn  btn__cancel' @click='cancelHandle'>Cancel</a>
         </div>
@@ -22,13 +26,15 @@
         data(){
             return{
                 dailyTime: 0,
-                dailyTrophy: 0
+                dailyTrophy: 0,
+                dailyComment: ''
             }
         },
         watch: {
             'item': function() {
                  this.dailyTime = this.item.time;
                  this.dailyTrophy = this.item.trophy;
+                 this.dailyComment = this.item.comment;
             }
         },
         methods: {
@@ -37,7 +43,8 @@
                     id: this.item.id,
                     date: this.item.date,
                     time: this.dailyTime,
-                    trophy: this.dailyTrophy
+                    trophy: this.dailyTrophy,
+                    comment: this.dailyComment
                 });
             },
             cancelHandle: function() {
@@ -47,6 +54,7 @@
         mounted: function() {
             this.dailyTime = this.item.time;
             this.dailyTrophy = this.item.trophy;
+            this.dailyComment = this.item.comment;
         }
 
     }
@@ -56,7 +64,7 @@
  @import 'styles/settings.variable.scss';
     .update-panel__container {
         position:absolute;
-        top: 190px;
+        top: 230px;
         left: 190px;
         width:100%;
         border:2px solid steelblue;
@@ -77,6 +85,10 @@
         }
         .trophy {
             color: #{$trophy_color};
+        }
+        .comment {
+            color: #{$comment_color};
+            font-size:0.8em;
         }
         input {
             width:60px;

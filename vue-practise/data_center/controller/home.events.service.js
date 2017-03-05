@@ -136,10 +136,12 @@ module.exports = function (client) {
             let dailyTime = req.body.time;
             let dailyTrophy = req.body.trophy;
             let dailyType = req.body.type;
+            let dailyComment = req.body.comment || '';
             let dailyDate = req.params.date;
+
             async.waterfall([
                 function(next) {
-                    let addDailyText = `insert into home.event_daily(event_id, date, time, trophy ) values(${dailyType},'${dailyDate}', ${dailyTime},  ${dailyTrophy})`
+                    let addDailyText = `insert into home.event_daily(event_id, date, time, trophy, comment ) values(${dailyType},'${dailyDate}', ${dailyTime},  ${dailyTrophy}, '${dailyComment}')`
                     console.log(addDailyText);
                     client.query({
                         text: addDailyText
@@ -159,9 +161,10 @@ module.exports = function (client) {
             let id = req.params.id;
             let dailyTime = req.body.time;
             let dailyTrophy = req.body.trophy;
+            let dailyComment = req.body.comment;
             async.waterfall([
                 function(next) {
-                    let updateDailyText = `update home.event_daily set time=${dailyTime}, trophy=${dailyTrophy} where id=${id}`;
+                    let updateDailyText = `update home.event_daily set time=${dailyTime}, trophy=${dailyTrophy}, comment='${dailyComment}' where id=${id}`;
                     console.log(updateDailyText)
                     client.query({
                         text: updateDailyText

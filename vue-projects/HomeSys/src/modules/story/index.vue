@@ -17,7 +17,8 @@
         </div>
         <div class='content__container'>
             <div class='grid__container' >
-                <story-grid :colNum='colNum' :rowNum='rowNum'></story-grid>
+                <story-grid :colNum='currentStoryItem ? currentStoryItem.y : colNum'
+                            :rowNum='currentStoryItem ? currentStoryItem.x :  rowNum'></story-grid>
             </div>
             <div class='right__container'>
                 <new-pieces-list :pieces='newPieces' @deletePiece='deletePiece'></new-pieces-list>
@@ -35,7 +36,7 @@
         components: {storyGrid, newPiecesList, newPiecePanel},
         data() {
             return {
-                colNum : 7,
+                colNum: 7,
                 rowNum: 7,
                 showNewPiecePanel: false,
                 selectStoryItemId:  null
@@ -74,6 +75,9 @@
                     return state.storyPiece.current.filter((o)=> { return o.x ==-1 || o.y ==-1});
                }
             }),
+            currentStoryItem: function() {
+                return this.storyItems.find(o=>o.id==this.selectStoryItemId)
+            },
             newPiecesReverse: function() {
                 return this.newPieces.reverse();
             }
