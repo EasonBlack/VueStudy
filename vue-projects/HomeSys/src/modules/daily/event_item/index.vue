@@ -25,7 +25,7 @@
         props:['item', 'activeId'],
         data() {
             return {
-               colors: ['#CF6066','#27727B','#FCCE10','#E87C25','#B5C334','#D9E5ED', '#FFC7C7', '#97866E', '#1DB496','#B4597E'],
+               colors: ['#CF6066','#27727B','#FCCE10','#E87C25','#B5C334','#143042', '#FFC7C7', '#97866E', '#1DB496','#B4597E', '#137510'],
                menuActive: false
             }
         },
@@ -47,6 +47,7 @@
             closeEventItem: function() {
                 let id = this.item.id;
                 this.$store.dispatch('closeEventItem', id);
+                this.menuActive= false;
             }
         },
 

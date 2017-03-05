@@ -74,6 +74,7 @@
           padding:10px;
           border-right: 1px solid rgba(white,1);
           border-bottom: 1px solid rgba(white,1);
+          position:relative;
           &.active {
               background-color:lightseagreen;
           }

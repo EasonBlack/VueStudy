@@ -2,17 +2,24 @@
 <template>
     <div class='piece-card__wrapper flex__center'  draggable="true"
           v-bind:class='{
-              active: active
+              active: active,
+              big: expand
            }'
            @dragstart='handleDragstart'
            @dragend='handleDragend'
+           @click='handleBig'
     >
-        {{card.content}}
+        {{recodeContent}}
     </div>
 </template>
 <script>
     export default {
         props: ['card'],
+        data() {
+            return {
+                expand: false
+            }
+        },
         methods: {
             handleDragstart: function(ev) {
                 this.active = true;
@@ -20,6 +27,20 @@
             },
             handleDragend: function(ev) {
                 this.active = false;
+            },
+            handleBig: function() {
+                this.expand = !this.expand;
+            }
+
+        },
+        computed: {
+            recodeContent : function() {
+
+                 let _t = this.card.content;
+                 if(_t.length > 20 && !this.expand) {
+                    _t = _t.substring(0, 20) + '...';
+                 }
+                return _t;
             }
         }
     }
@@ -39,6 +60,14 @@
         &.active {
            opacity:0.4;
            transform: scale(0.8);
+        }
+        &.big  {
+            position:absolute;
+            padding:10px;
+            width: 250px;
+            height:100%;
+            font-size:0.9em;
+            z-index:100;
         }
     }
 </style>
