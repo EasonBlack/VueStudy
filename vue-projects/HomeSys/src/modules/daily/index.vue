@@ -5,13 +5,18 @@
          </div>
 
          <div class='daily__content'>
-             <div class='panel__container'>
+             <div class='daily-left__container'>
                  <add-panel @clickHandle='dailySave'></add-panel>
                  <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length' @showUpdateHandle='showUpdateHandle'></daily-list>
                  <update-panel v-if='showUpdate' :item='currentItem' @updateCancel='updateCancel' @updateHandle='updateHandle'></update-panel>
              </div>
-             <div class='event-list__container'>
-                <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
+             <div class='daily-right__container'>
+                <div class='event-list__section'>
+                    <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
+                </div>
+                <div class='chart-list__section'>
+                     <chart-panel></chart-panel>
+                </div>
              </div>
          </div>
 
@@ -25,8 +30,9 @@
     import dailyList from './daily_list/index.vue';
     import dailyHeader from './daily_header/index.vue';
     import updatePanel from './update_panel/index.vue';
+    import chartPanel from './chart_panel/index.vue';
     export default {
-        components:{addPanel, eventItem, dailyList, dailyHeader, updatePanel},
+        components:{addPanel, eventItem, dailyList, dailyHeader, updatePanel, chartPanel},
 
         data() {
             return {
@@ -96,15 +102,27 @@
         width:100%;
         display:flex;
     }
-    .panel__container {
+    .daily-left__container {
         width:200px;
         padding:10px;
         position:relative;
     }
-    .event-list__container {
+    .daily-right__container {
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        flex-wrap:wrap;
+        align-content: flex-start;
+    }
+    .event-list__section {
         flex:1;
         display:flex;
         flex-wrap:wrap;
         align-content: flex-start;
+        overflow:auto;
+    }
+    .chart-list__section {
+        height:400px;
+        padding:0 10px;
     }
 </style>
