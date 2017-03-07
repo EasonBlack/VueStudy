@@ -61,7 +61,8 @@
             },
             savePieces: function() {
                 this.$store.dispatch('saveStoryPiece', {id: this.selectStoryItemId , pieces: this.allPieces});
-            }
+            },
+
         },
         computed: {
             ...mapState({

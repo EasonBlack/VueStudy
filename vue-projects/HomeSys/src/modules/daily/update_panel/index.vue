@@ -69,6 +69,7 @@
         width:100%;
         border:2px solid steelblue;
         padding:20px 5px;
+        z-index:10;
     }
     .panel__row {
         display:inline-block;

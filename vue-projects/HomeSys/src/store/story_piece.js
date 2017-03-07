@@ -45,6 +45,11 @@ const actions = {
         Vue.http.post(Config.API_ROOT + '/api/home/storyPiece/' + o.id, {pieces: o.pieces}).then((response) => {
             commit('fetchStoryPiece', response.body.data)
         })
+    },
+    editStoryPiece ({commit, state}, o) {
+        Vue.http.post(Config.API_ROOT + '/api/home/editStoryPiece/' + o.item_id, {piece: o}).then((response) => {
+            commit('fetchStoryPiece', response.body.data)
+        })
     }
 }
 

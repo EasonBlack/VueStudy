@@ -244,6 +244,24 @@ module.exports = function (client) {
 
 
 
+        },
+        editStoryPiece: function(req, res) {
+            let piece = req.body.piece;
+            let editQueryTxt = `update home.story_piece set content = '${piece.content}', type=${piece.type} where id=${piece.id}`;
+            async.waterfall([
+                function(next) {
+                    client.query({
+                        text: editQueryTxt
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+                },
+                fetchStoryPiece
+            ])
         }
     }
 }
