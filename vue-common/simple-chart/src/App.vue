@@ -1,5 +1,8 @@
 <template>
 	<div  class='main__container'>
+        <div class='chart__container'>
+            <circle-chart-svg :num="'75'" :width="'200'"></circle-chart-svg>
+        </div>
        <div class='chart__container'>
             <circle-chart :num="'75'"></circle-chart>
        </div>
@@ -9,8 +12,9 @@
 
 <script>
     import circleChart from '../circle-percentage/index.vue';
+    import circleChartSvg from '../circle-percentage-svg/index.vue';
 	export default {
-	    components: {circleChart},
+	    components: {circleChart, circleChartSvg},
 		data() {
 			return {
 
@@ -39,12 +43,14 @@
         position:relative;
         display:flex;
         overflow:hidden;
+        flex-wrap: wrap;
     }
 
     .chart__container {
         width:200px;
         height:200px;
         display:flex;
+        position: relative;
     }
 
 </style>
