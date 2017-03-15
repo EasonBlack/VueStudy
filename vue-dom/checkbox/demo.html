@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app></app>
+</div>
+</body>
+<script>
+
+
+    Vue.component('app', {
+        data: function() {
+            return {
+                checkAll: false,
+                checkedNames: [],
+                data: [{name: 'a'},{name: 'b'}]
+            }
+        },
+        template: `<div>
+            <input type="checkbox" v-model="checkAll" @click="checkAllHandle" />
+            <div>
+                <input  v-for="item in data" type="checkbox" v-model="checkedNames" :value="item.name" />
+            </div>
+            <div>{{checkedNames}}</div>
+        </div>`,
+        methods: {
+            checkAllHandle:function() {
+                if(this.checkAll) {
+                    this.checkedNames = [];
+                } else {
+                    this.data.forEach(o=> {
+                        this.checkedNames.push(o.name);
+                    })
+                }
+                this.checkAll = !this.checkAll;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>
