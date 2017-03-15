@@ -6,6 +6,9 @@
        <div class='chart__container'>
             <circle-chart :num="'75'"></circle-chart>
        </div>
+        <div class='chart__container'>
+            <circle-chart-double-svg :num1="'75'" :size1="'200'" :num2="'30'" :size2="'100'"></circle-chart-double-svg>
+        </div>
 	</div>
 
 </template>
@@ -13,8 +16,9 @@
 <script>
     import circleChart from '../circle-percentage/index.vue';
     import circleChartSvg from '../circle-percentage-svg/index.vue';
+    import circleChartDoubleSvg from '../circle-percentage-double-svg/index.vue';
 	export default {
-	    components: {circleChart, circleChartSvg},
+	    components: {circleChart, circleChartSvg, circleChartDoubleSvg},
 		data() {
 			return {
 
