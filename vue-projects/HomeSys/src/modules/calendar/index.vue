@@ -52,7 +52,6 @@
          computed: {
             ...mapState({
                monthItems: (state) => {
-                    console.log(state.eventDaily.month);
                     return state.eventDaily.month.map((o)=> {
                         o.name = o.item_name;
                         return o;

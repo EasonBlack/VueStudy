@@ -3,7 +3,8 @@ import Config from '../common/config.js';
 
 const state = {
     current: [],
-    month: []
+    month: [],
+    week: []
 }
 
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
     },
     fetchMonth: function(state, items) {
         state.month = items
+    },
+    fetchWeek: function(state, items) {
+        state.week = items
     }
 }
 
@@ -24,6 +28,11 @@ const actions = {
     fetchDailyByDate ({commit, state}, d) {
         Vue.http.get(Config.API_ROOT +'/api/home/fetchDaily/'+ d.startDate + '/' + d.endDate).then((response) => {
             commit('fetchMonth', response.body.data)
+        })
+    },
+    fetchDailyByWeek ({commit, state}, d) {
+        Vue.http.get(Config.API_ROOT +'/api/home/fetchDaily/'+ d.startDate + '/' + d.endDate).then((response) => {
+            commit('fetchWeek', response.body.data)
         })
     },
     postDaily ({commit, state}, req) {

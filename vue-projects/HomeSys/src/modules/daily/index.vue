@@ -46,6 +46,13 @@
         created:function() {
             this.$store.dispatch('fetchEventItemsActive');
             this.$store.dispatch('fetchDaily', this.current);
+
+            this.fetchWeek = (date)=> {
+                let startOfWeek = moment(date).startOf('week').format('YYYY-MM-DD');
+                let endOfWeek = moment(date).endOf('week').format('YYYY-MM-DD');
+                this.$store.dispatch('fetchDailyByWeek', {startDate: startOfWeek, endDate: endOfWeek});
+            }
+            this.fetchWeek(this.current);
         },
         methods: {
             ...mapActions({
@@ -62,6 +69,7 @@
             updateCurrent: function(o){
                 this.current = moment(this.current).add(o, 'days').format('YYYY-MM-DD');
                 this.$store.dispatch('fetchDaily', this.current);
+                this.fetchWeek(this.current);
             },
             showUpdateHandle: function(item) {
                 this.showUpdate = true;
@@ -82,6 +90,12 @@
                },
                dailyItems: (state) => {
                     return state.eventDaily.current;
+               },
+               monthItems: (state) => {
+                    return state.eventDaily.week.map((o)=> {
+                         o.name = o.item_name;
+                         return o;
+                    });
                }
             })
         }

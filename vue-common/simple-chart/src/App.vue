@@ -9,6 +9,9 @@
         <div class='chart__container'>
             <circle-chart-double-svg :num1="'75'" :size1="'200'" :num2="'30'" :size2="'100'"></circle-chart-double-svg>
         </div>
+        <div class='chart__container'>
+            <half-circle-rank></half-circle-rank>
+        </div>
 	</div>
 
 </template>
@@ -17,8 +20,9 @@
     import circleChart from '../circle-percentage/index.vue';
     import circleChartSvg from '../circle-percentage-svg/index.vue';
     import circleChartDoubleSvg from '../circle-percentage-double-svg/index.vue';
+    import halfCircleRank from '../half-circle-rank/index.vue';
 	export default {
-	    components: {circleChart, circleChartSvg, circleChartDoubleSvg},
+	    components: {circleChart, circleChartSvg, circleChartDoubleSvg, halfCircleRank},
 		data() {
 			return {
 
