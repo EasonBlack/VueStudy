@@ -16,12 +16,13 @@
 }
 
 .icon-plus:before { content: '\e800'; }
-.icon-calendar:before { content: '\e802'; }
+.icon-calendar:before { content: '\e801'; }
+.icon-right-open:before { content: '\e802'; }
+.icon-left-open:before { content: '\e803'; }
+.icon-down-open:before { content: '\e804'; }
+.icon-minus:before { content: '\e805'; }
+.icon-up-open:before { content: '\e806'; }
 .icon-table:before { content: '\f0ce'; }
+.icon-angle-double-left:before { content: '\f100'; }
+.icon-angle-double-right:before { content: '\f101'; }
 .icon-quora:before { content: '\f2c4'; }
-.icon-minus:before { content: '\e804'; }
-
-.icon-left-open:before { content: '\e801'; }
-.icon-right-open:before { content: '\e803'; }
-.icon-up-open:before { content: '\e805'; }
-.icon-down-open:before { content: '\e806'; }

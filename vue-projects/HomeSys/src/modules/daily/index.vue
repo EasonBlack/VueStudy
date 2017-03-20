@@ -61,6 +61,7 @@
             dailySave: function(o) {
                 let _d = Object.assign({},o,{type: this.selectedEventItem.id, date: this.current} );
                 this.postDaily(_d);
+                this.fetchWeek(this.current);
             },
             eventItemClick : function(o) {
                 this.selectedEventItem = o.val;
