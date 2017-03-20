@@ -55,7 +55,7 @@ Vue.component('app-chart', {
         mySvg.append("path")
             .datum(this.months)
             .attr("class", "line")
-            .attr("d", (d)=> {   return this.line(d); })
+            .attr("d", (d)=> { return this.line(d); })
             .attr('stroke', 'blue')
             .attr('stroke-width', 2)
             .attr('fill', 'none');
