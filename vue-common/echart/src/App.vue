@@ -3,6 +3,12 @@
        <div class='chart__container'>
             <bar-simple></bar-simple>
        </div>
+        <div class='chart__container'>
+            <bar-demo1></bar-demo1>
+        </div>
+        <div class='chart__container'>
+            <area-demo1></area-demo1>
+        </div>
 	</div>
 
 </template>
@@ -10,8 +16,10 @@
 <script>
 
     import barSimple from '../bar-simple/index.vue';
+    import barDemo1 from '../bar-demo-1/index.vue';
+    import areaDemo1 from '../area-demo-1/index.vue';
 	export default {
-	    components: {barSimple},
+	    components: {barSimple, barDemo1, areaDemo1},
 		data() {
 			return {
 
