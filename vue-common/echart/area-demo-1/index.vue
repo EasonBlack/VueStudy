@@ -3,16 +3,33 @@
 </template>
 <script>
     import echarts from 'echarts'
+    import chartMixin from './area-demo-1_mixin.js'
     export default {
+        mixins: [chartMixin],
+        data() {
+            return {
+                data1: [5, 20, 36, 10, 10, 20],
+                data2: [3, 12, 22, 13, 13, 21],
+
+            }
+        },
+
         mounted: function() {
+
             var myChart = echarts.init(this.$el);
+
+            const newFunc = this.pipe(this.createSeriesDate, this.createSeriesStyle, this.createSeries);
+            const _series = newFunc([
+               this.data1, this.data2
+            ])
+            console.log(_series);
              myChart.setOption({
                  title: {
                       text: ''
                   },
                   tooltip: {},
                   legend: {
-                      data:['销量']
+
                   },
                   xAxis: {
                       data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
@@ -39,48 +56,7 @@
                         }
                       }
                   },
-                  series: [{
-                      name: 'bb',
-                      type: 'line',
-                      smooth:true,
-                      areaStyle: {normal: {}},
-                      data: [5, 20, 36, 10, 10, 20],
-                      showSymbol: false,
-                      lineStyle: {
-                        normal: {
-                            width:5
-                        }
-                      },
-                      itemStyle: {
-                          normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                              offset: 0, color: '#D57774' // 0% 处的颜色
-                            }, {
-                              offset: 1, color: 'white'// 100% 处的颜色
-                            }], false),
-                            barBorderRadius:[10, 10, 10, 10],
-
-                        }
-                      }
-                  },
-                  {
-                      name: 'aa',
-                      type: 'line',
-                      smooth:true,
-                      areaStyle: {normal: {}},
-                      data: [3, 12, 22, 13, 13, 21],
-                      itemStyle: {
-                          normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                              offset: 0, color: '#AA9177' // 0% 处的颜色
-                            }, {
-                              offset: 1, color: 'white'// 100% 处的颜色
-                            }], false),
-                            barBorderRadius:[10, 10, 10, 10],
-
-                        }
-                      }
-                  }]
+                  series: _series
              });
         }
     }
