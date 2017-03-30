@@ -4,6 +4,7 @@
 <script>
     import echarts from 'echarts'
     import chartMixin from './area-demo-1_mixin.js'
+    import {Common} from './common/index'
     export default {
         mixins: [chartMixin],
         data() {
@@ -13,12 +14,11 @@
 
             }
         },
-
         mounted: function() {
 
             var myChart = echarts.init(this.$el);
 
-            const newFunc = this.pipe(this.createSeriesDate, this.createSeriesStyle, this.createSeries);
+            const newFunc = Common.pipe(this.createSeriesDate, this.createSeriesStyle, this.createSeries);
             const _series = newFunc([
                this.data1, this.data2
             ])

@@ -11,7 +11,6 @@
         components: {listWrapper},
 		data() {
 			return {
-
 			}
 		},
 		methods: {

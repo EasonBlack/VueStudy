@@ -1,6 +1,8 @@
 
 
 import echarts from 'echarts'
+
+
 export default {
     
     created () {

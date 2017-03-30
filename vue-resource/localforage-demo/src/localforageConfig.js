@@ -1,6 +1,6 @@
 
 import Vue from 'vue';
-import * as localForage from "localforage";
+import  localForage from "localforage";
 
 export default ()=> {
     Vue.http.interceptors.push(function(request, next) {

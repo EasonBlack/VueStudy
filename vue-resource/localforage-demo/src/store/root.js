@@ -1,4 +1,5 @@
-import * as localForage from "localforage";
+import  localForage from "localforage";
+import Vue from 'vue'
 
 export default (URL)=> {
 

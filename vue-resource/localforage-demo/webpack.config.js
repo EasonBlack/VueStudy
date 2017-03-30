@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -13,11 +14,11 @@ module.exports = {
   },
    resolve: {
        alias: {
-           'vue': 'vue/dist/vue',
-           'localforage': 'localforage/dist/localforage'
+           'vue': 'vue/dist/vue'
        }
    },
   module: {
+    noParse:   [  path.join(__dirname, '../../node_modules', 'localforage/dist/localforage.js') ],
     loaders: [
       {
         test: /\.vue$/,
