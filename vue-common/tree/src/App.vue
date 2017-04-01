@@ -1,18 +1,26 @@
 <template>
 	<div  class='main__container'>
-      xxxx
+        <div class="row__section">
+            <tree-wrapper :items="items"></tree-wrapper>
+        </div>
 	</div>
 </template>
 
 <script>
-
+    import Vue from 'vue';
+    import treeWrapper from '../tree__1/index.vue'
 	export default {
-
+        components: {treeWrapper},
 		data() {
 			return {
-
+                items: []
 			}
 		},
+        created() {
+            Vue.http.get('../data.json').then((d) => {
+                this.items = d.body;
+            })
+        },
 		methods: {
 
 		}
