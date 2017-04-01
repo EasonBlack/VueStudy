@@ -1,5 +1,7 @@
 
-import common from './common.js'
+import Common from './common.js'
 
 
-export const Common = common
+export {
+    Common
+}
