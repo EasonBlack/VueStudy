@@ -35,6 +35,11 @@ const actions = {
         Vue.http.put(Config.API_ROOT + '/api/home/closeEventItem/'+ id).then((response) => {
             commit('fetchEventItemsActive', response.body.data)
         })
+    },
+    pendEventItem ({commit, state}, id) {
+        Vue.http.put(Config.API_ROOT + '/api/home/changeEventStatus/'+ id +  '/3').then((response) => {
+            commit('fetchEventItemsActive', response.body.data)
+        })
     }
 
 }

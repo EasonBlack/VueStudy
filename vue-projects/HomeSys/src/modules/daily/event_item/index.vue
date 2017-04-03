@@ -14,7 +14,11 @@
         >
             {{item.name}}
         </div>
-        <event-status v-if='menuActive' @menuCloseHandle='menuCloseHandle' @closeEventItem='closeEventItem'></event-status>
+        <event-status v-if='menuActive'
+        @menuCloseHandle='menuCloseHandle'
+        @closeEventItem='closeEventItem'
+        @pendEventHandle='pendEventHandle'
+        ></event-status>
     </div>
 </template>
 <script>
@@ -47,6 +51,11 @@
             closeEventItem: function() {
                 let id = this.item.id;
                 this.$store.dispatch('closeEventItem', id);
+                this.menuActive= false;
+            },
+            pendEventHandle: function() {
+                let id = this.item.id;
+                this.$store.dispatch('pendEventItem', id);
                 this.menuActive= false;
             }
         },

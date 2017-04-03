@@ -132,6 +132,25 @@ module.exports = function (client) {
             ])
 
         },
+        changeEventStatus: function(req, res){
+            let eventId = req.params.id;
+            let eventStatus = req.params.status;
+            async.waterfall([
+                function(next) {
+                    let closeEventItemText = `update home.event_item set status=${eventStatus} where id=${eventId}`
+                    client.query({
+                        text: closeEventItemText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+                },
+                fetchEventItemsActive
+            ])
+        },
         postDaily: function(req, res){
             let dailyTime = req.body.time;
             let dailyTrophy = req.body.trophy;

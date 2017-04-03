@@ -2,6 +2,7 @@
     <div class='status__container'>
         <a class='close_button flex__center' @click='clickHandle'>X</a>
         <a class='update_button' @click='closeEventItem' >Close</a>
+        <a class='pend_button' @click='pendEventItem' >Pend</a>
     </div>
 </template>
 <script>
@@ -16,6 +17,9 @@
             },
             closeEventItem: function() {
                 this.$emit('closeEventItem')
+            },
+            pendEventItem: function() {
+                this.$emit('pendEventHandle')
             }
         }
     }
@@ -38,6 +42,14 @@
             color: white;
             padding:5px;
             background-color: #ca1549;
+            margin-right:10px;
+        }
+        .pend_button {
+            display:inline-block;
+            font-size:0.7em;
+            color: white;
+            padding:5px;
+            background-color: steelblue;
         }
         .close_button {
             position:absolute;
@@ -49,6 +61,8 @@
             color: white;
             border-radius: 50%;
             font-size: 0.9em;
+
         }
+
     }
 </style>
