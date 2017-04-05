@@ -10,13 +10,24 @@
         </div>
         <div class="row">
             <div>
+                <input v-validate="'required'" :class="{ 'is-danger': isSubmit && errors.has('aa') }" name="aa" type="text" placeholder="aa" >
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('aa') }">{{ errors.first('aa') }}</span>
+                <input v-validate="'confirmed:aa|required'" :class="{ 'is-danger': isSubmit && errors.has('bb') }" name="bb" type="text" placeholder="bb" >
+                <span class="help" v-show="errors.has('bb')" :class="{'is-danger': errors.has('bb') }">not match</span>
+                <span class="help" v-show="errors.has('bb')" :class="{'is-danger': errors.has('bb') }">should has sth</span>
+
+            </div>
+        </div>
+        <div class="row">
+            <div>
                 <input v-validate="'required|testvee'" :class="{ 'is-danger': isSubmit && errors.has('test') }" name="test" type="text" placeholder="test" >
                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('test') }">{{ errors.first('test') }}</span>
             </div>
-            <div>
-                <button @click="submit">Submit</button>
-            </div>
+
         </div>
+        <div class="row">
+             <button @click="submit">Submit</button>
+         </div>
 	</div>
 </template>
 
@@ -31,6 +42,15 @@
 		methods: {
             submit() {
                 this.isSubmit = true;
+                console.log(this.model);
+            },
+            getError(field, rule) {
+                if(this.errors.errors.find(o=>o.field == field && o.rule == rule)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             }
 		}
 	}
