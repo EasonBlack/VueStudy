@@ -5,6 +5,7 @@
                 <select v-model='selectedLayout'>
                     <option value='layout-left-right1'>Layout_left_right1</option>
                     <option value='layout-left-right2'>Layout_left_right2</option>
+                    <option value='layout-left-menu-cascade1'>Layout_left_menu_cascade1</option>
                 </select>
          </div>
 	</div>
@@ -13,11 +14,12 @@
 <script>
     import layoutLeftRight1 from '../layout_left_right_1/index.vue';
     import layoutLeftRight2 from '../layout_left_right_2/index.vue';
+    import layoutLeftMenuCascade1 from '../layout_left_menu_cascade_1/index.vue'
 	export default {
-	    components: {layoutLeftRight1, layoutLeftRight2},
+	    components: {layoutLeftRight1, layoutLeftRight2, layoutLeftMenuCascade1},
 		data() {
 			return {
-                selectedLayout: null
+                selectedLayout: 'layout-left-menu-cascade1'
             }
 		},
 		created: function(){
@@ -35,6 +37,10 @@
         margin:0;
         box-sizing:border-box;
         font-family: Arial;
+    }
+
+    ul {
+        list-style:none;
     }
 
     #main {
