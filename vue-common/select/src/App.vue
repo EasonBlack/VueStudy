@@ -3,13 +3,17 @@
         <div class='row__section'>
             <cascade-select></cascade-select>
         </div>
+        <div class='row__section'>
+            <multi-value-select></multi-value-select>
+        </div>
 	</div>
 </template>
 
 <script>
     import cascadeSelect from '../cascade__select__1/index.vue';
+    import multiValueSelect from '../multi_value_box__select/index.vue';
 	export default {
-	    components: {cascadeSelect},
+	    components: {cascadeSelect, multiValueSelect},
 		data() {
 			return {
 
@@ -35,6 +39,7 @@
         background-color:#EFEFEF;
         position:relative;
         display:flex;
+        flex-direction:column;
         overflow:hidden;
     }
 
