@@ -85,6 +85,7 @@
 </script>
 
 <style lang='scss' scoped>
+    @import '~$color/color.scss';
     .calendar__header {
         height:60px;
         position:relative;

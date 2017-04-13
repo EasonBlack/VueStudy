@@ -31,11 +31,7 @@ module.exports = {
         loader: 'vue-html'
       },
       {
-        test: /\.css/,
-        loader: 'style!css'
-      },
-      {
-        test: /\.(png|jpg|gif|svg|woff2)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         loader: 'url',
         query: {
           limit: 10000,
@@ -52,10 +48,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue',
-      'common': path.resolve(__dirname, '../../vue-common'),
-      '$style': path.resolve(__dirname, '../../style'),
-      '$color': path.resolve(__dirname, './commonstyle')
-
+      '$styles': path.resolve(__dirname, './styles')
     }
   },
   devServer: {
