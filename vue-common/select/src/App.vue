@@ -6,14 +6,18 @@
         <div class='row__section'>
             <multi-value-select></multi-value-select>
         </div>
+        <div class='row__section'>
+             <multi-value-select-multi-line></multi-value-select-multi-line>
+        </div>
 	</div>
 </template>
 
 <script>
     import cascadeSelect from '../cascade__select__1/index.vue';
     import multiValueSelect from '../multi_value_box__select/index.vue';
+    import multiValueSelectMultiLine from '../multi_value_box__select_multi_line/index.vue';
 	export default {
-	    components: {cascadeSelect, multiValueSelect},
+	    components: {cascadeSelect, multiValueSelect, multiValueSelectMultiLine},
 		data() {
 			return {
 
