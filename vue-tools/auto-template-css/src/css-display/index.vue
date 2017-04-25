@@ -23,7 +23,7 @@
             this.buildCssArray= (tags) => {
                 let _cssTxt = '';
                 for(let o of tags){
-                    _cssTxt +=`.${o.text}__container { \n `;
+                    _cssTxt +=`.${o.text} { \n `;
                     for(let a of o.css) {
                         _cssTxt += this.recodeCss(a, '\t');
                     }

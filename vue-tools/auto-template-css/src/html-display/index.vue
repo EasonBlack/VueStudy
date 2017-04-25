@@ -14,7 +14,7 @@
         },
         created: function() {
             this.buildTreeTag = (tag, tags) => {
-                let _html = `${this.tabnum[tag.num || 0]}<div class='${tag.text}__container'>\n`;
+                let _html = `${this.tabnum[tag.num || 0]}<div class='${tag.text}'>\n`;
                 let id = tag.index;
                 let children = tags.filter((o)=> {
                     return o.parent == id
