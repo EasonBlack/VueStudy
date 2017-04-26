@@ -19,6 +19,7 @@
 <script>
 
     export default{
+        props:['value'],
         data(){
             return{
                 showItems: false,
@@ -42,9 +43,11 @@
             selectItem(item) {
                 this.$set(item, 'selected', true);
                 this.showItems = !this.showItems;
+                this.$emit('input', this.items.filter(o=>o.selected))
             },
             delItem(item) {
                 this.$set(item, 'selected', false);
+                this.$emit('input', this.items.filter(o=>o.selected))
             }
 
         },

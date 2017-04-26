@@ -7,7 +7,8 @@
             <multi-value-select></multi-value-select>
         </div>
         <div class='row__section'>
-             <multi-value-select-multi-line></multi-value-select-multi-line>
+             <multi-value-select-multi-line v-model='multiLineValue'></multi-value-select-multi-line>
+             <button @click='multiLineConfirm'>Confirm</button>
         </div>
 	</div>
 </template>
@@ -20,12 +21,14 @@
 	    components: {cascadeSelect, multiValueSelect, multiValueSelectMultiLine},
 		data() {
 			return {
-
+                multiLineValue: null
 
 			}
 		},
 		methods: {
-
+            multiLineConfirm() {
+                console.log(this.multiLineValue);
+            }
 		}
 	}
 </script>
