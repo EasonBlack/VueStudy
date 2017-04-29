@@ -1,6 +1,9 @@
 <template>
 	<div id="app">
 	    <div class='main_container'>
+            <example-input-calendar-range2></example-input-calendar-range2>
+        </div>
+	    <div class='main_container'>
             <example-input-calendar-range></example-input-calendar-range>
         </div>
 		<div class='main_container'>
@@ -41,12 +44,17 @@
     import exampleInputCalendar from '../example__input_calendar/index.vue';
     import exampleInputCalendar2 from '../example__input_calendar_2/index.vue';
     import exampleInputCalendarRange from '../example__input_calendar_range/index.vue';
+    import exampleInputCalendarRange2 from '../example__input_calendar_range2/index.vue';
     import exampleCalendarGit from '../example__calendar_gitlike/index.vue';
     import exampleGantt1 from '../example__gantt_1/index.vue';
     import exampleDailyArrange from '../example__daily_arrange/index.vue';
+
 	export default {
 	    name: 'app',
-	    components: {exampleCalendar, exampleInputCalendar,exampleInputCalendar2, exampleCalendarGit, exampleGantt1, exampleDailyArrange, exampleInputCalendarRange},
+	    components: {
+	        exampleCalendar, exampleInputCalendar,exampleInputCalendar2, exampleCalendarGit, exampleGantt1,
+	        exampleDailyArrange, exampleInputCalendarRange, exampleInputCalendarRange2
+	    },
 		data() {
 			return {
 			    current: moment().startOf('month'),
