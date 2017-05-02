@@ -20,12 +20,12 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
+        include: __dirname,
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        loader: 'style!css!sass',
-        exclude: /node_modules/
+          test: /\.css$/,
+          loader: 'style!css'
       },
       {
         test: /\.json$/,
