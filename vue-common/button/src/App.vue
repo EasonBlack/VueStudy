@@ -35,7 +35,10 @@
 		    }
 		},
 		created:function() {
-
+            const test = {a: 1, b:2};
+            let result = {...test};
+            let {a, ...r} = {...test};
+            console.log(result, r);
 		}
 
 	}
