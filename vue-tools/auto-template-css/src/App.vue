@@ -1,7 +1,18 @@
 <template>
 	<div class='main__section'>
 		<div class='input__section'>
-            <textarea v-model='inputOrigin' @keydown='keydownHandle'></textarea>
+            <div class="area__section">
+                <textarea v-model='inputOrigin' @keydown='keydownHandle'></textarea>
+            </div>
+            <div class="pre__section">
+                <ul class="tag__bar">
+                    <li @click="tagSelect('html')" :class='{active: tagActive=="html"}'>Html</li>
+                    <li @click="tagSelect('css')"  :class='{active: tagActive=="css"}'>Css</li>
+                </ul>
+                <div class="pre__content">
+                    <div v-for="item in $data[tagActive]" @click="tagItemSelectHandle(item)">{{item}}</div>
+                </div>
+            </div>
         </div>
 		<div class='display__section'>
             <div class='html__section'>
@@ -18,7 +29,9 @@
 <script>
     import htmlDisplay from './html-display/index.vue';
     import cssDisplay from './css-display/index.vue';
+    import tagMixin from './tag'
 	export default {
+        mixins: [tagMixin],
         components: {htmlDisplay, cssDisplay},
 	    data() {
 	    	return {
@@ -30,7 +43,8 @@
                     3: '\t\t\t',
                     4: '\t\t\t\t',
                     5: '\t\t\t\t\t',
-                }
+                },
+                tagActive: 'html'
 	    	}
 	    },
 	    created: function() {
@@ -80,7 +94,14 @@
                      el.selectionStart = el.selectionEnd = start + 1;
                      e.preventDefault();
                 }
-	        }
+	        },
+            tagSelect: function(t) {
+                this.tagActive = t;
+            },
+            tagItemSelectHandle(t) {
+               let v =  this[t + 'Handle']()
+               console.log(v);
+            }
 	    },
 	    computed: {
             inputTags: function() {
@@ -127,10 +148,42 @@
         position:relative;
     }
     .input__section {
-        width:50%;
+        width:60%;
         height:100%;
-
         border-right:1px solid rgba(grey,0.3);
+        .area__section {
+            height:50%;
+            border-bottom:1px solid rgba(grey, 0.3);
+        }
+        .pre__section {
+            height:50%;
+            .tag__bar {
+                width:100%;
+                list-style:none;
+                display:flex;
+                border-bottom: 1px solid steelblue;
+                li {
+                    width:100px;
+                    height:30px;
+                    line-height:30px;
+                    text-align:center;
+                    border: 1px solid steelblue;
+                    border-bottom:none;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    cursor: pointer;
+                    margin-right:10px;
+                    &:hover {
+                        background-color: rgba(steelblue, 0.3);
+                        color: white;
+                    }
+                    &.active {
+                        background-color: rgba(steelblue, 0.9);
+                        color: white;
+                    }
+                }
+            }
+        }
         textarea {
             width:100%;
             height:100%;
@@ -142,7 +195,7 @@
         }
     }
     .display__section {
-        width:50%;
+        width:40%;
         height:100%;
     }
     .html__section {
