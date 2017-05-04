@@ -8,18 +8,15 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -32,11 +29,11 @@ module.exports = {
       },
       {
         test: /\.css/,
-        loader: 'style!css'
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.(png|jpg|gif|svg|woff2)$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
@@ -44,12 +41,10 @@ module.exports = {
       }
     ]
   },
-  vue: {
-    loaders: {
-      scss: 'style!css!sass'
-    }
-  },
   resolve: {
+     modules: [
+          "node_modules"
+     ],
     alias: {
       'vue$': 'vue/dist/vue',
       'common': path.resolve(__dirname, '../../vue-common'),
@@ -61,7 +56,19 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      test: /\.vue$/,
+      options: {
+        vue: {
+          loaders: {
+            scss: 'style-loader!css-loader!sass-loader'
+          }
+        }
+      }
+    }),
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
