@@ -19,9 +19,7 @@
         props: ['currentYear','currentMonth', 'source'],
         data:function(){
             return {
-                startDate: '',
-                endDate: '',
-                countDays: ''
+
             }
         },
         methods: {

@@ -4,10 +4,12 @@
     @dragover.prevent='processDragOverOrEnter($event)'
     @dragenter.prevent='processDragOverOrEnter($event)'>
     </div>
+
 </template>
 
 <script>
-    import {getAverageRGB} from './util'
+    import {getAverageRGB} from './util';
+
     export default{
         data(){
             return{

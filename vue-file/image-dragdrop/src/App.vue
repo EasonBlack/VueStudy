@@ -8,18 +8,22 @@
                     'background-color': domainColor
                 }">
                 </div>
+
          </div>
+          <el-color-picker v-model="color1" show-alpha></el-color-picker>
 	</div>
 </template>
 
 <script>
+    import Vue from 'vue';
     import dropZone from './dropzone.vue';
 	export default {
 	    components: {dropZone},
 		data() {
 			return {
                 newImage: '',
-                domainColor: 'rgb(0,0,0)'
+                domainColor: 'rgb(0,0,0)',
+                color1: 'rgba(19, 206, 102, 0.8)'
 			}
 		},
 		methods: {

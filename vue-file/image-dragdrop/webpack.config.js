@@ -27,6 +27,10 @@ module.exports = {
         loader: 'json'
       },
       {
+        test: /\.css/,
+        loader: 'style!css'
+      },
+      {
         test: /\.html$/,
         loader: 'vue-html'
       },
@@ -37,7 +41,11 @@ module.exports = {
           limit: 10000,
           name: '[name].[ext]?[hash]'
         }
-      }
+      }, 
+      {
+          test: /\.(woff|woff2|eot|ttf)(\?.*$|$)/,
+          loader: 'url-loader?importLoaders=1&limit=100000'
+      },
     ]
   },
   vue: {
