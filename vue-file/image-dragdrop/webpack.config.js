@@ -1,6 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 console.log(path.resolve(__dirname, "../../assets/icons"));
+
+const projectRoot = path.resolve(__dirname, '../../')
+console.log(projectRoot);
+console.log(path.resolve(projectRoot, 'node_modules','vue/dist/vue'));
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -8,18 +12,15 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -28,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.css/,
-        loader: 'style!css'
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.html$/,
@@ -48,25 +49,31 @@ module.exports = {
       },
     ]
   },
-  vue: {
-    html: {
-      root: path.resolve(__dirname, '../../assets')
-    },
-    loaders: {
-      scss: 'style!css!sass'
-    }
-  },
   resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue',
-      'assets': path.resolve(__dirname, '../../assets'),
-    }
+      modules: [
+               "node_modules"
+      ],
+      alias: {
+          'vue$': 'vue/dist/vue'
+      }
   },
   devServer: {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+      new webpack.LoaderOptionsPlugin({
+          test: /\.vue$/,
+          options: {
+              vue: {
+                  loaders: {
+                      scss: 'style-loader!css-loader!sass-loader'
+                  }
+              }
+          }
+      }),
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {

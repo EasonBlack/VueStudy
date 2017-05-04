@@ -15,7 +15,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import dropZone from './dropzone.vue';
 	export default {
 	    components: {dropZone},
