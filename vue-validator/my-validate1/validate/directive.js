@@ -1,7 +1,5 @@
 import rules from './rules';
 
-let theRules = [];
-
 function findVModelName(vnode) {
     return vnode.data.model.expression;
 }
@@ -25,8 +23,10 @@ function getRules(rules) {
 
 function getValidateRule(name, rulelist, myrules ) {
     let validate = [];
+    let _rulelist = Object.assign({}, rulelist);
     myrules.forEach(rule=> {
-        let _rule = rulelist[rule.name](name, ...rule.param);
+        console.log(name)
+        let _rule = _rulelist[rule.name](name, ...rule.param);
         _rule.params = rule.param;
         validate.push(_rule);
     })
@@ -35,17 +35,18 @@ function getValidateRule(name, rulelist, myrules ) {
 
 export default (options)=> ({
     bind(el, binding, vnode) {
-        theRules = getValidateRule(findVModelName(vnode), rules, getRules(binding.value));
-
+        let modelName = findVModelName(vnode);
+        vnode.componentInstance.rules = getValidateRule(modelName, rules, getRules(binding.value));
     },
     update(el, binding, vnode) {
         let modelName = findVModelName(vnode);
         let _model = vnode.context[modelName];
-        vnode.context.$children[0].error = "";
-            theRules.some(r=>{
+        console.log(vnode);
+        vnode.componentInstance.error = "";
+        vnode.componentInstance.rules.some(r=>{
             if(!r.fn(_model , ...r.params)){
                 console.log('sth wrong with ' + r.key);
-                vnode.context.$children[0].error = r.text;
+                vnode.componentInstance.error = r.text;
                 return true
             } else {
                 console.log(r.key + ' success');

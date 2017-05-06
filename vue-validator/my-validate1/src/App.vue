@@ -10,6 +10,15 @@
             </form-input>
         </div>
 
+        <div class='row'>
+             <form-input :title='"AGE"'
+                 v-validate="'required|numeric|min:20'"
+                 v-model="age"
+                 :error_flag = 'isSubmit'
+                 name="age">
+             </form-input>
+        </div>
+
         <div class="row">
              <button @click="submit">Submit</button>
          </div>
@@ -24,7 +33,8 @@
 		data() {
 			return {
                 isSubmit:false,
-                name: ''
+                name: '',
+                age: ''
 			}
 		},
 		methods: {
