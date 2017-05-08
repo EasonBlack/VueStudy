@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
     <app-view :msg="'Hi'">
-        <div>This is View</div>
+        <div slot="prepend">This is Prepend</div>
+
     </app-view>
 </div>
 </body>
@@ -17,10 +18,19 @@
         props:['msg'],
         template:`
             <div>
+                <slot name="prepend"></slot>
+                <div v-if="$slots.prepend">has prepend</div>
                 {{msg}}
-                <slot></slot>
+                <slot name="append">
+                    XXXXX
+                </slot>
+                <div v-if="$slots.append">has append</div>
             </div>
-       `
+       `,
+        created() {
+            console.log(this);
+            console.log(this.$slots);
+        }
     })
 
     new Vue({
