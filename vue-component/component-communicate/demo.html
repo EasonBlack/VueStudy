@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+    Vue.component('app-view', {
+        props: ['text'],
+        data: function () {
+            return {
+            }
+        },
+        methods: {
+            confirm() {
+                this.$refs.appviewchild.$emit('$appviewc:loaded')
+            }
+        },
+        template: `<div>
+            <app-view-child ref="appviewchild"></app-view-child>
+            <button @click="confirm">Confirm</button>
+        </div>`
+    })
+
+    Vue.component('app-view-child', {
+        data() {
+            return {
+                message: 'xxxxx'
+            }
+        },
+        template: `<div>
+            {{message}}
+        </div>`,
+
+        mounted: function() {
+            this.$on('$appviewc:loaded', ()=>{
+                this.message= 'Hello';
+            })
+        }
+    })
+
+
+    new Vue({
+        data: {
+            msg: 'hhhhhhhhhh'
+        }
+    }).$mount('#app')
+</script>
+</html>
