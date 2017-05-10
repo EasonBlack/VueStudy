@@ -1,5 +1,10 @@
 <template>
-    <div class='container'>
+    <div class='container' :style="{
+                                   width:w,
+                                   height:h,
+                                   top: t,
+                                   left: l
+                               }">
     <div class='plus' @click.prevent.stop='enlarge'>+</div>
     <div class='minus' @click.prevent.stop='ensmall'>-</div>
     <svg width='100%' height='100%' viewBox='0 0 220 220'>
@@ -61,17 +66,17 @@
 
 <script>
     export default {
-        props: ['oldposition'],
+        props: ['w','h','t','l', 'svgType'],
         data() {
             return {
             }
         },
         methods: {
             enlarge() {
-                this.$emit('setWidget', 'flower');
+                this.$emit('enlarge');
             },
             ensmall() {
-                this.$emit('setWidget', this.oldposition);
+                this.$emit('ensmall');
             }
         }
     }
@@ -79,7 +84,7 @@
 
 <style lang='scss' scoped>
      .container {
-          position:relative;
+          position:absolute;
      }
 
      .plus {

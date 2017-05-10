@@ -66,6 +66,9 @@
             return {
             }
         },
+        created() {
+
+        },
         methods: {
             enlarge() {
                 this.$emit('setWidget', 'flower');
