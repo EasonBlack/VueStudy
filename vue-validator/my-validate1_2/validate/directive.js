@@ -36,13 +36,13 @@ function getValidateRule(name, rulelist, myrules ) {
 export default (options)=> ({
     bind(el, binding, vnode) {
         let modelName = findVModelName(vnode);
-        console.log(vnode);
+        //console.log(vnode);
         vnode.componentInstance.rules = getValidateRule(modelName, rules, getRules(binding.value));
     },
     update(el, binding, vnode) {
         let modelName = findVModelName(vnode);
         let _model = vnode.context[modelName];
-        console.log(vnode);
+        //console.log(vnode);
         vnode.componentInstance.error = "";
         vnode.componentInstance.rules.some(r=>{
             if(!r.fn(_model , ...r.params)){
