@@ -1,0 +1,39 @@
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body,html {
+    width:100vw;
+    height:100vh;
+}
+.main {
+    width:50vw;
+
+    overflow-x:hidden;
+    overflow-y:scroll;
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+}
+.box {
+    width:30%;
+    border:1px solid steelblue;
+    position:relative;
+    display:block;
+}
+.box:before {
+    content: "";
+    display: block;
+    padding-top: 100%;   //这里是关键
+}
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
