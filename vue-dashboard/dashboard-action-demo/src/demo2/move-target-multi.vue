@@ -13,8 +13,13 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import cell from './cell.vue';
     import box from './box.vue';
+
+     import vDrag from './v-drag/index'
+     Vue.use(vDrag);
+
     export default{
         components: {cell, box},
         data(){
