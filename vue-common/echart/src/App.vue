@@ -9,6 +9,9 @@
         <div class='chart__container'>
             <area-demo1></area-demo1>
         </div>
+        <div class='chart__container'>
+             <china-map-demo></china-map-demo>
+         </div>
 	</div>
 
 </template>
@@ -18,8 +21,9 @@
     import barSimple from '../bar-simple/index.vue';
     import barDemo1 from '../bar-demo-1/index.vue';
     import areaDemo1 from '../area-demo-1/index.vue';
+    import chinaMapDemo from '../china-map-demo/index.vue';
 	export default {
-	    components: {barSimple, barDemo1, areaDemo1},
+	    components: {barSimple, barDemo1, areaDemo1, chinaMapDemo},
 		data() {
 			return {
 
