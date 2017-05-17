@@ -4,7 +4,7 @@
             <cell v-for='(i,j) in r' :key='i' :index='index+"_"+j'
              @dropDown='dropDown'
              @dragOver='dragOver'>
-                 <box v-for='b in boxes' v-if='b.x==j && b.y ==index' :w='b.w' :h='b.h' :id='b.id'>
+                 <box v-for='b in boxes' v-if='b.x==j && b.y ==index' :w='b.w' :h='b.h' :id='b.id' :random='b.random'>
                  </box>
              </cell>
         </div>
@@ -25,15 +25,22 @@
     const checkBoxes = (target, current,  boxes, grid)=>{
         let _x = parseInt(target.split('_')[1]);
         let _y = parseInt(target.split('_')[0]);
-        //console.log(_x, _y)
-        let occupyBox = boxes.find(b=>parseInt(b.x)==_x && parseInt(b.y)==_y && b.id != current);
         let currentBox = boxes.find(b=> b.id==current);
+    
+        let occupyBox;
+
+        let num = currentBox.w;
+        while(num-1) {
+            occupyBox = boxes.find(b=>parseInt(b.x)==_x + num -1  && parseInt(b.y)==_y && b.id != current);
+            num--
+        }
+        console.log(occupyBox);
         if(occupyBox) {
             occupyBox.startx = occupyBox.x;
             occupyBox.starty = occupyBox.y;
             console.log(occupyBox.y, occupyBox.x, currentBox.y, currentBox.x)
 
-            if( parseInt(occupyBox.y)>=parseInt(currentBox.starty || currentBox.y )
+            if( parseInt(occupyBox.y )>=parseInt(currentBox.starty || currentBox.y )
                 && parseInt(occupyBox.y) < grid.length -1 ){
                 console.log('down');
                 occupyBox.y = parseInt(occupyBox.y) + 1;
@@ -68,20 +75,30 @@
                     [1,1,1,1,1],
                 ],
                 boxes: [
-                    {x:2, y:0, w:1, h:1, id: 'b1'},
-                    {x:1, y:1, w:2, h:1, id: 'b2'},
-                    {x:4, y:4, w:1, h:1, id: 'b3'}
+                    {x:2, y:0, w:1, h:1, id: 'b1', random:0},
+                    {x:1, y:1, w:2, h:1, id: 'b2', random:0},
+                    {x:4, y:4, w:1, h:1, id: 'b3', random:0}
                 ]
             }
         },
         methods: {
            dropDown(o) {
+
                 let target = o.target;
                 let _box =  this.boxes.find(b=>b.id==o.boxid);
                 let _x = target.split('_')[1];
                 let _y = target.split('_')[0];
-                _box.x = _x;
-                _box.y = _y;
+                if(_box.x == _x && _box.y==_y){
+
+                    _box.random =  _box.random + 1;
+                } else {
+                    console.log(234);
+                    _box.x = _x;
+                    _box.y = _y;
+                }
+
+
+
            },
            dragOver(o) {
                 let target = o.target;

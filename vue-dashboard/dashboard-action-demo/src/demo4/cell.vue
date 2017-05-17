@@ -19,7 +19,7 @@
         methods: {
              dragOverHandle(e) {
                  e.preventDefault();
-                 console.log(this.index);
+
                  this.$emit('dragOver', { target: this.index})
                  return false;
              },

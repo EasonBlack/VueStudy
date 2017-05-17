@@ -37,6 +37,7 @@
         },
         methods: {
            dropDown(o) {
+
                 let target = o.target;
                 let _box =  this.boxes.find(b=>b.id==o.boxid);
                 let _x = target.split('_')[1];

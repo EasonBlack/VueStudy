@@ -1,8 +1,8 @@
 <template>
     <div class="box"
-
         v-drag
         :class='"w"+w + "h" + h'
+        :random = 'random'
         :style="{
             width:w * 100 + '%',
             visibility : isHide ?'hidden': ''
@@ -13,13 +13,17 @@
 </template>
 <script>
     export default {
-        props:['w', 'h'],
+        props:['w', 'h', 'random'],
         data() {
             return {
                 isHide: false
             }
         },
-
+        watch: {
+            'random': function() {
+                this.isHide= false;
+            }
+        },
         methods: {
 
         },

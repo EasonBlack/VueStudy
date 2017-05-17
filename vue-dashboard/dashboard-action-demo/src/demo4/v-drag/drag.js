@@ -4,21 +4,27 @@ const ctx = 'drag'
 let actionNode;
 
 document.addEventListener('dragstart', function(e){
-    actionNode = e.target;
     nodeList.forEach(node => {
-        node[ctx].documentHandler(e)
+        let id = e.target.parentNode.id;
+        if(node.id == id) {
+            node[ctx].documentHandler(e);
+        }
     });
 })
 
 
 export default (options)=> ({
-    bind(el, binding, vnode) {
-        console.log(vnode);
-        const id = nodeList.push(vnode.elm) - 1;
+    inserted(el, binding, vnode) {
+        const id = el.id;
+        nodeList.push(vnode.elm);
         const documentHandler = function(e) {
-            console.log(e.target.parentElement);
+
             vnode.context.$parent.$parent['currentDrag'] = e.target.parentElement.id;
             e.dataTransfer.effectAllowed = "move";
+            setTimeout(()=>{
+                console.log(vnode);
+                vnode.context['isHide'] = true;
+            },0)
             e.dataTransfer.setData("box",  e.target.parentElement.id);
             e.dataTransfer.setDragImage(e.target.parentElement, 10 ,10);
         };
