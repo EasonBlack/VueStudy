@@ -10,7 +10,7 @@ new Vue({
         let _cookie = document.cookie;
         let flag = _cookie.split(';').some(c=> c.split('=')[0]=='name');
         console.log(this.$router.currentRoute.fullPath);
-        !flag  &&  this.$router.push('/login')
+        //!flag  &&  this.$router.push('/login')
     },
     template:'<App></App>'
 })
