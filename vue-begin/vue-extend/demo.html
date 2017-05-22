@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../../vendor/vue.js"></script>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -11,28 +11,34 @@
 </div>
 </body>
 <script>
-    let myMixin = {
+
+    let ec = Vue.component('app-extend', {
+        template: `<div>
+            <div>This is extend component</div>
+        </div>`,
         created: function () {
-            this.hello()
+            console.log('created from extend')
         },
         methods: {
-            hello: function () {
-                console.log('trigger created!');
-            },
             sayHello: function () {
-                alert(123);
+                console.log('sayhello from extend')
             }
         }
-    }
+    })
 
     Vue.component('app-view', {
-        mixins: [myMixin],
+        extends: ec,
         template: `<div>
             <div>This is view</div>
             <button v-on:click="sayHello">Click</button>
         </div>`,
         created: function () {
-            console.log('xxxxxxxx');
+            console.log('created from component');
+        },
+        methods: {
+            sayHello: function () {
+                console.log('sayhello from component')
+            }
         }
     })
 
