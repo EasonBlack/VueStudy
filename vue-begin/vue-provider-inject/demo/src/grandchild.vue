@@ -1,9 +1,9 @@
 <template>
-    <div>This is grand child, {{message}}</div>
+    <div>This is grand child, {{message}}, {{test}}</div>
 </template>
 
 <script>
     export default {
-        inject: ['message']
+        inject: ['message', 'test']
     }
 </script>

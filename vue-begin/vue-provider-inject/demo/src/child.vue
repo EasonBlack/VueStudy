@@ -9,6 +9,16 @@
     import grandChild from './grandchild.vue'
     export default {
         components: {grandChild},
+        provide() {
+            return {
+                test: this.test
+            }
+        },
+        data() {
+            return {
+                test: 'ccccc'
+            }
+        },
         inject: ['message']
     }
 </script>
