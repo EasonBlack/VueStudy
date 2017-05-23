@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+    let myMixin = {
+        methods: {
+            sayHello: function () {
+                console.log('say hello from mixin');
+            }
+        }
+    }
+
+    Vue.component('app-view', {
+        template: `<div>
+            <div>This is view</div>
+            <button v-on:click="sayHello">Click</button>
+        </div>`,
+        created: function () {
+            console.log('xxxxxxxx');
+        },
+        methods: {
+            sayHello: function() {
+                console.log('say hello from component');
+            }
+        },
+        mixins: [myMixin],
+    })
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+    let myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log('trigger created!');
+            },
+            sayHello: function () {
+                alert(123);
+            }
+        }
+    }
+
+    Vue.component('app-view', {
+        mixins: [myMixin],
+        template: `<div>
+            <div>This is view</div>
+            <button v-on:click="sayHello">Click</button>
+        </div>`,
+        created: function () {
+            console.log('xxxxxxxx');
+        }
+    })
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</html>
