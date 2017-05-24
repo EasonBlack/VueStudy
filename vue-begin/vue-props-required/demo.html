@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../node_modules/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+
+    Vue.component('child', {
+        props:{
+            title: {
+                type: String,
+                required: true,
+                default: 'asdfasdf'
+            }
+        },
+        template: `<div>
+            <div>x{{title}}x</div>
+        </div>`
+    })
+
+    Vue.component('app-view', {
+        template: `<div>
+            <div>{{message}}</div>
+            <child ></child>
+        </div>`,
+        data() {
+             return {
+                 message: 'hhhhh',
+                 mytitle:  null
+             }
+        },
+        methods: {
+            sayHello: function () {
+                console.log('sayhello from component')
+            }
+        }
+    })
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</html>
