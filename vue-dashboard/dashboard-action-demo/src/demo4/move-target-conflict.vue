@@ -26,7 +26,7 @@
         let _x = parseInt(target.split('_')[1]);
         let _y = parseInt(target.split('_')[0]);
         let currentBox = boxes.find(b=> b.id==current);
-    
+
         let occupyBox;
 
         let num = currentBox.w;

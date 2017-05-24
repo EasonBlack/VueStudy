@@ -1,6 +1,23 @@
 var path = require('path');
 var fs = require('fs');
+
 const appCtrl = require('../controller');
+
+var multer  = require('multer');
+
+//var upload = multer({ dest: 'uploads/' })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        console.log(file);
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
+var upload = multer({ storage: storage });
+
+
 
 module.exports = function (app) {
     app.get('/api/herb/question', appCtrl.herbQuestionService.questionAll);
@@ -16,6 +33,8 @@ module.exports = function (app) {
     app.get('/api/test/checkAccount',appCtrl.testUserSerivce.checkAccount);
     app.post('/api/test/loginAccount',appCtrl.testUserSerivce.loginAccount);
     app.get('/api/test/fetchData',appCtrl.testDataSerivce.fetchData);
+
+    app.post('/api/test/upload', upload.array('myfiles', 12), appCtrl.testUserSerivce.uploadImages);
 
     app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
     app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);

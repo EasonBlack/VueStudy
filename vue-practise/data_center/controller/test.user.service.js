@@ -17,7 +17,14 @@ module.exports = function (client) {
             let password = req.body.password;
             console.log(account, password);
             res.send('success');
+        },
+
+        uploadImages: function(req,res) {
+            console.log(req.files);
+            res.send('success');
         }
+
+
 
     }
 }
