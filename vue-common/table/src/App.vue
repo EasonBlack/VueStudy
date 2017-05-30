@@ -5,6 +5,20 @@
         </div>
         <div class='row__section'>
             <div class='table_container' style='overflow:hidden'>
+                <example-table-slot-td  :columns='columns' :rows='rows'>
+                    <template  slot='slot1' scope="props">
+                        <td>
+                            <span @click='getDetailOnSlotTd(props.rowid)'>remove</span>
+                        </td>
+                    </template>
+                    <template  slot='slot2' scope="props">
+                         <td>
+                              <span>preview</span>
+                          </td>
+                    </template>
+                </example-table-slot-td>
+            </div>
+            <div class='table_container' style='overflow:hidden'>
                 <example-table-freeze-all1></example-table-freeze-all1>
             </div>
             <div class='table_container' style='overflow:hidden'>
@@ -40,10 +54,13 @@
     import exampleTableFreeze1 from '../example__table_freeze_header/index.vue';
     import exampleTableFreezeAll1 from '../example__table_freeze_all_1/index.vue';
     import exampleTableFreezeFirst from '../example__table_freeze_first/index.vue';
+    import exampleTableSlotTd from '../example__table_td_slot/index.vue';
     import tablePager from '../pager__1/index.vue';
 	export default {
 	    name: 'app',
-	    components: {exampleTable, exampleTable2,exampleTableColmerge, exampleTableFreeze1, exampleTableFreezeFirst, exampleTableFreezeAll1, tablePager},
+	    components: {exampleTable, exampleTable2,exampleTableColmerge,
+	    exampleTableFreeze1, exampleTableFreezeFirst, exampleTableFreezeAll1, tablePager,
+	    exampleTableSlotTd},
 		data() {
 			return {
 			    current: 1,
@@ -70,6 +87,9 @@
 		methods: {
 		    pagerHandle:function(o) {
 		        this.current = o.val;
+		    },
+		    getDetailOnSlotTd(id) {
+		        alert(id);
 		    }
 		},
 		computed: {
