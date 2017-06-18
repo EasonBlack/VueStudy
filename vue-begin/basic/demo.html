@@ -8,7 +8,8 @@
 <body>
 <div id="app"  v-on:click="getMessage">
     {{ message }}
-    <my-div v-bind:mm="mm"></my-div>
+    <my-div :mm="mm" ></my-div>
+    <button @click="confirm">Confirm</button>
 </div>
 </body>
 <script>
@@ -20,12 +21,15 @@
     var app = new Vue({
         el: '#app',
         data: {
+            mm: 'mmm',
             message: 'Hello Vue!'
         },
         methods: {
             getMessage: function(){
                 this.message = 'xxxxxxxxxxx';
-                this.mm = 'erererer';
+            },
+            confirm:function(){
+                alert(123);
             }
         }
     })

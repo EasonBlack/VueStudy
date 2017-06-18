@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        {{message}} {{count}}
+        <my-div></my-div>
+        <button @click="add">Add</button>
+    </div>
+</body>
+<script src="../../vendor/vue.js"></script>
+<script src="vuex-simplest.js"></script>
+<script>
+    const store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        mutations: {
+            increment (state) {
+                state.count++
+            }
+        }
+    })
+
+    Vue.component('my-div', {
+        props: ['mm'],
+        template: '<div>{{mm || "My Div"}}</div>'
+    })
+
+    var app = new Vue({
+        el: '#app',
+        beforeCreate: function() {
+            console.log('before in vue instance');
+        },
+        data: {
+            message: 'Hello Vue!'
+        },
+        store,
+        methods: {
+            add() {
+               store.commit('increment');
+            }
+        },
+        computed:{
+            count() {
+                return store.state.count;
+            }
+        }
+    })
+</script>
+</html>

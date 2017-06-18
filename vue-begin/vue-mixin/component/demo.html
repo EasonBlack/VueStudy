@@ -12,7 +12,11 @@
 </body>
 <script>
     let myMixin = {
+        beforeCreate: function() {
+            console.log('trigger beforeCreate');
+        },
         created: function () {
+            console.log('trigger created')
             this.hello()
         },
         methods: {
