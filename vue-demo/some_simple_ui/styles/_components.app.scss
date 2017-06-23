@@ -1,0 +1,22 @@
+.app__container {
+  width:50%;
+  margin:auto auto;
+  padding: 20px;
+}
+
+.btn {
+  display: block;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+
+  cursor: pointer;
+}
+
+.btn__add {
+  position: absolute;
+  right: -110px;
+  width:100px;
+  background-color: #2DB681;
+  color: white;
+}
