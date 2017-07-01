@@ -1,0 +1,19 @@
+# DB
+
+create schema home;
+
+CREATE TABLE home.EVENT_TYPE (id SERIAL  PRIMARY KEY, Name VARCHAR(20));
+create table home.event_item (id serial primary key, name varchar(50), status integer, type bigint);
+create table home.event_daily (id serial primary key, event_id bigint, time numeric, trophy numeric, date text);
+
+CREATE INDEX event_daily_date_index ON home.event_daily (date);
+
+CREATE OR REPLACE view event_daily_view AS
+select d.*,i.name as item_name , t.name as type_name from home.event_daily d
+left join home.event_item i on d.event_id = i.id
+left join home.event_type t on i.type = t.id
+
+
+CREATE TABLE home.story_item (id SERIAL PRIMARY KEY, Name VARCHAR(20));
+CREATE TABLE home.story_piece (id SERIAL PRIMARY KEY, item_id bigint, content text, x integer, y integer, type integer);
+CREATE TABLE home.story_config (id SERIAL PRIMARY KEY, item_id integer , type_id integer, color VARCHAR(10));
