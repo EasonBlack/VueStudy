@@ -5,6 +5,9 @@
   font-family: bootstrap, Arial;
   position: relative; }
 
+a {
+  cursor: pointer; }
+
 ul {
   list-style: none; }
 
@@ -18,6 +21,12 @@ ul {
 
 .flex__2 {
   flex: 2 !important; }
+
+.flex__left {
+  flex: 1; }
+
+.flex__right {
+  justify-content: flex-end; }
 
 .flex__h_end {
   justify-content: flex-end; }

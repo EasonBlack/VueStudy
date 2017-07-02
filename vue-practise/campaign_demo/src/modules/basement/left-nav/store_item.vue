@@ -36,14 +36,14 @@
         height:#{$item_height}px;
         display:flex;
         align-items: center;
-        padding: 0px #{$header_padding}px;
+        padding-left: #{$header_padding}px;
         border-bottom: 1px solid #EDECEB;
     }
     .storemenu__left {
         display:flex;
     }
     .storemenu__right {
-        width:50px;
+        width:#{$left_menu_right_icon_width}px;
     }
     .storemenu__logo {
         height:100%;
