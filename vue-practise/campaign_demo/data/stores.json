@@ -1,0 +1,32 @@
+[
+  {
+    "name": "xxxxx",
+    "title": "XXXXX",
+    "logo": "http://placehold.it/60x60&text=logo",
+    "address": "xxxx xxx street",
+    "campaigns": [
+      {
+        "name": "ad1",
+        "title": "Ad 1",
+        "startdate": "2017-01-01",
+        "enddate": "2017-10-10",
+        "statue": "enable",
+        "impr": 100,
+        "click": 12,
+        "ctr": 20,
+        "all": 82
+      },
+      {
+        "name": "ad2",
+        "title": "Ad 2",
+        "startdate": "2017-01-01",
+        "enddate": "2017-10-10",
+        "statue": "enable",
+        "impr": 100,
+        "click": 13,
+        "ctr": 20,
+        "all": 81
+      }
+    ]
+  }
+]

@@ -13,7 +13,6 @@
         components: {menuWrapper},
         data() {
             return {
-
             }
         },
         computed: {

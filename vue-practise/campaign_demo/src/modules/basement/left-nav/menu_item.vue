@@ -22,14 +22,14 @@
     }
 </script>
 <style lang='scss' scoped>
+    $item_height : 50;
     .menu-item__container {
         cursor: pointer;
-        height:100px;
+        height:#{$item_height}px;
         z-index:15;
         &:hover label{
-            color: #3BAA98;
-        }
 
+        }
         .item__wrapper {
             z-index:40;
             width: 100%;
@@ -45,9 +45,10 @@
         }
         label {
             font-size:0.8em;
+            font-weight:700;
             display:inline-block;
             width: 100%;
-            text-align: center;
+            color: #595854;
             z-index: 35;
         }
     }
