@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-div>
+        <my-sub-div></my-sub-div>
+        <my-sub-div></my-sub-div>
+        <my-sub-div></my-sub-div>
+    </my-div>
+</div>
+</body>
+<script>
+    Vue.component('my-div', {
+        template: '<div><slot></slot></div>'
+    })
+
+    Vue.component('my-sub-div', {
+        template: '<div>aaaaa</div>'
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+</script>
+</html>

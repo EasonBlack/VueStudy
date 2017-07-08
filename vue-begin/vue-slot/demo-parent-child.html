@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-div>
+        <my-sub-div></my-sub-div>
+    </my-div>
+</div>
+</body>
+<script>
+    Vue.component('my-div', {
+        template: `<div>
+            <div>xxxxx</div>
+            <slot></slot>
+        </div>`,
+        data() {
+            return {
+                submsg: 'bbbbb'
+            }
+        },
+        created() {
+            this.$on('item-click', this.handleItemClick);
+        },
+        methods:{
+            handleItemClick() {
+                alert(123);
+            }
+        },
+        mounted() {
+            let a = this.$parent.msg;
+            console.log(a);
+        }
+    })
+
+    Vue.component('my-sub-div', {
+        template: `<div @click="handleHeaderClick">
+            bbbbb
+        </div>
+        `,
+        mounted() {
+            let b = this.$parent.submsg;
+            console.log(b);
+        },
+        methods: {
+            handleHeaderClick() {
+                var parent = this.$parent
+                parent.$emit('item-click', 'ccc');
+            }
+        },
+    })
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'aaaas'
+        }
+    })
+</script>
+</html>

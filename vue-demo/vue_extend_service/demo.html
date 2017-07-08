@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    <button @click="confirm">Confirm</button>
+</div>
+</body>
+<script>
+
+
+    let basicService = Vue.extend({
+        template: `<div>{{msg}}</div>`,
+        data() {
+            return {
+                msg: 'xxxx'
+            }
+        }
+    })
+    let instance = new basicService({
+        el: document.createElement('div'),
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            mm: 'mmm',
+            message: 'Hello Vue!'
+        },
+        methods: {
+            confirm:function(){
+                document.body.appendChild(instance.$el);
+            }
+        }
+    })
+</script>
+</html>
