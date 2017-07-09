@@ -1,0 +1,5 @@
+npm i stylelint -D
+npm i stylelint-processor-html -D
+npm i stylelint-config-standard -D
+
+stylelint **/*.vue --syntax scss
