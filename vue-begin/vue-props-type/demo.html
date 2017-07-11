@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+</head>
+<body>
+<div id="app">
+    <app-view></app-view>
+</div>
+</body>
+<script>
+    let testClass = function() {
+        this.a = "aa";
+        this.b = "bb";
+    }
+
+
+    Vue.component('child', {
+        props:{
+            oo: {
+                type: testClass,
+                required: true
+            }
+        },
+        template: `<div>
+            <div>{{oo}}</div>
+        </div>`
+    })
+
+    Vue.component('app-view', {
+        template: `<div>
+            <div>{{message}}</div>
+            <child :oo="oo"></child>
+        </div>`,
+        data() {
+             return {
+                 message: 'hhhhh',
+                 mytitle:  null,
+                 oo: new testClass()
+             }
+        },
+        methods: {
+            sayHello: function () {
+                console.log('sayhello from component')
+            }
+        }
+    })
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</html>
