@@ -34,7 +34,7 @@
             <div class='right'>
                  <div class='datepicker__container'>
                        <date-picker v-model='feedback.next'></date-picker>
-                  </div
+                  </div>
             </div>
          </div>
     </div>

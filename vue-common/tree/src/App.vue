@@ -3,14 +3,19 @@
         <div class="row__section">
             <tree-wrapper :items="items"></tree-wrapper>
         </div>
+        <div class="row__section">
+            <tree-wrapper2 :items="items"></tree-wrapper2>
+        </div>
 	</div>
 </template>
 
 <script>
     import Vue from 'vue';
-    import treeWrapper from '../tree__1/index.vue'
+    import treeWrapper from '../tree__1/index.vue';
+    import treeWrapper2 from '../tree__2/index.vue';
+
 	export default {
-        components: {treeWrapper},
+        components: {treeWrapper, treeWrapper2},
 		data() {
 			return {
                 items: []
