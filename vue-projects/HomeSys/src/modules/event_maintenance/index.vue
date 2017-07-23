@@ -6,7 +6,7 @@
         </div>
         <div class='item__container'  v-if='eventTypes && eventTypes.length'>
             <div class='col__container col1'>
-               <type-group v-for='g in colGroups[0].items' :group='g'></type-group>
+               <type-group v-for='g in colGroups[0].items' :group='g' ></type-group>
             </div>
             <div class='col__container col2'>
                 <type-group v-for='g in colGroups[1].items' :group='g'></type-group>
@@ -40,6 +40,7 @@
                 this.postEventItem(o);
             },
             statusChange: function(o) {
+                this.$store.commit("setCurrentEventGroupType", o);
                 this.$store.dispatch('fetchEventItems', {status: o});
             }
         },

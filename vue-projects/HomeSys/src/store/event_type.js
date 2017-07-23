@@ -2,12 +2,16 @@ import Vue from 'vue';
 import Config from '../common/config.js';
 
 const state = {
-    all: []
+    all: [],
+    currentType: 1  //[1,2,3]
 }
 
 const mutations = {
     fetchEventType: function (state, types) {
         state.all = types
+    },
+    setCurrentEventGroupType(state, name) {
+        state.currentType = name;
     }
 }
 

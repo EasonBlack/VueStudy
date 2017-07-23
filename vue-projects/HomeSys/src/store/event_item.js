@@ -3,7 +3,8 @@ import Config from '../common/config.js';
 
 const state = {
     all: [],
-    current: []
+    current: [],
+    
 }
 
 const mutations = {
@@ -12,7 +13,7 @@ const mutations = {
     },
     fetchEventItemsByStatus: function (state, items) {
         state.current = items
-    },
+    }
 }
 
 const actions = {
@@ -34,6 +35,15 @@ const actions = {
     closeEventItem ({commit, state}, id) {
         Vue.http.put(Config.API_ROOT + '/api/home/closeEventItem/'+ id).then((response) => {
             commit('fetchEventItemsActive', response.body.data)
+        })
+    },
+    changeEventItemType({commit, state, dispatch}, {id, origintype, resulttype}){
+        console.log(id, origintype, resulttype);
+        Vue.http.put(Config.API_ROOT + '/api/home/changeEventStatus/'+ id +  '/' + resulttype).then((response) => {
+            dispatch('fetchEventItems',  {status: origintype })
+                .then(response=> {
+                    commit('fetchEventItemsByStatus', response.body.data);
+                })
         })
     },
     pendEventItem ({commit, state}, id) {
