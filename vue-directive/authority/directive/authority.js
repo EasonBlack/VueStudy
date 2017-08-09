@@ -15,8 +15,6 @@ export default {
             vnode.elm = comment;
             vnode.text = ' ';
             vnode.isComment = true;
-            //vnode.componentInstance.$el = comment;
-            vnode.context = undefined;
             vnode.tag = undefined;
 
             if (el.parentNode) {

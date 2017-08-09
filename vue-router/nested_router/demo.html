@@ -47,8 +47,14 @@
             <div class="header">Resource</div>
             <div class="content">
                 This is Home Resource
+                <button @click="toView1">to view1</button>
             </div>
-        </div>`
+        </div>`,
+        methods: {
+            toView1() {
+                this.$router.push('/view1')
+            }
+        }
     })
     let AppView1 = Vue.component('app-view1', {
         props: [],
