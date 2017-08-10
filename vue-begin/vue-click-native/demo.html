@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <app id="app">
+        <test @click.native="clickHandle"></test>
+    </app>
+</body>
+<script src="../../vendor/vue2.3.2.js"></script>
+<script>
+
+    Vue.component('test', {
+        template: `<div>Hello World</div>`
+    })
+
+    new Vue({
+        el: '#app',
+        methods: {
+            clickHandle() {
+                alert(123);
+            }
+        }
+    })
+</script>
+</html>
