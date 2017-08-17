@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        body,html {
+            width:100vw;
+            height:100vh;
+            position:relative;
+        }
+        .d {
+            position:absolute;
+
+            width:100px;
+            height:100px;
+            background-color:steelblue;
+            color:white;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .d1 {
+            top:50px;
+            left:200px;
+        }
+        .d2 {
+            top:180px;
+            left:300px;
+        }
+        .large {
+            top:0px;
+            left:0px;
+            width:100vw;
+            height:100vh;
+            z-index:10;
+        }
+    </style>
+</head>
+<body>
+    <div class="d d1">ITEM</div>
+    <div class="d d2">ITEM</div>
+</body>
+<script>
+    let d = document.querySelectorAll('.d');
+    Array.from(d).forEach(b => {
+        b.addEventListener('click', function(e) {
+            e.target.classList.toggle('large');
+        });
+    });
+
+</script>
+</html>
