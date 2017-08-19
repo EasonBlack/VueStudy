@@ -28,7 +28,11 @@ module.exports = {
                 loader: 'vue-html-loader'
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.css/,
+                loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.(png|jpg|gif|svg|woff2)$/,
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
@@ -39,7 +43,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue'
+            'vue$': 'vue/dist/vue',
+            '$style': path.resolve(__dirname, '../../../style'),
         }
     },
     devServer: {
