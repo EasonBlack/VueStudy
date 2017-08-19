@@ -50,7 +50,14 @@
                     </form-row-input>
 		        </div>
 		        <div class='row'>
-		            <a>Confirm</a>
+		            <div class='ml-35'>
+		                <input type=checkbox />
+		                <span>aaaaaa aaaaaa aaaaaa</span>
+		            </div>
+
+                </div>
+		        <div class='row'>
+		            <a class='ml-35 btn__confirm'>Confirm</a>
 		        </div>
 		    </div>
 		</div>
@@ -144,6 +151,20 @@
             font-size:15px;
             vertical-align: top;
         }
+    }
+    .ml-35 {
+        margin-left:35%;
+    }
+
+    .btn__confirm {
+         display:inline-block;
+         width:120px;
+         height:30px;
+         line-height:30px;
+         text-align: center;
+         border-radius:5px;
+         background-color:steelblue;
+         color:white;
     }
 
 </style>
