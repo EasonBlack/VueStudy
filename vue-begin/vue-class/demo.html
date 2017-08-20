@@ -27,8 +27,9 @@
         props: ['m1','m2', 'id', 'other-attr'],
         template: `<div :class="[
             c1,c2, {
-                isBlue: true
-            }
+                'isBlue': true
+            },
+            blank
         ]">My Div</div>`,
         created() {
             console.log(this);
@@ -37,7 +38,8 @@
         data() {
             return {
                 c1: 'c1',
-                c2: 'c2'
+                c2: 'c2',
+                blank: null
             }
         }
     })
