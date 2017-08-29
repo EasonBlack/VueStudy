@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../style/bootstrap4.0.0-beta.css" rel="stylesheet" />
+    <script src="../../vendor/vue2.3.2.js"></script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class='container'>
+    <div  class="row justify-content-center" >
+        <div class="col-md-2" align="center">
+            <div class="mb-1">
+                <select v-model="xy"  class="form-control">
+                    <option :value="[11,22]">11*22</option>
+                    <option :value="[12,23]">12*23</option>
+                    <option :value="[13,24]">13*24</option>
+                </select>
+            </div>
+            <div class="input-group mb-1">
+                <span class="input-group-addon">X:</span>
+                <label class="form-control">{{x}}</label>
+            </div>
+            <div class="input-group mb-1">
+                <span class="input-group-addon">Y:</span>
+                <label class="form-control">{{y}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            xy: [12, 23]
+        },
+        methods: {},
+        computed: {
+            x() {
+                return this.xy[0]
+            },
+            y() {
+                return this.xy[1]
+            }
+        }
+
+    })
+</script>
+</html>
