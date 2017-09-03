@@ -1,0 +1,36 @@
+<link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
+<link rel="import"  href="https://polygit.org/components/iron-input/iron-input.html">
+<link rel="import"  href="https://polygit.org/components/polymer/lib/elements/dom-repeat.html">
+
+
+<dom-module id="custom-element">
+    <template>
+        <p>I'm a DOM element.Test test test</p>
+        <p>{{owner}}</p>
+        <p>[[owner]]</p>
+        <iron-input bind-value="{{owner}}">
+            <input is="iron-input" placeholder="Your name here...">
+        </iron-input>
+        <template is="dom-repeat" items="{{items}}">
+            <p>{{item}}</p>
+        </template>
+    </template>
+
+    <script>
+        // Define the class for a new element called custom-element
+        class CustomElement extends Polymer.Element {
+            static get is() {
+                return "custom-element";
+            }
+            constructor() {
+                super();
+                this.owner = "eason";
+                this.items = [
+                        'a', 'b'
+                ]
+            }
+        }
+        // Register the new element with the browser
+        customElements.define(CustomElement.is, CustomElement);
+    </script>
+</dom-module>
