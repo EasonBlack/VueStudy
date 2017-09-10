@@ -3,15 +3,27 @@
     <table>
         <thead>
             <th v-for='col in columns'
+               :class='[
+                   col.options.textAlign
+               ]'
             >{{col.title}}</th>
         </thead>
         <tbody>
             <template v-for='(row, index) in rows'>
                 <tr>
-                   <td v-for='col in columns'>
+                   <td v-for='col in columns'
+                        :class='[
+                            col.options.textAlign
+                         ]'
+                   >
                        <col-image v-if='col.options.coltype=="image"' :image='row[col.id]' :desc='row["desc"]' :size='col.options.size'></col-image>
                        <col-enable-circle v-else-if='col.options.coltype=="enable-circle"' :value='row[col.id]' ></col-enable-circle>
                        <col-values-map-color v-else-if='col.options.coltype=="values-map-color"' :value='row[col.id]' :map='col.options.map'></col-values-map-color>
+                       <col-link-route v-else-if='col.options.coltype=="link-route"'
+                            :value='row[col.id]'
+                            :routeName='col.options.routeName'
+                            :paramName= 'col.options.paramName'
+                            :paramVal='row[col.options.keyName]' />
                        <span v-else>
                             {{row[col.id]}}
                        </span>
@@ -29,8 +41,9 @@
     import colEnableCircle from './col/enable_circle.vue';
     import colValuesMapColor from './col/values_map_color.vue';
     import colImage from './col/image_col.vue';
+    import colLinkRoute from './col/col_link_route.vue'
     export default{
-        components: {colEnableCircle, colValuesMapColor, colImage},
+        components: {colEnableCircle, colValuesMapColor, colImage, colLinkRoute},
         props: ['columns', 'rows', 'config', 'pager', 'noPager'],
         data(){
             return{
@@ -72,13 +85,6 @@
                 border-bottom: 1px solid grey;
                 height: 50px;
                 font-size:13px;
-                &.center {
-                    text-align:center;
-                }
-                &.left {
-                    text-align: left;
-                    padding-left:20px;
-                }
             }
         }
         tbody {
@@ -102,6 +108,17 @@
                 }
             }
         }
+    }
+    .center {
+        text-align:center;
+    }
+    .left {
+        text-align: left;
+        padding-left:20px;
+    }
+    .right {
+        text-align:right;
+        padding-right:20px;
     }
 
 </style>
