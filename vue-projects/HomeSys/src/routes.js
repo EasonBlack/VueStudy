@@ -8,6 +8,7 @@ import EventMaintenance from './modules/event_maintenance/index.vue'
 import Story from './modules/story/index.vue'
 
 
+
 const router = new VueRouter({
     routes: [
         { path: '/calendar', name: 'calendar',component: Calendar },

@@ -1,16 +1,15 @@
 <template>
-	<div>
-		{{message}}
-	</div>
+		<router-view></router-view>
 </template>
 
 <script>
+
 	export default {
 		data() {
 			return {
-				message: 'my vue'
 			}
-		}
+		},
+
 	}
 </script>
 <style>
