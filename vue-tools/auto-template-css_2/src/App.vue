@@ -6,12 +6,7 @@
             </div>
         </div>
 		<div class='display__section'>
-            <div class='html__section'>
-                {{inputTags}}
-                <!-- <html-display :inputTags='inputTags' :tabnum='tabnum'></html-display> -->
-            </div>
-            <div class='css__section'>
-                <!-- <css-display :inputTags='inputTags'></css-display> -->
+            <div class='html__section'>{{inputTags}}
             </div>
         </div>
 	</div>
@@ -33,32 +28,8 @@
             let content = "     div.container.d-flex.box__3wrapper:title='Name':value";
             this.classRegex = /\.([\w-]*)/g;
             this.tagRegex  = /^([\s\t]*)([\w]+)/;
-            //this.paramRegex = new RegExp("\:([\w]+)[=]?[\'\"]?([\w]*)[\'\"]?");
-            var classRes = content.match(this.classRegex);
-            var tagRes = content.match( this.tagRegex);
-            console.log(classRes);
-            console.log(tagRes);
-
-            // this.recodeTags = function(tags) {
-            //     let prev = null;
-            //     for(let i =0;i<tags.length;i++) {
-            //         let t = tags[i];
-            //         if(prev && t.num > prev.num) {
-            //             t.parent = prev.index;
-            //         } else if(prev && t.num == prev.num) {
-            //             t.parent = prev.parent;
-            //         } else if(prev && t.num < prev.num) {
-            //             let pid = prev.parent;
-            //             let p = tags.find(o=> {
-            //                 return o.index == pid
-            //             })
-            //             console.log(p);
-            //             t.parent = p.parent!=undefined ? p.parent : p.index;
-            //         }
-            //         prev = t;
-            //     }
-            //     return tags;
-            // }
+            //var classRes = content.match(this.classRegex);
+            //var tagRes = content.match( this.tagRegex);          
 	    },
 	    methods:  {
 	        keydownHandle: function(e) {
@@ -70,7 +41,6 @@
                      this.inputOrigin = this.inputOrigin.substring(0, start)
                                  + "\t"
                                  + this.inputOrigin.substring(end);
-
                      el.selectionStart = el.selectionEnd = start + 1;
                      e.preventDefault();
                 }
@@ -81,41 +51,45 @@
                 if(!this.inputOrigin) return false;
                 let lines = this.inputOrigin.split('\n');
                 let tags = lines.map((o,i)=>{
-                   
                     let classRes = o.match(this.classRegex);
                     let tagRes = o.match( this.tagRegex);
-                    //console.log(classRes, tagRes)
-                    if(tagRes && tagRes.length > 1){
-                        let tags = tagRes[1];
-                        console.log(encodeURI(tags).toString().split('%09'));
+                    let tagName='',tabNum=0;
+                    if(tagRes) {
+                        tagName = tagRes[2];               
+                        tabNum = encodeURI(tagRes[1]).toString().split('%09').length - 1 ;
+                    } 
+                    if(tabNum < 0 ) tabNum = 0;                   
+                    return {
+                        tab: tabNum,
+                        tag: tagName,
+                        class: classRes && classRes.length ? classRes.map(c=>c.substring(1)) : []
+                    }   
+                })
+                let result = ''
+                let previousIndents = []
+                for(let i = 0 ;i<tags.length ;i++) {
+                    let tag = tags[i];
+                    let tabNum = tag.tab;
+                    let tagString = '';
+                    let tabString = '';
+                    if(tag.tag) {
+                        tabString =  new Array(tabNum).fill().reduce((t,i)=>{return t+'\t'}, '');
+                        tagString = `${tabString}<${tag.tag} class='${tag.class.join(",")}'>\n` ;
+                    }
+                    
+                    while(previousIndents.length 
+                        && (tag.tab<=previousIndents[previousIndents.length-1].tab || tag.tab==0)
+                        ) {
+                        let _last = previousIndents.pop();
+                        let _lastTag = ''
+                        _lastTag = new Array(_last.tab).fill().reduce((t,i)=>{return t+'\t'}, '');
+                        result +=  `${_lastTag}</${_last.tag}> \n`
                     }
                    
-                })
-
-                return tags;
-                // let tags = lines.map((o, i)=> {
-                //     let num = this.checkTab(o, initNum);
-                //     let arr = o.trim().split('@');
-                //     let self = arr[0];
-                //     let selfArr = self.split('_')
-                //     let children = arr.slice(1,arr.length);
-                //     children = children.map((o)=> {
-                //         let _tempArr =  o.split('_');
-                //         return {
-                //             el: _tempArr[0],
-                //             css: _tempArr.slice(1,_tempArr.length)
-                //         }
-                //     });
-                //     return {
-                //         text: selfArr[0],
-                //         css: selfArr.slice(1,selfArr.length),
-                //         children: children,
-                //         num : num,
-                //         index: i
-                //     }
-                // })
-                // tags = this.recodeTags(tags);
-                // return tags;
+                    previousIndents.push(tag)
+                    result += tagString ; 
+                }
+                return result;
             }
 	    }
 	}
@@ -184,6 +158,7 @@
         padding:10px;
         overflow:auto;
         border-bottom:1px solid rgba(grey, 0.3);
+        white-space:pre-wrap;
     }
     .css__section {
         padding:10px;
