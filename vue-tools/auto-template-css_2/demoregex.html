@@ -31,6 +31,9 @@
   let classRegex2 = /\.([\w-]*):([\w-:=\d]*)/g;
   let matchRes = strCss.match(classRegex2);
   console.log(matchRes);
+
+  let str1 = `aaa` + [1,2,3].reduce((o, i)=>o += i +  ' x\n', '')  + ` bbb`;
+  console.log(str1)
 </script>
 
 </html>

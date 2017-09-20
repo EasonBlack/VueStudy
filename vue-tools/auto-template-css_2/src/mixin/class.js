@@ -25,11 +25,11 @@ let mixin = {
       })
 
       classArr.forEach(c=>{
-        result += `.${c.name}{ \n`
-        c.css.forEach(o=>{
-          result +=`\t${o.name} : ${o.value}; \n`
-        }) 
-        result += '} \n'
+        result += `.${c.name}{ \n` 
+        + c.css.reduce((t, o)=>{
+          return t +=`\t${o.name} : ${o.value}; \n`
+        }, '') 
+        + `} \n`;
       })
     
       return result;
