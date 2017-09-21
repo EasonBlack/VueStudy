@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Helvetic;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      line-height:100px;
+      background-color: steelblue;
+      position: absolute;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      margin: auto auto;
+      width: 80%;
+      height: 80%;
+      border: 1px solid grey;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" @mousemove='mouseMove' @mouseup='mouseUp'>
+    <div class='container'>
+      <box  v-for = '(b , b_key) in boxes'
+      @mousedownhandle='mouseDown' 
+      :boxid='b_key'
+      :title = 'b.title'
+      :currenttop='b.currentTop' 
+      :currentleft='b.currentLeft'/>
+    </div>
+  </div>
+
+</body>
+<script src='../../../vendor/vue2.3.2.js'></script>
+<script>
+  Vue.component('box', {
+    props: ['currenttop', 'currentleft', 'boxid', 'title'],
+    data() {
+      return {
+      }
+    },
+    template: `
+      <div class='box box1' @mousedown.prevent.stop="mousedown" :style='{
+          top: currenttop + "px",
+          left: currentleft + "px"
+        }'>
+        {{title}}
+      </div>
+    `,
+    methods: {  
+      mousedown(e) {
+        this.$emit('mousedownhandle', {boxid: this.boxid, e})
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello World',
+      moveFlag: false,
+      startTop: 0,
+      startLeft: 0,
+      originTop: 0,
+      originLeft: 0,
+      currentBoxId: null,
+      boxes: {
+       "1": {currentLeft: 0, currentTop:0, title: 'Box 1'},
+       "2": {currentLeft: 0, currentTop:0, title: 'Box 2'}
+      }
+       
+      
+    },
+    methods: {
+      mouseDown({e, boxid}) {
+        this.moveFlag = true;
+        this.currentBoxId = boxid;
+        this.startTop = e.clientY;
+        this.startLeft = e.clientX;
+        this.originTop = this.boxes[boxid].currentTop;
+        this.originLeft = this.boxes[boxid].currentLeft;
+      },
+
+      mouseUp() {
+        this.moveFlag = false;
+      },
+
+      mouseMove(e) {
+
+        if (!this.moveFlag) return false;
+
+        this.boxes[this.currentBoxId].currentTop = this.originTop + e.clientY - this.startTop;
+        this.boxes[this.currentBoxId].currentLeft = this.originLeft + e.clientX - this.startLeft;
+
+      },
+    }
+  })
+</script>
+
+</html>

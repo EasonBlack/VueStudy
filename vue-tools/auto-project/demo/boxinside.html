@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Helvetic;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      width: 80%;
+      height: 80%;
+      padding:10px;
+      position: absolute;
+      color: black;
+      text-align: center;
+      border: 1px solid steelblue;
+
+    }
+
+  
+  </style>
+</head>
+
+<body>
+  <div id="app" >
+    <box v-for='(val,key) in boxes' :b='val'></box>
+  </div>
+
+</body>
+<script src='../../../vendor/vue2.3.2.js'></script>
+<script>
+   Vue.component('box', {
+    props: ['b'],
+    components: {
+        'box': this
+    },
+    data() {
+      return {
+      }
+    },
+    template: `
+      <div class='box box1' @mousedown.prevent.stop="mousedown" >
+        {{b.title}}
+        <box v-for='(box , b_key) in b.boxes' :b='box'></box>
+      </div>
+    `,
+    methods: {  
+      mousedown(e) {
+        this.$root.clickHandle(this.b.id);
+        this.$forceUpdate();
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      pressFlag: null,
+     
+      boxes: {
+        "1": {id: "1", title: 'Box 1', boxes: {
+          "1.11": {id: "1.11", title: 'Box 11', boxes: {
+            "1.11.111": {id: "1.11.111", title: 'Box 111'}
+          }}
+        }}
+      }
+    },
+    methods: {
+      clickHandle(id) {
+        let newId = Date.now();
+        let len = id.toString().split('.').length;
+        let parentLen = len - 1 ;
+        let boxes = Object.assign({}, this.boxes);
+        let res = new Array(len).fill().reduce((b, blank, i)=> {
+          let _ids = id.toString().split('.').slice();
+          let _i = _ids.splice(0,i+1).join('.')
+          let _b = b[_i] || b.boxes[_i]
+
+          if(i== len-1) {
+            _b.boxes = _b.boxes || {} ;
+            _b.boxes[_i + "."+ newId] = {id: _i + "." + newId, title: 'Box ' + newId}
+          }
+
+          return _b
+          }, this.boxes)
+        // alert(res.title);
+        // this.$forceUpdate();
+      }
+    }
+  })
+</script>
+</html>
