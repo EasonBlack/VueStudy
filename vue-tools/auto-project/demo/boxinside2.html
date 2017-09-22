@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Helvetic;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      min-width: 100px;
+      line-height: 100px;
+      background-color: steelblue;
+      position: absolute;
+      color: white;
+      text-align: center;
+      border: 1px solid grey;
+    }
+
+    .box .box-header {
+      position: absolute;
+      top: -20px;
+      height: 20px;
+      padding: 2px 8px;
+      line-height: normal;
+      left: 0;
+      background-color: black;
+      border: 1px solid grey;
+      text-align: center;
+      font-size: 13px;
+      color: #eee;
+      z-index: 20;
+    }
+
+    .box .box-header-input {
+      position: absolute;
+      top: -20px;
+      left: 0px;
+      height: 20px;
+      line-height: 20px;
+      padding-left: 8px;
+      max-width: 100px;
+      z-index: 10;
+    }
+
+    .box-utility {
+      position: absolute;
+      bottom: 0px;
+      color: white;
+      height: 20px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    .size-box {
+      right: 0px;
+      background-color: blueviolet;
+      width: 30px;
+    }
+
+    .move-box {
+      right: 40px;
+      background-color: lightcoral;
+      width: 40px;
+    }
+
+    .insert-box {
+      left: 0px;
+      background-color: lawngreen;
+      width: 40px;
+    }
+
+    .container {
+      margin: auto auto;
+      width: 80%;
+      height: 80%;
+      border: 1px solid grey;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" @mousemove='mouseMove' @mouseup='mouseUp'>
+    <div class='container'>
+      <box v-for='(b , b_key) in boxes' @movehandle='moveHandle' @sizehandle='sizeHandle' :boxid='b_key' :b='b' />
+    </div>
+  </div>
+</body>
+
+<script src='../../../vendor/vue2.3.2.js'></script>
+<script>
+ 
+  Vue.component('box', {
+    components: {
+      'box': this
+    },
+    props: ['boxid', 'b'],
+    data() {
+      return {
+        currentTitle: '',
+        isEditHeader: false
+      }
+    },
+   
+    template: `
+      <div class='box box1' :style='{
+          top: b.currentTop + "px",
+          left: b.currentLeft + "px",
+          width: b.width + "px",
+          height: b.height + "px"
+        }'
+        >
+
+        <box v-for='(box , b_key) in b.boxes' :b='box' :boxid='b_key'></box>
+
+        <div class='box-header' @dblclick="toggleEditTitle" v-if='!isEditHeader'>
+          {{b.title}}
+        </div>
+      
+
+        <input type='text' ref="titleInput" v-model='currentTitle'  class='box-header-input' @blur='titleEditBlur'  v-if='isEditHeader' />
+       
+        <div class='box-utility size-box' @mousedown.prevent.stop='sizehandle'>size</div>
+        <div class='box-utility move-box' @mousedown.prevent.stop='movehandle'>move</div>
+        <div class='box-utility insert-box'  @click.prevent.stop='addInside'>insert</div>
+        
+      </div>
+    `,
+    created() {
+      this.currentTitle = this.b.title;
+    },
+
+    methods: {
+      toggleEditTitle() {
+        this.isEditHeader = true;
+        this.$nextTick(function () {
+          this.$refs.titleInput.focus();
+        })
+      },
+
+      titleEditBlur(e) {
+        this.isEditHeader = false;
+        this.$root.editBoxTitle({
+          title: this.currentTitle,
+          boxid: this.boxid
+        })
+      },
+
+      movehandle(e) {
+        this.$root.moveHandle({
+          boxid: this.boxid,
+          e
+        });
+        this.$forceUpdate();
+      },
+
+      sizehandle(e) {
+        this.$root.sizeHandle({
+          boxid: this.boxid,
+          e
+        });
+        this.$forceUpdate();
+      },
+
+      addInside() {
+        this.$root.addInside(this.boxid);
+        this.$forceUpdate();
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello World',
+      moveFlag: false,
+      sizeFlag: false,
+      startTop: 0,
+      startLeft: 0,
+      originTop: 0,
+      originLeft: 0,
+      originWidth: 0,
+      originHeight: 0,
+      currentBoxId: null,
+      boxes: {
+        "1": {
+          currentLeft: 0,
+          currentTop: 0,
+          title: 'box-1',
+          width: 400,
+          height: 300,
+          boxes: {
+            '1.11': {
+              currentLeft: 0,
+              currentTop: 10,
+              title: 'box-1',
+              width: 100,
+              height: 100,
+            }
+          }
+        }
+      }
+
+    },
+    methods: {
+      moveHandle({
+        e,
+        boxid
+      }) {
+        this.moveFlag = true;
+        this.currentBoxId = boxid;
+
+        this.startTop = e.clientY;
+        this.startLeft = e.clientX;
+        let _box = this.getTheBox(this.currentBoxId);
+        this.originTop = _box.currentTop;
+        this.originLeft = _box.currentLeft;
+      },
+
+      sizeHandle({
+        e,
+        boxid
+      }) {
+        this.sizeFlag = true;
+        this.currentBoxId = boxid;
+
+        this.startTop = e.clientY;
+        this.startLeft = e.clientX;
+        let _box = this.getTheBox(this.currentBoxId);
+
+        this.originWidth = _box.width;
+        this.originHeight = _box.height;
+      },
+
+      getTheBox(id) {
+        let len = id.split('.').length;
+        let res = new Array(len).fill().reduce((b, blank, i) => {
+          let _ids = id.toString().split('.').slice();
+          let _i = _ids.splice(0, i + 1).join('.')
+          let _b = b[_i] || b.boxes[_i]
+          return _b
+        }, this.boxes)
+        return res;
+      },
+
+      addInside(id) {
+        let newId = Date.now();
+        let len = id.toString().split('.').length;
+
+        let res = new Array(len).fill().reduce((b, blank, i) => {
+          let _ids = id.toString().split('.').slice();
+          let _i = _ids.splice(0, i + 1).join('.')
+          let _b = b[_i] || b.boxes[_i]
+
+          if (i == len - 1) {
+            _b.boxes = _b.boxes || {};
+            _b.boxes[_i + "." + newId] = {
+              id: _i + "." + newId,
+              title: 'box',
+              width: 100,
+              height: 100,
+              currentTop: 0,
+              currentLeft: 0
+            }
+          }
+
+          return _b
+        }, this.boxes)
+
+      },
+
+      editBoxTitle({
+        title,
+        boxid
+      }) {
+        this.boxes[boxid].title = title;
+      },
+
+      mouseUp() {
+        this.moveFlag = false;
+        this.sizeFlag = false;
+      },
+
+      mouseMove(e) {
+        if (!this.moveFlag && !this.sizeFlag) {
+          return false;
+        }
+
+        let _box = this.getTheBox(this.currentBoxId);
+
+        if (this.moveFlag) {
+          _box.currentTop = this.originTop + e.clientY - this.startTop;
+          _box.currentLeft = this.originLeft + e.clientX - this.startLeft;
+        }
+
+        if (this.sizeFlag) {
+          _box.width = this.originWidth + e.clientX - this.startLeft;
+          _box.height = this.originHeight + e.clientY - this.startTop;
+        }
+
+      },
+    }
+  })
+</script>
+
+</html>

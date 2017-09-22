@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Helvetic;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      min-width: 100px;
+      line-height: 100px;
+      background-color: steelblue;
+      position: absolute;
+      color: white;
+      text-align: center;
+    }
+
+    .box .box-header {
+      position: absolute;
+      top: -20px;
+      height: 20px;
+      padding: 2px 8px;
+      line-height: normal;
+      left: 0;
+      background-color: black;
+      border: 1px solid grey;
+      text-align: center;
+      font-size: 13px;
+      color: #eee;
+      z-index: 20;
+    }
+
+    .box .box-header-input {
+      position: absolute;
+      top: -20px;
+      left: 0px;
+      height: 20px;
+      line-height: 20px;
+      padding-left: 8px;
+      max-width: 100px;
+      z-index: 10;
+    }
+
+    .box .size-box {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background-color: blueviolet;
+      color: white;
+      height: 20px;
+      width: 30px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+    .box .move-box {
+      position: absolute;
+      bottom: 0px;
+      right: 40px;
+      background-color: lightcoral;
+      color: white;
+      height: 20px;
+      width: 40px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    .container {
+      margin: auto auto;
+      width: 80%;
+      height: 80%;
+      border: 1px solid grey;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" @mousemove='mouseMove' @mouseup='mouseUp'>
+    <div class='container'>
+      <box v-for='(b , b_key) in boxes' @movehandle='moveHandle' @sizehandle='sizeHandle' @editboxtitle='editBoxTitle' :boxid='b_key'
+        :title='b.title' :currenttop='b.currentTop' :currentleft='b.currentLeft' :width='b.width' :height='b.height' />
+    </div>
+  </div>
+</body>
+
+<script src='../../../vendor/vue2.3.2.js'></script>
+<script>
+  Vue.component('box', {
+    props: ['currenttop', 'currentleft', 'boxid', 'title', 'width', 'height'],
+    data() {
+      return {
+        currentTitle: '',
+        isEditHeader: false
+      }
+    },
+    template: `
+      <div class='box box1' :style='{
+          top: currenttop + "px",
+          left: currentleft + "px",
+          width: width + "px",
+          height: height + "px"
+        }'>
+
+        <div class='box-header' @dblclick="toggleEditTitle" v-if='!isEditHeader'>
+          {{title}}
+        </div>
+      
+        <input type='text' ref="titleInput" v-model='currentTitle'  class='box-header-input' @blur='titleEditBlur'  v-if='isEditHeader' />
+       
+        <div class='size-box' @mousedown.prevent.stop='sizehandle'>size</div>
+        <div class='move-box' @mousedown.prevent.stop='movehandle'>move</div>
+        
+      </div>
+    `,
+    created() {
+      this.currentTitle = this.title;
+    },
+
+    methods: {
+      toggleEditTitle() {
+        this.isEditHeader = true;
+        this.$nextTick(function () {
+          this.$refs.titleInput.focus();
+        })
+      },
+
+      titleEditBlur(e) {
+        this.isEditHeader = false;
+        this.$emit('editboxtitle', {
+          title: this.currentTitle,
+          boxid: this.boxid
+        });
+      },
+
+      movehandle(e) {
+        this.$emit('movehandle', {
+          boxid: this.boxid,
+          e
+        });
+      },
+
+      sizehandle(e) {
+        this.$emit('sizehandle', {
+          boxid: this.boxid,
+          e
+        });
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello World',
+      moveFlag: false,
+      sizeFlag: false,
+      startTop: 0,
+      startLeft: 0,
+      originTop: 0,
+      originLeft: 0,
+      originWidth: 0,
+      originHeight: 0,
+      currentBoxId: null,
+      boxes: {
+        "1": {
+          currentLeft: 0,
+          currentTop: 0,
+          title: 'box-1',
+          width: 100,
+          height: 100
+        }
+      }
+
+    },
+    methods: {
+      moveHandle({
+        e,
+        boxid
+      }) {
+        this.moveFlag = true;
+        this.currentBoxId = boxid;
+        this.startTop = e.clientY;
+        this.startLeft = e.clientX;
+        this.originTop = this.boxes[boxid].currentTop;
+        this.originLeft = this.boxes[boxid].currentLeft;
+      },
+
+      sizeHandle({
+        e,
+        boxid
+      }) {
+        this.sizeFlag = true;
+        this.currentBoxId = boxid;
+        this.startTop = e.clientY;
+        this.startLeft = e.clientX;
+        this.originWidth = this.boxes[boxid].width;
+        this.originHeight = this.boxes[boxid].height;
+      },
+
+      editBoxTitle({
+        title,
+        boxid
+      }) {
+        this.boxes[boxid].title = title;
+      },
+
+      mouseUp() {
+        this.moveFlag = false;
+        this.sizeFlag = false;
+      },
+
+      mouseMove(e) {
+
+        if (this.moveFlag) {
+          this.boxes[this.currentBoxId].currentTop = this.originTop + e.clientY - this.startTop;
+          this.boxes[this.currentBoxId].currentLeft = this.originLeft + e.clientX - this.startLeft;
+        }
+
+        if (this.sizeFlag) {
+          this.boxes[this.currentBoxId].width = this.originWidth + e.clientX - this.startLeft;
+          this.boxes[this.currentBoxId].height = this.originHeight + e.clientY - this.startTop;
+        }
+
+      },
+    }
+  })
+</script>
+
+</html>
