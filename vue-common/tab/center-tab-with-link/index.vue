@@ -102,7 +102,8 @@ $numHeight: 40;
 
 .tab__section_title {
   height:#{$rowHeight}px;
-  line-height:#{$rowHeight}px;
+  display:flex;
+  align-items:center;
   position:relative;
   z-index:10;
   padding-right: 10px;
