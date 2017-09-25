@@ -26,8 +26,8 @@ export default {
     created: function() {
         let content = "     div.container.d-flex.box__3wrapper:title='Name':value";
         this.classRegex = /\.([\w-]*)/g;
-        this.tagRegex = /^([\s\t]*)([\w]+)/;
-        this.cssRegex = /\.([\w-]*):([\w-:=\d]*)/g;
+        this.tagRegex = /^([\s\t]*)([\w-]+)/;
+        this.cssRegex = /\.([\w-]*):([\w-:=%\d]*)/g;
         //var classRes = content.match(this.classRegex);
         //var tagRes = content.match( this.tagRegex);          
     },
