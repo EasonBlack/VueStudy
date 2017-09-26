@@ -68,16 +68,24 @@ body {
   width: 30px;
 }
 
-.move-box {
-  right: 40px;
-  background-color: lightcoral;
-  width: 40px;
-}
-
 .insert-box {
   left: 0px;
   background-color: lawngreen;
   width: 40px;
+}
+.delete-box {
+  right:0;
+  top:0;
+  background-color: red;
+  color:white;
+  width:30px;
+}
+
+.style-box {
+  right: 50px;
+  bottom:0;
+  background-color: lightcoral;
+  width:40px;
 }
 
 .container {

@@ -11,6 +11,20 @@ function getTheBox(id, boxes) {
     return res;
 }
 
+function getParentBox(id, boxes) {
+    let len = id.split('.').length;
+    let res = new Array(len).fill().reduce((b, blank, i) => {
+        let _ids = id.toString().split('.').slice();
+        let _i = _ids.splice(0, i + 1).join('.')
+        let _b = b[_i] || b.boxes[_i]
+        if(i==len-1) {
+            _b = b
+        }
+        return _b
+    }, boxes)
+    return res;
+}
+
 
 const state = {
     moveFlag: false,
@@ -25,7 +39,7 @@ const state = {
     triggerFlag: 0,
     boxes: {
         "1": {
-            currentLeft: 0,
+            currentLeft: 20,
             currentTop: 100,
             title: 'box-1',
             width: 400,
@@ -63,15 +77,22 @@ const mutations = {
                 _b.boxes[_i + "." + newId] = {
                     id: _i + "." + newId,
                     title: 'box',
-                    width: 100,
+                    width: 150,
                     height: 100,
                     currentTop: 20,
-                    currentLeft: 0
+                    currentLeft: 20
                 }
             }
 
             return _b
         }, state.boxes)
+    },
+
+    deleteHandle(state, {boxid}){
+        let _box = getParentBox(boxid, state.boxes);
+        delete _box.boxes[boxid];
+        console.log(state.boxes);
+        state.triggerFlag+=1;
     },
 
     moveHandle(state, { e, boxid }){
@@ -94,7 +115,7 @@ const mutations = {
         let _box = getTheBox(state.currentBoxId, state.boxes);
         state.originWidth = _box.width;
         state.originHeight = _box.height;
-        state.triggeFlag = 0;        
+        state.triggerFlag = 0;        
     },
 
     mouseUp(state) {
