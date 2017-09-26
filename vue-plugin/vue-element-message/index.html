@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Demo</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="dist/build.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <style>
+    .el-message-box__header {
+      background-color: steelblue;
+      color: white;
+      padding: 10px 20px !important;
+      display:flex;
+      align-items:center;
+    }
+    .el-message-box__title {
+      color:white !important;
+    }
+    .el-message-box__headerbtn {
+      position:relative !important;
+      margin-left: auto;
+      top: unset !important;
+      right: unset !important;
+    }
+    .el-message-box__headerbtn .el-message-box__close  {
+      color:white !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="dist/build.js"></script>
+</body>
+
 </html>
