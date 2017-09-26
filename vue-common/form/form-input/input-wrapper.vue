@@ -1,5 +1,7 @@
 <template>
-  <div class='input__wrapper' :style='{margin: "0 "+ marginauto}'>
+  <div class='input__wrapper' :style='{margin: "0 "+ marginauto}'
+   
+  >
     <label class='input__title'
       :class='{
         single : !isMulti,
@@ -8,7 +10,11 @@
     >
       {{title}}
     </label>
-    <div class='input__content'>
+    <div class='input__content'  
+      :class='{
+        flex: !isMulti
+      }'
+    >
       <slot></slot>
     </div>
   </div>
@@ -24,11 +30,10 @@ export default {
 </script>
 <style scoped lang='scss'>
 .input__wrapper {
-  display: flex;
   width: 100%;
   padding: 5px;
-
   position: relative;
+  display:flex;
 }
 
 .input__title {
@@ -40,6 +45,7 @@ export default {
   justify-content: flex-end;
   &.single {
     align-items: center;
+    
   }
   &.multi {
     padding-top:17px;
@@ -49,5 +55,9 @@ export default {
 .input__content {
   height: 100%;
   flex: 1;
+  position:relative;
+  &.flex {
+    display:flex;
+  }
 }
 </style>

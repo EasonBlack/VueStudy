@@ -22,6 +22,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding:10px 0;
+  width:100%;
 }
 
 input {

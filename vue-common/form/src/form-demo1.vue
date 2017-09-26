@@ -17,6 +17,26 @@
         </form-input-wrapper>     
     </div>
     <div class='form__row'>
+      <form-input-wrapper :title='"Date"'>
+        <grid-col :colspan='11'>
+          <form-input-has-validation   :validator='""' v-model="newUser.startDate" :inputName='"start date"'/>    
+        </grid-col>
+        <grid-col :colspan='2' class='line'>-</grid-col>
+        <grid-col :colspan='11'>
+          <form-input-has-validation  :validator='""' v-model="newUser.endDate" :inputName='"end date"'/>    
+        </grid-col>  
+      </form-input-wrapper>
+    </div>
+    <div class='form__row'>
+      <grid-col :offleft='2' :colspan='14'>
+        this question is very very long, a label couldn't hold it 
+      </grid-col>
+      <grid-col :colspan='6'>
+        <input type=checkbox />
+        <input type=checkbox />
+      </grid-col>
+    </div>
+    <div class='form__row'>
       <form-input-wrapper>
          <button @click='confirm'>Confirm</button>
       </form-input-wrapper>
@@ -26,10 +46,10 @@
 <script>
   import formInputWrapper from '../form-input/input-wrapper.vue';
   import formInputHasValidation from '../form-input/input-has-validation.vue';
-
+  import gridCol from '../grid/grid-col.vue';
   export default {
     //$validates: true,
-    components: {formInputWrapper, formInputHasValidation},
+    components: {formInputWrapper, formInputHasValidation,gridCol},
     data() {
       return {
         newUser: {
@@ -63,5 +83,11 @@
   }
   .m-h-p20 {
     margin: 0 20%;
+  }
+  .line {
+    position:relative;  
+    display:flex;
+    justify-content:center;
+    align-items: center;
   }
 </style>
