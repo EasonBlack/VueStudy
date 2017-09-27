@@ -82,6 +82,7 @@ export default {
         boxid: this.boxid
       })
     },
+
     addInside() {
       this.$store.commit('addInside', {
         id: this.boxid
@@ -90,7 +91,9 @@ export default {
     },
 
     styleModal() {
-      console.log(123);
+      this.$store.commit('setCurrentBoxId', {
+        boxid: this.boxid
+      })
     }
   },
   computed: {

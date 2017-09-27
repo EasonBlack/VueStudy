@@ -1,29 +1,7 @@
+import {getTheBox, getParentBox} from './box_fun'
+import mutations_act from './box_mutations_act'
 
 
-function getTheBox(id, boxes) {
-    let len = id.split('.').length;
-    let res = new Array(len).fill().reduce((b, blank, i) => {
-        let _ids = id.toString().split('.').slice();
-        let _i = _ids.splice(0, i + 1).join('.')
-        let _b = b[_i] || b.boxes[_i]
-        return _b
-    }, boxes)
-    return res;
-}
-
-function getParentBox(id, boxes) {
-    let len = id.split('.').length;
-    let res = new Array(len).fill().reduce((b, blank, i) => {
-        let _ids = id.toString().split('.').slice();
-        let _i = _ids.splice(0, i + 1).join('.')
-        let _b = b[_i] || b.boxes[_i]
-        if(i==len-1) {
-            _b = b
-        }
-        return _b
-    }, boxes)
-    return res;
-}
 
 
 const state = {
@@ -36,7 +14,9 @@ const state = {
     originWidth: 0,
     originHeight: 0,
     currentBoxId: null,
+    currentBoxSugar: null,
     triggerFlag: 0,
+    styleModalDisplay: false,
     boxes: {
         "1": {
             currentLeft: 20,
@@ -63,6 +43,18 @@ const mutations = {
         _box.title = title;
     },
 
+    setCurrentBoxId(state, {boxid}) {
+        state.currentBoxId = boxid;
+        let _box = getTheBox(boxid, state.boxes);
+        state.currentBoxSugar = _box.sugar;
+        state.styleModalDisplay = true;
+    },
+    setCurrentBoxNull(state) {
+        state.currentBoxId = null;
+        state.currentBoxSugar = null;
+        state.styleModalDisplay = false;
+    },
+
     addInside(state, {id}) {
         let newId = Date.now();
         let len = id.toString().split('.').length;
@@ -83,7 +75,6 @@ const mutations = {
                     currentLeft: 20
                 }
             }
-
             return _b
         }, state.boxes)
     },
@@ -94,63 +85,19 @@ const mutations = {
         console.log(state.boxes);
         state.triggerFlag+=1;
     },
-
-    moveHandle(state, { e, boxid }){
-        state.moveFlag = true;
-        state.currentBoxId = boxid;
-
-        state.startTop = e.clientY;
-        state.startLeft = e.clientX;
-        let _box = getTheBox(state.currentBoxId, state.boxes);
-        state.originTop = _box.currentTop;
-        state.originLeft = _box.currentLeft;
-        state.triggerFlag = 0;
-    },
-
-    sizeHandle(state, { e, boxid }){
-        state.sizeFlag = true;
-        state.currentBoxId = boxid;
-        state.startTop = e.clientY;
-        state.startLeft = e.clientX;
-        let _box = getTheBox(state.currentBoxId, state.boxes);
-        state.originWidth = _box.width;
-        state.originHeight = _box.height;
-        state.triggerFlag = 0;        
-    },
-
-    mouseUp(state) {
-        state.moveFlag = false;
-        state.sizeFlag = false;
-    },
-
-    mouseMove(state, {e}){
-        
-        if (!state.moveFlag && !state.sizeFlag) {
-            return false;
-        }
-
-        let _box = getTheBox(state.currentBoxId, state.boxes);
-
-        if (state.moveFlag) {
-            _box.currentTop = state.originTop + e.clientY - state.startTop;
-            _box.currentLeft = state.originLeft + e.clientX - state.startLeft;
-        }
-
-        if (state.sizeFlag) {
-            _box.width = state.originWidth + e.clientX - state.startLeft;
-            _box.height = state.originHeight + e.clientY - state.startTop;
-        }
-        state.triggerFlag+=1;
+    
+    saveBoxContent(state, {html, css, boxid, sugar}){
+        let _box = getTheBox(boxid, state.boxes);
+        _box.html = html;
+        _box.css = css;
+        _box.sugar = sugar;
     }
     
 }
 
-const actions = {
-}
 
 
 export default {
     state,
-    mutations,
-    actions
+    mutations : Object.assign({}, mutations,mutations_act)
 }
