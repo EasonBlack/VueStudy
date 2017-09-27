@@ -15,9 +15,6 @@
     <script src="/build/jquery.min.js"></script>
     <script>
       $('#btnSetup').click(()=>{
-        // $.post('/setup', {username: {a:1,b:2}}).then((res)=>{
-        //   console.log(res);
-        // })
         $.ajax({
             url: "/setup",
             dataType: "json",
