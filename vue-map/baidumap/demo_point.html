@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        #bdmap {
+            height: 300px;
+            width: 100%;
+        }
+        /*.anchorBL{*/
+        /*display:none;*/
+        /*}*/
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6QkMdfO2FR1k3qiceZxbWnG9"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="bdmap"></div>
+        <div>
+            <input v-model='lat' />
+            <input v-model='lon' />
+            <button @click='confirm'>Confirm</button>
+        </div>
+    </div>
+</body>
+<script src="../../vendor/vue2.3.2.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            lat: '116.4035',  //118.060576,36.842432
+            lon: '39.915',
+            map: null,
+            myCircle: null,
+            marker: null
+        },
+        methods: {
+            confirm() {
+                this.getPoint();
+            }
+        },
+        mounted() {
+            this.getPoint = () => {
+                this.map = this.map ||  new BMap.Map("bdmap");
+                this.myCircle && this.map.removeOverlay(this.myCircle)
+                this.marker && this.map.removeOverlay(this.marker)
+                var point = new BMap.Point(this.lat, this.lon);
+                this.map.centerAndZoom(point, 16);
+                this.marker = new BMap.Marker(point); // 创建标注
+                this.map.addOverlay(this.marker);
+                this.myCircle = new BMap.Circle(this.map.getCenter(), 300, {
+                    strokeColor: "blue",
+                    strokeWeight: 2,
+                    fillColor: "#E2E8F1",
+                    fillOpacity: 0.6
+                });
+                this.map.addOverlay(this.myCircle);
+                this.map.disableDragging(); //禁止拖动
+            }
+            this.getPoint();
+
+        }
+    })
+</script>
+
+</html>
