@@ -3,29 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Demo</title>
-    <link href = "/style/main.css"   rel='stylesheet' />
+    <link href = "/styles/main.css"   rel='stylesheet' />
 
   </head>
   <body>
     <div id="app"></div>
-    <div style='position:fixed;z-index:9999;top:0;left:0'>
-      <button id='btnSetup'>Setup</button>
-    </div>
-    <script src="/build/build.js"></script>
-    <script src="/build/jquery.min.js"></script>
-    <script>
-      $('#btnSetup').click(()=>{
-        $.ajax({
-            url: "/setup",
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            type: "POST",
-            data: JSON.stringify({a:1,b:2}),
-            success: function (msg) {
-                console.log(msg)
-            }
-        });
-      })
-    </script>
+    <script src="/dist/build.js"></script>
   </body>
 </html>

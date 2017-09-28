@@ -1,7 +1,5 @@
 <template>
-<div class='row'>
-	<span class='title'>
-	</span> 
+<div class='container'>
 </div> 
 </template> 
 
@@ -12,8 +10,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.row{ 
-	width : 100%; 
-} 
 </style> 
 

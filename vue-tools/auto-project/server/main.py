@@ -2,10 +2,11 @@ from flask import Flask, render_template, send_file, send_from_directory, reques
 from flask_cors import CORS, cross_origin
 import json
 import os
+import shutil
 
 app = Flask(__name__,
             static_url_path='', 
-            static_folder='static',
+            static_folder='../client',
             template_folder='templates')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -54,6 +55,7 @@ def hello():
 @app.route('/setup', methods=['POST'])
 @cross_origin()
 def setup():
+    shutil.rmtree('dist')
     request_json = request.get_json()
     for key in request_json:
         if not os.path.exists('dist/' + request_json[key]['title']):

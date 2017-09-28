@@ -1,21 +1,18 @@
 <template>
 <div class='container'>
-	<myDiv class=''>
-	</myDiv> 
+	<simple class=''>
+	</simple> 
 </div> 
 </template> 
 
 <script>
-import myDiv from './myDiv.vue' 
+import simple from './simple.vue' 
 
 export default { 
-	components: { myDiv},
+	components: { simple},
 }
 </script>
 
 <style lang='scss' scoped>
-.container{ 
-	width : 100px; 
-} 
 </style> 
 
