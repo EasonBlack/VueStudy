@@ -12,6 +12,7 @@
       </div>
       <div class='display__container'>
         <div class='display__html'>{{inputTags}}</div>
+        <div class='display__script'>{{inputScript}}</div>
         <div class='display__css'>{{inputClass}}</div>
       </div>
     </div>
@@ -22,8 +23,9 @@
   import { mapState } from 'vuex';
   import tagMixin from '../mixin/tag'
   import cssMixin from '../mixin/class'
+  import scriptMixin from '../mixin/script'
   export default {
-    mixins:[tagMixin, cssMixin],
+    mixins:[tagMixin, cssMixin, scriptMixin],
     data() {
       return {
         inputOrigin: ''
@@ -55,6 +57,7 @@
         this.$store.commit('saveBoxContent', {
           html: this.inputTags,
           css: this.inputClass,
+          script: this.inputScript,
           sugar: this.inputOrigin,
           boxid: this.boxid
         });
@@ -137,6 +140,14 @@
   border-right: 1px solid grey;
    white-space: pre-wrap;
    overflow:auto;
+}
+
+.display__script {
+  flex: 1;
+  height: 100%;
+  border-right: 1px solid grey;
+  white-space: pre-wrap;
+  overflow:auto;
 }
 
 .display__css {

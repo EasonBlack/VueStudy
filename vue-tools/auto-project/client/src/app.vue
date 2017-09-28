@@ -3,6 +3,7 @@
 		<box v-for='(b , b_key) in boxes' :key='b_key' :boxid='b_key' :b='b' 
 		/>
 		<style-modal v-if='styleModalDisplay' />
+		<button @click='setup'>Setup</button>
 	</div>
 	
 </template>
@@ -25,6 +26,10 @@ export default {
 
 		mouseMove(e) {
 			this.$store.commit('mouseMove',{e});
+		},
+
+		setup() {
+			this.$store.dispatch('setup');
 		}
 		
 	},
@@ -37,3 +42,14 @@ export default {
 }
 </script>
 
+<style lang='scss' scoped>
+	button {
+		position:fixed;
+		bottom:20px;
+		right:20px;
+		width:100px;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+	}
+</style>

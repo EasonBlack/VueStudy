@@ -1,6 +1,6 @@
 import {getTheBox, getParentBox} from './box_fun'
 import mutations_act from './box_mutations_act'
-
+import axios from 'axios'
 
 
 
@@ -86,18 +86,30 @@ const mutations = {
         state.triggerFlag+=1;
     },
     
-    saveBoxContent(state, {html, css, boxid, sugar}){
+    saveBoxContent(state, {html, css, script, boxid, sugar}){
         let _box = getTheBox(boxid, state.boxes);
         _box.html = html;
         _box.css = css;
+        _box.script = script;
         _box.sugar = sugar;
     }
     
 }
 
+const actions = {
+    setup({state}) {
+        let URL = 'http://localhost:90/setup';
+        axios.post(URL, state.boxes)
+        .then(res=>{
+            console.log(res);
+        })
+    }
+    
+}
 
 
 export default {
     state,
-    mutations : Object.assign({}, mutations,mutations_act)
+    mutations : Object.assign({}, mutations,mutations_act),
+    actions
 }
