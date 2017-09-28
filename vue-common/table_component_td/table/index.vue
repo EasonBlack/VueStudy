@@ -19,6 +19,7 @@
                        <col-image v-if='col.options.coltype=="image"' :image='row[col.id]' :desc='row["desc"]' :size='col.options.size'></col-image>
                        <col-enable-circle v-else-if='col.options.coltype=="enable-circle"' :value='row[col.id]' ></col-enable-circle>
                        <col-values-map-color v-else-if='col.options.coltype=="values-map-color"' :value='row[col.id]' :map='col.options.map'></col-values-map-color>
+                       <col-desc v-else-if='col.options.coltype="with-desc"' :value='row[col.id]' :desc='row[col.options.desc]' />
                        <col-link-route v-else-if='col.options.coltype=="link-route"'
                             :value='row[col.id]'
                             :routeName='col.options.routeName'
@@ -42,8 +43,9 @@
     import colValuesMapColor from './col/values_map_color.vue';
     import colImage from './col/image_col.vue';
     import colLinkRoute from './col/col_link_route.vue'
+    import colDesc from './col/col_desc.vue'
     export default{
-        components: {colEnableCircle, colValuesMapColor, colImage, colLinkRoute},
+        components: {colEnableCircle, colValuesMapColor, colImage, colLinkRoute, colDesc},
         props: ['columns', 'rows', 'config', 'pager', 'noPager'],
         data(){
             return{
