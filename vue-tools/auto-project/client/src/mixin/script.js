@@ -2,7 +2,7 @@ let mixin = {
   computed: {
     inputScript: function () {
       if (!this.inputOrigin) return false;
-      let reserveList = ["div", "span"];
+      let reserveList = ["div", "span", "ul", "li"];
       let lines = this.inputOrigin.split('\n');
       let tags = [];
 
