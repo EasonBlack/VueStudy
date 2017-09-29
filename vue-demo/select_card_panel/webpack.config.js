@@ -8,42 +8,34 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       },
       {
         test: /\.html$/,
-        loader: 'vue-html'
+        loader: 'vue-html-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
         }
       }
     ]
-  },
-  vue: {
-    loaders: {
-      scss: 'style!css!sass'
-    }
   },
   resolve: {
     alias: {

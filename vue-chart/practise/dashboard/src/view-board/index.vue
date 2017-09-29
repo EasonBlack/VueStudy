@@ -46,7 +46,7 @@
         data(){
             return{
                 newPanelActive:false,
-                charts: [],
+                
                 closeImg: closeImg
             }
         },
