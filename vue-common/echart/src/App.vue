@@ -12,6 +12,9 @@
         <div class='chart__container'>
              <china-map-demo></china-map-demo>
          </div>
+         <div class='chart__container'>
+             <pie-demo/>
+        </div>
 	</div>
 
 </template>
@@ -22,8 +25,9 @@
     import barDemo1 from '../bar-demo-1/index.vue';
     import areaDemo1 from '../area-demo-1/index.vue';
     import chinaMapDemo from '../china-map-demo/index.vue';
+    import pieDemo from '../pie-demo/index.vue';
 	export default {
-	    components: {barSimple, barDemo1, areaDemo1, chinaMapDemo},
+	    components: {barSimple, barDemo1, areaDemo1, chinaMapDemo, pieDemo},
 		data() {
 			return {
 
@@ -51,13 +55,15 @@
         background-color:#EFEFEF;
         position:relative;
         display:flex;
-        overflow:hidden;
+        overflow:auto;
+        flex-wrap: wrap;
     }
 
     .chart__container {
         width:400px;
         height:400px;
         display:flex;
+    
     }
 
 </style>

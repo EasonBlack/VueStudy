@@ -3,6 +3,9 @@
        <div class='chart__container'>
             <bar-simple></bar-simple>
        </div>
+       <div class='chart__container'>
+            <circle-simple></circle-simple>
+       </div>
 	</div>
 
 </template>
@@ -10,8 +13,9 @@
 <script>
 
     import barSimple from '../bar-simple/index.vue';
+    import circleSimple from '../circle-simple/index.vue';
 	export default {
-	    components: {barSimple},
+	    components: {barSimple, circleSimple},
 		data() {
 			return {
 
@@ -39,7 +43,8 @@
         background-color:#EFEFEF;
         position:relative;
         display:flex;
-        overflow:hidden;
+        overflow:auto;
+        flex-wrap: wrap;
     }
 
     .chart__container {
