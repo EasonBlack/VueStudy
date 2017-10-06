@@ -50,13 +50,15 @@ module.exports = {
       'vue$': 'vue/dist/vue',
       'common': path.resolve(__dirname, '../../vue-common'),
       '$style': path.resolve(__dirname, '../../style'),
-      '$color': path.resolve(__dirname, './commonstyle')
+      '$color': path.resolve(__dirname, './commonstyle'),
+      '$common': path.resolve(__dirname, './src/common')
 
     }
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    inline: false
   },
   devtool: '#eval-source-map'
 }

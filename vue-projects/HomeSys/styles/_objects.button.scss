@@ -5,6 +5,8 @@
   line-height:30px;
   text-align: center;
   padding: 0 10px;
+  color:white;
+  font-size:0.9em;
 }
 
 .btn__full_width {
@@ -12,19 +14,18 @@
 }
 .btn__add {
   background-color:steelblue;
-  color:white;
-  font-size:0.9em;
+}
+
+.btn__delete {
+  background-color: #B4301E;
 }
 
 
 .btn__cancel {
-  background-color:#B4301E;
-  color:white;
-  font-size:0.9em;
+  background-color:#eee;
+  color:black;
 }
 
 .btn__save {
   background-color:#B44991;
-  color:white;
-  font-size:0.9em;
 }

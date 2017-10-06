@@ -199,6 +199,28 @@ module.exports = function (client) {
                 fetchDaily
             ])
         },
+
+        deleteDaily: function(req,res) {
+            let id = req.params.id;
+            async.waterfall([
+                function(next) {
+                    let deleteDailyText = `delete from home.event_daily where id=${id}`;
+                    console.log(deleteDailyText)
+                    client.query({
+                        text: deleteDailyText
+                    }, function (error) {
+                        if(error) {
+                            console.log(error);
+                            return;
+                        }
+                        next(null, req, res);
+                    })
+
+                },
+                fetchDaily
+            ])
+        },
+
         fetchStoryItem: function(req,res) {
             client.query({
                 text: `select * from home.story_item`

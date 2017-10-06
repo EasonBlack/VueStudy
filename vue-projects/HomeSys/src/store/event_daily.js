@@ -44,6 +44,11 @@ const actions = {
         Vue.http.put(Config.API_ROOT + '/api/home/putDaily/'+ req.id, req).then((response) => {
             commit('fetchDaily', response.body.data)
         })
+    },
+    deleteDaily({commit, state},req) {
+        Vue.http.delete(Config.API_ROOT + '/api/home/deleteDaily/'+ req.id, req).then((response) => {
+            commit('fetchDaily', response.body.data)
+        })
     }
 
 }

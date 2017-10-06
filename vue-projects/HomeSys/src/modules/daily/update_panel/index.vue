@@ -15,19 +15,23 @@
         <div class='panel__row'>
             <a class='btn  btn__add ' @click='updateHandle'>Update</a>
             <a class='btn  btn__cancel' @click='cancelHandle'>Cancel</a>
+            <a class='btn  btn__delete' @click='deleteHandle'>Delete</a>
         </div>
+        <confirm-box :message='"确定要删除吗?"' @boxConfirm='boxConfirm' @boxCancel='boxCancel' v-if='showConfirm'/>
     </div>
 </template>
 
 <script>
-
+    import confirmBox from '$common/confirm-box/confirm-box.vue';
     export default{
+        components: {confirmBox},
         props: ['item'],
         data(){
             return{
                 dailyTime: 0,
                 dailyTrophy: 0,
-                dailyComment: ''
+                dailyComment: '',
+                showConfirm: false
             }
         },
         watch: {
@@ -49,6 +53,16 @@
             },
             cancelHandle: function() {
                 this.$emit('updateCancel')
+            },
+            deleteHandle:function() {
+                this.showConfirm = true;
+            },
+            boxConfirm() {
+                this.$emit('deleteHandle', this.item.id);
+                this.showConfirm = false;
+            },
+            boxCancel() {
+                this.showConfirm = false;
             }
         },
         mounted: function() {
@@ -66,7 +80,8 @@
         position:absolute;
         top: 230px;
         left: 190px;
-        width:100%;
+        width: 210px;
+        background-color: white;
         border:2px solid steelblue;
         padding:20px 5px;
         z-index:10;

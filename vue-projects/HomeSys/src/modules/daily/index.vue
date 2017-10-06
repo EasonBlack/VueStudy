@@ -8,7 +8,8 @@
              <div class='daily-left__container'>
                  <add-panel @clickHandle='dailySave'></add-panel>
                  <daily-list :items='dailyItems' v-if='dailyItems && dailyItems.length' @showUpdateHandle='showUpdateHandle'></daily-list>
-                 <update-panel v-if='showUpdate' :item='currentItem' @updateCancel='updateCancel' @updateHandle='updateHandle'></update-panel>
+                 <update-panel v-if='showUpdate' :item='currentItem'
+                 @updateCancel='updateCancel' @updateHandle='updateHandle' @deleteHandle='deleteHandle'></update-panel>
              </div>
              <div class='daily-right__container'>
                 <div class='event-list__section'>
@@ -81,6 +82,10 @@
             },
             updateHandle: function(item) {
                 this.$store.dispatch('putDaily', item);
+                this.showUpdate = false;
+            },
+            deleteHandle: function(id) {
+                this.$store.dispatch('deleteDaily', {id:id});
                 this.showUpdate = false;
             }
         },

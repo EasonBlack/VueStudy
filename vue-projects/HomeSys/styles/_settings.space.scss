@@ -1,0 +1,19 @@
+$spacers: (10,20,30,40,50);
+@each $prop, $abbrev in (margin: m, padding: p) {
+  @each $size in $spacers {
+
+    .#{$abbrev}-#{$size}  { #{$prop}:       #{$size}px !important; }
+    .#{$abbrev}t-#{$size} { #{$prop}-top:    #{$size}px !important; }
+    .#{$abbrev}r-#{$size} { #{$prop}-right:  #{$size}px !important; }
+    .#{$abbrev}b-#{$size} { #{$prop}-bottom: #{$size}px !important; }
+    .#{$abbrev}l-#{$size} { #{$prop}-left:   #{$size}px !important; }
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-right: #{$size}px !important;
+      #{$prop}-left:  #{$size}px !important;
+    }
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-top:    #{$size}px !important;
+      #{$prop}-bottom: #{$size}px !important;
+    }
+  }
+}
