@@ -17,7 +17,9 @@
                             col.options.width
                          ]'
                    >
-                       <col-image v-if='col.options.coltype=="image"' :image='row[col.id]' :desc='row["desc"]' :size='col.options.size'></col-image>
+                       <col-image v-if='col.options.coltype=="image"' :image='row[col.id]' :desc='row["desc"]' :size='col.options.size'
+                        @popup='imagePopup'
+                       ></col-image>
                        <col-enable-circle v-else-if='col.options.coltype=="enable-circle"' :value='row[col.id]' ></col-enable-circle>
                        <col-values-map-color v-else-if='col.options.coltype=="values-map-color"' :value='row[col.id]' :map='col.options.map'></col-values-map-color>
                        <col-desc v-else-if='col.options.coltype=="with-desc"' :value='row[col.id]' :desc='row[col.options.key]' />
@@ -35,7 +37,11 @@
             </template>
         </tbody>
     </table>
-
+    <div class='popup__mask' v-if='showPopup' @click.prevent.stop='imagePopup'>
+        <div class='image__popup'>
+            <img :src='currentImage'  />
+        </div>
+    </div>
     </div>
 
 </template>
@@ -52,7 +58,9 @@
         props: ['columns', 'rows', 'config', 'pager', 'noPager'],
         data(){
             return{
-                isCheckAll: false
+                isCheckAll: false,
+                showPopup: false,
+                currentImage: null
             }
         },
         methods: {
@@ -65,6 +73,12 @@
             },
             pageHandle(num) {
                 this.$emit('pageHandle',num);
+            },
+            imagePopup(obj) {
+                if(obj) {
+                    this.currentImage = obj.image;
+                }
+                this.showPopup = !this.showPopup;
             }
 
         }
@@ -130,5 +144,17 @@
         width:200px;
         max-width: 200px;
         padding:0 10px;
+    }
+     .popup__mask {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        z-index:999;
+        background-color: rgba(black,0.3)
     }
 </style>
