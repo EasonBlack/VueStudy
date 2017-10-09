@@ -23,7 +23,18 @@
                 <input v-validate="'required|testvee'" :class="{ 'is-danger': isSubmit && errors.has('test') }" name="test" type="text" placeholder="test" >
                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('test') }">{{ errors.first('test') }}</span>
             </div>
-
+        </div>
+        <div class="row">
+            <div>
+                <input v-validate="'required|numeric'" :class="{ 'is-danger': isSubmit && errors.has('num1') }" name="num1" type="text" placeholder="number test" >
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('num1') }">{{ errors.first('num1') }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <input v-validate="'required|decimal'" :class="{ 'is-danger': isSubmit && errors.has('num2') }" name="num2" type="text" placeholder="decimal test" >
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('num2') }">{{ errors.first('num2') }}</span>
+            </div>
         </div>
         <div class="row">
              <button @click="submit">Submit</button>
