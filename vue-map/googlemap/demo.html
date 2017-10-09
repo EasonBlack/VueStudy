@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            position:relative;
+        }
+        body,html {
+            width:100%;
+            height:100%;
+        }
+        #ggmap {
+            height:300px;
+            width:100%;
+        }
+      
+    </style>
+    <script src="../../vendor/vue2.3.2.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmfgSQX7u5YQonGPYaziqSiSLhcSwqYkw"
+     ></script>
+</head>
+<body>
+    <div id="app">
+        <div id="ggmap"></div>
+        {{ message }}
+    </div>
+</body>
+
+<script>
+     var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        mounted() {
+            let  myLatLng = {lat: 39.915 , lng: 116.4035};
+            let map = new google.maps.Map(document.getElementById('ggmap'), {
+                center: myLatLng,
+                zoom: 16,
+                scrollwheel: false,
+                mapTypeControl: false,
+                zoomControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                scaleControl: false,
+                draggable: false
+            });
+
+            let marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!',
+            });
+
+            let cityCircle = new google.maps.Circle({
+                strokeColor: 'blue',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#E2E8F1',
+                fillOpacity: 0.35,
+                map: map,
+                center: myLatLng,
+                radius: 200
+            });
+        }
+    })
+</script>
+
+
+</html>
