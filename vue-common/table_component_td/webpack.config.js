@@ -20,6 +20,14 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader'
       },
@@ -28,18 +36,19 @@ module.exports = {
         loader: 'vue-html-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
         loader: 'url-loader',
         query: {
-          limit: 10000,
-          name: '[name].[ext]?[hash]'
+            limit: 10000,
+            name: '[name].[ext]?[hash]'
         }
-      }
+      },
     ]
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue'
+      'vue$': 'vue/dist/vue',
+      '$style': path.resolve(__dirname, '../../style'),
     }
   },
   devServer: {

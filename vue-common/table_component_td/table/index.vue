@@ -2,20 +2,23 @@
     <div class='table__container'>
     <table>
         <thead>
-            <th v-for='col in columns'
+            <th v-for='(col, $index) in columns'  :key='$index'
                :class='[
                    col.options.textAlign
                ]'
+               v-if='col.show'
             >{{col.title}}</th>
+            <span class='icon-cog' @click='columnsPopup'></span>
         </thead>
         <tbody>
             <template v-for='(row, index) in rows'>
                 <tr>
-                   <td v-for='col in columns'
+                   <td v-for='(col,$index) in columns'  :key='$index'
                         :class='[
                             col.options.textAlign,
                             col.options.width
                          ]'
+                        v-if='col.show'
                    >
                        <col-image v-if='col.options.coltype=="image"' :image='row[col.id]' :desc='row["desc"]' :size='col.options.size'
                         @popup='imagePopup'
@@ -42,6 +45,15 @@
             <img :src='currentImage'  />
         </div>
     </div>
+     <div class='columns__container' v-if='showColumns'>
+        <ul>
+            <li v-for='(col, $index) in columns' :key='$index'>
+                <input type='checkbox' v-model='col.show' />
+                <label>{{col.title}}</label>
+            </li> 
+        </ul>
+    </div>
+   
     </div>
 
 </template>
@@ -60,7 +72,9 @@
             return{
                 isCheckAll: false,
                 showPopup: false,
-                currentImage: null
+                currentImage: null,
+
+                showColumns: false
             }
         },
         methods: {
@@ -79,6 +93,9 @@
                     this.currentImage = obj.image;
                 }
                 this.showPopup = !this.showPopup;
+            },
+            columnsPopup() {
+                this.showColumns = !this.showColumns;
             }
 
         }
@@ -86,9 +103,12 @@
 </script>
 
 <style lang='scss' scoped>
+    @import './components.cog.scss';
+    @import './components.columns.scss';
 
     .table__container {
         background-color:white;
+        position:relative;
     }
     table {
         width:100%;

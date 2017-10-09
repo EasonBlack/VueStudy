@@ -1,0 +1,16 @@
+.icon-cog {
+  position:absolute;
+  right:10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  &:before {
+      cursor: pointer;
+  }
+  &:hover:before {
+      color: lighten(black, 70%);
+  }
+  &:active:before {
+      color: lighten(black, 10%);
+  }
+}

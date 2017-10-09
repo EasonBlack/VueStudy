@@ -30,3 +30,5 @@
 .icon-angle-double-left:before { content: '\f100'; }
 .icon-angle-double-right:before { content: '\f101'; }
 .icon-quora:before { content: '\f2c4'; }
+
+.icon-cog:before { content: '\e809'; } /*齿轮*/

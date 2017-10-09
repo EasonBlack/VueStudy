@@ -10,11 +10,16 @@ export default {
     data() {
         return {
             columns: [
-                { id: 'name', title: 'Name', options: { coltype: 'link-route', routeName: 'home_detail', keyName: 'name', paramName: 'id', textAlign: 'center' } },
-                { id: 'age', title: 'Age', options: { textAlign: 'right' } },
-                { id: 'image', title: 'Image', options: { coltype: 'image', size: '100px' } },
-                { id: 'rate', title: 'Rate', options: { coltype: 'with-desc', key: 'rate_desc' } },
-                { id: 'desc', title: 'Description', options: { coltype: 'with-limit-popup', width:'w-200' } },
+                { id: 'name', title: 'Name', show: true,
+                options: { coltype: 'link-route', routeName: 'home_detail', keyName: 'name', paramName: 'id', textAlign: 'center' } },
+                { id: 'age', title: 'Age',  show: true,
+                options: { textAlign: 'right' } },
+                { id: 'image', title: 'Image',  show: true,
+                options: { coltype: 'image', size: '100px' } },
+                { id: 'rate', title: 'Rate',  show: true,
+                options: { coltype: 'with-desc', key: 'rate_desc' } },
+                { id: 'desc', title: 'Description',  show: true,
+                options: { coltype: 'with-limit-popup', width:'w-200' } },
             ],
             rows: [
                 { name: 'AA', age: 12, image: 'src/img/320_50.png',  rate_desc: 'aaaa', rate: '10%', desc: 'aaa aaa aa a aa aaaaa aaaa aaa aaa aa a aa aaaaa aaaa' },

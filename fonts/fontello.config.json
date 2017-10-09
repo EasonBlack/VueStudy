@@ -83,6 +83,12 @@
       "css": "minus-squared",
       "code": 59400,
       "src": "entypo"
+    },
+    {
+      "uid": "e99461abfef3923546da8d745372c995",
+      "css": "cog",
+      "code": 59401,
+      "src": "fontawesome"
     }
   ]
 }

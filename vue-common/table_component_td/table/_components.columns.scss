@@ -1,0 +1,13 @@
+.columns__container {
+  position: absolute;
+  right: 20px;
+  top: 35px;
+  z-index: 200;
+  background-color: white;
+  width: 150px;
+  padding: 10px;
+  border: 1px solid;
+  ul {
+    list-style: none;
+  }
+}
