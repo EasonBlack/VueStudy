@@ -7,27 +7,35 @@ import 'flag'
 Vue.use(VueI18n)
 
 
+
 const locales = {
     cn : {
-        message: {
-            hello: 'こんにちは、世界 111'
+        info: "bbbb",
+        help: {
+            xxx: '22222222222'
         }           
     },
     us: {
-        message: {
-            hello: '123123123123'
+        info: "aaaa",
+        help: {
+            xxx: '11111111111'
         }   
     }
 }
 
 const i18n = new VueI18n({
     locale: 'cn', // set locale
-    messages: locales, // set locale messages
+    messages: locales
 })
 
 
 new Vue({
     el: '#app',
     i18n,
+    methods: {
+        setLan(lan) {
+            this.$i18n.locale = lan;
+        }
+    },
     render: h => h(App)
 })

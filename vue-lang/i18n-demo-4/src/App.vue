@@ -1,12 +1,12 @@
+
 <template>
 	<div  class='main__container'>
-        {{ $t("message.hello") }}
-  
-        
+        {{ $t("message") }}
+       
         <div class='panel__container'>
             <a @click='toggleLang'>Set</a>
             <ul v-if='showLanSet'>
-                <li v-for='lan in langs' @click='setLang(lan)'>
+                <li v-for='lan in langs' @click='setLang(lan.id)'>
                     <span class="flag-icon flag-icon-squared"
                     :class='["flag-icon-"+lan.id]'>
                     </span>
@@ -15,28 +15,44 @@
             </ul>
         </div>
 	</div>
-
 </template>
 
 <script>
     import Vue from 'vue'
+    import axios from 'axios'
 	export default {
 		data() {
 			return {
-                message: {hello: "xxxx"},
                 showLanSet: false,
                 langs: [
                     {id: 'us', title: 'American'},
                     {id: 'cn', title: 'Chinese'},
                 ]
 			}
-		},
+        },
+        created() {
+            this.setLang('cn');
+        },
 		methods: {
             toggleLang() {
-                this.showLanSet = !this.showLanSet;
+                this.showLanSet = !this.showLanSet
             },
-            setLang(lan) {          
-                this.$i18n.locale = lan.id;
+            setLang(lan) {  
+                if(Object.keys(this.$i18n.messages).indexOf(lan)!=-1){
+                     this.$i18n.locale = lan;
+                }  else {
+                    axios.get(`../data/${lan}.json`)
+                    .then(res=>{
+                        this.$i18n.setLocaleMessage(lan, res.data);
+                        this.$i18n.locale = lan;
+                        this.$forceUpdate()          
+                        console.log(this.$i18n.getLocaleMessage(lan))      
+                    
+                    })
+                }
+                 
+              
+                
             }
 		}
 	}

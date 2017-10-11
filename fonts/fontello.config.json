@@ -89,6 +89,12 @@
       "css": "cog",
       "code": 59401,
       "src": "fontawesome"
+    },
+    {
+      "uid": "2d6150442079cbda7df64522dc24f482",
+      "css": "down-dir",
+      "code": 59402,
+      "src": "fontawesome"
     }
   ]
 }

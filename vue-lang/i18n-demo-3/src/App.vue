@@ -1,8 +1,20 @@
+<i18n>
+{
+  "us": {
+    "hello": "hello world!"
+  },
+  "cn": {
+    "hello": "世界！"
+  }
+}
+</i18n>
+
 <template>
 	<div  class='main__container'>
-        {{ $t("message.hello") }}
-  
-        
+        {{ $t("hello") }}
+        {{ $t("help.xxx") }}
+        {{ $t("info") }}
+       
         <div class='panel__container'>
             <a @click='toggleLang'>Set</a>
             <ul v-if='showLanSet'>
@@ -23,20 +35,25 @@
 	export default {
 		data() {
 			return {
-                message: {hello: "xxxx"},
                 showLanSet: false,
                 langs: [
                     {id: 'us', title: 'American'},
                     {id: 'cn', title: 'Chinese'},
                 ]
 			}
-		},
+        },
+        created() {
+          console.log(this.$i18n);
+        },
 		methods: {
             toggleLang() {
-                this.showLanSet = !this.showLanSet;
+                this.showLanSet = !this.showLanSet
             },
-            setLang(lan) {          
-                this.$i18n.locale = lan.id;
+            setLang(lan) {  
+                this.$root.setLan(lan.id);        
+                // this.$i18n.locale = lan.id;
+                // this.$i18n._root.locale = lan.id;
+                // console.log(this.$i18n);
             }
 		}
 	}

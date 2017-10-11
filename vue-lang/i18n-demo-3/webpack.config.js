@@ -8,31 +8,41 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            i18n: '@kazupon/vue-i18n-loader'
+          }
+        }
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
+        test: /\.css/,
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.html$/,
-        loader: 'vue-html'
+        loader: 'vue-html-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
@@ -40,14 +50,10 @@ module.exports = {
       }
     ]
   },
-  vue: {
-    loaders: {
-      scss: 'style!css!sass'
-    }
-  },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue',
+      'flag$': path.resolve(__dirname, '../../node_modules/flag-icon-css/css/flag-icon.css'),
     }
   },
   devServer: {

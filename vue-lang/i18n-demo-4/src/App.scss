@@ -1,0 +1,41 @@
+.panel__container {
+  position:fixed;
+  right:0;
+  top:0;
+  width:100px;
+  
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: steelblue;
+    width:30px;
+    height:30px;
+    position:absolute;
+    right:5px;
+    border-radius:50%;
+    color:white;
+  }
+  ul {
+    list-style:none;
+    position:absolute;
+    top:30px;
+    right:0;
+    background-color:white;
+    border: 1px solid grey;
+    li {
+      display:flex;
+      align-items:center;
+      height:30px;
+      
+      width: 100px;
+
+      span {
+        width:20px !important;
+        height:20px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
