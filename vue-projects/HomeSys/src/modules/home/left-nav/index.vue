@@ -4,28 +4,31 @@
             <parent-item v-for='menu in menus'
                          :menu='menu'
                          @activeMenu='activeMenu'
-                         :activeName='activeName'></parent-item>
+                         :activeName='activeMenuName'></parent-item>
         </ul>
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex'
     import parentItem from './parent_item.vue';
     export default {
         props:['menus'],
         components: {parentItem},
         data() {
-            return {
-                activeName: 'calendar'
-            }
+            return {}
         },
         created: function() {
-            this.activeName = this.$route.name;
-            console.log(this.$route)
+            this.$store.commit('setActiveMenu', this.$route.name)
         },
         methods: {
             activeMenu:function(o) {
-                this.activeName = o;
+                this.$store.commit('setActiveMenu', o)
             }
+        },
+        computed: {
+            ...mapState({
+                activeMenuName : (state)=> state.menu.activeMenu
+            })
         }
 
     }

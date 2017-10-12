@@ -9,6 +9,7 @@ import eventType from './event_type';
 import eventItem from './event_item';
 import eventDaily from './event_daily';
 import storyPiece from './story_piece';
+import menu from './menu';
 
 export default new Vuex.Store({
     modules: {
@@ -17,6 +18,8 @@ export default new Vuex.Store({
         eventType,
         eventItem,
         eventDaily,
-        storyPiece
+        storyPiece,
+
+        menu
     }
 })

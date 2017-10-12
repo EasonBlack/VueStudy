@@ -1,6 +1,7 @@
 <template>
     <div class='date__container'>
         <div class='title__section'
+            @click='handleDailyClick'
              v-bind:class="{
                 notcurrent: !isCurrentMonth
              }"
@@ -29,6 +30,9 @@
         methods: {
             activeContent: function() {
                 this.active = !this.active;
+            },
+            handleDailyClick: function() {
+                this.$emit('daily-click', moment(this.dateMoment).format('YYYY-MM-DD'));
             }
         },
         computed: {

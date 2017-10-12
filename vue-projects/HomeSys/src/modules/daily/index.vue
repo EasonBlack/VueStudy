@@ -45,6 +45,10 @@
             }
         },
         created:function() {
+            if(this.$route.params.date) {
+                this.current = this.$route.params.date
+            }
+
             this.$store.dispatch('fetchEventItemsActive');
             this.$store.dispatch('fetchDaily', this.current);
 

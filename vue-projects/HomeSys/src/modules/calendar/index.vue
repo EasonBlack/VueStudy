@@ -16,7 +16,9 @@
         <example-calendar
                 :currentYear='currentYear'
                 :currentMonth='currentMonth'
-                :source='monthGroup'></example-calendar>
+                :source='monthGroup'
+                @daily-click='dailyClick'
+        ></example-calendar>
     </div>
 </template>
 
@@ -48,6 +50,10 @@
                  this.currentMonth = this.current.month();
                  this.currentYear = this.current.year();
              },
+             dailyClick: function(date) {
+                 this.$store.commit('setActiveMenu', 'daily')
+                 this.$router.push('/daily/'+ date);
+             }
          },
          computed: {
             ...mapState({
