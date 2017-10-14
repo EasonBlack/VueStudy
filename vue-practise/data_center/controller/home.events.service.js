@@ -89,6 +89,21 @@ module.exports = function (client) {
                 res.send(result.rows);
             })
         },
+        updateEventType: function(req,res){
+            console.log(123);
+            let eventId = req.params.id;
+            let updateEventTypeText = `update home.event_item set name='${req.body.name}' where id=${eventId}`
+            console.log(updateEventTypeText)
+            client.query({
+                text: updateEventTypeText
+            }, function (error, result) {
+                if(error) {
+                    console.log(error);
+                    return;
+                }
+                res.send(result);
+            })
+        },
         postEventItem: function(req, res){
             let eventName = req.body.name;
             let eventType = req.body.type;

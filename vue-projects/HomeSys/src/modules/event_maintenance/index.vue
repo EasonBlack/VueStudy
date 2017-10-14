@@ -6,13 +6,13 @@
         </div>
         <div class='item__container'  v-if='eventTypes && eventTypes.length'>
             <div class='col__container col1'>
-               <type-group v-for='g in colGroups[0].items' :group='g' ></type-group>
+               <type-group v-for='g in colGroups[0].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
             <div class='col__container col2'>
-                <type-group v-for='g in colGroups[1].items' :group='g'></type-group>
+                <type-group v-for='g in colGroups[1].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
             <div class='col__container col3'>
-                <type-group v-for='g in colGroups[2].items' :group='g'></type-group>
+                <type-group v-for='g in colGroups[2].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
 
         </div>
@@ -26,11 +26,16 @@
     export default {
         components: {addPanel, typeGroup, selectPanel},
         beforeCreate:function() {
-             this.$store.dispatch('fetchEventType');
-             this.$store.dispatch('fetchEventItems', {status: 1});
+
         },
         data() {
-            return {}
+            return {
+                eventStatus: 1
+            }
+        },
+        created() {
+            this.$store.dispatch('fetchEventType');
+            this.$store.dispatch('fetchEventItems', {status:  this.eventStatus});
         },
         methods: {
             ...mapActions({
@@ -40,8 +45,13 @@
                 this.postEventItem(o);
             },
             statusChange: function(o) {
+                this.eventStatus = o;
                 this.$store.commit("setCurrentEventGroupType", o);
                 this.$store.dispatch('fetchEventItems', {status: o});
+            },
+            refreshHandle: function() {
+                console.log('refreshsssssssssssssssssssss');
+                this.$store.dispatch('fetchEventItems', {status: this.eventStatus});
             }
         },
         computed: {

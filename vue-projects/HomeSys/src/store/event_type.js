@@ -21,6 +21,15 @@ const actions = {
             commit('fetchEventType', response.body)
         })
     },
+    updateEventType({commit, state}, obj) {
+        return new Promise(function(resolve){
+            Vue.http.post(Config.API_ROOT + '/api/home/updateEventType/'+ obj.id, {name: obj.name}).then(res=>{
+                //commit('fetchEventType', res.body);
+                resolve();
+            })
+        });
+
+    }
 
 }
 

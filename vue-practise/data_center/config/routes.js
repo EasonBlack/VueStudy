@@ -37,6 +37,7 @@ module.exports = function (app) {
     app.post('/api/test/upload', upload.array('myfiles', 12), appCtrl.testUserSerivce.uploadImages);
 
     app.get('/api/home/fetchEventType',appCtrl.homeEventsSerivce.fetchEventType);
+    app.post('/api/home/updateEventType/:id',appCtrl.homeEventsSerivce.updateEventType);
     app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);
     app.get('/api/home/fetchEventItems',appCtrl.homeEventsSerivce.fetchEventItems);
     app.post('/api/home/postEventItem',appCtrl.homeEventsSerivce.postEventItem);
