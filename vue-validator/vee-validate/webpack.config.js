@@ -29,13 +29,17 @@ module.exports = {
         loader: 'vue-html-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: '[name].[ext]?[hash]'
-        }
-      }
+        test: /\.css/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+          test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
+          loader: 'url-loader',
+          query: {
+              limit: 10000,
+              name: '[name].[ext]?[hash]'
+          }
+      },
     ]
   },
   resolve: {

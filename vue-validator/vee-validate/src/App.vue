@@ -36,6 +36,15 @@
                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('num2') }">{{ errors.first('num2') }}</span>
             </div>
         </div>
+        <div class='row'>
+            <div>
+                 <date-picker v-model="startDate" v-validate="'required|dateless:' + endDate" name='startDate'></date-picker>
+                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('startDate') }">{{ errors.first('startDate') }}</span>
+                 -
+                <date-picker v-model="endDate" v-validate="'required'" name='endDate'></date-picker>
+                  <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('endDate') }">{{ errors.first('endDate') }}</span>
+            </div>
+        </div>
         <div class="row">
              <button @click="submit">Submit</button>
          </div>
@@ -43,11 +52,14 @@
 </template>
 
 <script>
-
+    import {DatePicker} from 'element-ui';
 	export default {
+        components: {DatePicker},
 		data() {
 			return {
-                isSubmit:false
+                isSubmit:false,
+                startDate: null,
+                endDate: null
 			}
 		},
 		methods: {

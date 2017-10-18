@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VeeValidate from 'vee-validate';
 
 import App from './App.vue'
+import moment from 'moment'
 
 VeeValidate.Validator.extend('testvee', {
     getMessage: field => 'The ' + field + ' value is not through validate.',
@@ -11,6 +12,17 @@ VeeValidate.Validator.extend('testvee', {
         } else {
             return false
         }
+    }
+});
+
+VeeValidate.Validator.extend('dateless', {
+    getMessage: field => 'The ' + field + ' should not later than end date.',
+    validate: (value,other) => {
+        let _other = null;
+        if(other[0]){
+            _other = new Date(other[0])
+        }
+        return moment(value).isBefore(moment(other[0]))
     }
 });
 
