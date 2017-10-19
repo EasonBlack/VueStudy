@@ -38,11 +38,22 @@
         </div>
         <div class='row'>
             <div>
-                 <date-picker v-model="startDate" v-validate="'required|dateless:' + endDate" name='startDate'></date-picker>
-                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('startDate') }">{{ errors.first('startDate') }}</span>
+                <date-picker v-model="startDate" 
+                 v-validate="{
+                     required: true,
+                     dateless:{
+                        target: this.endDate,
+                        targetName: 'End Date'
+                     }
+                 }"
+                 
+                name='startDate'></date-picker>
+               
                  -
                 <date-picker v-model="endDate" v-validate="'required'" name='endDate'></date-picker>
-                  <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('endDate') }">{{ errors.first('endDate') }}</span>
+                
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('startDate') }">{{ errors.first('startDate') }}</span>  
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('endDate') }">{{ errors.first('endDate') }}</span>
             </div>
         </div>
         <div class="row">

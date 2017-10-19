@@ -16,13 +16,16 @@ VeeValidate.Validator.extend('testvee', {
 });
 
 VeeValidate.Validator.extend('dateless', {
-    getMessage: field => 'The ' + field + ' should not later than end date.',
-    validate: (value,other) => {
-        let _other = null;
-        if(other[0]){
-            _other = new Date(other[0])
+    getMessage: (field, obj) => {
+        let targetName= obj[0].targetName;
+        return 'The ' + field + ' should not later than ' + targetName + '.'
+    },
+    validate: (value,obj) => {
+        let target = null;
+        if(obj[0]){
+            target = new Date(obj[0].target)
         }
-        return moment(value).isBefore(moment(other[0]))
+        return moment(value).isBefore(target)
     }
 });
 
