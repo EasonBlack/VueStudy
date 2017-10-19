@@ -26,6 +26,17 @@
             this.$store.dispatch('fetch').then(res=>{
                 console.log(res);
             })
+            this.$store.dispatch('fetchError')
+            .then(res=>{})
+            .catch(err=>{
+                console.log(err);
+            })
+            this.$store.dispatch('fetchPromise')
+            .then(res=>{})
+            .catch(err=>{
+                console.log(err);
+            })
+            
         },
         computed: {
             name: () => store.state.name 
