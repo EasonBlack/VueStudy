@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+    <script src="../../node_modules/vuex/dist/vuex.min.js"></script>
+</head>
+<body>
+<div id="app" @click='count'>
+    {{ message }} : {{countNum}}
+</div>
+</body>
+<script src='store.js'></script>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        store,
+        methods: {
+            count() {
+                this.$store.commit('increment');
+            }
+        },
+        computed: {
+            countNum: () => store.state.count 
+        }
+    })
+</script>
+</html>

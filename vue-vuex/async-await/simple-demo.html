@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue2.3.2.js"></script>
+    <script src="../../node_modules/vuex/dist/vuex.min.js"></script>
+    <script src="../../node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+    {{ message }} : {{name}}
+</div>
+</body>
+<script src='store.js'></script>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        store,
+        created() {
+            this.$store.dispatch('fetch').then(res=>{
+                console.log(res);
+            })
+        },
+        computed: {
+            name: () => store.state.name 
+        }
+    })
+</script>
+</html>
