@@ -36,6 +36,14 @@
                 <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('num2') }">{{ errors.first('num2') }}</span>
             </div>
         </div>
+        <div class="row">
+            <div>
+                <input v-validate="'required'" :class="{ 'is-danger': isSubmit && errors.has('password1') }" name="password1" type="text" placeholder="Password" >
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('password1') }">{{ errors.first('password1') }}</span>
+                <input v-validate="'required|confirmed:password1'" :class="{ 'is-danger': isSubmit && errors.has('password2') }" name="password2" type="text" placeholder="Password Again" >
+                <span class="help" v-show="isSubmit" :class="{'is-danger': errors.has('password2') }">{{ errors.first('password2') }}</span>
+            </div>
+        </div>
         <div class='row'>
             <div>
                 <date-picker v-model="startDate" 
