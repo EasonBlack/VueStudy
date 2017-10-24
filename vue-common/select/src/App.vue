@@ -6,9 +6,12 @@
         <div class='row__section'>
             <multi-value-select></multi-value-select>
         </div>
-        <div class='row__section'>
+        <div class='row__section' style='margin-bottom:20px;'>
              <multi-value-select-multi-line v-model='multiLineValue'></multi-value-select-multi-line>
              <button @click='multiLineConfirm'>Confirm</button>
+        </div>
+        <div class='row__section'>
+            <complicated-options />
         </div>
 	</div>
 </template>
@@ -17,8 +20,9 @@
     import cascadeSelect from '../cascade__select__1/index.vue';
     import multiValueSelect from '../multi_value_box__select/index.vue';
     import multiValueSelectMultiLine from '../multi_value_box__select_multi_line/index.vue';
+    import complicatedOptions from '../complicated__options/index.vue';
 	export default {
-	    components: {cascadeSelect, multiValueSelect, multiValueSelectMultiLine},
+	    components: {cascadeSelect, multiValueSelect, multiValueSelectMultiLine, complicatedOptions},
 		data() {
 			return {
                 multiLineValue: null
