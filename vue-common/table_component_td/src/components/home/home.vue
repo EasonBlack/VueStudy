@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-table :columns='columns' :rows='rows' />
+        <my-table :columns='columns' :rows='rows' :totalRow='totalRow'/>
     </div>
 </template>
 <script>
@@ -25,7 +25,12 @@ export default {
                 { name: 'AA', age: 12, image: 'src/img/320_50.png',  rate_desc: 'aaaa', rate: '10%', desc: 'aaa aaa aa a aa aaaaa aaaa aaa aaa aa a aa aaaaa aaaa' },
                 { name: 'BB', age: 13, image: 'src/img/320_100.png', rate_desc: 'bbbb', rate: '10%', desc: 'bbb bb b bb b bbb  bb bbxa ability' },
                 { name: 'CC', age: 14, image: 'src/img/320_100.png', rate_desc: 'cccc', rate: '10%', desc: 'df' }
-            ]
+            ],
+            totalRow: {
+                age: 78,
+                rate: 100,
+                desc: "总价:123"
+            }
 
         }
     }

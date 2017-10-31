@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             <template v-for='(row, index) in rows'>
-                <tr>
+                <tr :key='index'>
                    <td v-for='(col,$index) in columns'  :key='$index'
                         :class='[
                             col.options.textAlign,
@@ -38,6 +38,17 @@
                    </td>
                 </tr>
             </template>
+            <tr v-if='totalRow' class='total__tr'>
+                <td v-for='(col,$index) in columns'  :key='$index'
+                    :class='[
+                        col.options.textAlign,
+                        col.options.width
+                        ]'
+                    v-if='col.show'
+                >
+                    {{totalRow[col.id]}}
+                </td>
+            </tr>
         </tbody>
     </table>
     <div class='popup__mask' v-if='showPopup' @click.prevent.stop='imagePopup'>
@@ -67,7 +78,7 @@
     import colLimitPopup from './col/col_limit_popup.vue'
     export default{
         components: {colEnableCircle, colValuesMapColor, colImage, colLinkRoute, colDesc, colLimitPopup},
-        props: ['columns', 'rows', 'config', 'pager', 'noPager'],
+        props: ['columns', 'rows', 'config', 'pager', 'noPager', 'totalRow'],
         data(){
             return{
                 isCheckAll: false,
@@ -131,6 +142,9 @@
             font-size:13px;
             tr {
                 border-bottom: 1px solid #E5E4E1;
+            }
+            .total__tr {
+                background-color: #ccc;
             }
             .table__ck {
                 width:30px;
