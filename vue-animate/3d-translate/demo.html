@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <style>
+      #app {
+        width:100vw;
+        height:100vh;
+        position:relative;
+        padding: 30px;
+        perspective: 500px;
+        margin: auto;
+      }
+    
+      .box {
+        top:200px;
+        left:200px;
+        width:100px;
+        height:100px;
+        position:absolute;    
+      }
+      .box:hover {
+        border: 1px solid slategrey;
+      }
+    </style>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class='box' v-for='(item,$index) in items' :key='$index' 
+    :style='{ 
+      backgroundColor: item.color ,
+      transform: "translate3d(0,0, " + $index * 10 + "px )"
+    }'>
+      {{item.name}}
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+          items: [
+            {name: 'AAA', color: 'steelblue'},
+            {name: 'BBB', color: 'lightgreen'},
+            {name: 'CCC', color: 'purple'},
+            {name: 'DDD', color: '#ccc'},
+            {name: 'EEE', color: '#eee'}
+          ]
+        }
+    })
+</script>
+</html>
