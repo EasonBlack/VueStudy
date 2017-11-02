@@ -5,6 +5,7 @@
         <div class='test' v-my-advance-directive='clickEvent'>
              {{message}}
         </div>
+        <my-com />
     </div>
 
 </template>
@@ -12,8 +13,10 @@
 <script>
     import myDirective from './my-directive';
     import myAdvanceDirective from './my-advance-directive';
+    import myCom from './App_component.vue'
 	export default {
         directives: { myDirective , myAdvanceDirective},
+        components: {myCom},
 		data() {
 			return {
                 message: 'hello'
