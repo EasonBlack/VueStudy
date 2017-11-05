@@ -3,13 +3,13 @@
         <div class='calendar__header'>
            <div class='left__section'>
                 <div class='flex__left'>
-                     <a class='calendar__prev icon-left-open' @click='prev'></a>
+                     <a class='calendar__prev icon-left-open' @click='change(-1)'></a>
                 </div>
                 <div class='flex__center'>
                     {{this.current.format('YYYY-MM')}}
                 </div>
                 <div class='flex__right'>
-                    <a class='calendar__next icon-right-open' @click='next'></a>
+                    <a class='calendar__next icon-right-open' @click='change(1)'></a>
                 </div>
             </div>
         </div>
@@ -37,23 +37,25 @@
             }
         },
         created:function() {
-            this.$store.dispatch('fetchDailyByDate', {startDate: this.startDate, endDate: this.endDate});
+            this.setCalendar(0)
         },
          methods: {
-             prev: function() {
-                 this.current =this.current.subtract(1, 'months');
+            change(step) {
+                this.setCalendar(step);
+            },
+            setCalendar(step) {
+                console.log('set calendar');
+                 this.current = this.current.add(step, 'months');
                  this.currentMonth = this.current.month();
                  this.currentYear = this.current.year();
-             },
-             next: function() {
-                 this.current = this.current.add(1, 'months');
-                 this.currentMonth = this.current.month();
-                 this.currentYear = this.current.year();
-             },
-             dailyClick: function(date) {
+                 let _start =  this.current.startOf('month').format('YYYY-MM-DD');
+                 let _end = this.current.endOf('month').format('YYYY-MM-DD');
+                 this.$store.dispatch('fetchDailyByDate', {startDate:_start, endDate: _end});
+            },
+            dailyClick: function(date) {
                  this.$store.commit('setActiveMenu', 'daily')
                  this.$router.push('/daily/'+ date);
-             }
+            }
          },
          computed: {
             ...mapState({
@@ -78,14 +80,7 @@
                     }
                 })
                 return monthGroup;
-            },
-            startDate: function() {
-                return this.current.format('YYYY-MM-DD');
-            },
-            endDate : function() {
-                return this.current.endOf('month').format('YYYY-MM-DD');
             }
-
          }
     }
 </script>
