@@ -110,8 +110,10 @@ module.exports = function (client) {
             let eventStatus = req.body.status?req.body.status : 1;
             async.waterfall([
                 function(next) {
-                    let addEventItemText = `insert into home.event_item(name, type, status ) values('${eventName}','${eventType}', ${eventStatus})`
-                    console.log(addEventItemText);
+
+                    //let addEventItemText = `insert into home.event_item(name, type, status ) values('${eventName}','${eventType}', ${eventStatus})`
+                    let addEventItemText = `select home.add_event_item('${eventName}', ${eventType}, ${eventStatus})`
+                    console.log(addEventItemText)
                     client.query({
                         text: addEventItemText
                     }, function (error) {
@@ -125,36 +127,17 @@ module.exports = function (client) {
                 fetchEventItemsActive
             ])
         },
-        closeEventItem: function(req, res) {
-            let eventId = req.params.id;
-            let eventName = req.body.name;
-            let eventType = req.body.type;
-            let eventStatus = req.body.status;
-            async.waterfall([
-                function(next) {
-                    let closeEventItemText = `update home.event_item set status=2 where id=${eventId}`
-                    client.query({
-                        text: closeEventItemText
-                    }, function (error) {
-                        if(error) {
-                            console.log(error);
-                            return;
-                        }
-                        next(null, req, res);
-                    })
-                },
-                fetchEventItemsActive
-            ])
-
-        },
+       
         changeEventStatus: function(req, res){
             let eventId = req.params.id;
             let eventStatus = req.params.status;
             async.waterfall([
                 function(next) {
-                    let closeEventItemText = `update home.event_item set status=${eventStatus} where id=${eventId}`
+                    // let closeEventItemText = `update home.event_item set status=${eventStatus} where id=${eventId}`
+                    let changeEventItemText = `select home.update_event_item_status(${eventId}, ${eventStatus})`
+                    console.log(changeEventItemText)
                     client.query({
-                        text: closeEventItemText
+                        text: changeEventItemText
                     }, function (error) {
                         if(error) {
                             console.log(error);

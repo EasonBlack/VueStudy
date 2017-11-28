@@ -36,3 +36,6 @@
 
 .icon-ok:before { content: '\e80b'; } /* 对勾 */
 .icon-minus-1:before { content: '\e80c'; } /* 和勾对应的 -  */
+
+.icon-picture:before { content: '\e80d'; } /* 图表 */
+.icon-calendar-1:before { content: '\e80e'; } /* 另一个日历 */

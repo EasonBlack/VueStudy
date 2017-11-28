@@ -107,6 +107,18 @@
       "css": "minus-1",
       "code": 59404,
       "src": "fontawesome"
+    },
+    {
+      "uid": "9bf421d05c985b569e86fa7c502bd879",
+      "css": "picture",
+      "code": 59405,
+      "src": "iconic"
+    },
+    {
+      "uid": "c833c98d78cfebed5780cfaaa302a12b",
+      "css": "calendar-1",
+      "code": 59406,
+      "src": "iconic"
     }
   ]
 }

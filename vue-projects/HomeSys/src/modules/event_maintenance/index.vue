@@ -6,13 +6,13 @@
         </div>
         <div class='item__container'  v-if='eventTypes && eventTypes.length'>
             <div class='col__container col1'>
-               <type-group v-for='g in colGroups[0].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
+               <type-group v-for='(g,$index) in colGroups[0].items' :key='$index' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
             <div class='col__container col2'>
-                <type-group v-for='g in colGroups[1].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
+                <type-group v-for='(g,$index) in colGroups[1].items' :key='$index' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
             <div class='col__container col3'>
-                <type-group v-for='g in colGroups[2].items' :group='g' @refresh-handle='refreshHandle' ></type-group>
+                <type-group v-for='(g,$index) in colGroups[2].items' :key='$index' :group='g' @refresh-handle='refreshHandle' ></type-group>
             </div>
 
         </div>

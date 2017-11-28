@@ -33,7 +33,7 @@ const actions = {
         })
     },
     closeEventItem ({commit, state}, id) {
-        Vue.http.put(Config.API_ROOT + '/api/home/closeEventItem/'+ id).then((response) => {
+        Vue.http.put(Config.API_ROOT + '/api/home/changeEventStatus/'+ id + '/'  + 2).then((response) => {
             commit('fetchEventItemsActive', response.body.data)
         })
     },

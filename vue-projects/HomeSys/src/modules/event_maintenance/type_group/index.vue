@@ -4,7 +4,7 @@
             <span>{{groupName}}</span>
         </div>
         <ul>
-            <li v-for='item in group.items'>
+            <li v-for='(item,$index) in group.items' :key='$index'>
                 <span v-if='!item.showRenameInput'>{{item.name}}</span>
                 <span v-if='item.showRenameInput'>
                     <input v-model='currentName' />
@@ -14,6 +14,7 @@
                 <span class='item__action close'  v-if='currentType!="2"' @click='eventTypeChange(item, 2)'>C</span>
                 <span class='item__action pend'   v-if='currentType!="3"' @click='eventTypeChange(item, 3)'>P</span>
                 <span class='item__action rename'  @click='toggleRenameInput(item)'>R</span>
+                <span class='item__action icon-picture' @click='showItemChart(item)'/>
             </li>
         </ul>
     </div>
@@ -51,9 +52,11 @@
                     id: item.id,
                     name: this.currentName
                 }).then(()=>{
-                    console.log(123123123);
                     this.$emit('refresh-handle', {});
                 })
+
+            },
+            showItemChart(item) {
 
             }
         },

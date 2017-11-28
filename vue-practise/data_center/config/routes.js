@@ -41,7 +41,6 @@ module.exports = function (app) {
     app.get('/api/home/fetchEventItemsActive',appCtrl.homeEventsSerivce.fetchEventItemsActive);
     app.get('/api/home/fetchEventItems',appCtrl.homeEventsSerivce.fetchEventItems);
     app.post('/api/home/postEventItem',appCtrl.homeEventsSerivce.postEventItem);
-    app.put('/api/home/closeEventItem/:id',appCtrl.homeEventsSerivce.closeEventItem);
     app.put('/api/home/changeEventStatus/:id/:status',appCtrl.homeEventsSerivce.changeEventStatus);
 
     app.get('/api/home/fetchDaily/:date', appCtrl.homeEventsSerivce.fetchDaily);

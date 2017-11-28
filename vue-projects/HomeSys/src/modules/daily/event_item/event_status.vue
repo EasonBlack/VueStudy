@@ -28,8 +28,7 @@
     .status__container {
         position: absolute;
         width: 70%;
-        height: 100%;
-        line-height: 100%;
+        height: 40px;
         background-color: rgba(grey,0.3);
         display: flex;
         align-items: center;
