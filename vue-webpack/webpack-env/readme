@@ -1,0 +1,19 @@
+# webpack.DefinePlugin define the param 
+# it could hard code 
+# or by  set NODE_ENV = xxxx
+
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
+    ]
+
+# which could be used in the js code
+
+    if(process.env.ENV == 'test') {
+        App = require('./App2.vue')
+    } else {
+        App = require('./App1.vue')
+    }
