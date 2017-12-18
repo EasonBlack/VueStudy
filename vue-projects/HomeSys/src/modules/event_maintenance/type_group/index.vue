@@ -17,16 +17,21 @@
                 <span class='item__action icon-picture' @click='showItemChart(item)'/>
             </li>
         </ul>
+        <item-bar v-if='showItemBarChart' :items='itemBarData' @closeChart='closeChart'/>
     </div>
 </template>
 <script>
+    import itemBar from '$common/item-bar/index.vue';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     export default {
+        components: {itemBar},
         props: ['group'],
         data() {
             return {
                 showRenameInput : false,
-                currentName: null
+                currentName: null,
+                showItemBarChart: false,
+                itemBarData: null
             }
         },
         methods: {
@@ -56,8 +61,16 @@
                 })
 
             },
+            closeChart() {
+                this.showItemBarChart = false;
+            },
             showItemChart(item) {
-
+                this.$store.dispatch('fetchDailyByEventId', {id: item.id})
+                .then(res=>{
+                    this.itemBarData = res;
+                    this.showItemBarChart = true;
+                 })
+                
             }
         },
         computed: {

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import Config from '../common/config.js';
 
 const state = {
@@ -30,6 +31,12 @@ const actions = {
             commit('fetchMonth', response.body.data)
         })
     },
+
+    async fetchDailyByEventId ({commit, state}, d) {
+        let result = await axios.get(Config.API_ROOT +'/api/home/fetchDailyByEventId/' + d.id)
+        return result.data;
+    },
+
     fetchDailyByWeek ({commit, state}, d) {
         Vue.http.get(Config.API_ROOT +'/api/home/fetchDaily/'+ d.startDate + '/' + d.endDate).then((response) => {
             commit('fetchWeek', response.body.data)

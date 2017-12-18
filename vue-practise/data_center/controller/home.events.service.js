@@ -60,6 +60,20 @@ module.exports = function (client) {
         });
     }
 
+    let fetchDailyByEventId = function(req,res) {
+        let _id = req.params.id;
+        client.query({
+            text: `select * from home.event_daily_view where event_id = ${_id}`
+        }, function (error, results) {
+            if (error) {
+                console.log(error);
+            }
+            res.send(
+                 results.rows
+            );
+        });
+    }
+
     let fetchStoryPiece = function(req, res) {
         let id = req.params.id;
         client.query({
@@ -76,6 +90,7 @@ module.exports = function (client) {
 
     return {
         fetchDaily,
+        fetchDailyByEventId,
         fetchEventItemsActive,
         fetchEventItems,
         fetchEventType: function(req, res) {

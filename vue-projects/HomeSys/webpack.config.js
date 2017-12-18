@@ -51,8 +51,7 @@ module.exports = {
       'common': path.resolve(__dirname, '../../vue-common'),
       '$style': path.resolve(__dirname, '../../style'),
       '$color': path.resolve(__dirname, './commonstyle'),
-      '$common': path.resolve(__dirname, './src/common')
-
+      '$common': path.resolve(__dirname, './src/common'),
     }
   },
   devServer: {
