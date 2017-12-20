@@ -1,11 +1,11 @@
 <template>
     <div class='container'>
-        <div class='content__container' id='canvas__container' >
-            <canvas id="canvas" width='600' height='600'
-                    @mouseout="onMouseOut"
-                    @mousemove='onMouseMove' 
-                    @mousedown='onMouseDown'
-                    @mouseup='onMouseUp'
+        <div class='content__container' id='canvas__container' 
+            @mousemove='onMouseMove' 
+            @mousedown='onMouseDown'
+            @mouseup='onMouseUp'
+        >
+            <canvas id="canvas" width='600' height='600'         
             ></canvas>
             <point  
                 v-for='(p,index) in points' :key='index' 
@@ -24,6 +24,7 @@
 		data: function() {
             return {
                 canvas: '',
+                container: null,
                 ctx: '',
                 w: '',
                 h: '',
@@ -85,22 +86,27 @@
             },
 
             onMouseOut: function() {
+                console.log('out')
                 this.$store.commit('pointClickDownOut');              
             },
 
             onMouseMove: function(e) {
+                console.log(12);
                 if (this.isPointClickDown) {
+                    console.log(13);
                     this.cleanCanvas();
                     this.drawObj.currX = e.clientX - this.offsetLeft;
                     this.drawObj.currY = e.clientY - this.offsetTop ;
                     this.draw();
-                    console.log(e.clientX, e.clientY, e.clientX - this.offsetLeft , e.clientY - this.offsetTop);
+                    // console.log(e.clientX, e.clientY, e.clientX - this.offsetLeft , e.clientY - this.offsetTop);
                 }
             },
 
             onMouseUp(e) {
                 this.$store.commit('pointClickDownOut');    
                 this.drawLines();
+                this.container.focus();
+                document.getElementById('canvas__container').focus();
             },
 
             onMouseDown(e) {
@@ -157,11 +163,12 @@
         width:600px;
         height:600px;
         position: relative;
+        z-index:1;
     }
 
     canvas {
         border: 1px solid gainsboro;
-        z-index:20;
+        //z-index:20;
     }
 
 </style>

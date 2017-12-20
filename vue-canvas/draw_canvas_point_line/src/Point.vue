@@ -33,6 +33,7 @@
         }
     }
 </script>
+
 <style lang='scss' scoped>
     .point__wrapper {
         position: absolute;
@@ -41,6 +42,6 @@
         border-radius:50%;
         background-color: steelblue;
         opacity: 0.1;
-        z-index:-1;
+        //z-index:1;
     }
 </style>
