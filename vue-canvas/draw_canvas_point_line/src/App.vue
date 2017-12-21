@@ -5,14 +5,15 @@
             @mousedown='onMouseDown'
             @mouseup='onMouseUp'
         >
-            <canvas id="canvas" width='600' height='600'         
+            <canvas id="canvas" width='600' height='500'         
             ></canvas>
             <point  
                 v-for='(p,index) in points' :key='index' 
                 :top='p.top' :left='p.left' 
-                @drawLines='drawLines'
+                @drawLines='drawLines' 
             />
         </div>
+        <button @click='del'>Toggle Delete</button>
     </div>
 </template>
 
@@ -37,7 +38,7 @@
         
 		created: function() {
 		    this.drawObj.x = 'black';
-		    this.drawObj.y = '2';
+		    this.drawObj.y = '3';
 
 		    this.drawObj.currX = 0;
             this.drawObj.currY = 0;
@@ -77,9 +78,14 @@
             drawLines() {
                 this.cleanCanvas();
                 this.lines.forEach(l=>{
+                    let angle = Math.atan2(l.y2-l.y1,l.x2-l.x1);
                     this.ctx.beginPath();
+                    this.ctx.lineCap="round";
                     this.ctx.moveTo(l.x1, l.y1);
                     this.ctx.lineTo(l.x2, l.y2);
+                    this.ctx.moveTo(l.x2-10*Math.cos(angle-Math.PI/6),l.y2-10*Math.sin(angle-Math.PI/6));
+                    this.ctx.lineTo(l.x2, l.y2);                   
+                    this.ctx.lineTo(l.x2-10*Math.cos(angle+Math.PI/6),l.y2-10*Math.sin(angle+Math.PI/6));
                     this.ctx.stroke();
                     this.ctx.closePath();
                 }) 
@@ -91,9 +97,7 @@
             },
 
             onMouseMove: function(e) {
-                console.log(12);
                 if (this.isPointClickDown) {
-                    console.log(13);
                     this.cleanCanvas();
                     this.drawObj.currX = e.clientX - this.offsetLeft;
                     this.drawObj.currY = e.clientY - this.offsetTop ;
@@ -105,8 +109,6 @@
             onMouseUp(e) {
                 this.$store.commit('pointClickDownOut');    
                 this.drawLines();
-                this.container.focus();
-                document.getElementById('canvas__container').focus();
             },
 
             onMouseDown(e) {
@@ -115,7 +117,12 @@
 
             cleanCanvas() {
                 this.ctx.clearRect(0, 0, this.w, this.h)
-            }
+            },
+
+            del() {
+                this.$store.commit('setDeleteMode');    
+            },
+
         },
         
 		mounted: function() {
@@ -136,6 +143,7 @@
                 stopX: (state)=> state.pointEvent.stopX,
                 stopY: (state)=> state.pointEvent.stopY,
                 lines: (state)=> state.pointEvent.lines,
+                deletePoints: (state)=> state.pointEvent.deletePoints,
             })
         }
 
@@ -161,7 +169,7 @@
 
     .content__container {
         width:600px;
-        height:600px;
+        height:500px;
         position: relative;
         z-index:1;
     }
