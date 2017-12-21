@@ -46,22 +46,25 @@ const mutations = {
     deleteDeletePoint(state) {
         state.deletePoint = null;
     },
+
     addDeletePoint(state, {x,y}) {
+        
         let isDelete = false;
         if(!state.deletePoint) {
             state.deletePoint = {x, y}
-        } else {
-            for(var i=state.lines.length-1;i>=0;i--){
-                let _line = state.lines[i];
-                if(_line.x1 == state.deletePoint.x && _line.y1 == state.deletePoint.y 
-                && _line.x2 == x && _line.y2 == y) {
-                    state.lines.splice(i, 1);
-                    state.deletePoint = null;
-                    isDelete = true;              
-                }
+            return false;
+        } 
+
+        for(var i=state.lines.length-1;i>=0;i--){
+            let _line = state.lines[i];
+            if(_line.x1 == state.deletePoint.x && _line.y1 == state.deletePoint.y 
+            && _line.x2 == x && _line.y2 == y) {
+                state.lines.splice(i, 1);
+                state.deletePoint = null;
+                isDelete = true;              
             }
         }
-        
+       
         if(state.deletePoint && !isDelete) {
             state.deletePoint = {x, y}
         }
