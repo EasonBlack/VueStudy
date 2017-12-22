@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vendor/vue.js"></script>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        body, #container {
+            position:relative;
+            width: 100vw;
+            height: 100vh;
+            overflow:hidden;
+        }
+        #app {
+            top:0;
+            left:0;
+            position:absolute;
+            width: 100%;
+            height: 100%;
+            overflow:hidden;
+            transition: all 1s;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: steelblue;
+            transition: all 1s;
+            cursor: pointer;   
+        }
+
+        .box-large {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transition: all 2s;
+            background-color: red;
+            z-index: -1;
+        }
+
+     
+
+    </style>
+</head>
+
+<body>
+    <div id="container" >
+        <app></app>
+    </div>
+</body>
+<script>
+    
+    Vue.component('app', {
+        template: `<div id="app" 
+            :style='{
+                transform: "translate(" +appinfo.left + ", "+ appinfo.top + ") scale("+ appinfo.scale+ ")"
+            }'    
+        >
+            <div v-for='item in items'
+                class='box-large'
+                :style='{
+                    top: item.t + "px",
+                    left: item.l + "px",
+                    opacity: enlarge? "1" : "0",
+                    zIndex: enlarge? "2" : "-1" 
+                }'
+            />
+            <div v-for='item in items' 
+                class='box'
+                :style='{
+                    top: item.t + "px",
+                    left: item.l + "px",
+                    backgroundColor: item.color,
+                    transform: "scale(" + item.scale + ")",
+                }'
+                @click='toggleSize(item)'
+            />
+           
+        </div>
+        `,
+        data: function () {
+            return {
+                appinfo: {
+                    top: 0,
+                    left: 0,
+                    scale: 1
+                },
+                enlarge: false,
+                items:[
+                    {t :100, l: 100, color: 'steelblue', scale: 1},
+                    {t :250, l: 200, color: 'pink', scale: 1},
+                    {t :400, l: 300, color: '#bfa732', scale: 1},
+                ]
+            }
+        },
+        methods: {
+            toggleSize(item) {
+                if(this.appinfo.scale==1) {
+                    this.appinfo.scale =  2;
+                    this.appinfo.top = `calc(100% - ${2 * (item.t + 50) }px)`;
+                    this.appinfo.left = `calc(100% - ${2 * (item.l + 50) }px)`;
+                } else {
+                    this.appinfo.scale =  1;
+                    this.appinfo.top = 0;
+                    this.appinfo.left = 0;
+                }
+                this.$nextTick(()=>{
+                    this.enlarge = !this.enlarge
+                })
+            }
+        }
+    })
+
+    new Vue({
+        el: '#container'
+    })
+</script>
+
+</html>
