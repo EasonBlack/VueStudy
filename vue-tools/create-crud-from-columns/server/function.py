@@ -1,19 +1,29 @@
 
 from shutil import copyfile, rmtree, copytree
 import os
+import json
+import ConfigParser
 
 import jinja2
 
-CLASSNAME = 'student'
-COLS = ['name', 'age']
-KEYCOL = COLS[0]
+cf = ConfigParser.ConfigParser()  
+cf.read('main.config')
+
+CLASSNAME = cf.get("config", "CLASSNAME")
+COLS =  json.loads(cf.get("config", "COLS"))
+KEYCOL = json.loads(cf.get("config", "KEYCOL"))
+PROJECT_FILES = json.loads(cf.get("config", "PROJECT_FILES"))
+COMMON_FOLDERS = json.loads(cf.get("config", "COMMON_FOLDERS"))
+FOLDERS = json.loads(cf.get("config", "FOLDERS"))
+TEMPLATE_FILES = json.loads(cf.get("config", "TEMPLATE_FILES"))
+
 
 TEMPLATE_DICT = {
     'className':CLASSNAME,
     'cols': COLS,
     'keycol':KEYCOL
 }
-#className=CLASSNAME, cols=COLS, keycol=KEYCOL
+
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,34 +34,6 @@ TEMPLATE_ENV = jinja2.Environment(
     variable_start_string='%%',
     variable_end_string='%%',
 )
-
-FOLDERS = [
-    'dist/src',
-    'dist/src/store',
-    'dist/src/module',
-    'dist/src/module/' + CLASSNAME,
-    'dist/src/module/' + CLASSNAME +'/' + CLASSNAME + '-detail',
-    'dist/src/module/' + CLASSNAME +'/' + CLASSNAME + '-edit',
-    'dist/src/module/' + CLASSNAME +'/' + CLASSNAME + '-list'
-]
-PROJECT_FILES = [
-    'index.html',
-    '.babelrc',
-    'webpack.config.js',
-    'src/main.js'
-]
-COMMON_FOLDERS = [
-    'src/component'
-]
-
-TEMPLATE_FILES = [
-    {'base': 'src/App.vue', 'dict': 'src/App.vue'},
-    {'base': 'src/store/index.js', 'dict': 'src/store/index.js'},
-    {'base': 'src/store/base.js', 'dict': 'src/store/'+ CLASSNAME +'.js'},
-    {'base': 'src/module/base/base-list/index.vue', 'dict': 'src/module/' + CLASSNAME +'/' + CLASSNAME + '-list/index.vue'},
-    {'base': 'src/module/base/base-detail/index.vue', 'dict': 'src/module/' + CLASSNAME +'/' + CLASSNAME + '-detail/index.vue'},
-    {'base': 'src/module/base/base-edit/index.vue', 'dict': 'src/module/' + CLASSNAME +'/' + CLASSNAME + '-edit/index.vue'},
-]
 
 def createMainProject():
     if not os.path.exists('dist'):

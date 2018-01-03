@@ -29,13 +29,14 @@ const mutations = {
         state.%%className%%EditView = false;
     },
     update%%className.capitalize()%%(state, row){
-        let _r = state.rows.find(r=>r.name == row.name);      
-        _r.name = row.name;
-        _r.age = row.age;
+        let _r = state.rows.find(r=>r.%%keycol%% == row.%%keycol%%);   
+        [% for col in cols -%]
+            _r.%%col%% = row.%%col%%
+        [% endfor %]   
         state.%%className%%EditView = false;
     },
     delete%%className.capitalize()%%(state, row){
-        let _i = state.rows.findIndex(r=>r.name == row.name);
+        let _i = state.rows.findIndex(r=>r.%%keycol%% == row.%%keycol%%);
         state.rows.splice(_i, 1);
         state.%%className%%EditView = false;
     }
