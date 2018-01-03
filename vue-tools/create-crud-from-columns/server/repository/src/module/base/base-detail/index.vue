@@ -1,8 +1,11 @@
 <<template>
     <div class='mask' @click='cancel'>
-        <div class='person-detail__container' @click.prevent.stop=''>
-            <person-row :title='"Name"' :value='row.name' />
-            <person-row :title='"Age"' :value='row.age'/>
+        <div class='%%className%%-detail__container' @click.prevent.stop=''>
+            [% for col in cols -%]
+                <%%className%%-row :title='"%%col.capitalize()%%"' :value='row.%%col%%'/>
+            [% endfor %]
+            <!-- <person-row :title='"Name"' :value='row.name' />
+            <person-row :title='"Age"' :value='row.age'/> -->
         </div>
     </div>
    
@@ -10,21 +13,18 @@
 
 <script>
     import {mapState} from 'vuex'
-    import personRow from '$component/form-row/detail.vue';
+    import %%className%%Row from '$component/form-row/detail.vue';
     export default {
-        components: {personRow},
+        components: {%%className%%Row},
         props: ['row'],
         methods: {  
-            confirm() {
-               
-            },
             cancel() {
-                this.$store.commit('togglePersonDetail', false);
+                this.$store.commit('toggle%%className.capitalize()%%Detail', false);
             },
         },
         computed: {
             ...mapState({
-                detail: (state) => state.person.detail
+                detail: (state) => state.%%className%%.detail
             })
         }
     }
@@ -41,7 +41,7 @@
         justify-content: center;
         align-items: center;
     }
-    .person-detail__container {
+    .%%className%%-detail__container {
         width:400px;
         height:auto;
         background-color: white;

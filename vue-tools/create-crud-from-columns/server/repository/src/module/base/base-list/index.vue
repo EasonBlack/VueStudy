@@ -1,6 +1,6 @@
 <<template>
-    <div class='person-list__container'>
-        <person-table  :rows='rows' :cols='cols'
+    <div class='%%className%%-list__container'>
+        <%%className%%-table  :rows='rows' :cols='cols'
              @editRow='editRow' @deleteRow='deleteRow' @detailRow='detailRow'
          />
     </div>
@@ -8,9 +8,9 @@
 
 <script>
     import {mapState} from 'vuex'
-    import personTable from '$component/table/index.vue';
+    import %%className%%Table from '$component/table/index.vue';
     export default {
-        components: {personTable},
+        components: {%%className%%Table},
         data() {
             return {
                 
@@ -19,20 +19,20 @@
         methods: {
             editRow(row) {
                 this.$store.commit('setDetail', row);
-				this.$store.commit('togglePersonEdit', true);
+				this.$store.commit('toggle%%className.capitalize()%%Edit', true);
             },
             detailRow(row) {
                 this.$store.commit('setDetail', row);
-                this.$store.commit('togglePersonDetail', true);
+                this.$store.commit('toggle%%className.capitalize()%%Detail', true);
             },
 			deleteRow(row) {
-                this.$store.commit('deletePerson', row);
+                this.$store.commit('delete%%className.capitalize()%%', row);
 			}
         },
         computed: {
 			...mapState({
-				 rows: (state) => state.person.rows,
-				 cols: (state) => state.person.cols
+				 rows: (state) => state.%%className%%.rows,
+				 cols: (state) => state.%%className%%.cols
 			})
 		}
     }

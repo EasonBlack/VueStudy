@@ -3,10 +3,10 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import person from './person';
+import  %%className%% from './%%className%%';
 
 export default new Vuex.Store({
     modules: {
-        person
+        %%className%%
     }
 })
