@@ -1,42 +1,32 @@
 <<template>
-    <div class='mask' @click='cancel'>
-        <div class="modal-dialog" role="document" @click.prevent.stop=''>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Person</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class='form-group'>
-                        <person-row :title='"Name"' v-model='newName'/>
-                    </div>
-                    <div class='form-group'>
-                        <person-row :title='"Email"' v-model='newEmail' />
-                    </div>
-                    <div class='form-group'>
-                        <person-row :title='"Address"' v-model='newAddress' />
-                    </div>
-                    <div class='form-group'>
-                        <person-row :title='"Phone"' v-model='newPhone' />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"  @click='confirm'>Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click='cancel'>Close</button>
-                </div>
+    <modal :title='"Edit Person"' @cancel='cancel'>
+        <div  slot="body">
+            <div class='form-group'>
+                <person-row :title='"Name"' v-model='newName'/>
             </div>
-        </div>  
-    </div>
-   
+            <div class='form-group'>
+                <person-row :title='"Email"' v-model='newEmail' />
+            </div>
+            <div class='form-group'>
+                <person-row :title='"Address"' v-model='newAddress' />
+            </div>
+            <div class='form-group'>
+                <person-row :title='"Phone"' v-model='newPhone' />
+            </div>
+        </div>
+        <div slot="footer">
+            <button type="button" class="btn btn-primary"  @click='confirm'>Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click='cancel'>Close</button>
+        </div>
+    </modal>   
 </template>
 
 <script>
     import {mapState} from 'vuex'
     import personRow from '$component/form-row/edit.vue';
+    import modal from '$component/modal/index.vue';
     export default {
-        components: {personRow},
+        components: {personRow, modal},
         props: ['row'],
         data() {
             return {
@@ -78,15 +68,5 @@
     }
 </script>
 <style lang='scss' scoped>
-    .mask {
-        width:100vw;
-        height: 100vh;
-        position: fixed;
-        top:0;
-        left: 0;
-        background-color: rgba(black, 0.2);
-        display: flex;
-        justify-content: center;
-        padding-top: 100px;
-    }
+
 </style>

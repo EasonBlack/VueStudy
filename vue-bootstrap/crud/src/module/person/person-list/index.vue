@@ -4,10 +4,10 @@
 			<div class="table-title">
                 <div class="row bg-dark text-white">
                     <div class="col-sm-6 ">
-						<h2>Manage <b>Employees</b></h2>
+						<h2>Manage <b>Persons</b></h2>
 					</div>
 					<div class="col-sm-6 d-flex justify-content-end align-items-center">
-						<a class="btn btn-success mr-1" @click='add'><span>Add New Employee</span></a>
+						<a class="btn btn-success mr-1" @click='add'><span>Add New Person</span></a>
 						<a class="btn btn-danger"><span>Delete</span></a>						
 					</div>
                 </div>
