@@ -100,7 +100,9 @@
     ul {
         display:block;
         border-radius:2px;
-
+        max-height:500px;
+        overflow-y:auto;
+        overflow-x:hidden;
         li {
             padding:10px;
         }
