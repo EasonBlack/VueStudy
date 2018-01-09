@@ -3,6 +3,10 @@
 		<person-list />
 		<person-detail v-if='personDetailView' :row='personDetail' />
 		<person-edit v-if='personEditView' :row='personDetail' />
+		<div class='mask'  v-if='screenSpin'>
+			<div class='loader' />
+		</div>
+		
 	</div>
 </template>
 
@@ -17,7 +21,8 @@
 			...mapState({
                 personDetailView: (state) => state.person.personDetailView,
 				personEditView: (state) => state.person.personEditView,
-				personDetail: (state) => state.person.detail
+				personDetail: (state) => state.person.detail,
+				screenSpin: (state) => state.app.screenSpin
             })
 		}
 	}
@@ -26,4 +31,6 @@
 	body {
 		background-color: rgba(grey, 0.3);
 	}
+
+	
 </style>

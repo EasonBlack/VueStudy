@@ -50,11 +50,16 @@
                     address: this.newAddress,
                     phone: this.newPhone
                 }
-                if(this.row.name) {
-                    this.$store.commit('updatePerson', req);
-                } else {
-                    this.$store.commit('createPerson', req);
-                }
+                this.$store.commit('toggleScreenSpin', true);
+                setTimeout(()=>{
+                    if(this.row.name) {
+                        this.$store.commit('updatePerson', req);
+                    } else {
+                        this.$store.commit('createPerson', req);
+                    }
+                    this.$store.commit('toggleScreenSpin', false);
+                },2000)
+                
             },
             cancel() {
                 this.$store.commit('togglePersonEdit', false);
