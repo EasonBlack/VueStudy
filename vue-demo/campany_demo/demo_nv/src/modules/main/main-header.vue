@@ -1,16 +1,15 @@
 <template>
 <nav class='navbar navbar-default container-fluid'>
 	<img class='logo' src='assets/images/logo.png' />
-	<account-info class=''>
-	</account-info> 
+	<profile-header />
 </nav> 
 </template> 
 
 <script>
-import accountInfo from './account-info.vue' 
+import profileHeader from './profile/profile-header.vue' 
 
 export default { 
-	components: { accountInfo},
+	components: { profileHeader},
 }
 </script>
 
