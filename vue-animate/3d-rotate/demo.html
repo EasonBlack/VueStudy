@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <style>
+        .card {
+            position:relative;
+            margin-top:100px;
+            width:200px;
+            height:400px;
+            perspective: 500px;
+          
+        }
+        .card > div {
+            border:1px solid steelblue;
+            position:absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            transform-style: preserve-3d;
+            /* backface-visibility:hidden; */
+            transition: all 0.3s;
+        }
+        .front {
+            background-color: lightblue;
+            transform: rotateY(0deg);
+            z-index:10;
+        }
+        .front.rotate {
+            opacity : 0;
+            transform: rotateY(-180deg);
+            z-index:1;
+        }
+        .back {
+            background-color: lightgreen;
+            transform: rotateY(180deg);
+            opacity : 0;
+            z-index:1;
+        }
+        .back.rotate {
+            opacity : 1;
+            transform: rotateY(0deg);
+            z-index:10;
+        }
+    </style>
+    <script src="../../vendor/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class='card'  >
+        <div class='front' :class='{rotate: isBack}'>aa</div>
+        <div class='back' :class='{rotate: isBack}'>bb</div>
+    </div>
+    <button @click='toggleCard'>Toggle</button>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isBack : false
+        },
+        methods: {
+            toggleCard() {
+                this.isBack = !this.isBack;
+            }
+        }
+    })
+</script>
+</html>
