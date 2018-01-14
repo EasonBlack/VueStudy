@@ -1,0 +1,88 @@
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus 
+{
+    outline: 5px auto #fff;
+    outline-offset: -2px;
+  }
+.btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled.focus, .btn-default[disabled].focus, fieldset[disabled] .btn-default.focus{
+  background-color:#ec825a;
+  border-color:#ec825a;
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
+  color:#ffffff;
+  background-color:#ec825a;
+  border-color:#ec825a;
+}
+
+.btn-default:hover{
+  color:#ffffff;
+  background-color:#ec825a;
+  border-color:#ec825a;
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
+  color:#ffffff;
+  background-color:#ec825a;
+  border-color:#ec825a;
+}
+
+.btn-default:focus, .btn-default.focus{
+  color:#ffffff;
+  background-color:#ec825a;
+  border-color:#ec825a;
+  /*padding:20px 10px;*/
+}
+
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{
+    color:#ffffff;
+    background-color:#798d8f;
+    border-color:#74898a;
+  }
+  
+  .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{
+    color:#ffffff;
+    background-color:#ec825a;
+    border-color:#ec825a;
+  }
+  
+  .btn-default:focus, .btn-default.focus{
+    color:#ffffff;
+    background-color:#798d8f;
+    border-color:#566566;
+  }
+  
+  .btn-default{
+    color:#ffffff;
+    background-color:#ec825a;
+    border-color:#ec825a;
+  }
+  
+  .btn-xs, .btn-group-xs > .btn{
+    padding:2px 10px;
+    font-size:13px;
+    line-height:1.5;
+    border-radius:3px;
+  }
+
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #6cb6d1;
+    border-color: #6cb6d1;
+    }
+
+.btn-primary.bg-orange    {
+    background-color: #ec825a;
+    border-color: #ec825a;
+}
+.btn-primary.bg-blue    {
+    background-color: #636577;
+    border-color: #636577;
+}
+
+.btn-info {
+    color: #ffffff;
+    background-color: #6cb6d1;
+    border-color: #6cb6d1;
+}
