@@ -48,7 +48,7 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue',
-            '$bootstrap$':  path.resolve(__dirname, '../../style/bootstrap4.0.0-beta.3.css'),
+            '$bootstrap$':  path.resolve(__dirname, '../../../style/bootstrap4.0.0-beta.3.css'),
             '$mainstyle$':  path.resolve(__dirname, './assets/styles/main.scss'),
             '$style':  path.resolve(__dirname, './assets/styles'),
             '$components': path.resolve(__dirname, './src/common-components'),

@@ -4,12 +4,12 @@
             <div class='col-4 pt-30'>
                 <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
                     @click='toggleEdit'>
-                    <span v-if="!isBack">Edit Story</span>
+                    <span v-if="!isEidt">Edit Story</span>
                     <span v-else>Back List</span>
                 </a>
                 <div class='board mt-10'>
-                    <story-list  class='front' :class='{rotate: isBack}' />
-                    <story-edit  class='back'  :class='{rotate: isBack}' />
+                    <story-list  class='front' :class='{rotate: isEidt}' />
+                    <story-edit  class='back'  :class='{rotate: isEidt}'  />
                 </div>      
             </div>
             <div class='col-4'>bb</div>
@@ -18,6 +18,7 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex';
     import storyList from './storyList.vue';
     import storyEdit from './storyEdit.vue';
     export default {
@@ -25,15 +26,26 @@
             storyList,
             storyEdit
         },
+        
         data() {
             return {
-                isBack : false
+              
             }
+        },
+        created() {
+            this.$store.dispatch("getAllBooks")
+            .then(()=>{})
         },
         methods: {
             toggleEdit() {
-                this.isBack = !this.isBack;
+                this.$store.commit('getBookById', {});
+                this.$store.commit("toggleBookEdit")
             }
+        },
+        computed: {
+            ...mapState({
+                isEidt: (state) => state.book.isEdit
+            })
         }
         
     }
@@ -67,7 +79,7 @@
         z-index:1;
     }
     .back {
-        background-color: lightgreen;
+        background-color: rgba(#ccc, 0.3);
         transform: rotateY(180deg);
         opacity : 0;
         z-index:1;

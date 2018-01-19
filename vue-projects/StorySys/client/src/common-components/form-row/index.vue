@@ -2,22 +2,17 @@
     <div class='form-row__container'>
         <div class='row-title'>
             <label>
-                {{title}}
+                <strong>{{title}}</strong>
             </label>
         </div>   
         <div class='row-input'>
-            <template v-if='type=="e"'>
-                <input :value="value" @input="$emit('input', $event.target.value)" />
-            </template>
-            <template v-if='type=="d"'>
-                <span>{{value}}</span>
-            </template>
+            <slot></slot>
         </div>
     </div>
 </template>
 <script>
     export default {
-        props: ['title', 'value']
+        props: ['title']
     }
 </script>
 <style lang='scss' scoped>
