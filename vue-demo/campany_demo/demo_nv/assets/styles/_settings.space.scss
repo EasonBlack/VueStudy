@@ -17,3 +17,10 @@ $spacers: (10,15,20,25,30,40,50);
     }
   }
 }
+
+@each $prop, $abbrev in (width: w,height: h) {
+  @each $size in $spacers {
+    .#{$abbrev}-#{$size}p  { #{$prop}: #{$size}% !important; }
+    .#{$abbrev}-#{$size}  { #{$prop}:  #{$size}px !important; }
+  }
+}
