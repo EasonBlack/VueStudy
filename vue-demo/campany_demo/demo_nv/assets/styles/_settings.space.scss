@@ -1,4 +1,4 @@
-$spacers: (10,15,20,25,30,40,50);
+$spacers: (10,15,20,25,30,40,50, 100);
 @each $prop, $abbrev in (margin: m, padding: p) {
   @each $size in $spacers {
 

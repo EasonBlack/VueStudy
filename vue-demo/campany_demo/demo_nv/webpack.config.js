@@ -53,6 +53,7 @@ module.exports = {
             '$style':  path.resolve(__dirname, './assets/styles'),
             '$components': path.resolve(__dirname, './src/common-components'),
             '$functions': path.resolve(__dirname, './src/common-functions'),
+            '$model': path.resolve(__dirname, './src/model'),
         }
     },
     devServer: {
