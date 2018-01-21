@@ -1,3 +1,4 @@
 /.idea
 /node_modules
 /vue-practise/data_center/site_images
+__pycache__
