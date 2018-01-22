@@ -3,10 +3,9 @@
         <div class='row'>
             <detail-menus />
         </div>
-        <div class='row'>
-            <component v-bind:is="selectedMenu">
-            </component>
-        </div>
+        
+        <component v-bind:is="selectedMenu" />
+        
     </div>
 </template>
 <script>
