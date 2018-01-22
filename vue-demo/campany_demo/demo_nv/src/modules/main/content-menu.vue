@@ -33,6 +33,7 @@
     ul {
         list-style: none;
         padding:0;
+        margin-bottom:0;
         li {
             
         }

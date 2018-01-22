@@ -1,11 +1,11 @@
 <template>
-    <div class='container'>
-        This is detail
+    <div>
+        This is Bill  History
     </div>
 </template>
-<script>
+<script>   
     export default {
-        
+    
     }
 </script>
 <style lang='scss' scoped>

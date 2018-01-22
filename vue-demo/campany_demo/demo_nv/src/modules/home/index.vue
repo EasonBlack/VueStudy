@@ -8,7 +8,7 @@
 <script>
     import searchPanel from './searchPanel.vue';
     import accountPanel from './accountPanel.vue';
-    import accountDetail from './accountDetail.vue';
+    import accountDetail from './detail/index.vue';
     export default {
         components: {searchPanel, accountPanel, accountDetail},
         data() {

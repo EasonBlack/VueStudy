@@ -1,0 +1,8 @@
+
+
+$colors: white "white", orange "#EC825A", grey "#efefef";
+@each $color in $colors {
+    $key: nth($color, 1);
+    $value: nth($color, 2);
+    .bg-#{$key}  { background-color:  #{$value} !important; }
+}
