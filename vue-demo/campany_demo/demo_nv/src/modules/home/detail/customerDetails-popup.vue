@@ -12,18 +12,18 @@
             <div class='info-box bg-white pb-20 d-flex flex-wrap'>
                 <box :title='"Service Location Details"'>
                     <form-row :title='"Latitue"' :labelspan='"6"'>
-                        <span>xxxxxx</span>
+                        <input class='form-control' />
                     </form-row>
                     <form-row :title='"Longitude"' :labelspan='"6"'>
-                        <span>xxxxxx</span>
+                        <input class='form-control' />
                     </form-row>
                 </box>
                 <box :title='"Billing Address Details"'>
                     <form-row :title='"Contact Number"' :labelspan='"6"'>
-                        <span>77777777</span>
+                        <input class='form-control' />
                     </form-row>
                     <form-row :title='"PO Box"' :labelspan='"6"'>
-                        <span>xxxxxx</span>
+                        <input class='form-control' />
                     </form-row>
                 </box>     
             </div>

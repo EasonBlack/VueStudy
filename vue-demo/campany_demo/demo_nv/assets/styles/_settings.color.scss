@@ -1,6 +1,6 @@
 
 
-$colors: white "white", orange "#EC825A", grey "#efefef";
+$colors: white "white", orange "#EC825A", grey "#efefef", blue "#636577";
 @each $color in $colors {
     $key: nth($color, 1);
     $value: nth($color, 2);

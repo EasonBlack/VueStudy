@@ -1,5 +1,5 @@
 <template>
-    <div class='container'>
+    <div class=''>
         <div class='row'>
             <detail-menus />
         </div>

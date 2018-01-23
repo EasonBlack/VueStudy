@@ -1,11 +1,11 @@
 <template>
-    <div class='container'>
-        <div class='row'>
-            <div class='w-100p title d-flex align-items-center text-white font-weight-bold pl-10'>Accounts:</div>
-            <account-table :rows='rows' :cols='cols' @colKeyClickHandle='getAccountDetail'/>
-        </div>
-       
+    
+    <div class='row'>
+        <div class='w-100p title d-flex align-items-center text-white font-weight-bold pl-10'>Accounts:</div>
+        <account-table :rows='rows' :cols='cols' @colKeyClickHandle='getAccountDetail'/>
     </div>
+       
+    
 </template>
 <script>
     import {mapState} from 'vuex';

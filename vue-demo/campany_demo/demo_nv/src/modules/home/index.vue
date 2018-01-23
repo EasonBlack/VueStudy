@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <search-panel   />
-        <account-panel  />
-        <account-detail />
+    <div class='w-100'>
+        <div class='container'>
+            <search-panel   />
+            <account-panel  />
+            <account-detail />
+        </div>
     </div>
+   
 </template>
 <script>
     import searchPanel from './searchPanel.vue';
