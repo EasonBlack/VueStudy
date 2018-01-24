@@ -1,6 +1,7 @@
 <template>
     <div>
         <my-table :columns='columns' :rows='rows' :totalRow='totalRow'/>
+        <button @click='clearData'>Clear Data</button>
     </div>
 </template>
 <script>
@@ -32,6 +33,11 @@ export default {
                 desc: "总价:123"
             }
 
+        }
+    },
+    methods: {
+        clearData() {
+            this.rows = [];
         }
     }
 }

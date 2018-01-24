@@ -11,7 +11,12 @@
             <span class='icon-cog' @click='columnsPopup'></span>
         </thead>
         <tbody>
-            <template v-for='(row, index) in rows'>
+            <template v-if='!rows.length'>
+                <tr>
+                    <td :colspan='columns.length' style='text-align: center;font-size:20px;'>No Data Available</td>
+                </tr>
+            </template>
+            <template else v-for='(row, index) in rows'>
                 <tr :key='index'>
                    <td v-for='(col,$index) in columns'  :key='$index'
                         :class='[
@@ -38,7 +43,7 @@
                    </td>
                 </tr>
             </template>
-            <tr v-if='totalRow' class='total__tr'>
+            <tr v-if='totalRow && rows.length' class='total__tr'>
                 <td v-for='(col,$index) in columns'  :key='$index'
                     :class='[
                         col.options.textAlign,
