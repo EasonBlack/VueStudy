@@ -4,11 +4,13 @@ from flask import Flask, render_template, send_file, request,Blueprint
 from flask.json import jsonify
 from flask_cors import CORS, cross_origin
 from bookController import book
+from charactorController import charactor
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.register_blueprint(book)
+app.register_blueprint(charactor)
 
 @app.route("/")
 def index():

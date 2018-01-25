@@ -12,15 +12,21 @@
                     <story-edit  class='back'  :class='{rotate: isEidt}'  />
                 </div>      
             </div>
-            <div class='col-4'>bb</div>
+            <div class='col-4 pt-30'>
+                <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
+                    @click='toggleCharactorEdit'>
+                    <span v-if="!isCharactorEidt">Edit Charactor</span>
+                    <span v-else>Back List</span>
+                </a>
+            </div>
             <div class='col-4'>cc</div>
         </div>
     </div>
 </template>
 <script>
     import {mapState} from 'vuex';
-    import storyList from './storyList.vue';
-    import storyEdit from './storyEdit.vue';
+    import storyList from './story/storyList.vue';
+    import storyEdit from './story/storyEdit.vue';
     export default {
         components: {
             storyList,
@@ -40,11 +46,16 @@
             toggleEdit() {
                 this.$store.commit('getBookById', {});
                 this.$store.commit("toggleBookEdit")
+            },
+            toggleCharactorEdit() {
+                // this.$store.commit('getCharactorById', {});
+                this.$store.commit("toggleCharactorEdit")
             }
         },
         computed: {
             ...mapState({
-                isEidt: (state) => state.book.isEdit
+                isEidt: (state) => state.book.isEdit,
+                isCharactorEdit: (state) => state.book.isCharactorEdit
             })
         }
         
