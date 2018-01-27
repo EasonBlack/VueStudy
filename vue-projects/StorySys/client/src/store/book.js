@@ -12,7 +12,9 @@ const state = {
     ],
     detail: {},
     isEdit: false,
-    isCharactorEdit: false
+    isCharactorEdit: false,
+
+    showCharactor: false,
 }
 
 const mutations = {
@@ -23,13 +25,9 @@ const mutations = {
     getBookById(state, book) {
         state.detail = book;
     },
-
     toggleBookEdit(state) {
         state.isEdit = !state.isEdit;
     },
-    toggleCharactorEdit(state) {
-        state.isCharactorEdit = !state.isCharactorEdit;
-    }
 
 }
 
@@ -51,12 +49,7 @@ const actions = {
     async getAllBooks({commit}) {
         let result = await axios.get('bookItems')
         commit('getAllBooks', result.data.rows);
-    },
-
-    async getCharactorByBookId({commit}, book) {
-        
     }
-  
 }
 
 

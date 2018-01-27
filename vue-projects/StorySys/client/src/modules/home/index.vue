@@ -12,13 +12,18 @@
                     <story-edit  class='back'  :class='{rotate: isEidt}'  />
                 </div>      
             </div>
-            <div class='col-4 pt-30'>
-                <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
-                    @click='toggleCharactorEdit'>
-                    <span v-if="!isCharactorEidt">Edit Charactor</span>
-                    <span v-else>Back List</span>
-                </a>
-            </div>
+            <transition name="charactor-display">
+                <div class='col-4 pt-30' v-if='charactorDisplay'>
+                    <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
+                        @click='toggleCharactorEdit'>
+                        <span v-if="!isCharactorEidt">Edit Charactor</span>
+                        <span v-else>Back List</span>
+                    </a>
+                    <div class='board mt-10'>
+                        <charactor-list  class='front'  />
+                    </div>
+                </div>
+            </transition>
             <div class='col-4'>cc</div>
         </div>
     </div>
@@ -27,15 +32,17 @@
     import {mapState} from 'vuex';
     import storyList from './story/storyList.vue';
     import storyEdit from './story/storyEdit.vue';
+    import charactorList from './charactor/list.vue';
     export default {
         components: {
             storyList,
-            storyEdit
+            storyEdit,
+            charactorList
         },
         
         data() {
             return {
-              
+               
             }
         },
         created() {
@@ -48,14 +55,15 @@
                 this.$store.commit("toggleBookEdit")
             },
             toggleCharactorEdit() {
-                // this.$store.commit('getCharactorById', {});
+                this.$store.commit('getCharactorById', {});
                 this.$store.commit("toggleCharactorEdit")
             }
         },
         computed: {
             ...mapState({
                 isEidt: (state) => state.book.isEdit,
-                isCharactorEdit: (state) => state.book.isCharactorEdit
+                isCharactorEdit: (state) => state.book.isCharactorEdit,
+                charactorDisplay: (state) => state.charactor.charactorDisplay
             })
         }
         
@@ -83,6 +91,7 @@
         background-color: lightblue;
         transform: rotateY(0deg);
         z-index:10;
+        overflow-y:auto;
     }
     .front.rotate {
         opacity : 0;
@@ -100,4 +109,12 @@
         transform: rotateY(0deg);
         z-index:10;
     }
+
+    .charactor-display-enter-active, .charactor-display-leave-active {
+        transition: opacity .5s
+    }
+    .charactor-display-enter, .charactor-display-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0
+    }
+
 </style>

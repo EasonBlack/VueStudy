@@ -5,10 +5,12 @@ Vue.use(Vuex);
 
 import person from './person';
 import book from './book';
+import charactor from './charactor';
 
 export default new Vuex.Store({
     modules: {
         person,
-        book
+        book,
+        charactor
     }
 })

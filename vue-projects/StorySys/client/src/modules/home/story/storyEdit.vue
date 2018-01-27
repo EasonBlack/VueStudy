@@ -10,6 +10,7 @@
         </form-row>
     </div>
 </template>
+
 <script>
     import {mapState} from 'vuex';
     import formDetailRow from '$components/form-row-input/detail.vue';
