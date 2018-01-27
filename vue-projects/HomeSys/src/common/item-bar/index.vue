@@ -7,7 +7,7 @@
     import moment from 'moment';
     import echarts from 'echarts';
     export default {
-        props: ['items'],
+        props: ['items', 'start', 'end'],
         data(){
             return{
                 myChart :null
@@ -20,9 +20,9 @@
         },
         mounted: function() {
             this.myChart = echarts.init(this.$refs.cw);
-            console.log(this.items)
-            let _start = this.items[0].date;
-            let _end = this.items[this.items.length - 1].date;
+          
+            let _start = this.start;//this.items[0].date;
+            let _end = this.end; //this.items[this.items.length - 1].date;
             let _endMoment = moment(_end).add(1,'days');
             let _dates = [];
             let _times = [];
@@ -38,11 +38,26 @@
                 }
                 _times.push(_time);
             }
-            console.log(_dates, _times);
-    
+
+            let titleObject = null;
+            if(!this.items.length) {
+                titleObject = {
+                    text: "No Data Available",
+                    left: 'center',
+                    top: 'center'
+                }
+            } else {
+                let _sum = this.items.reduce((t,item)=>t + parseFloat(item.time), 0)
+                 titleObject = {
+                    text: _sum.toFixed(2),
+                    x: 'right',
+                }
+            }
+            
             this.createChart = ()=> {   
                 this.myChart.setOption({ 
                     backgroundColor: 'white',
+                    title: titleObject,
                     xAxis : [
                         {
                             type : 'category',

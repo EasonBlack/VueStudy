@@ -60,10 +60,32 @@ module.exports = function (client) {
         });
     }
 
+
+
     let fetchDailyByEventId = function(req,res) {
         let _id = req.params.id;
+        let _start = req.params.start;
+        let _end = req.params.end;
+        let _text = `select * from home.event_daily_view where event_id = ${_id} and date between '${_start}' and '${_end}'`
+        console.log(_text)
         client.query({
-            text: `select * from home.event_daily_view where event_id = ${_id}`
+            text: _text
+        }, function (error, results) {
+            if (error) {
+                console.log(error);
+            }
+            res.send(
+                 results.rows
+            );
+        });
+    }
+
+    let fetchDailyByTypeId = function(req,res) {
+        let _id = req.params.id;
+        let _start = req.params.start;
+        let _end = req.params.end;
+        client.query({
+            text: `select * from home.event_daily_view where type_id = ${_id} and date between '${_start}' and '${_end}'`
         }, function (error, results) {
             if (error) {
                 console.log(error);
@@ -91,6 +113,7 @@ module.exports = function (client) {
     return {
         fetchDaily,
         fetchDailyByEventId,
+        fetchDailyByTypeId,
         fetchEventItemsActive,
         fetchEventItems,
         fetchEventType: function(req, res) {

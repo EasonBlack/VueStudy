@@ -44,7 +44,8 @@ module.exports = function (app) {
     app.put('/api/home/changeEventStatus/:id/:status',appCtrl.homeEventsSerivce.changeEventStatus);
 
     app.get('/api/home/fetchDaily/:date', appCtrl.homeEventsSerivce.fetchDaily);
-    app.get('/api/home/fetchDailyByEventId/:id', appCtrl.homeEventsSerivce.fetchDailyByEventId);
+    app.get('/api/home/fetchDailyByEventId/:id/:start/:end', appCtrl.homeEventsSerivce.fetchDailyByEventId);
+    app.get('/api/home/fetchDailyByTypeId/:id/:start/:end', appCtrl.homeEventsSerivce.fetchDailyByTypeId);
     app.get('/api/home/fetchDaily/:date/:enddate', appCtrl.homeEventsSerivce.fetchDaily);
     app.post('/api/home/postDaily/:date',appCtrl.homeEventsSerivce.postDaily);
     app.put('/api/home/putDaily/:id',appCtrl.homeEventsSerivce.putDaily);

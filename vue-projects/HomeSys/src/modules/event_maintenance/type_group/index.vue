@@ -2,6 +2,7 @@
     <div class='type-group__container'>
         <div class='type-group__title'>
             <span>{{groupName}}</span>
+            <span class='type-group__chart icon-picture' @click='showTypeChart'/>
         </div>
         <ul>
             <li v-for='(item,$index) in group.items' :key='$index'>
@@ -17,11 +18,14 @@
                 <span class='item__action icon-picture' @click='showItemChart(item)'/>
             </li>
         </ul>
-        <item-bar v-if='showItemBarChart' :items='itemBarData' @closeChart='closeChart'/>
+        <item-bar v-if='showItemBarChart' :items='itemBarData' 
+        :start='monthAgeDate' :end='currentDate'
+        @closeChart='closeChart'/>
     </div>
 </template>
 <script>
     import itemBar from '$common/item-bar/index.vue';
+    import moment from 'moment';
     import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
     export default {
         components: {itemBar},
@@ -31,7 +35,10 @@
                 showRenameInput : false,
                 currentName: null,
                 showItemBarChart: false,
-                itemBarData: null
+                itemBarData: null,
+
+                currentDate: moment().format('YYYY-MM-DD'),
+                monthAgeDate:  moment().subtract(1,'month').format('YYYY-MM-DD')
             }
         },
         methods: {
@@ -65,12 +72,18 @@
                 this.showItemBarChart = false;
             },
             showItemChart(item) {
-                this.$store.dispatch('fetchDailyByEventId', {id: item.id})
+                this.$store.dispatch('fetchDailyByEventId', {id: item.id, start:this.monthAgeDate, end:this.currentDate})
                 .then(res=>{
                     this.itemBarData = res;
                     this.showItemBarChart = true;
-                 })
-                
+                 })             
+            },
+            showTypeChart() {
+                 this.$store.dispatch('fetchDailyByTypeId', {id: this.group.name, start:this.monthAgeDate, end:this.currentDate})
+                .then(res=>{
+                    this.itemBarData = res;
+                    this.showItemBarChart = true;
+                 })     
             }
         },
         computed: {
@@ -79,10 +92,10 @@
                   return state.eventType.all;
              },
              currentType:(state)=> state.eventType.currentType
-           }),
-           groupName: function() {
+            }),
+            groupName: function() {
                return this.eventTypes.find((o)=> { return o.id == this.group.name}).name;
-           }
+            }
         }
     }
 </script>
@@ -95,7 +108,13 @@
         height:30px;
         line-height:30px;
         padding:0 10px;
+        display:flex;
         background-color: lightgreen;
+        .type-group__chart  {
+            margin-left: auto;
+            color:white;
+            cursor:pointer;
+        }
     }
     ul {
         display:block;
@@ -119,7 +138,7 @@
             }
             .pend {
                   background-color: #ecec19;
-            },
+            }
             .rename {
                 background-color: steelblue;
             }

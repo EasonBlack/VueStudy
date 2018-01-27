@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import Config from '../common/config.js';
 
+
 const state = {
     current: [],
     month: [],
@@ -33,7 +34,11 @@ const actions = {
     },
 
     async fetchDailyByEventId ({commit, state}, d) {
-        let result = await axios.get(Config.API_ROOT +'/api/home/fetchDailyByEventId/' + d.id)
+        let result = await axios.get(`${Config.API_ROOT}/api/home/fetchDailyByEventId/${d.id}/${d.start}/${d.end}`)
+        return result.data;
+    },
+    async fetchDailyByTypeId ({commit, state}, d) {
+        let result = await axios.get(`${Config.API_ROOT}/api/home/fetchDailyByTypeId/${d.id}/${d.start}/${d.end}`)
         return result.data;
     },
 
