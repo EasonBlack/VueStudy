@@ -1,0 +1,4 @@
+set APP_VERSION=2 &  webpack-dev-server
+set APP_VERSION=1 &  webpack-dev-server
+
+会替换掉app.vue中的import config from './config/config.version'
