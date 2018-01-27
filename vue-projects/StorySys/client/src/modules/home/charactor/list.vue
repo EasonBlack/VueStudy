@@ -5,10 +5,9 @@
             <li class="list-group-item d-flex align-items-center" v-for='(row, index) in rows' :key='index'>
                 {{row["name"]}} 
                 <!-- <span v-if='row["author"]'>({{row["author"]}})</span> -->
-                <!-- <div class='ml-auto'>
-                    <a class='btn btn-info text-white ml-auto' @click='detail(row)'>Detail</a>
+                <div class='ml-auto'>
                     <a class='btn btn-primary text-white ml-auto' @click='edit(row)'>Edit</a>
-                </div> -->    
+                </div> 
             </li>
         </ul>
     </div>
@@ -17,7 +16,10 @@
     import {mapState} from 'vuex'
     export default {
         methods: {
-    
+            edit(charactor) {
+                this.$store.commit('getCharactorById', charactor);
+                this.$store.commit("toggleCharactorEdit", true);
+            }
         },
         computed: {
             ...mapState({

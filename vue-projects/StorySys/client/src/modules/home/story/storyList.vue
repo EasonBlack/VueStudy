@@ -5,7 +5,7 @@
                 {{row["name"]}} 
                 <span v-if='row["author"]'>({{row["author"]}})</span>
                 <div class='ml-auto'>
-                    <a class='btn btn-info text-white ml-auto' @click='detail(row)'>Detail</a>
+                    <a class='btn btn-info text-white ml-auto' @click='detail(row)'>Charactor</a>
                     <a class='btn btn-primary text-white ml-auto' @click='edit(row)'>Edit</a>
                 </div>
                 
@@ -22,8 +22,15 @@
                 this.$store.commit('toggleBookEdit')
             },
             detail(row) {
-                this.$store.dispatch('getCharactorByBookId', row);
-                this.$store.commit('toggleCharactorPanel' , true);
+                this.$store.dispatch('getCharactorByBookId', row)
+                .then((rownum)=>{                
+                    this.$store.commit('toggleCharactorEdit' , !rownum ? true: false);   
+                    if(!rownum){
+                        this.$store.commit('getCharactorById', {});
+                    }
+                    this.$store.commit('displayCharactorPanel' , row.id);
+                })
+                
             }
         },
         computed: {
