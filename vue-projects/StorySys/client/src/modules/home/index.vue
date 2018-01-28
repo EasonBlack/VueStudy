@@ -12,12 +12,11 @@
                     <story-edit  class='back'  :class='{rotate: isEidt}'  />
                 </div>      
             </div>
-            <transition name="charactor-display">
-                <div class='col-4 pt-30' v-if='charactorDisplay'>
+            <transition name="opacity-display">
+                <div class='col-4 pt-30' v-if='charactorDisplay && storyDetail.name'>
                     <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
                         @click='toggleCharactorEdit'>
-                        <span v-if="!isCharactorEdit">Edit Charactor</span>
-                        <span v-else>Back List</span>
+                        <span>{{storyDetail.name}}</span>
                     </a>
                     <div class='board mt-10'>
                         <charactor-list  class='front'  :class='{rotate: isCharactorEdit}'  />
@@ -25,9 +24,17 @@
                     </div>
                 </div>
             </transition>
-            <div class='col-4'>
-                
-            </div>
+            <transition name="opacity-display">
+                <div class='col-4 pt-30' v-if='charactorDisplay && storyDetail.name'>
+                    <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
+                        @click='toggleCharactorEdit'>
+                        <span>{{storyDetail.name}}</span>
+                    </a>
+                    <div class='board mt-10'>
+                       
+                    </div>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -68,7 +75,8 @@
             ...mapState({
                 isEidt: (state) => state.book.isEdit,
                 isCharactorEdit: (state) => state.charactor.isEdit,
-                charactorDisplay: (state) => state.charactor.charactorDisplay
+                charactorDisplay: (state) => state.charactor.charactorDisplay,
+                storyDetail: (state)=>state.book.detail
             })
         }
         

@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, send_file, request,Blueprint
 from flask.json import jsonify
 from flask_cors import CORS, cross_origin
+from common.sqlHandle import selectHandle
 
 book = Blueprint('book',__name__) 
 con = psycopg2.connect(database='home', user='eason', password='admin') 
@@ -10,23 +11,7 @@ con = psycopg2.connect(database='home', user='eason', password='admin')
 @book.route("/bookItems")
 @cross_origin()
 def getAllBookItems():
-    result = {"rows": [], "cols": []}
-    cur = con.cursor()
-    cur.execute('''select column_name from  information_schema.columns
-                where table_name=\'book_items\'''')
-    for col in cur.fetchall():
-        result["cols"].append(col[0])
-    # print(result["cols"])
-    cur.execute("Select * from home.book_items")
-    for row in cur.fetchall():
-        _row = {}
-        print(row)
-        for i,col in enumerate(result["cols"]):
-            _row[col] = row[i]
-            # print(i,col)
-        result["rows"].append(_row)
-    cur.close()
-    return jsonify(result)
+    return selectHandle(con, 'book_items', '')
 
 @book.route('/bookItems', methods=['POST'])
 @cross_origin()

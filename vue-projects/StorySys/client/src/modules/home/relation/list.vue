@@ -3,8 +3,7 @@
     <div>
         <ul class="list-group">
             <li class="list-group-item d-flex align-items-center" v-for='(row, index) in rows' :key='index'>
-                {{row["name"]}} 
-
+                {{row["name"]}}({{row["relationship"]}})
                 <div class='ml-auto'>
                     <div class="btn-group dropleft">
                         <button class="btn btn-secondary dropdown-toggle"  type="button" aria-haspopup="true" aria-expanded="false">
