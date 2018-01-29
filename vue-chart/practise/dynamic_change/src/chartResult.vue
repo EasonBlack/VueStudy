@@ -26,7 +26,7 @@
                     _catagroy.push(item.date);
                     _num.push(item.num + 10);
                     _value.push(item.value);
-                    _alert.push(item.num + 10 > item.value ? 0 : item.value);
+                    _alert.push(item.num + 10 > item.value ? null : item.value);
 
                 })
                 this.revChart.setOption({
@@ -39,6 +39,20 @@
                         type: 'value'
                     },
                     series: [
+                        {
+                            name: 'alert',
+                            type: 'bar',
+                            barGap: 0,
+                            data: _alert,
+                            itemStyle: {
+                                normal: {
+                                    color: 'white',
+                                    borderWidth: 3,
+                                    borderColor: 'red'
+                                }
+                                
+                            }
+                        },
                         {
                             name: 'AA',
                             type: 'bar',
@@ -65,15 +79,7 @@
                                 
                             } 
                         }, 
-                        {
-                            name: 'alert',
-                            type: 'bar',
-                            barGap: '-100%',
-                            data: _alert,
-                            itemSytle: {
-                                color: 'yellow'
-                            }
-                        }
+                        
                     ]
                 });
             }

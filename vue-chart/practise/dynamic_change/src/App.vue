@@ -2,6 +2,7 @@
 	<div class='container' sytle='padding-top:40px;'>
 		<div class='row'>
 			<div class='col-6'>
+				<div>{{current}}</div>
 				<chart-standard :items='items' :current='current'/>
 			</div>
 			<div class='col-6'>
@@ -11,6 +12,7 @@
 		<div class='row'>
 			<div class='col-12'>
 				<a class='btn btn-primary text-white' @click='startHandle'>Start</a>
+				<a class='btn btn-primary text-white' @click='stopHandle'>Stop</a>
 			</div>
 		</div>
 		
@@ -30,16 +32,30 @@
 					{date: "2018-01-02", num: 12, value: 13},
 					{date: "2018-01-03", num: 14, value: 25},
 				],
-				current: '2018-01-03'
+				current: '2018-01-03',
+				intervalNum : null
 			}
 		},
 		methods: {
 			startHandle() {
+				this.intervalNum = setInterval(()=>{
+					this.triggerChange();
+				},1000)
+			},
+
+			stopHandle() {
+				clearInterval(this.intervalNum);
+			},
+
+			triggerChange() {
 				this.current = moment(this.current).add(1, 'days').format('YYYY-MM-DD');
 				let _num = Math.ceil(Math.random()*100);
 				let _value = Math.ceil(Math.random()*100);
 				this.items.push({date: this.current, num: _num, value: _value});
 			}
+		},
+		mounted() {
+			
 		}
 	}
 </script>
