@@ -30,7 +30,19 @@
 
                 })
                 this.revChart.setOption({
-                                  
+                    backgroundColor: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0.3, color: 'AliceBlue'
+                        }, {
+                            offset: 1, color: 'white' 
+                        }],
+                       
+                    },        
                     xAxis: {
                         type: 'category',
                         data: _catagroy

@@ -1,0 +1,9 @@
+<svg >
+
+  <defs>
+    <linearGradient id="Gradient01">
+      <stop offset="20%" stop-color="AliceBlue" />
+      <stop offset="90%" stop-color="#F3F" />
+    </linearGradient>
+  </defs>
+</svg>
