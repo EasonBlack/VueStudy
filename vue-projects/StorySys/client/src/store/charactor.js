@@ -19,6 +19,7 @@ const mutations = {
     toggleCharactorEdit(state, bool) {
         state.isEdit = bool == undefined ? !state.isEdit : bool;
     },
+   
     displayCharactorPanel(state, bookId) {
         state.bookId = bookId;
         state.charactorDisplay =true;
@@ -50,7 +51,7 @@ const actions = {
         fd.append('bookId', charactor.bookId);
         fd.append('desc', charactor.desc);
         if(charactor.id) {
-            await axios.put(`book/${charactor.bookId}/charactors/${charactor.id}`, fd)
+            await axios.put(`charactors/${charactor.id}`, fd)
         } else {
             await axios.post(`book/${charactor.bookId}/charactors`, fd)
         }

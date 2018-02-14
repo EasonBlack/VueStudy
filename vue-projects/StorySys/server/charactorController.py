@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, send_file, request,Blueprint
 from flask.json import jsonify
 from flask_cors import CORS, cross_origin
-from common.sqlHandle import selectHandle
+from common.sqlHandle import selectHandle, selectById
 
 charactor = Blueprint('charactor',__name__) 
 con = psycopg2.connect(database='home', user='eason', password='admin') 
@@ -26,10 +26,15 @@ def addCharactor(id):
     cur.close() 
     return "success"
 
-
-@charactor.route('/book/<id>/charactors/<cid>', methods=['PUT'])
+@charactor.route("/charactors/<cid>",  methods=['GET'])
 @cross_origin()
-def updateCharactor(id, cid):
+def getCharactorById(cid):
+    return selectById(con, 'book_charactors', cid)
+
+
+@charactor.route('/charactors/<cid>', methods=['PUT'])
+@cross_origin()
+def updateCharactor(cid):
     cur = con.cursor()
     _name = request.form["name"]
     _subname = request.form["subname"]
@@ -40,9 +45,9 @@ def updateCharactor(id, cid):
     return "success"
 
 
-@charactor.route('/book/<id>/charactors/<cid>', methods=['DELETE'])
+@charactor.route('/charactors/<cid>', methods=['DELETE'])
 @cross_origin()
-def deleteCharactor(id,cid):
+def deleteCharactor(cid):
     cur = con.cursor()
     cur.execute("Delete from home.book_charactors WHERE id=%s", (cid))     
     con.commit()   

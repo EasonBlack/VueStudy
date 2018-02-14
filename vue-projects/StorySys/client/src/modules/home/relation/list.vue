@@ -3,19 +3,13 @@
     <div>
         <ul class="list-group">
             <li class="list-group-item d-flex align-items-center" v-for='(row, index) in rows' :key='index'>
-                {{row["name"]}}({{row["relationship"]}})
-                <div class='ml-auto'>
-                    <div class="btn-group dropleft">
-                        <button class="btn btn-secondary dropdown-toggle"  type="button" aria-haspopup="true" aria-expanded="false">
-                           Act
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
-                            <a class="dropdown-item" @click='edit(row)'>Edit</a>
-                            <a class="dropdown-item" href="#">Relation</a>
-                        </div>
-                    </div>
-                    <!-- <a class='btn btn-primary text-white ml-auto' @click='edit(row)'>Edit</a> -->
-                </div> 
+                {{row["relation"]}}({{row["relationship"]}})
+
+                <div class='ml-auto'  >
+                    <a class='btn btn-danger text-white ml-auto' @click='del(row)'>
+                        Delete
+                    </a> 
+                </div>
             </li>
         </ul>
     </div>
@@ -29,14 +23,13 @@
             }
         },
         methods: {
-            edit(charactor) {
-                this.$store.commit('getCharactorById', charactor);
-                this.$store.commit("toggleCharactorEdit", true);
+            del(relation) {
+               this.$store.dispatch('deleteRelation', relation)
             }
         },
         computed: {
             ...mapState({
-                rows:  (state) => state.charactor.rows
+                rows:  (state) => state.relation.rows
             })
         }
     }

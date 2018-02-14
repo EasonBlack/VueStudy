@@ -12,7 +12,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
                             <a class="dropdown-item" @click='edit(row)'>Edit</a>
-                            <a class="dropdown-item" href="#">Relation</a>
+                            <a class="dropdown-item" @click='showRelation(row)'>Relation</a>
                         </div>
                     </div>
                     <!-- <a class='btn btn-primary text-white ml-auto' @click='edit(row)'>Edit</a> -->
@@ -33,6 +33,13 @@
             edit(charactor) {
                 this.$store.commit('getCharactorById', charactor);
                 this.$store.commit("toggleCharactorEdit", true);
+            },
+            showRelation(charactor) {
+                this.$store.dispatch('getRelationByCharactorId', charactor)
+                .then((rownum)=>{       
+                    this.$store.commit('toggleRelationEdit' , !rownum ? true: false);   
+                    this.$store.commit("displayRelationPanel", charactor.id);
+                })
             }
         },
         computed: {

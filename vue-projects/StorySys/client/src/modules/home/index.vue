@@ -19,19 +19,20 @@
                         <span>{{storyDetail.name}}</span>
                     </a>
                     <div class='board mt-10'>
-                        <charactor-list  class='front'  :class='{rotate: isCharactorEdit}'  />
-                        <charactor-edit class='back'   :class='{rotate: isCharactorEdit}' />
+                        <charactor-list  class='front'  :class='{rotate: isCharactorEdit}' />
+                        <charactor-edit class='back'    :class='{rotate: isCharactorEdit}' />
                     </div>
                 </div>
             </transition>
             <transition name="opacity-display">
-                <div class='col-4 pt-30' v-if='charactorDisplay && storyDetail.name'>
+                <div class='col-4 pt-30' v-if='relationDisplay'>
                     <a class='btn btn-primary d-block text-center font-weight-bold text-white' 
-                        @click='toggleCharactorEdit'>
-                        <span>{{storyDetail.name}}</span>
+                        @click='toggleRelationEdit'>
+                        <span>{{hostName}}</span>
                     </a>
                     <div class='board mt-10'>
-                       
+                        <relation-list  class='front'  :class='{rotate: isRelationEdit}'  />
+                        <relation-edit  class='back'   :class='{rotate: isRelationEdit}'  />
                     </div>
                 </div>
             </transition>
@@ -44,12 +45,16 @@
     import storyEdit from './story/storyEdit.vue';
     import charactorList from './charactor/list.vue';
     import charactorEdit from './charactor/edit.vue';
+    import relationList from './relation/list.vue';
+    import relationEdit from './relation/edit.vue';
     export default {
         components: {
             storyList,
             storyEdit,
             charactorList,
-            charactorEdit
+            charactorEdit,
+            relationList,
+            relationEdit
         },
         
         data() {
@@ -68,15 +73,22 @@
             },
             toggleCharactorEdit() {
                 this.$store.commit('getCharactorById', {});
-                this.$store.commit("toggleCharactorEdit")
+                this.$store.commit("toggleCharactorEdit");
+            },
+            toggleRelationEdit() {
+                 this.$store.commit("toggleRelationEdit");
             }
         },
         computed: {
             ...mapState({
                 isEidt: (state) => state.book.isEdit,
+                storyDetail: (state)=>state.book.detail,
                 isCharactorEdit: (state) => state.charactor.isEdit,
                 charactorDisplay: (state) => state.charactor.charactorDisplay,
-                storyDetail: (state)=>state.book.detail
+                charactorDetail:(state)=> state.charactor.detail,
+                relationDisplay: (state) => state.relation.relationDisplay,
+                isRelationEdit: (state) => state.relation.isEdit,
+                hostName: (state)=>state.relation.hostName,
             })
         }
         
