@@ -50,7 +50,7 @@
                 this.$store.dispatch('fetchEventItems', {status: o});
             },
             refreshHandle: function() {
-                console.log('refreshsssssssssssssssssssss');
+                console.log('refresh');
                 this.$store.dispatch('fetchEventItems', {status: this.eventStatus});
             }
         },

@@ -58,6 +58,15 @@
                 this.myChart.setOption({ 
                     backgroundColor: 'white',
                     title: titleObject,
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {
+                            type : 'shadow'
+                        },
+                        formatter:(a)=>{
+                            return a[0].name + ":" + a[0].data;
+                        }
+                    },
                     xAxis : [
                         {
                             type : 'category',

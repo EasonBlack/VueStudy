@@ -19,8 +19,9 @@
             </li>
         </ul>
         <item-bar v-if='showItemBarChart' :items='itemBarData' 
-        :start='monthAgeDate' :end='currentDate'
+        :start='chartStart' :end='chartEnd'
         @closeChart='closeChart'/>
+           <!-- :start='monthAgeDate' :end='currentDate' -->
     </div>
 </template>
 <script>
@@ -72,16 +73,33 @@
                 this.showItemBarChart = false;
             },
             showItemChart(item) {
-                this.$store.dispatch('fetchDailyByEventId', {id: item.id, start:this.monthAgeDate, end:this.currentDate})
+                let req = {}
+                if(this.currentType == 2) {
+                    req = {id: item.id}
+                } else {
+                    req = {id: item.id, start:this.monthAgeDate, end:this.currentDate}
+                }
+                this.$store.dispatch('fetchDailyByEventId', req)
                 .then(res=>{
+                    if(this.currentType == 2) {
+                        console.log(res);
+                        console.log('xxxxxxxxxxxxxxxxxxxx')
+                        this.chartStart = res[0].date;
+                        this.chartEnd = res[res.length-1].date;
+                    } else {
+                        this.chartStart = this.monthAgeDate;
+                        this.chartEnd = this.currentDate;
+                    }
                     this.itemBarData = res;
                     this.showItemBarChart = true;
                  })             
             },
             showTypeChart() {
                  this.$store.dispatch('fetchDailyByTypeId', {id: this.group.name, start:this.monthAgeDate, end:this.currentDate})
-                .then(res=>{
+                .then(res=>{               
                     this.itemBarData = res;
+                    this.chartStart = this.monthAgeDate;
+                    this.chartEnd = this.currentDate;
                     this.showItemBarChart = true;
                  })     
             }

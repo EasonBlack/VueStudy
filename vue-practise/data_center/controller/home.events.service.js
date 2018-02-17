@@ -5,7 +5,7 @@ module.exports = function (client) {
 
     let fetchEventItemsActive = function (req, res) {
         client.query({
-            text: `select * from home.event_item where status=1 order by id`
+            text: `select * from home.event_item where status=1 order by id desc`
         }, function (error, results) {
             if (error) {
                 console.log(error);
@@ -31,7 +31,7 @@ module.exports = function (client) {
         }
         console.log(_queryTxt);
         client.query({
-            text: _queryTxt +  ' order by id'
+            text: _queryTxt +  ' order by id desc'
         }, function (error, results) {
             if (error) {
                 console.log(error);
@@ -66,7 +66,13 @@ module.exports = function (client) {
         let _id = req.params.id;
         let _start = req.params.start;
         let _end = req.params.end;
-        let _text = `select * from home.event_daily_view where event_id = ${_id} and date between '${_start}' and '${_end}'`
+        let _text = '';
+       
+        if(_start == undefined) {
+            _text = `select * from home.event_daily_view where event_id = ${_id} and date between '${_start}' and '${_end}'` 
+        } else {
+            _text = `select * from home.event_daily_view where event_id = ${_id}`
+        }   
         console.log(_text)
         client.query({
             text: _text

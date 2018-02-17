@@ -23,10 +23,10 @@
                   this.myChart.setOption({
 
                       tooltip : {
-                          trigger: 'axis',
-                          axisPointer : {
-                              type : 'shadow'
-                          }
+                        trigger: 'axis',
+                        axisPointer : {
+                            type : 'shadow'
+                        },
                       },
                       grid: {
                           left: '3%',
