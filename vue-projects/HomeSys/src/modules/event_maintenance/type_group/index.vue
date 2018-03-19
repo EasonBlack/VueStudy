@@ -82,8 +82,6 @@
                 this.$store.dispatch('fetchDailyByEventId', req)
                 .then(res=>{
                     if(this.currentType == 2) {
-                        console.log(res);
-                        console.log('xxxxxxxxxxxxxxxxxxxx')
                         this.chartStart = res[0].date;
                         this.chartEnd = res[res.length-1].date;
                     } else {
