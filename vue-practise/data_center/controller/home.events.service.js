@@ -91,7 +91,8 @@ module.exports = function (client) {
         let _start = req.params.start;
         let _end = req.params.end;
         client.query({
-            text: `select * from home.event_daily_view where type_id = ${_id} and date between '${_start}' and '${_end}'`
+            text : `select sum(time) as time, date from home.event_daily_view where type_id = ${_id} and date between  '${_start}' and '${_end}' group by date`
+            // text: `select * from home.event_daily_view where type_id = ${_id} and date between '${_start}' and '${_end}'`
         }, function (error, results) {
             if (error) {
                 console.log(error);
