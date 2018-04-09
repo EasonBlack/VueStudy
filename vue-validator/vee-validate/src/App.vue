@@ -5,6 +5,10 @@
             <span class="help" :class="{'is-danger': errors.has('password') }">{{ errors.first('password') }}</span>
         </div>
         <div class="row">
+            <input v-validate="'required|url'" :class="{ 'is-danger': errors.has('url') }" name="url"  placeholder="http://" >
+            <span class="help" :class="{'is-danger': errors.has('url') }">{{ errors.first('url') }}</span>
+        </div>
+        <div class="row">
             <input v-validate="'required|testvee'" :class="{ 'is-danger': errors.has('test') }" name="test" type="text" placeholder="test" >
             <span class="help" :class="{'is-danger': errors.has('test') }">{{ errors.first('test') }}</span>
         </div>
