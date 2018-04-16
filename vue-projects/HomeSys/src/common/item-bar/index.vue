@@ -47,9 +47,16 @@
                     top: 'center'
                 }
             } else {
-                let _sum = this.items.reduce((t,item)=>t + parseFloat(item.time), 0)
-                 titleObject = {
-                    text: _sum.toFixed(2),
+                let _sum = this.items.reduce((t,item)=>t + parseFloat(item.time), 0);
+                let _words = this.items.reduce((t,item)=> {
+                    if(item.type_name=='write') {
+                        return t + parseFloat(item.comment)
+                    } else {
+                        return t;
+                    }
+                }, 0);
+                titleObject = {
+                    text: _sum.toFixed(2) + ( _words ? `(${_words})` : ''),
                     x: 'right',
                 }
             }

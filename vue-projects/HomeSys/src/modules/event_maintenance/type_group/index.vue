@@ -88,6 +88,7 @@
                         this.chartStart = this.monthAgeDate;
                         this.chartEnd = this.currentDate;
                     }
+                  
                     this.itemBarData = res;
                     this.showItemBarChart = true;
                  })             
