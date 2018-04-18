@@ -13,7 +13,7 @@
              </div>
              <div class='daily-right__container'>
                 <div class='event-list__section'>
-                    <event-item v-for='e in eventItems' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
+                    <event-item v-for='(e, $index) in eventItems' :key='$index' :item='e' @clickHandle='eventItemClick' :activeId="activeId"></event-item>
                 </div>
                 <div class='chart-list__section'>
                      <chart-panel></chart-panel>
@@ -89,7 +89,10 @@
                 this.showUpdate = false;
             },
             deleteHandle: function(id) {
-                this.$store.dispatch('deleteDaily', {id:id});
+                this.$store.dispatch('deleteDaily', {id:id})
+                .then(res=>{
+                    this.$store.dispatch('fetchDaily', this.current);
+                })  
                 this.showUpdate = false;
             }
         },

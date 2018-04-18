@@ -57,10 +57,10 @@ const actions = {
             commit('fetchDaily', response.body.data)
         })
     },
-    deleteDaily({commit, state},req) {
-        Vue.http.delete(Config.API_ROOT + '/api/home/deleteDaily/'+ req.id, req).then((response) => {
-            commit('fetchDaily', response.body.data)
-        })
+    async deleteDaily({commit, state},req) {
+        let result = await axios.delete(Config.API_ROOT + '/api/home/deleteDaily/'+ req.id, req)
+        commit('fetchDaily', result.data);
+        return true;
     }
 
 }
