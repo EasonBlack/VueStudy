@@ -28,6 +28,10 @@ module.exports = {
                 loader: 'vue-html-loader'
             },
             {
+                test: /\.css/,
+                loader: 'style-loader!css-loader'
+            },
+            {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'url-loader',
                 query: {
@@ -39,7 +43,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue'
+            'vue$': 'vue/dist/vue',
+            '$bootstrap$':  path.resolve(__dirname, '../../../style/bootstrap4.0.0-beta.3.css'),
         }
     },
     devServer: {

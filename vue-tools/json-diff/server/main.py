@@ -20,18 +20,24 @@ def index():
 def json_upload():
   if not os.path.exists('source'):
     os.makedirs('source')
-  submitted_file = request.files['file']
-  submitted_file.save("source/one.json")
+  submitted_file1 = request.files['file1']
+  submitted_file2 = request.files['file2']
+  submitted_file1.save("source/one.json")
+  submitted_file2.save("source/two.json")
   return true
 
 @app.route("/getjson")
 @cross_origin()
 def json_loader():
-  data = {}
+  data1 = {}
+  data2 = {}
   with open('source/one.json', 'r') as json_file:
-    data = json.load(json_file)
-    
-  return jsonify(data)
+    data1 = json.load(json_file)
+  with open('source/two.json', 'r') as json_file:
+    data2 = json.load(json_file)
+  result = {"one": data1, "two": data2}
+  return jsonify(result)
+
 
 
 if __name__ == '__main__':
