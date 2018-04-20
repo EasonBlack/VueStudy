@@ -4,13 +4,16 @@
 			<div class='left col-3'>
 				<input type='file' @change="onFileChange($event, 1)"/>
 				<input type='file' @change="onFileChange($event, 2)"/>
-				<button @click='postFile'>Ok</button>
-				<button @click='fetchContent'>Fetch</button>
+				<button class='btn btn-primary' @click='postFile'>Upload</button>
+				<button class='btn btn-primary' @click='fetchContent'>Fetch</button>
 			</div>
 			<div class='right col-9'>
 				<ul>
 					<li v-for='(item,key, $index) in one' :key='$index'>
-						{{key}}:{{item}}
+							<label>{{$index}}:{{key}}</label>
+							<label>{{item}}</label>
+							<input v-model='two[key]'/>
+							<button class='btn btn-info' @click='fetchMeaning(key)'>Dictionary</button>
 					</li>
 				</ul>
 
@@ -46,6 +49,11 @@
 				
 			},
 			postFile() {
+
+				if(!this.jsonFile1 || !this.jsonFile2) {
+					return false;
+				}
+
 				let req = new FormData()
 				req.append('file1', this.jsonFile1)
 				req.append('file2', this.jsonFile2)
@@ -63,10 +71,35 @@
 						this.one = res.data.one;
 						this.two = res.data.two;
 					});
+			},
+
+			fetchMeaning(key) {
+				let req = new FormData()
+				req.append('content', key)
+				axios.post('http://localhost:5000/getmeaning', req)
+				.then(res=>{
+					console.log(res);
+				});
 			}
+
 		}
 	}
 </script>
-<style>
+<style lang='scss'>
+ul {
+	list-style: none;
+}
 
+.left {
+	padding-top:30px;
+	* {
+		margin-bottom:20px;
+	}
+	button {
+		display: block;
+	}
+}
+.right {
+	padding-top:30px;
+}
 </style>
