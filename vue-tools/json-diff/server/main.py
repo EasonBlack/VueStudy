@@ -21,8 +21,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 
-appid = '20180206000121301'
-secretKey = '3yP2yC5CNWNhHzA3UILu'
+appid = ''
+secretKey = ''
 
  
 httpClient = None
