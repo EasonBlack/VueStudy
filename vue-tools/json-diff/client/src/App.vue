@@ -6,6 +6,7 @@
 				<input type='file' @change="onFileChange($event, 2)"/>
 				<button class='btn btn-primary' @click='postFile'>Upload</button>
 				<button class='btn btn-primary' @click='fetchContent'>Fetch</button>
+				<button class='btn btn-primary' @click='save'>Save</button>
 			</div>
 			<div class='right col-6'>
 				<ul>
@@ -90,6 +91,19 @@
 					console.log(res);
 					this.meanings = res.data.trans_result;
 				});
+			},
+
+			save() {
+				console.log(this.two);
+				// let req = new FormData()
+				// req.append('content', this.two)
+				axios.post('http://localhost:5000/savemeaning', this.two,  {
+						headers: {'Content-Type': 'application/json'}
+					})
+				.then(res=>{
+					this.fetchContent();
+				});
+				
 			}
 
 		}

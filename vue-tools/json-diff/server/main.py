@@ -77,6 +77,19 @@ def get_mean_from_baidu():
   print(r.json())
   return jsonify(r.json())
 
+@app.route('/savemeaning', methods=['POST'])
+@cross_origin()
+def save_mean_from_json():
+  # content = request.form['content']
+  content = request.get_json(silent=True)
+  
+  with open('source/result.json', 'w') as f:
+    f.write("{\n")
+    for (d,x) in content.items():
+      f.write("\t\"" + d +"\""  + " : \"" + x + "\",\n" )
+    f.write("}")
+  
+  return jsonify(1)
 
 
 if __name__ == '__main__':
