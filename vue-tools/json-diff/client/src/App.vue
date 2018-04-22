@@ -1,13 +1,13 @@
 <template>
 	<div class='container-fluid' >
-		<div class='row'>
+		<div class='row main-container'>
 			<div class='left col-3'>
 				<input type='file' @change="onFileChange($event, 1)"/>
 				<input type='file' @change="onFileChange($event, 2)"/>
 				<button class='btn btn-primary' @click='postFile'>Upload</button>
 				<button class='btn btn-primary' @click='fetchContent'>Fetch</button>
 			</div>
-			<div class='right col-9'>
+			<div class='right col-6'>
 				<ul>
 					<li v-for='(item,key, $index) in one' :key='$index'>
 							<label>{{$index}}:{{key}}</label>
@@ -17,6 +17,14 @@
 					</li>
 				</ul>
 
+			</div>
+			<div class='col-3'>
+				<ul>
+					<li></li>
+					<li v-for='(item,$index) in meanings' :key='$index'>
+						{{item.dst}}
+					</li>
+				</ul>
 			</div>
 		</div>
 	
@@ -34,7 +42,8 @@
 				jsonFile1: null,
 				jsonFile2: null,
 				one: {},
-				two: {}
+				two: {},
+				meanings: []
 			}
 		},
 		methods: {
@@ -79,6 +88,7 @@
 				axios.post('http://localhost:5000/getmeaning', req)
 				.then(res=>{
 					console.log(res);
+					this.meanings = res.data.trans_result;
 				});
 			}
 
@@ -90,8 +100,11 @@ ul {
 	list-style: none;
 }
 
-.left {
+.main-container {
 	padding-top:30px;
+}
+
+.left {
 	* {
 		margin-bottom:20px;
 	}
@@ -100,6 +113,6 @@ ul {
 	}
 }
 .right {
-	padding-top:30px;
+
 }
 </style>

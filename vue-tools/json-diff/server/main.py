@@ -21,21 +21,18 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 
-appid = ''
-secretKey = ''
+appid = '20180206000121301'
+secretKey = '3yP2yC5CNWNhHzA3UILu'
 
  
 httpClient = None
 myurl = '/api/trans/vip/translate'
-q = 'hello world'
+
 fromLang = 'en'
 toLang = 'zh'
 salt = random.randint(32768, 65536)
 
-sign = appid+q+str(salt)+secretKey
-m1  = hashlib.md5()  
-m1.update(sign.encode("utf-8"))
-sign = m1.hexdigest()
+
 baseUrl = 'http://api.fanyi.baidu.com'
 
 @app.route("/")
@@ -51,7 +48,7 @@ def json_upload():
   submitted_file2 = request.files['file2']
   submitted_file1.save("source/one.json")
   submitted_file2.save("source/two.json")
-  return true
+  return 1
 
 @app.route("/getjson")
 @cross_origin()
@@ -69,9 +66,16 @@ def json_loader():
 @cross_origin()
 def get_mean_from_baidu():
   content = request.form['content']
-  transurl = baseUrl + myurl+'?appid='+appid+'&q='+urllib.quote(content)+'&from='+fromLang+'&to='+toLang+'&salt='+str(salt)+'&sign='+sign
+  sign = appid+content+str(salt)+secretKey
+  m1  = hashlib.md5()  
+  m1.update(sign.encode("utf-8"))
+  sign = m1.hexdigest()
+
+  transurl = baseUrl + myurl+'?appid='+appid+'&q='+urllib.parse.quote(content)+'&from='+fromLang+'&to='+toLang+'&salt='+str(salt)+'&sign='+sign
+  print(transurl)
   r = requests.get(transurl, headers={'Connection':'close'})
-  return r
+  print(r.json())
+  return jsonify(r.json())
 
 
 
