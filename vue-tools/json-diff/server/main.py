@@ -24,8 +24,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["JSON_SORT_KEYS"] = False
 
 
-appid = '20180206000121301'
-secretKey = '3yP2yC5CNWNhHzA3UILu'
+appid = ''
+secretKey = ''
 
  
 httpClient = None
