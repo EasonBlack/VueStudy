@@ -1,32 +1,42 @@
 <template>
 	<div class='container-fluid' >
 		<div class='row main-container'>
-			<div class='left col-3'>
-				<input type='file' @change="onFileChange($event, 1)"/>
-				<input type='file' @change="onFileChange($event, 2)"/>
-				<button class='btn btn-primary' @click='postFile'>Upload</button>
-				<button class='btn btn-primary' @click='fetchContent'>Fetch</button>
-				<button class='btn btn-primary' @click='save'>Save</button>
-			</div>
-			<div class='right col-6'>
+			<div class='content col-9'>
 				<ul>
 					<li v-for='(item,key, $index) in one' :key='$index'>
-							<label>{{$index}}:{{key}}</label>
-							<label>{{item}}</label>
+
+						<div class='word-key'>
+							<label :title='key'>{{$index+1}}:{{key}}</label>
+							<label :title='item'>[{{item}}]</label>
+						</div>
+
+						<div class='word-content d-flex align-items-center'>
 							<input v-model='two[key]'/>
-							<button class='btn btn-info' @click='fetchMeaning(key)'>Dictionary</button>
+							<button class='btn btn-info btn-sm' @click='fetchMeaning(key)'>Dictionary</button>
+						</div>
+						
 					</li>
 				</ul>
-
 			</div>
-			<div class='col-3'>
+			<div class='right col-3'>
+				<div>
+					<input type='file' @change="onFileChange($event, 1)"/>
+					<input type='file' @change="onFileChange($event, 2)"/>
+					<button class='btn btn-primary btn-block' @click='postFile'>Upload</button>
+					<button class='btn btn-primary btn-block' @click='fetchContent'>Fetch</button>
+					<button class='btn btn-primary btn-block' @click='save'>Save</button>
+				</div>
+
 				<ul>
 					<li></li>
-					<li v-for='(item,$index) in meanings' :key='$index'>
-						{{item.dst}}
+					<li class='d-flex align-items-center meaning-item' v-for='(item,$index) in meanings' :key='$index'>
+						<label>{{item.dst}}</label>
+						<button class='btn btn-primary btn-sm' @click='getThisMeaning(item.dst)'>Get</button>
 					</li>
 				</ul>
+								
 			</div>
+		
 		</div>
 	
 		
@@ -44,7 +54,8 @@
 				jsonFile2: null,
 				one: {},
 				two: {},
-				meanings: []
+				meanings: [],
+				selectedKey: ''
 			}
 		},
 		methods: {
@@ -90,6 +101,7 @@
 				.then(res=>{
 					console.log(res);
 					this.meanings = res.data.trans_result;
+					this.selectedKey = key;
 				});
 			},
 
@@ -104,6 +116,13 @@
 					this.fetchContent();
 				});
 				
+			},
+
+			getThisMeaning(str) {
+				if(!this.selectedKey) return false;
+				this.two[this.selectedKey] = str;
+				console.log(str);
+				this.$forceUpdate();
 			}
 
 		}
@@ -118,15 +137,49 @@ ul {
 	padding-top:30px;
 }
 
-.left {
+.right {
 	* {
 		margin-bottom:20px;
 	}
+
 	button {
 		display: block;
 	}
-}
-.right {
 
+	ul {
+		border-top: 1px solid rgba(black, 0.3);
+		padding-left: 0;
+	}
+
+	.meaning-item {
+		label {
+			margin-right:10px;
+		}
+		button,label {
+			margin-bottom:0;
+		}
+	}
 }
+
+.content {
+	height: 80vh;
+	overflow-y:auto;
+	.word-key {
+		flex: 2;
+	}
+	.word-content {
+		flex: 1;
+	}
+
+	li {
+		display:flex;
+		align-items: center;
+		margin-bottom:10px;
+		label {
+			margin-bottom:0;
+		}
+	}
+}
+
+
 </style>
