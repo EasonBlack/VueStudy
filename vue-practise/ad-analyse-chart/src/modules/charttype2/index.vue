@@ -1,6 +1,6 @@
 <template>
     <div>
-        This is center
+        This is chart type 2
     </div>
 </template>
 

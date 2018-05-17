@@ -8,12 +8,16 @@ import '$bootstrap';
 
 Vue.use(resource);
 
+// IMPORT ALL ELEMENT UI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 Vue.use(ElementUI);
-// import {ElMenu, ElSubmenu} from 'element-ui';
-// Vue.component(ElMenu.name, ElMenu);
-// Vue.component(ElSubmenu.name, ElSubmenu);
+// import {Menu,MenuItem} from 'element-ui';
+// import 'element-ui/lib/theme-default/index.css';
+// console.log(Menu);
+// Vue.component(Menu.name, Menu);
+// Vue.component(MenuItem.name, MenuItem);
+
 
 import '../styles/main.scss';
 
