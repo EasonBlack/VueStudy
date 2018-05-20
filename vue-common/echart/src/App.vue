@@ -23,6 +23,9 @@
                 Toggle
             </button>
         </div>
+         <div class='chart__container'>
+            <bar-demo3 :data='singleObjectData'></bar-demo3>
+        </div>
 	</div>
 
 </template>
@@ -32,11 +35,12 @@
     import barSimple from '../bar-simple/index.vue';
     import barDemo1 from '../bar-demo-1/index.vue';
     import barDemo2 from '../bar-demo-2/index.vue';
+    import barDemo3 from '../bar-demo-3/index.vue';
     import areaDemo1 from '../area-demo-1/index.vue';
     import chinaMapDemo from '../china-map-demo/index.vue';
     import pieDemo from '../pie-demo/index.vue';
 	export default {
-	    components: {barSimple, barDemo1, barDemo2, areaDemo1, chinaMapDemo, pieDemo},
+	    components: {barSimple, barDemo1, barDemo2,barDemo3, areaDemo1, chinaMapDemo, pieDemo},
 		data() {
 			return {
                 singleObjectData: {
