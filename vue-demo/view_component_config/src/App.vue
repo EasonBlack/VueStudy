@@ -12,7 +12,9 @@
         <div class='row'>
             <router-view></router-view>
         </div>
-       
+        <div class='loader-mask' v-if='screenSpin'>
+			<div class='loader'></div>
+		</div>
     </div>
 </template>
 
