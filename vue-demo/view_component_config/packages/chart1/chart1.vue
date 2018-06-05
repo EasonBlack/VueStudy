@@ -4,6 +4,16 @@
 
 <script>
     export default {
-        name: 'chart1'
+        name: 'chart1',
+        data() {
+            return {
+                content: null
+            }
+        },
+        created() {
+            setTimeout(()=>{
+                this.content = 'CHART ONE';
+            }, 1000);
+        }
     }
 </script>
