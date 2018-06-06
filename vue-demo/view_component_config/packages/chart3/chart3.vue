@@ -18,8 +18,10 @@
             }
         },
         created() {
+            this.$store.commit('addLoadingNum');
             setTimeout(()=>{
                 this.content = 'CHART THERE';
+                this.$store.commit('minusLoadingNum');
             }, 1000);
         }
     }

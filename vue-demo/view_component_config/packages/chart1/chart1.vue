@@ -1,5 +1,12 @@
 <template>
-    <div>This is Chart 1</div>
+    <div>
+        <div>
+            This is Chart 1
+        </div>
+        <div>
+            {{content}}
+        </div>
+    </div>
 </template>
 
 <script>
@@ -11,9 +18,11 @@
             }
         },
         created() {
+            this.$store.commit('addLoadingNum');
             setTimeout(()=>{
                 this.content = 'CHART ONE';
-            }, 1000);
+                this.$store.commit('minusLoadingNum');
+            }, 2000);
         }
     }
 </script>

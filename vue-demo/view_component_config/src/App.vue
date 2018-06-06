@@ -12,13 +12,14 @@
         <div class='row'>
             <router-view></router-view>
         </div>
-        <div class='loader-mask' v-if='screenSpin'>
+        <div class='loader-mask' v-if='loadingNum'>
 			<div class='loader'></div>
 		</div>
     </div>
 </template>
 
 <script>
+    import { mapState, mapGetters, mapMutations, mapActions  } from 'vuex';
 	export default {
         data() {
             return {
@@ -33,6 +34,11 @@
             handleSelect(key, keyPath) {
                 this.$router.push({ path: key });
             }
+        },
+        computed: {
+            ...mapState({
+                loadingNum: (state)=>state.app.loadingNum
+            })
         }
 	}
 </script>
