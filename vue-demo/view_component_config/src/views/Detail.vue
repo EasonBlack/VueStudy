@@ -1,7 +1,7 @@
 <template>
     <div class='view-wrapper'>
        <div v-for='item in items' :key='item.name' :class='"col-" + item.w'>
-            <component :is="item.name" />
+            <component :is="item.name"  :p1="'2'"  :p2="'3'"/>
        </div>
     </div>
 </template>

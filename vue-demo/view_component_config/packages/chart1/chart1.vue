@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            This is Chart 1
+            This is Chart 1 {{p1}}, {{p2}}
         </div>
         <div>
             {{content}}
@@ -12,6 +12,7 @@
 <script>
     export default {
         name: 'chart1',
+        props: ['p1', 'p2'],
         data() {
             return {
                 content: null
