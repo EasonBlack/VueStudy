@@ -2,3 +2,11 @@
 /node_modules
 /vue-practise/data_center/site_images
 __pycache__
+/vendor/composer
+/vendor/container-interop
+/vendor/nikic
+/vendor/pimple
+/vendor/psr
+/vendor/slim
+/vendor/tobscure
+/vendor/autoload.php

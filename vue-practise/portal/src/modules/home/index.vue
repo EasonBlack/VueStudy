@@ -2,7 +2,7 @@
     <div>
        <img src='../../../assets/spinner.gif' v-if='!mydata.length'  />
        <ul v-if='mydata.length'>
-           <li v-for='item in mydata'>
+           <li v-for='item in mydata' :key='item.name'>
              {{item.name}}
            </li>
        </ul>

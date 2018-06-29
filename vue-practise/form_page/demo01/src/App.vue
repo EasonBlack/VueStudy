@@ -6,29 +6,29 @@
 		    <div class='login__login' >
 		        <div class='row'>
                     <form-row-input :title='"Email"' :w='"35%"'>
-                        <input></input>
+                        <input/>
                     </form-row-input>
 		        </div>
 		        <div class='row'>
 		            <form-row-input :title='"Password"' :w='"35%"' >
-                        <input></input>
+                        <input/>
                     </form-row-input>
 		        </div>
 		        <div class='row'>
 		             <form-row-input :title='"Re Password"' :w='"35%"'>
-                        <input></input>
+                        <input/>
                     </form-row-input>
 		        </div>
                 <div class='row'>
 		             <form-row-input :title='"City"' :title2='"State"' :w='"35%"'>
-                        <input></input>
-                        <input slot='input2'></input>
+                        <input/>
+                        <input slot='input2'/>
                     </form-row-input>
 		        </div>
 
 		        <div class='row'>
 		            <form-row-input :title='"Code"' :w='"35%"' class='form__code'>
-                            <input ></input>
+                            <input />
                             <a>Get Code</a>
                     </form-row-input>
 		        </div>
