@@ -1,11 +1,14 @@
 <template>
 	<div class='main-container noisy fluid-container'>
+		<app-nav />
 		<router-view />
 	</div>
 </template>
 
 <script>
+	import appNav from './AppNav.vue';
 	export default {
+		components: {appNav}
 		
 	}
 </script>
@@ -14,8 +17,6 @@
 		width:100vw;
 		height:100vh;
 		background-color: #40526F;
-		display:flex;
-		justify-content: center;
-		align-items: center;
+		
 	}
 </style>
