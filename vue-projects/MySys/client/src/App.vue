@@ -1,7 +1,7 @@
 <template>
 	<div class='main-container noisy fluid-container'>
 		<app-nav />
-		<router-view />
+		<router-view style='flex:1' />
 	</div>
 </template>
 
@@ -16,7 +16,9 @@
 	.main-container {
 		width:100vw;
 		height:100vh;
-		background-color: #40526F;
-		
+		background-color: steelblue;
+		// background-color: #40526F;
+		display:flex;
+		flex-direction:column;
 	}
 </style>

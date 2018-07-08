@@ -47,7 +47,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue'
+            'vue$': 'vue/dist/vue',
+            '$commoncomponents': path.resolve(__dirname, './src/common/components'),
+            '$commonfunctions': path.resolve(__dirname, './src/common/functions'),
         }
     },
     devServer: {
