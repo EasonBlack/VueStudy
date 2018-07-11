@@ -38,7 +38,10 @@
                 currentName: 'current',
                 items : [
                     {name: 'current', title: 'Current', path:'/current'},
-                    {name: 'inspire', title: 'Inspire', path:'/inspire'},
+                    {name: 'inspire', title: 'Inspire', isdown: false ,items: [
+                        {name: 'inspire_new', title: 'New', path : '/inspire/new'},
+                        {name: 'inspire_list', title: 'List', path : '/inspire/list'},
+                    ]},
                     {name: 'collection', title: 'Collection', isdown: false ,items: [
                         {name: 'collection_it', title: 'IT', path : '/collectionit'},
                         {name: 'collection_lit', title: 'Lit', path : '/collectionlit'},

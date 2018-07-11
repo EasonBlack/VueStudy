@@ -15,7 +15,8 @@
 </template>
 <script>
     import myTextArea from '$commoncomponents/myTextArea.vue';
-    import {PostCurrent, GetCurrent,GetCurrentById,  PutCurrent, GetAfterPutCurrent} from '$commonfunctions/api.js';
+    //import {PostCurrent, GetCurrent,GetCurrentById,  PutCurrent, GetAfterPutCurrent} from '$commonfunctions/api.js';
+    import { ApiCurrent } from '$api/index';
     export default {
         components: {myTextArea},
         data() {
@@ -26,11 +27,12 @@
         },
         created() {
            this.getCurrent();
+           console.log(current);
         },
         methods: {  
             
             getCurrent() {
-                GetCurrent()
+                ApiCurrent.GetCurrent()
                 .then(r=>{
                     this.items = r.data;
                     this.selectItem = this.items.length ? this.items[0]: {}       
@@ -39,7 +41,7 @@
             
             save() {
                 let _item = this.selectItem;
-                GetAfterPutCurrent({ID: _item.ID, content: _item.CONTENT})
+                ApiCurrent.GetAfterPutCurrent({ID: _item.ID, content: _item.CONTENT})
                 .then(o=>{               
                     console.log(o);
                     this.selectItem = o[0];
@@ -74,12 +76,6 @@
         cursor: pointer;
     }
 
-    .textarea-wrapper {
-        padding:10px 1rem;
-        height:50%;
-    }
-    .action-wrapper {
-        padding:10px 1rem;
-    }
    
+ 
 </style>

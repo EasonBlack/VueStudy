@@ -50,6 +50,7 @@ module.exports = {
             'vue$': 'vue/dist/vue',
             '$commoncomponents': path.resolve(__dirname, './src/common/components'),
             '$commonfunctions': path.resolve(__dirname, './src/common/functions'),
+            '$api': path.resolve(__dirname, './src/api'),
         }
     },
     devServer: {
