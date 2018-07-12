@@ -9,8 +9,9 @@ import Charactor from './views/book_charactor/index.vue'
 import Current from './views/current/index.vue';
 import Inspire from './views/inspire/index.vue';
 import InspireList from './views/inspire_list/index.vue';
-import CollectionIt from './views/collection_it/index.vue';
-import CollectionLit from './views/collection_lit/index.vue';
+import CollectionItNew from './views/collection/it/index.vue';
+import CollectionItList from './views/collection/it/list.vue';
+import CollectionLit from './views/collection/lit/index.vue';
 
 const router = new VueRouter({
   
@@ -19,7 +20,8 @@ const router = new VueRouter({
         { path: '/current', name: 'current', component: Current },
         { path: '/inspire/new',  name: 'inspire-new', component: Inspire},
         { path: '/inspire/list',  name: 'inspire-list', component: InspireList},
-        { path: '/collectionit',  name: 'collectionit', component: CollectionIt },
+        { path: '/collectionit/new',  name: 'collectionit-new', component: CollectionItNew },
+        { path: '/collectionit/list',  name: 'collectionit-list', component: CollectionItList },
         { path: '/collectionlit',  name: 'collectionlit', component: CollectionLit },
         { path: '/book', name: 'book', component: Book },
         { path: '/book/:id', component: General, children: [

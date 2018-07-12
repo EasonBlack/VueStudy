@@ -1,5 +1,7 @@
 <template>
-    <div>LIT</div>
+    <div>
+        
+    </div>
 </template>
 <script>
      export default  {}

@@ -27,7 +27,7 @@
         },
         created() {
            this.getCurrent();
-           console.log(current);
+           //console.log(current);
         },
         methods: {  
             

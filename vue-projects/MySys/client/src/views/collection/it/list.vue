@@ -4,13 +4,11 @@
             <el-select
                 class='el-select'
                 v-model="currentCategory"
-                multiple
-                filterable
                 allow-create
                 default-first-option
                 placeholder="Category">
                 <el-option
-                    v-for="item in litItems"
+                    v-for="item in categoryItems"
                     :key="item.ID"
                     :label="item.NAME"
                     :value="item.ID">
@@ -33,35 +31,63 @@
                     :value="item.ID">
                 </el-option>
             </el-select>
+            <button class='btn btn-primary' @click='search'>Confirm</button>
         </div>
-        <div class='textarea-wrapper'>
-            <my-text-area v-model='content' />
-        </div>
-        <div class='action-wrapper'>
-            <button class='btn btn-primary' @click='save'>Save</button>
+        <div class='section-wrapper'>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <div class='col-6 collection-wrapper' v-for='item in collectionItems' :key='item.ID'>
+                        <collection-card :item='item' />
+                    </div>
+                </div>
+            </div>
+           
         </div>
     </div>
 </template>
 <script>
     import {mapState} from 'vuex';
-     export default  {
+    import collectionCard from '../card.vue';
+    export default {
+        components: { collectionCard },
         data() {
             return {
                 currentCategory: '',
-                currentKey: '',
+                currentKeys: '',
+                content: '',
+                collectionItems: []
             }
         },
         created() {
+            if(!this.categoryItems.length) {
+                this.$store.dispatch('getItCategory')
+            }
             if(!this.itItems.length) {
                 this.$store.dispatch('getItItems')
             }
         },
-        computed: {
+        methods: {
+            search() {
+                this.$store.dispatch('getItCollection', {
+                    category: this.currentCategory,
+                    key: this.currentKeys.join(',')
+                }).then(result => {
+                    this.collectionItems = result.data;
+                })
+            }
+        },
+         computed: {
 			...mapState({
+                categoryItems: (state) => state.category.itCategory,
                 itItems : (state) => state.key.itItems
             })
 		}
-     }
+    }
 </script>
-<style lang='scss' soped>
+<style lang='scss' scoped>
+    .collection-wrapper {
+        display:flex;
+        padding-left:0px;
+        margin-bottom:10px;
+    }
 </style>

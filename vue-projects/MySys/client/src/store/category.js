@@ -17,12 +17,12 @@ const mutations = {
 
 const actions = {
   async getLitCategory({commit, state, rootState, dispatch}, req) {
-    let result = await ApiKey.ApiCategory('lit');
+    let result = await ApiCategory.GetCategory('lit');
     commit('setLitCategory', result.data);
   },
 
-  async getItItems({commit, state, rootState, dispatch}, req) {
-    let result = await ApiKey.ApiCategory('it');
+  async getItCategory({commit, state, rootState, dispatch}, req) {
+    let result = await ApiCategory.GetCategory('it');
     commit('setItCategory', result.data);
   },
   

@@ -39,12 +39,13 @@
                 items : [
                     {name: 'current', title: 'Current', path:'/current'},
                     {name: 'inspire', title: 'Inspire', isdown: false ,items: [
-                        {name: 'inspire_new', title: 'New', path : '/inspire/new'},
-                        {name: 'inspire_list', title: 'List', path : '/inspire/list'},
+                        {name: 'inspire-new', title: 'New', path : '/inspire/new'},
+                        {name: 'inspire-list', title: 'List', path : '/inspire/list'},
                     ]},
                     {name: 'collection', title: 'Collection', isdown: false ,items: [
-                        {name: 'collection_it', title: 'IT', path : '/collectionit'},
-                        {name: 'collection_lit', title: 'Lit', path : '/collectionlit'},
+                        {name: 'collection-it-new', title: 'IT New', path : '/collectionit/new'},
+                        {name: 'collection-it-list', title: 'IT List', path : '/collectionit/list'},
+                        {name: 'collection-lit', title: 'Lit', path : '/collectionlit'},
                     ]},
                     {name: 'book', title: 'Book', path:'/book'},
                 ]
