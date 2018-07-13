@@ -342,4 +342,11 @@ textarea {
 .section-wrapper {
   padding: 10px 1rem; }
 
+.li-card {
+  background-color: steelblue;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-size: 10px;
+  color: white; }
+
 /*# sourceMappingURL=main.css.map */

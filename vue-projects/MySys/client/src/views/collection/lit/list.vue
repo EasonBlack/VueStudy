@@ -25,7 +25,7 @@
                 default-first-option
                 placeholder="Keys">
                 <el-option
-                    v-for="item in itItems"
+                    v-for="item in litItems"
                     :key="item.ID"
                     :label="item.NAME"
                     :value="item.ID">
@@ -62,37 +62,28 @@
         },
         created() {
             if(!this.categoryItems.length) {
-                this.$store.dispatch('getItCategory')
+                this.$store.dispatch('getLitCategory')
             }
-            if(!this.itItems.length) {
-                this.$store.dispatch('getItItems')
+            if(!this.litItems.length) {
+                this.$store.dispatch('getLitItems')
             }
         },
         methods: {
             search() {
-                this.$store.dispatch('getItCollection', {
+                this.$store.dispatch('getLitCollection', {
                     category: this.currentCategory,
                     key: this.currentKeys.join(',')
                 }).then(result => {
                     this.collectionItems = result.data;
                 })
             },
-            // oddItems(items) {
-            //     return items.filter((item,index)=>{
-            //         if (index % 2==0) return item;
-            //     })
-            // },
-            // evenItems(items) {
-            //     return items.filter((item,index)=>{
-            //         if (index % 2==1) return item;
-            //     })
-            // }
+          
             
         },
         computed: {
 			...mapState({
-                categoryItems: (state) => state.category.itCategory,
-                itItems : (state) => state.key.itItems
+                categoryItems: (state) => state.category.litCategory,
+                litItems : (state) => state.key.litItems
             })
 		}
     }

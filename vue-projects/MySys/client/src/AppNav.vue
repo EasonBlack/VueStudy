@@ -45,7 +45,8 @@
                     {name: 'collection', title: 'Collection', isdown: false ,items: [
                         {name: 'collection-it-new', title: 'IT New', path : '/collectionit/new'},
                         {name: 'collection-it-list', title: 'IT List', path : '/collectionit/list'},
-                        {name: 'collection-lit', title: 'Lit', path : '/collectionlit'},
+                        {name: 'collection-lit-new', title: 'Lit New', path : '/collectionlit/new'},
+                        {name: 'collection-lit-list', title: 'Lit List', path : '/collectionlit/list'},
                     ]},
                     {name: 'book', title: 'Book', path:'/book'},
                 ]
