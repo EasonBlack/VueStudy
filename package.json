@@ -18,7 +18,7 @@
     "cors": "^2.8.1",
     "d3": "^4.3.0",
     "echarts": "^4.0.2",
-    "element-ui": "^2.4.3",
+    "element-ui": "^2.4.4",
     "express-vue": "^3.4.2",
     "flag-icon-css": "^2.8.0",
     "highcharts": "^5.0.6",
