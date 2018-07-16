@@ -3,7 +3,7 @@
         
         <div class='action-wrapper'>
             <el-select
-                class='el-select'
+                class='el-select mr-10'
                 v-model="currentCategory"
                 allow-create
                 default-first-option
@@ -19,7 +19,7 @@
         </div>
         <div class='action-wrapper'>
             <el-select
-                class='el-select'
+                class='el-select mr-10'
                 v-model="currentKeys"
                 multiple
                 filterable
@@ -33,6 +33,7 @@
                     :value="item.ID">
                 </el-option>
             </el-select>
+            <input class='form-control d-inline-block search-txt mr-10' placeholder='Search' v-model='currentSearch' />
             <button class='btn btn-primary' @click='search'>Confirm</button>
         </div>
         <div class='section-wrapper'>
@@ -41,8 +42,7 @@
                     <div class='row'>          
                         <div class='col-6 collection-wrapper'  v-for='item in collectionItems'  v-if='collectionItems.length' :key='item.ID'>
                             <collection-card :item='item' @edit='edit'/>
-                        </div>
-                    
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -72,6 +72,7 @@
                 currentId: '',
                 currentKeys: '',
                 content: '',
+                currentSearch: '',
                 collectionItems: [],
                 
                 getCategoryStr: '',
@@ -96,7 +97,8 @@
             search() {
                 this.$store.dispatch(this.getCollectionStr, {
                     category: this.currentCategory,
-                    key: this.currentKeys.join(',')
+                    key: this.currentKeys.join(','),
+                    search: this.currentSearch,
                 }).then(result => {
                     this.collectionItems = result.data;
                 })
@@ -212,6 +214,10 @@
 
     .el-select {
         width:30%;
+    }
+
+    .search-txt {
+        width: auto !important;
     }
 
 </style>

@@ -337,7 +337,9 @@ textarea {
   height: 50%; }
 
 .action-wrapper {
-  padding: 10px 1rem; }
+  padding: 10px 1rem;
+  display: flex;
+  align-items: center; }
 
 .section-wrapper {
   padding: 10px 1rem; }
