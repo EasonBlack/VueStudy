@@ -10,7 +10,7 @@
         data() {
             return {
                 books: [
-                    "a", "b", "c", "d", "e", "f", "gg", "ss", "123"
+                    "a", "b", "c", "d", "e", "f", "gg", "ss", "123", "aaa", "ccc", "ddfdf", 'dfdfde22'
                 ]
             }
         },
@@ -33,7 +33,7 @@
     .book-card-wrapper {
         min-width:25%;
         max-width:25%;
-        height:200px;
+        height: 33.33%;
         display:flex;
         justify-content: center;
         align-items: center;

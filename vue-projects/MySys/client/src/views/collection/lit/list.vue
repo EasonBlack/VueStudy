@@ -1,97 +1,28 @@
-<template>
-    <div>
-        <div class='action-wrapper'>
-            <el-select
-                class='el-select'
-                v-model="currentCategory"
-                allow-create
-                default-first-option
-                placeholder="Category">
-                <el-option
-                    v-for="item in categoryItems"
-                    :key="item.ID"
-                    :label="item.NAME"
-                    :value="item.ID">
-                </el-option>
-            </el-select>
-        </div>
-        <div class='action-wrapper'>
-            <el-select
-                class='el-select'
-                v-model="currentKeys"
-                multiple
-                filterable
-                allow-create
-                default-first-option
-                placeholder="Keys">
-                <el-option
-                    v-for="item in litItems"
-                    :key="item.ID"
-                    :label="item.NAME"
-                    :value="item.ID">
-                </el-option>
-            </el-select>
-            <button class='btn btn-primary' @click='search'>Confirm</button>
-        </div>
-        <div class='section-wrapper'>
-            <div class='container-fluid'>
-                <div class='row'>
-                   
-                    <div class='col-6 collection-wrapper'  v-for='item in collectionItems'  v-if='collectionItems.length' :key='item.ID'>
-                        <collection-card :item='item' />
-                    </div>
-                
-                </div>
-            </div>
-           
-        </div>
-    </div>
-</template>
+
 <script>
+
+    import base from '../list.base.vue';
     import {mapState} from 'vuex';
-    import collectionCard from '../card.vue';
-    export default {
-        components: { collectionCard },
-        data() {
-            return {
-                currentCategory: '',
-                currentKeys: '',
-                content: '',
-                collectionItems: []
-            }
-        },
-        created() {
-            if(!this.categoryItems.length) {
-                this.$store.dispatch('getLitCategory')
-            }
-            if(!this.litItems.length) {
-                this.$store.dispatch('getLitItems')
-            }
-        },
-        methods: {
-            search() {
-                this.$store.dispatch('getLitCollection', {
-                    category: this.currentCategory,
-                    key: this.currentKeys.join(',')
-                }).then(result => {
-                    this.collectionItems = result.data;
-                })
-            },
-          
-            
+	export default {
+        extends: base,
+		data() {
+			return {
+			    getCategoryStr: 'getLitCategory',
+                getkeyStr: 'getLitItems',
+                getCollectionStr: 'getLitCollection',
+
+                postCollectionStr: 'postLitCollection',
+                postKeyStr: 'postLitItems',
+                putCollectionStr: 'putLitCollection',
+			}
         },
         computed: {
 			...mapState({
                 categoryItems: (state) => state.category.litCategory,
-                litItems : (state) => state.key.litItems
+                keyItems : (state) => state.key.litItems
             })
 		}
-    }
+		
+	}
+
 </script>
-<style lang='scss' scoped>
-    .collection-wrapper {
-        display:flex;
-        padding-left:0px;
-        margin-bottom:10px;
-    }
-</style>

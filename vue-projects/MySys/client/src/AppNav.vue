@@ -18,8 +18,9 @@
                             {{item.title}}
                         </a>
                         <div class="dropdown-menu" :class='{down: item.isdown}' >
-                            <a class="dropdown-item" href="javascript:void(0)" v-for='child in item.items' :key='child.name'  @click='goto(child)'
-                                :class='{active: item.name==currentName}'
+                            <a class="dropdown-item" href="javascript:void(0)" 
+                            v-for='child in item.items' :key='child.name'  @click='goto(child)'
+                                :class='{active: child.name==currentName}'
                             >
                                 {{child.title}}
                             </a>
@@ -42,11 +43,9 @@
                         {name: 'inspire-new', title: 'New', path : '/inspire/new'},
                         {name: 'inspire-list', title: 'List', path : '/inspire/list'},
                     ]},
-                    {name: 'collection', title: 'Collection', isdown: false ,items: [
-                        {name: 'collection-it-new', title: 'IT New', path : '/collectionit/new'},
-                        {name: 'collection-it-list', title: 'IT List', path : '/collectionit/list'},
-                        {name: 'collection-lit-new', title: 'Lit New', path : '/collectionlit/new'},
-                        {name: 'collection-lit-list', title: 'Lit List', path : '/collectionlit/list'},
+                    {name: 'collection', title: 'Collection', isdown: false ,items: [     
+                        {name: 'collection-it-list', title: 'IT', path : '/collectionit/list'},
+                        {name: 'collection-lit-list', title: 'Lit', path : '/collectionlit/list'},
                     ]},
                     {name: 'book', title: 'Book', path:'/book'},
                 ]
@@ -60,6 +59,8 @@
                 this.isMenuDown = !this.isMenuDown;
             },
             goto(item) {
+                //item.isdown = false;
+                this.items.forEach(t=> {t.isdown=false});
                 this.currentName = item.name;
                 this.$router.push(item.path);
             }

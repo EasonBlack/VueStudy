@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {ApiUrl} from './config.js';
 
 export async function PostCurrent(obj) {
     return await axios.post(`${ApiUrl}/current`, obj)    

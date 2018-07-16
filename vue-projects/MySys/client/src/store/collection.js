@@ -30,6 +30,16 @@ const actions = {
         let result = await ApiCollection.PostCollection(Object.assign({table: 'lit'}, req));
         return result;
     },
+
+    async putItCollection({commit, state, rootState, dispatch}, req) {
+        let result = await ApiCollection.PutCollection(Object.assign({table: 'it'}, req));
+        return result;
+    },
+
+    async putLitCollection({commit, state, rootState, dispatch}, req) {
+        let result = await ApiCollection.PutCollection(Object.assign({table: 'lit'}, req));
+        return result;
+    },
 }
 
 export default {
