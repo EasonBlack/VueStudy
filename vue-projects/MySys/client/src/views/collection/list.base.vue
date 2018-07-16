@@ -132,9 +132,14 @@
                     this.currentKeys = _orginKeys.concat(this.keyItems.filter(o=>newItems.indexOf(o.NAME)!=-1).map(o=>o.ID));
                 } 
 
+                
+                let _content = this.content.replace(/\\/g,'\\\\');
+                _content = _content.replace(/\'/g,'\\\'');
+                _content = _content.replace(/\%/g,'\\\%');
+
                 return {
                     id: this.currentId,
-                    content: this.content, 
+                    content: _content, 
                     keys: this.currentKeys.join(','),
                     category: this.currentCategory
                 }
@@ -150,6 +155,8 @@
             saveCollection(collection) {
                 this.$store.dispatch(this.postCollectionStr, collection)
                 .then(o=>{
+                    console.log(collection);
+                    console.log(o);
                     alert('Finish');
                     this.cancel();
                 })

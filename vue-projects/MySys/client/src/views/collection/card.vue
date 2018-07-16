@@ -32,6 +32,7 @@
         padding-bottom: 5px;
         padding-top: 5px;
         position: relative;
+        background-color: rgba(#174A75, 0.3);
         &:hover {
             .btn-edit {
                 display:block;
@@ -60,5 +61,6 @@
         margin-bottom: 0px;
         overflow:hidden;
         
+        color: white;
     }
 </style>
