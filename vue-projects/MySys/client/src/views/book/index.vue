@@ -1,7 +1,7 @@
 <template>
     <div class='book-list-wrapper'>
-        <div class='book-card-wrapper' v-for='book in books' :key='book'>
-            <div class='book-card'>{{book}}</div>
+        <div class='book-card-wrapper' v-for='book in books' :key='book.ID'>
+            <div class='book-card' @click='goto(book.ID)' >{{book.NAME}}</div>
         </div>
     </div>
 </template>
@@ -9,10 +9,14 @@
     export default {
         data() {
             return {
-                books: [
-                    "a", "b", "c", "d", "e", "f", "gg", "ss", "123", "aaa", "ccc", "ddfdf", 'dfdfde22'
-                ]
+                books: []
             }
+        },
+        created() {
+            this.$store.dispatch('getBook')
+            .then(result=>{
+                this.books = result.data;
+            })
         },
         methods: {
             goto(id) {
@@ -40,10 +44,16 @@
         
     }
     .book-card {
-        width:100px;
-        height:50px;
+        font-size:20px;
+        width:160px;
+        height: 100px;
         color: white;
-        background-color: green;
+        padding: 10px;
+        background-color: rgba(#8dddbd, 0.4);
+        box-shadow: 2px 2px 3px 0px #496887;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 </style>

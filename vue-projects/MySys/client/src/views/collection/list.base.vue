@@ -63,7 +63,7 @@
 <script>
     import {mapState} from 'vuex';
     import myTextArea from '$commoncomponents/myTextArea.vue';
-    import collectionCard from './card.vue';
+    import collectionCard from '$commoncomponents/card.vue';
     export default {
         components: { collectionCard, myTextArea },
         data() {

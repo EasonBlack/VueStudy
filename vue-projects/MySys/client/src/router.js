@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import Book from './views/book/index.vue'
-import General from './views/book_general/index.vue'
+import BookIndex from './views/book_general/index.vue'
+import General from './views/book_general/general.vue'
 import Charactor from './views/book_charactor/index.vue'
 
 import Current from './views/current/index.vue';
@@ -17,16 +18,17 @@ const router = new VueRouter({
     routes: [
        
         { path: '/current', name: 'current', component: Current },
-        { path: '/inspire/new',  name: 'inspire-new', component: Inspire},
-        { path: '/inspire/list',  name: 'inspire-list', component: InspireList},
+        //{ path: '/inspire/new',  name: 'inspire-new', component: Inspire},
+        { path: '/inspire',  name: 'inspire-list', component: InspireList},
       
         { path: '/collectionit/list',  name: 'collectionit-list', component: CollectionItList },
      
         { path: '/collectionlit/list',  name: 'collectionlit-list', component: CollectionLitList },
         { path: '/book', name: 'book', component: Book },
-        { path: '/book/:id', component: General, children: [
+        { path: '/book/:id', component: BookIndex, children: [
+            {  path: 'general',component: General },
             {  path: 'charactor',component: Charactor },
-            {  path: '/',redirect: 'charactor' }
+            {  path: '/',redirect: 'general' }
         ]},
         { path: '/', redirect:  { name: 'book' } },
     ]
