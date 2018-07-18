@@ -9,6 +9,6 @@ export async function GetBookById(id) {
 }
 
 
-export async function GetBookCharactor(obj) {
-    return await axios.post(`${ApiUrl}/book/${obj.id}/charactor`, obj)    
+export async function GetBookCharactors(id) {
+    return await axios.get(`${ApiUrl}/book/${id}/charactor`)    
 }

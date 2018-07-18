@@ -59,8 +59,7 @@
             box-shadow: inset 0px -1px 2px 0px #ccc;
             
             &:hover {
-                border:1px solid #fff;
-                border-color:#def #678 #345 #cde;
+                border-right:10px solid #70bbb1;
             }
         }
     }

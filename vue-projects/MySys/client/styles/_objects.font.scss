@@ -1,0 +1,4 @@
+$spacers: (12,13,14,15,16,17,18,19,20);
+@each $size in $spacers {
+    .font-#{$size}  { font-size: #{$size}px !important; }
+}

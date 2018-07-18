@@ -20,8 +20,8 @@ const actions = {
         let result = await ApiBook.GetBookById(id);
         return result;
     },
-    async getBookCharactor({commit, state, rootState, dispatch}, req) {
-        let result = await ApiBook.GetBookCharactor(req);
+    async getBookCharactors({commit, state, rootState, dispatch}, id) {
+        let result = await ApiBook.GetBookCharactors(id);
         return result;
     },
 

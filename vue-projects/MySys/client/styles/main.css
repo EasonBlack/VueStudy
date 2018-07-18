@@ -344,6 +344,39 @@ textarea {
 .section-wrapper {
   padding: 10px 1rem; }
 
+.flex-1 {
+  flex: 1; }
+
+.flex-2 {
+  flex: 2; }
+
+.font-12 {
+  font-size: 12px !important; }
+
+.font-13 {
+  font-size: 13px !important; }
+
+.font-14 {
+  font-size: 14px !important; }
+
+.font-15 {
+  font-size: 15px !important; }
+
+.font-16 {
+  font-size: 16px !important; }
+
+.font-17 {
+  font-size: 17px !important; }
+
+.font-18 {
+  font-size: 18px !important; }
+
+.font-19 {
+  font-size: 19px !important; }
+
+.font-20 {
+  font-size: 20px !important; }
+
 .li-card {
   background-color: steelblue;
   padding: 2px 5px;
