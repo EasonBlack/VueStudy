@@ -25,6 +25,26 @@ const actions = {
         return result;
     },
 
+    async postBookCharactor({commit, state, rootState, dispatch}, res) {
+        let result = await ApiBook.PostBookCharactor(res);
+        return result;
+    },
+
+    async postAndGetBookCharactors({commit, state, rootState, dispatch}, res) {
+        await ApiBook.PostBookCharactor(res);
+        let result = await ApiBook.GetBookCharactors(res.id);
+        return result;
+    },
+
+    async putAndGetBookCharactors({commit, state, rootState, dispatch}, res) {
+        await ApiBook.PutBookCharactor(res);
+        let result = await ApiBook.GetBookCharactors(res.bookId);
+        return result;
+    },
+
+
+
+
    
 }
 

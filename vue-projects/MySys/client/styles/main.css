@@ -336,6 +336,9 @@ textarea {
   padding: 10px 1rem;
   height: 50%; }
 
+.input-wrapper {
+  padding: 10px 1rem; }
+
 .action-wrapper {
   padding: 10px 1rem;
   display: flex;
@@ -376,6 +379,18 @@ textarea {
 
 .font-20 {
   font-size: 20px !important; }
+
+.edit-wrapper {
+  position: absolute;
+  top: 0px;
+  right: -50%;
+  width: 50%;
+  height: 100%;
+  background-color: steelblue;
+  border-left: 1px solid white;
+  transition: right 0.5s; }
+  .edit-wrapper.active {
+    right: 0; }
 
 .li-card {
   background-color: steelblue;

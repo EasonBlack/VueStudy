@@ -10,3 +10,4 @@ __pycache__
 /vendor/slim
 /vendor/tobscure
 /vendor/autoload.php
+.sass-cache
