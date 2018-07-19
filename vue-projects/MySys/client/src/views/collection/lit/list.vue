@@ -14,12 +14,13 @@
                 postCollectionStr: 'postLitCollection',
                 postKeyStr: 'postLitItems',
                 putCollectionStr: 'putLitCollection',
+                pageType: 'lit'
 			}
         },
         computed: {
 			...mapState({
                 categoryItems: (state) => state.category.litCategory,
-                keyItems : (state) => state.key.litItems
+                //keyItems : (state) => state.key.litItems
             })
 		}
 		

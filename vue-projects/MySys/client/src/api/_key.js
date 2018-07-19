@@ -4,6 +4,10 @@ export async function GetKey(type) {
     return await axios.get(`${ApiUrl}/key/${type}`)    
 }
 
+export async function GetKeyByCategory(type, category) {
+    return await axios.get(`${ApiUrl}/key/${type}/${category}`)    
+}
+
 export async function PostKey(obj) {
     return await axios.post(`${ApiUrl}/key`, obj)    
 }

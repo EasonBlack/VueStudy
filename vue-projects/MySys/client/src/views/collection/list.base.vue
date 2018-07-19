@@ -7,6 +7,7 @@
                 v-model="currentCategory"
                 allow-create
                 default-first-option
+                @change='changeCategory()'
                 placeholder="Category">
                 <el-option
                     v-for="item in categoryItems"
@@ -74,6 +75,7 @@
                 content: '',
                 currentSearch: '',
                 collectionItems: [],
+                keyItems: [],
                 
                 getCategoryStr: '',
                 getkeyStr: '',
@@ -81,6 +83,7 @@
                 postCollectionStr: '',
                 postKeyStr: '',
                 putCollectionStr: '',
+                pageType : '',
 
                 newCollectionDisplay: false,
             }
@@ -89,9 +92,9 @@
             if(!this.categoryItems.length) {
                 this.$store.dispatch(this.getCategoryStr);
             }
-            if(!this.keyItems.length) {
-                this.$store.dispatch(this.getkeyStr);
-            }
+            // if(!this.keyItems.length) {
+            //     this.$store.dispatch(this.getkeyStr);
+            // }
         },
         methods: {
             search() {
@@ -101,6 +104,14 @@
                     search: this.currentSearch,
                 }).then(result => {
                     this.collectionItems = result.data;
+                })
+            },
+            changeCategory() {
+                //alert(this.currentCategory);
+                this.$store.dispatch("getKeyByCategory", {type: this.pageType, category: this.currentCategory})
+                .then(res=>{
+                    console.log(res);
+                    this.keyItems = res.data;
                 })
             },
             toggleNewCollectionDisplay() {
@@ -127,7 +138,8 @@
                 })
            
                 if(newItems.length) {
-                    await this.$store.dispatch(this.postKeyStr, {items: newItems})
+                    let result = await this.$store.dispatch(this.postKeyStr, {items: newItems, category: this.currentCategory})
+                    this.keyItems = result.data;
                     let _orginKeys = this.currentKeys.filter(o=>!isNaN(o)) 
                     this.currentKeys = _orginKeys.concat(this.keyItems.filter(o=>newItems.indexOf(o.NAME)!=-1).map(o=>o.ID));
                 } 

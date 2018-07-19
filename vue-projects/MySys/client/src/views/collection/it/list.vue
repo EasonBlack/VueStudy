@@ -13,12 +13,13 @@
                 postCollectionStr: 'postItCollection',
                 postKeyStr: 'postItItems',
                 putCollectionStr: 'putItCollection',
+                pageType: 'it'
 			}
         },
         computed: {
 			...mapState({
                 categoryItems: (state) => state.category.itCategory,
-                keyItems : (state) => state.key.itItems
+                //keyItems : (state) => state.key.itItems
             })
 		}
 		
