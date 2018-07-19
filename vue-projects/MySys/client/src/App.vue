@@ -1,5 +1,5 @@
 <template>
-	<div class='main-container noisy fluid-container'>
+	<div class='main-container noisy '>
 		<app-nav />
 		<router-view style='flex:1' />
 	</div>
@@ -17,7 +17,6 @@
 		width:100vw;
 		height:100vh;
 		background-color: steelblue;
-		// background-color: #40526F;
 		display:flex;
 		flex-direction:column;
 	}

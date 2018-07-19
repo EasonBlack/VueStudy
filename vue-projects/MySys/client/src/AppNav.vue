@@ -40,10 +40,6 @@
                 items : [
                     {name: 'current', title: 'Current', path:'/current'},
                     {name: 'inspire', title: 'Inspire', path : '/inspire'},
-                    // {name: 'inspire', title: 'Inspire', isdown: false ,items: [
-                    //     {name: 'inspire-new', title: 'New', path : '/inspire/new'},
-                    //     {name: 'inspire-list', title: 'List', path : '/inspire/list'},
-                    // ]},
                     {name: 'collection', title: 'Collection', isdown: false ,items: [     
                         {name: 'collection-it-list', title: 'IT', path : '/collectionit/list'},
                         {name: 'collection-lit-list', title: 'Lit', path : '/collectionlit/list'},
