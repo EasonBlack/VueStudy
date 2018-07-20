@@ -60,14 +60,19 @@
                 content: '',
                 currentSearch: '',
                 inspireItems: [],
+                keyItems: [],
 
                 newInspireDisplay: false,
             }
         },
         created() {
-            if(!this.keyItems.length) {
-                this.$store.dispatch("getLitItems");
-            }
+            this.$store.dispatch("getInspireKey")
+            .then(res=>{
+                this.keyItems = res.data;
+            })
+            // if(!this.keyItems.length) {
+            //     this.$store.dispatch("getLitItems");
+            // }
         },
         methods: {
             search() {
@@ -102,7 +107,9 @@
                 })
            
                 if(newItems.length) {
-                    await this.$store.dispatch("postLitItems", {items: newItems})
+
+                    let keyItemsResult = await this.$store.dispatch("postInspireKey", {items: newItems});
+                    this.keyItems = keyItemsResult.data;
                     let _orginKeys = this.currentKeys.filter(o=>!isNaN(o)) 
                     this.currentKeys = _orginKeys.concat(this.keyItems.filter(o=>newItems.indexOf(o.NAME)!=-1).map(o=>o.ID));
                 } 
@@ -152,9 +159,9 @@
             }
         },
         computed: {
-            ...mapState({
-                keyItems : (state) => state.key.litItems
-            })
+            // ...mapState({
+            //     keyItems : (state) => state.key.litItems
+            // })
 		}
     }
 </script>
