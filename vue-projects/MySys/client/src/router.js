@@ -8,7 +8,6 @@ import General from './views/book_general/general.vue'
 import Charactor from './views/book_charactor/index.vue'
 
 import Current from './views/current/index.vue';
-import Inspire from './views/inspire/index.vue';
 import InspireList from './views/inspire_list/index.vue';
 import CollectionItList from './views/collection/it/list.vue';
 import CollectionLitList from './views/collection/lit/list.vue';

@@ -43,6 +43,31 @@ const actions = {
     },
 
 
+    async getCharactorContentByCId({commit, state, rootState, dispatch}, id) {
+        let result = await ApiBook.GetCharactorContentByCId(id)
+        return result;
+    },
+
+    async getCharactorContentById({commit, state, rootState, dispatch}, id) {
+        let result = await ApiBook.GetCharactorContentById(id)
+        return result;
+    },
+
+
+    async postAndGetCharactorContent({commit, state, rootState, dispatch}, res) {
+        let pre = await ApiBook.PostCharactorContent(res);
+        console.log(pre);
+        let result = await ApiBook.GetCharactorContentByCId(res.id);
+        return result;
+    },
+
+    async putAndGetCharactorContent({commit, state, rootState, dispatch}, res) {
+        await ApiBook.PutCharactorContent(res);
+        let result = await ApiBook.GetCharactorContentById(res.id);
+        return result;
+    },
+
+
 
 
    

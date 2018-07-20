@@ -399,4 +399,42 @@ textarea {
   font-size: 10px;
   color: white; }
 
+.book-card-wrapper {
+  min-width: 25%;
+  max-width: 25%;
+  height: 33.33%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.book-card {
+  font-size: 20px;
+  width: 160px;
+  height: 100px;
+  color: white;
+  padding: 10px;
+  background-color: rgba(141, 221, 189, 0.4);
+  box-shadow: 2px 2px 3px 0px #496887;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.charactor-card {
+  position: relative;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  font-size: 15px;
+  color: white;
+  background-color: #41bbba;
+  background-image: linear-gradient(45deg, transparent 50%, #ffd8a3 50%), linear-gradient(135deg, transparent 50%, #ffd8a3 50%);
+  background-size: 10px 10px;
+  background-repeat: repeat-y;
+  background-position: 100% 0; }
+  .charactor-card:hover .btn-edit {
+    display: block; }
+  .charactor-card .btn-edit {
+    display: none; }
+
 /*# sourceMappingURL=main.css.map */

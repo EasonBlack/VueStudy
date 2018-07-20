@@ -8,10 +8,10 @@
                 <button class='btn btn-primary btn-sm' @click='toggleNewDisplay'>New</button>
             </div>
             <template v-if='charactors.length'>
-            <div class='charactor-item mb-10' v-for='charactor in charactors' :key='charactor.ID'>
-                {{charactor.NAME}}
-                <button class='btn btn-danger btn-sm btn-edit' @click='edit(charactor)'>Edit</button>
-            </div>
+                <div class='charactor-card mb-10' v-for='charactor in charactors' :key='charactor.ID'>
+                    {{charactor.NAME}}
+                    <button class='btn btn-danger btn-sm btn-edit' @click='edit(charactor)'>Edit</button>
+                </div>
             </template>
         </div>
         <div class='flex-1'>
@@ -104,31 +104,7 @@
 <style lang='scss' scoped>
    
 
-    .charactor-item {
-        position:relative;
-        width: 80%;
-        height:40px;
-        line-height:40px;
-        padding-left:10px;
-        font-size:15px;
-        color:white;
-        background-color: #41bbba;
-         
-        background-image: linear-gradient(45deg,transparent 50%,#ffd8a3 50%),
-        linear-gradient(135deg,transparent 50%,#ffd8a3 50%);
-        background-size:10px 10px;
-        background-repeat:repeat-y;
-        background-position:100% 0;  
-        
-        &:hover {
-            .btn-edit {
-                display:block;
-            }
-        }
-        .btn-edit {
-            display:none;
-        }
-    }
+    
     .btn-edit {
         position:absolute;
         top: 7px;

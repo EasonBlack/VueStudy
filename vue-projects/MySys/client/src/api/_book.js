@@ -20,3 +20,19 @@ export async function PostBookCharactor(res) {
 export async function PutBookCharactor(res) {
     return await axios.put(`${ApiUrl}/book/${res.id}/charactor`, res)    
 }
+
+export async function GetCharactorContentByCId(id) {
+    return await axios.get(`${ApiUrl}/charactor/${id}`)    
+}
+
+export async function GetCharactorContentById(id) {
+    return await axios.get(`${ApiUrl}/charactor-content/${id}`)    
+}
+
+export async function PostCharactorContent(res) {
+    return await axios.post(`${ApiUrl}/charactor/${res.id}`, res)    
+}
+
+export async function PutCharactorContent(res) {
+    return await axios.post(`${ApiUrl}/charactor/${res.cid}/${res.id}`, res)    
+}

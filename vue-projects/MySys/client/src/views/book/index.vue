@@ -34,26 +34,6 @@
         overflow-x: hidden;
         overflow-y: auto;
     }
-    .book-card-wrapper {
-        min-width:25%;
-        max-width:25%;
-        height: 33.33%;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        
-    }
-    .book-card {
-        font-size:20px;
-        width:160px;
-        height: 100px;
-        color: white;
-        padding: 10px;
-        background-color: rgba(#8dddbd, 0.4);
-        box-shadow: 2px 2px 3px 0px #496887;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  
 
 </style>
