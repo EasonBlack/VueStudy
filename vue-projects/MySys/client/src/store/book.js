@@ -56,15 +56,22 @@ const actions = {
 
     async postAndGetCharactorContent({commit, state, rootState, dispatch}, res) {
         let pre = await ApiBook.PostCharactorContent(res);
-        console.log(pre);
         let result = await ApiBook.GetCharactorContentByCId(res.id);
         return result;
     },
 
     async putAndGetCharactorContent({commit, state, rootState, dispatch}, res) {
         await ApiBook.PutCharactorContent(res);
-        let result = await ApiBook.GetCharactorContentById(res.id);
-        return result;
+        let resultDetail = await ApiBook.GetCharactorContentById(res.id);
+        let resultList = await ApiBook.GetCharactorContentByCId(res.cid);
+        console.log( {
+            list: resultList.data,
+            detail: resultDetail.data
+        })
+        return {
+            list: resultList.data,
+            detail: resultDetail.data
+        };
     },
 
 

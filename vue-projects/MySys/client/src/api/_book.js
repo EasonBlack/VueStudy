@@ -34,5 +34,5 @@ export async function PostCharactorContent(res) {
 }
 
 export async function PutCharactorContent(res) {
-    return await axios.post(`${ApiUrl}/charactor/${res.cid}/${res.id}`, res)    
+    return await axios.put(`${ApiUrl}/charactor/${res.cid}/${res.id}`, res)    
 }
