@@ -59,8 +59,12 @@
         width: 100%;
         font-size:12px;
         margin-bottom: 0px;
-        overflow:hidden;
+      
         
         color: white;
+        max-height: 150px;
+        overflow:hidden;
+        overflow-y: auto;
+        display: block;
     }
 </style>

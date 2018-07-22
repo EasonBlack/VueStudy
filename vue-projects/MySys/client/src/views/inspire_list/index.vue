@@ -185,6 +185,7 @@
         &.active {
             right: 0;
         }
+      
     }
 
     .section-wrapper {
