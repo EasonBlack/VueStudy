@@ -16,27 +16,23 @@
                     :value="item.ID">
                 </el-option>
             </el-select>
-            <button class='btn btn-primary' @click='toggleNewCollectionDisplay'>New</button>
-        </div>
-        <div class='action-wrapper'>
             <el-select
                 class='el-select mr-10'
-                v-model="currentKeys"
-                multiple
-                filterable
+                v-model="currentCategory"
                 allow-create
                 default-first-option
-                placeholder="Keys">
+                @change='changeCategory()'
+                placeholder="Category">
                 <el-option
-                    v-for="item in keyItems"
+                    v-for="item in categoryItems"
                     :key="item.ID"
                     :label="item.NAME"
                     :value="item.ID">
                 </el-option>
             </el-select>
-            <input class='form-control d-inline-block search-txt mr-10' placeholder='Search' v-model='currentSearch' />
-            <button class='btn btn-primary' @click='search'>Confirm</button>
+            <button class='btn btn-primary' @click='toggleNewCollectionDisplay'>New</button>
         </div>
+       
         <div class='section-wrapper'>
             <div class='content-wrapper'>
                 <div class='container-fluid'>
@@ -232,7 +228,7 @@
     }
 
     .el-select {
-        width:30%;
+        width:200px;
     }
 
     .search-txt {

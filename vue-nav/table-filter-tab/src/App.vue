@@ -9,7 +9,7 @@
 		    	unactive: !actionActive,
 		    	active: actionActive
 			}">
-				<li class='item' v-for="item in items">
+				<li class='item' v-for="item in items" :key='item'>
 					<span v-if="item.title=='Unread'">
 						{{item.title + ' ' + times}}
 					</span>
