@@ -13,6 +13,7 @@ const actions = {
 
     async getCollection({commit, state, rootState, dispatch}, req) {
         let result = await ApiCollection.GetCollection(Object.assign({}, req));
+        console.log(result);
         return result;
     },
 
@@ -25,7 +26,6 @@ const actions = {
    
     async putCollection({commit, state, rootState, dispatch}, req) {
         let result = await ApiCollection.PutCollection(Object.assign({}, req));
-        console.log(result);
         return result;
     },
 

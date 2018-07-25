@@ -62,14 +62,25 @@
                 this.currentCategory = item;
             },
             search() {       
-                let a = this.$store.commit('getAllCategoryChild', this.currentCategory.ID)  
-                console.log(a);    
-                // this.$store.dispatch('getCollection', {
-                //     category: this.currentCategory.ID,
-                //     search: this.currentSearch,
-                // }).then(result => {
-                //     this.collectionItems = result.data;
-                // })
+                let cids = this.getCategoryChild(this.categoryOriginItems, this.currentCategory.ID) ;
+                console.log(cids);        
+                this.$store.dispatch('getCollection', {
+                    category: cids.join(','), //this.currentCategory.ID,
+                    search: this.currentSearch,
+                }).then(result => {
+                    this.collectionItems = result.data;
+                })
+            },
+
+            getCategoryChild(items, id) {
+                let _result = [id];
+                let res = items.filter(item=>item.PARENT_ID==id);
+                res.forEach(r=>{
+                    let childIds = []
+                    childIds = [...this.getCategoryChild(items, r.ID)]
+                    _result.push(...childIds);
+                })
+                return _result;
             },
            
             toggleNewCollectionDisplay() {
@@ -135,6 +146,7 @@
         computed: {
             ...mapState({
                 categoryItems: (state) => state.category.items,
+                categoryOriginItems: (state) => state.category.originItems
             })
 		}
     }
