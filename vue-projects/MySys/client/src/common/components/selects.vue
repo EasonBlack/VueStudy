@@ -1,11 +1,11 @@
 <template> 
-    <div class='parent'>
-        <select @change='selectChange' v-model='currentItem'>
-            <option v-for='item in items' :key='item.id' :value='item'>
-                {{item.name}}
+    <div class='parent d-flex'>
+        <select class='mr-10' @change='selectChange' v-model='currentItem'>
+            <option v-for='item in items' :key='item.ID' :value='item'>
+                {{item.NAME}}
             </option>
         </select>
-        <multi-select :items='currentItem.children'   v-if='currentItem.children && currentItem.children.length' @selectChange='selectChange' />
+        <multi-select :items='currentItem.children' v-if='currentItem.children && currentItem.children.length' @selectChange='selectChange' />
     </div>
 </template>
 
@@ -43,4 +43,11 @@
    
 </script>
 <style lang='scss' scoped>
+    select {
+        height:40px;
+    }
+    option {
+        padding-left:10px;
+        padding-right:10px;
+    }
 </style>

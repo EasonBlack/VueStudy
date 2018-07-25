@@ -36,9 +36,9 @@
                 <div class='textarea-wrapper'>
                     <my-text-area v-model='content' />
                 </div>
-                 <div class='action-wrapper'>
+                <div class='action-wrapper'>
                     <button class='btn btn-primary mr-10' @click='save' v-if='!currentId'>Save</button>
-                    <button class='btn btn-danger mr-10' @click='editSave' v-else-if='currentId'>Edit</button>
+                    <button class='btn btn-danger  mr-10' @click='editSave' v-else-if='currentId'>Edit</button>
                     <button class='btn btn-primary' @click='cancel'>Cancel</button>
                 </div>
             </div>
@@ -66,13 +66,10 @@
             }
         },
         created() {
-            this.$store.dispatch("getInspireKey")
+            this.$store.dispatch("getKeys")
             .then(res=>{
                 this.keyItems = res.data;
             })
-            // if(!this.keyItems.length) {
-            //     this.$store.dispatch("getLitItems");
-            // }
         },
         methods: {
             search() {
@@ -108,7 +105,7 @@
            
                 if(newItems.length) {
 
-                    let keyItemsResult = await this.$store.dispatch("postInspireKey", {items: newItems});
+                    let keyItemsResult = await this.$store.dispatch("postKeys", {items: newItems});
                     this.keyItems = keyItemsResult.data;
                     let _orginKeys = this.currentKeys.filter(o=>!isNaN(o)) 
                     this.currentKeys = _orginKeys.concat(this.keyItems.filter(o=>newItems.indexOf(o.NAME)!=-1).map(o=>o.ID));
@@ -159,9 +156,7 @@
             }
         },
         computed: {
-            // ...mapState({
-            //     keyItems : (state) => state.key.litItems
-            // })
+           
 		}
     }
 </script>

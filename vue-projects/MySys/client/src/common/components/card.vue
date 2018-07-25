@@ -1,11 +1,11 @@
 <template>
     <div class='card'>
-        <ul>
+        <!-- <ul>
             <li class='li-card mr-10' v-for='key in keysArray' :key='key'>
                 {{key}} 
                 
             </li>
-        </ul>
+        </ul> -->
         <pre>{{item.CONTENT}}</pre>
         <button class='btn btn-danger btn-sm btn-edit' @click='edit(item)'>Edit</button>
     </div>
@@ -19,15 +19,14 @@
             } 
         },
         computed: {
-            "keysArray" :  function() { 
-                return this.item.KEYS_NAME.split(",")
-            }
+           
         }
     }
 </script>
 <style lang='scss' scoped>
     .card {
         width :100%;
+        min-height: 50px;
         padding-left: 5px;
         padding-bottom: 5px;
         padding-top: 5px;

@@ -40,10 +40,11 @@
                 items : [
                     {name: 'current', title: 'Current', path:'/current'},
                     {name: 'inspire', title: 'Inspire', path : '/inspire'},
-                    {name: 'collection', title: 'Collection', isdown: false ,items: [     
-                        {name: 'collection-it-list', title: 'IT', path : '/collectionit/list'},
-                        {name: 'collection-lit-list', title: 'Lit', path : '/collectionlit/list'},
-                    ]},
+                    {name: 'collection', title: 'Collection', path : '/collection'},
+                    // {name: 'collection', title: 'Collection', isdown: false ,items: [     
+                    //     {name: 'collection-it-list', title: 'IT', path : '/collectionit/list'},
+                    //     {name: 'collection-lit-list', title: 'Lit', path : '/collectionlit/list'},
+                    // ]},
                     {name: 'book', title: 'Book', path:'/book'},
                 ]
             }

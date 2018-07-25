@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function GetCategory(type) {
-    return await axios.get(`${ApiUrl}/category/${type}`)    
+    return await axios.get(`${ApiUrl}/category`)    
 }
 
 export async function PostCategory(obj) {

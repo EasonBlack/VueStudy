@@ -1,31 +1,58 @@
 
 import {ApiCategory} from '$api/index';
 
+let setCategoryItems = (function f(items, id)  {
+  let res = items.filter(item=>item.PARENT_ID==id);
+  res.forEach(r=>{
+    r.children = f(items, r.ID)
+  })
+  return res;
+})
+
+let getCategoryChild = (function f(items, id) {
+  let _result = [id];
+  let res = items.filter(item=>item.PARENT_ID==id);
+  res.forEach(r=>{
+    let childIds = []
+    //_result.push(r.ID);
+    childIds = [...f(items, r.ID)]
+    _result.push(...childIds);
+  })
+  console.log(_result);
+  return _result;
+})
+
 const state = {
-  litCategory: [],
-  itCategory: []
+  items:[],
+  originItems: []
 }
 
 const mutations = {
-  setLitCategory(state, items) {
-    state.litCategory = items;
+  setItems(state, categorys) {
+    state.items = categorys;
   },
-  setItCategory(state, items) {
-    state.itCategory = items;
+  setOriginal(state, items) {
+    state.originItems = items;
   },
+  getAllCategoryChild(state, id) {
+   
+    let result = getCategoryChild(state.originItems, id);
+    return result;
+  }
 }
 
 const actions = {
-  async getLitCategory({commit, state, rootState, dispatch}, req) {
-    let result = await ApiCategory.GetCategory('lit');
-    commit('setLitCategory', result.data);
+
+  
+
+  async getCategory({commit, state, rootState, dispatch}, req) {
+    let result = await ApiCategory.GetCategory();
+    let _items = result.data;
+    commit('setOriginal', _items);
+    let _category = setCategoryItems(_items, 0);
+    commit('setItems', _category);
   },
 
-  async getItCategory({commit, state, rootState, dispatch}, req) {
-    let result = await ApiCategory.GetCategory('it');
-    commit('setItCategory', result.data);
-  },
-  
 }
 
 export default {

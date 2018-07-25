@@ -11,35 +11,25 @@ const mutations = {
 
 const actions = {
 
-    async getItCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.GetCollection(Object.assign({type: 'it'}, req));
+    async getCollection({commit, state, rootState, dispatch}, req) {
+        let result = await ApiCollection.GetCollection(Object.assign({}, req));
         return result;
     },
 
-    async getLitCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.GetCollection(Object.assign({type: 'lit'}, req));
+
+    async postCollection({commit, state, rootState, dispatch}, req) {
+        let result = await ApiCollection.PostCollection(Object.assign({}, req));
         return result;
     },
 
-    async postItCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.PostCollection(Object.assign({table: 'it'}, req));
+   
+    async putCollection({commit, state, rootState, dispatch}, req) {
+        let result = await ApiCollection.PutCollection(Object.assign({}, req));
+        console.log(result);
         return result;
     },
 
-    async postLitCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.PostCollection(Object.assign({table: 'lit'}, req));
-        return result;
-    },
-
-    async putItCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.PutCollection(Object.assign({table: 'it'}, req));
-        return result;
-    },
-
-    async putLitCollection({commit, state, rootState, dispatch}, req) {
-        let result = await ApiCollection.PutCollection(Object.assign({table: 'lit'}, req));
-        return result;
-    },
+   
 }
 
 export default {

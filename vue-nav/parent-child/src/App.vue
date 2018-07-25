@@ -4,8 +4,9 @@
 			<div class='col-3 left'>
 				<menu-items :items='menus' />
 			</div>
-			<div class='col-9 right'>
-				
+			<div class='col-3 right'>
+				<multi-select  :items='menus'  @selectChange='selectChange'/>
+				<button @click='selectedItem'>Confirm</button>
 			</div>
 
 		</div>
@@ -14,8 +15,9 @@
 
 <script>
 	import menuItems from './items.vue';
+	import multiSelect from './selects.vue';
 	export default {
-		components: {menuItems},
+		components: {menuItems, multiSelect},
 		data() {
 			return {
 				menus: [],
@@ -34,7 +36,8 @@
 					{id: 12, name: 'AA2', parentId: '4',active: false}, 
 					{id: 13, name: 'AA3', parentId: '4',active: false}, 
 				
-				]
+				],
+				itemSelected: {}
 			}
 		},
 		created() {
@@ -49,6 +52,12 @@
 					r.children = this.setItems(r.id)
 				})
 				return res;
+			},
+			selectChange(item) {
+               	this.itemSelected = item;
+			},
+			selectedItem() {
+				console.log(this.itemSelected);
 			}
 		}
 	}

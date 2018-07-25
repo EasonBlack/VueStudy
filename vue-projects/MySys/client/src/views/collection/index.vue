@@ -2,22 +2,9 @@
     <div class='d-flex flex-column pt-10'>
         
         <div class='action-wrapper'>
-            <el-select
-                class='el-select mr-10'
-                v-model="currentCategory"
-                allow-create
-                default-first-option
-                @change='changeCategory()'
-                placeholder="Category">
-                <el-option
-                    v-for="item in categoryItems"
-                    :key="item.ID"
-                    :label="item.NAME"
-                    :value="item.ID">
-                </el-option>
-            </el-select>
-           
-            <button class='btn btn-primary' @click='toggleNewCollectionDisplay'>New</button>
+            <multi-selects :items='categoryItems'  @selectChange='selectCategoryChange' v-if='categoryItems.length'/>
+            <button class='btn btn-primary mr-10' @click='toggleNewCollectionDisplay'>New</button>
+            <button class='btn btn-primary' @click='search'>Confirm</button>
         </div>
        
         <div class='section-wrapper'>
@@ -53,55 +40,46 @@
         components: { collectionCard, myTextArea, multiSelects },
         data() {
             return {
-                currentCategory: '',
+                currentCategory: {},
+                collectionItems: [],
+
                 currentId: '',
                 currentKeys: '',
                 content: '',
                 currentSearch: '',
-                collectionItems: [],
-                keyItems: [],
                 
-                getCategoryStr: '',
-                getkeyStr: '',
-                getCollectionStr: '',
-                postCollectionStr: '',
-                postKeyStr: '',
-                putCollectionStr: '',
-                pageType : '',
 
                 newCollectionDisplay: false,
             }
         },
         created() {
             if(!this.categoryItems.length) {
-                this.$store.dispatch(this.getCategoryStr);
+                this.$store.dispatch('getCategory');
             }
         },
         methods: {
-            search() {
-                this.$store.dispatch(this.getCollectionStr, {
-                    category: this.currentCategory,
-                    key: this.currentKeys.join(','),
-                    search: this.currentSearch,
-                }).then(result => {
-                    this.collectionItems = result.data;
-                })
+            selectCategoryChange(item) {
+                this.currentCategory = item;
             },
-            changeCategory() {
-                //alert(this.currentCategory);
-                this.$store.dispatch("getKeyByCategory", {type: this.pageType, category: this.currentCategory})
-                .then(res=>{
-                    console.log(res);
-                    this.keyItems = res.data;
-                })
+            search() {       
+                let a = this.$store.commit('getAllCategoryChild', this.currentCategory.ID)  
+                console.log(a);    
+                // this.$store.dispatch('getCollection', {
+                //     category: this.currentCategory.ID,
+                //     search: this.currentSearch,
+                // }).then(result => {
+                //     this.collectionItems = result.data;
+                // })
             },
+           
             toggleNewCollectionDisplay() {
                 this.newCollectionDisplay = !this.newCollectionDisplay;
             },
+
             edit(item) {
                  this.newCollectionDisplay = true;
                  this.currentId = item.ID;
-                 this.content = item.CONTENT;
+                this.content = item.CONTENT;
             },
             save() {
                 this.preSave()
@@ -109,22 +87,7 @@
                     this.saveCollection(collection);
                 })
             },
-            async preSave(callback) {
-                if(!this.currentKeys.length) return ;
-
-                let _currentKeys = this.currentKeys.filter(o=>isNaN(o));
-                let _keyItemNames = this.keyItems.map(o=> o.NAME);
-                let newItems = _currentKeys.filter((v)=>{ 
-                    return _keyItemNames.indexOf(v) === -1 
-                })
-           
-                if(newItems.length) {
-                    let result = await this.$store.dispatch(this.postKeyStr, {items: newItems, category: this.currentCategory})
-                    this.keyItems = result.data;
-                    let _orginKeys = this.currentKeys.filter(o=>!isNaN(o)) 
-                    this.currentKeys = _orginKeys.concat(this.keyItems.filter(o=>newItems.indexOf(o.NAME)!=-1).map(o=>o.ID));
-                } 
-
+            async preSave(callback) { 
                 
                 let _content = this.content.replace(/\\/g,'\\\\');
                 _content = _content.replace(/\'/g,'\\\'');
@@ -133,8 +96,7 @@
                 return {
                     id: this.currentId,
                     content: _content, 
-                    keys: this.currentKeys.join(','),
-                    category: this.currentCategory
+                    category: this.currentCategory.ID
                 }
              
             },
@@ -146,22 +108,20 @@
                
             },
             saveCollection(collection) {
-                this.$store.dispatch(this.postCollectionStr, collection)
-                .then(o=>{
-                    console.log(collection);
-                    console.log(o);
-                    alert('Finish');
-                    this.cancel();
-                })
-            },
-            modifyCollection(collection) {
-                this.$store.dispatch(this.putCollectionStr, collection)
+                this.$store.dispatch("postCollection", collection)
                 .then(o=>{
                     alert('Finish');
                     this.cancel();
                 })
             },
 
+            modifyCollection(collection) {
+                this.$store.dispatch("putCollection", collection)
+                .then(o=>{
+                    alert('Finish');
+                    this.cancel();
+                })
+            },
 
             cancel() {
                 this.newCollectionDisplay = false;
@@ -173,8 +133,9 @@
             }
         },
         computed: {
-            // categoryItems
-            // keyItems
+            ...mapState({
+                categoryItems: (state) => state.category.items,
+            })
 		}
     }
 </script>
