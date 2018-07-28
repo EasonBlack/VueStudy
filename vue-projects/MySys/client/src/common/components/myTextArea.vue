@@ -1,5 +1,5 @@
 <template>
-     <textarea class='textarea' @keydown='handleTab' 
+     <textarea class='textarea' @keydown='handleTab'  spellcheck="false"
      :style="{
          minHeight: height ? height + '%' : '100%' 
      }"
