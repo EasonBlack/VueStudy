@@ -10,6 +10,5 @@ export async function GetCollection(obj) {
 }
 
 export async function PutCollection(obj) {
-    console.log(obj)
     return await axios.put(`${ApiUrl}/collection/${obj.id}`, obj)    
 }

@@ -6,6 +6,7 @@ import Book from './views/book/index.vue'
 import BookIndex from './views/book_general/index.vue'
 import General from './views/book_general/general.vue'
 import Charactor from './views/book_charactor/index.vue'
+import Section from './views/book_section/index.vue'
 
 import Current from './views/current/index.vue';
 import Daily from './views/daily/index.vue';
@@ -26,6 +27,7 @@ const router = new VueRouter({
         { path: '/book/:id', component: BookIndex, children: [
             {  path: 'general',component: General },
             {  path: 'charactor',component: Charactor },
+            {  path: 'section',component: Section },
             {  path: '/',redirect: 'general' }
         ]},
         { path: '/', redirect:  { name: 'book' } },

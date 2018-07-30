@@ -19,7 +19,8 @@
             return {
                 menus: [
                     {name: 'general', title: 'General', path: 'general'},
-                    {name: 'charactor', title: 'Charactor', path: 'charactor'}
+                    {name: 'charactor', title: 'Charactor', path: 'charactor'},
+                    {name: 'section', title: 'Section', path: 'section'}
                 ]
             }
         },
