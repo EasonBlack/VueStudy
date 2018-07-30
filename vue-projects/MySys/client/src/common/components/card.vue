@@ -7,6 +7,7 @@
             </li>
         </ul>
         <pre>{{bodyTxt}}</pre>
+        <button class='btn btn-success  btn-sm btn-show' @click='show(item)'>Show</button>
         <button class='btn btn-danger btn-sm btn-edit' @click='edit(item)'>Edit</button>
     </div>
 </template>
@@ -26,18 +27,20 @@
                 let _headerArrays = [];
                 var re =  /\[(.+?)\]/g, match;
                 while (match = re.exec(_headerTxt)) {
-                    console.log(match);
                     _headerArrays.push(match[1]);
                 }
                 this.headerTxt = _headerArrays;
                 this.bodyTxt = _bodyTxt.join('\n');           
             }
-            //console.log(this.item.CONTENT);
+          
         },
         methods: {
             edit(item) {
                 this.$emit('edit', item);
-            } 
+            },
+            show(item) {
+                this.$emit('show', item);
+            }
         },
         computed: {
            
@@ -54,11 +57,11 @@
         position: relative;
         background-color: rgba(#174A75, 0.3);
         &:hover {
-            .btn-edit {
+            .btn-edit, .btn-show {
                 display:block;
             }
         }
-        .btn-edit {
+        .btn-edit, .btn-show {
             display:none;
         }
     }
@@ -66,6 +69,12 @@
         position:absolute;
         bottom:5px;
         right:5px;
+    }
+
+    .btn-show {
+        position:absolute;
+        bottom:5px;
+        right: 50px;
     }
 
     ul {

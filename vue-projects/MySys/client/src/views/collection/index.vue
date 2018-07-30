@@ -12,7 +12,7 @@
                 <div class='container-fluid'>
                     <div class='row'>          
                         <div class='col-6 collection-wrapper'  v-for='item in collectionItems'  v-if='collectionItems.length' :key='item.ID'>
-                            <collection-card :item='item' @edit='edit'/>
+                            <collection-card :item='item' @edit='edit' @show='show'/>
                         </div>  
                     </div>
                 </div>
@@ -27,6 +27,7 @@
                     <button class='btn btn-primary' @click='cancel'>Cancel</button>
                 </div>
             </div>
+            <big-content :content='content' v-if='showCollectionDisplay'  @close='closeShowCollection'/>
         </div>
        
     </div>
@@ -36,8 +37,9 @@
     import myTextArea from '$commoncomponents/myTextArea.vue';
     import collectionCard from '$commoncomponents/card.vue';
     import multiSelects from '$commoncomponents/selects.vue';
+    import bigContent from './content.vue';
     export default {
-        components: { collectionCard, myTextArea, multiSelects },
+        components: { collectionCard, myTextArea, multiSelects, bigContent },
         data() {
             return {
                 currentCategory: {},
@@ -50,6 +52,7 @@
                 
 
                 newCollectionDisplay: false,
+                showCollectionDisplay: false
             }
         },
         created() {
@@ -62,8 +65,7 @@
                 this.currentCategory = item;
             },
             search() {       
-                let cids = this.getCategoryChild(this.categoryOriginItems, this.currentCategory.ID) ;
-                console.log(cids);        
+                let cids = this.getCategoryChild(this.categoryOriginItems, this.currentCategory.ID) ;      
                 this.$store.dispatch('getCollection', {
                     category: cids.join(','), //this.currentCategory.ID,
                     search: this.currentSearch,
@@ -88,9 +90,17 @@
             },
 
             edit(item) {
-                 this.newCollectionDisplay = true;
-                 this.currentId = item.ID;
+                this.newCollectionDisplay = true;
+                this.currentId = item.ID;
                 this.content = item.CONTENT;
+            },
+            show(item) {
+                this.showCollectionDisplay = true;
+                this.content = item.CONTENT;
+            },
+            closeShowCollection() {
+                this.showCollectionDisplay = false;
+                this.content = '';
             },
             save() {
                 this.preSave()

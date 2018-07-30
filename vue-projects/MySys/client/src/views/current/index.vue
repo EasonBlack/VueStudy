@@ -15,7 +15,6 @@
 </template>
 <script>
     import myTextArea from '$commoncomponents/myTextArea.vue';
-    //import {PostCurrent, GetCurrent,GetCurrentById,  PutCurrent, GetAfterPutCurrent} from '$commonfunctions/api.js';
     import { ApiCurrent } from '$api/index';
     export default {
         components: {myTextArea},
