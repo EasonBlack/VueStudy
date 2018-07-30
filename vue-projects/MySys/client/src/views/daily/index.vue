@@ -7,7 +7,9 @@
             </div>
             
         </div>
-        <div class='new-wrapper'>
+        <div class='new-wrapper'
+            :class='{active: newWrapperDisplay}'
+        >
             <div class='textarea-wrapper'>
                 <my-text-area v-model='newContent' />
             </div>
@@ -21,12 +23,15 @@
 <script>
     import myTextArea from '$commoncomponents/myTextArea.vue';
     import { ApiDaily } from '$api/index';
+    import Hammer from 'hammerjs';
     export default  {
         components: {myTextArea},
         data() {
             return {
                 newContent: '',
-                listItems: []
+                listItems: [],
+
+                newWrapperDisplay: false,
             }
         },
         created() {
@@ -43,7 +48,16 @@
 
             save() {},
             back() {}
-        }
+        },
+        mounted() {
+            let listWrapper = document.querySelector('.list-wrapper');
+            let newWRapper = document.querySelector('.new-wrapper');
+            let listHammer = new Hammer(listWrapper);
+            let newHammer = new Hammer(newWRapper);
+            listHammer.on('swipeleft', (e) => {
+                this.newWrapperDisplay = true;
+            });
+        },
     }
 </script>
 <style lang='scss' scoped>
@@ -52,5 +66,9 @@
         top: 0;
         right: -100%;
         width:100%;
+
+        &.active {
+            right: 0;
+        }
     }
 </style>
