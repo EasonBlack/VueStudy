@@ -94,6 +94,8 @@
         padding: 20px 20px;
         pre {
             color: white;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         .date-card {
             padding:2px 5px;
