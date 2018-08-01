@@ -9,8 +9,9 @@ btnLogin.addEventListener('click', ()=>{
         password: txtPassword
     })
     .then(res=>{
-        if(res.data) {
-            location.href = 'index.html';
-        }
+        console.log(res);
+        // if(res.data) {
+        //     location.href = 'index.html';
+        // }
     })
 })

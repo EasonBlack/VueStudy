@@ -4,7 +4,11 @@
         <div class='action-wrapper'>
             <multi-selects :items='categoryItems'  @selectChange='selectCategoryChange' v-if='categoryItems.length'/>
             <button class='btn btn-primary mr-10' @click='toggleNewCollectionDisplay'>New</button>
-            <button class='btn btn-primary' @click='search'>Confirm</button>
+           
+        </div>
+        <div class='action-wrapper'>
+            <input class='form-control search-txt mr-10' v-model='currentSearch' />
+            <button class='btn btn-primary' @click='search'>Search</button>
         </div>
        
         <div class='section-wrapper'>
@@ -200,7 +204,7 @@
     }
 
     .search-txt {
-        width: auto !important;
+        width: 200px !important;
     }
 
 </style>
