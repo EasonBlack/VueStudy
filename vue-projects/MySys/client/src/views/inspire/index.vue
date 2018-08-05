@@ -115,7 +115,7 @@
                 let _content = this.content.replace(/\\/g,'\\\\');
                 _content = _content.replace(/\'/g,'\\\'');
                 _content = _content.replace(/\%/g,'\\\%');
-
+                
                 return {
                     id: this.currentId,
                     content: _content, 
@@ -126,7 +126,8 @@
             editSave() {
                 this.preSave()
                 .then(inspire=>{
-                    this.modifyInspire(inspire);
+                    console.log(inspire);
+                    this.modifyInspire(inspire)
                 })
                
             },
@@ -140,6 +141,7 @@
             modifyInspire(obj) {
                 this.$store.dispatch("putInspire", obj)
                 .then(o=>{
+                    console.log(o);
                     alert('Finish');
                     this.cancel();
                 })
