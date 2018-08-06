@@ -9,6 +9,7 @@ import category from './category';
 import collection from './collection';
 import inspire from './inspire';
 import book from './book';
+import bookSection from './book-section';
 
 
 export default new Vuex.Store({
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         category,
         collection,
         inspire,
-        book
+        book,
+        bookSection
     }
 })

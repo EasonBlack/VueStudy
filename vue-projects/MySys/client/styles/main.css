@@ -419,6 +419,16 @@ textarea {
   justify-content: center;
   align-items: center; }
 
+.book-section-card {
+  font-size: 15px;
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  background-color: rgba(141, 221, 189, 0.4);
+  justify-content: center;
+  align-items: center; }
+
 .charactor-card {
   position: relative;
   width: 80%;

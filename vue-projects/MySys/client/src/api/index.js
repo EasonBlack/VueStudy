@@ -4,6 +4,7 @@ import * as _inspire from './_inspire';
 import * as _category from './_category';
 import * as _collection from './_collection';
 import * as _book from './_book';
+import * as _bookContent from './_content';
 import * as _daily from './_daily';
 
 export let ApiCurrent = _current;
@@ -12,4 +13,5 @@ export let ApiInspire = _inspire;
 export let ApiCategory = _category;
 export let ApiCollection = _collection;
 export let ApiBook = _book;
+export let ApiBookSection = _bookContent;
 export let ApiDaily = _daily;
