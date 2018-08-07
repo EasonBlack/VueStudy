@@ -34,5 +34,6 @@
         max-height: 100px;
         display: block;
         overflow: hidden;
+        white-space: pre-wrap;
     }
 </style>

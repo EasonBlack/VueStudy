@@ -19,6 +19,12 @@ const actions = {
         let result = await ApiBookSection.GetContentBySection({sectionId: res.sectionId});
         return result;
     },
+
+    async putContentById({commit, state, rootState, dispatch}, res) {
+        await ApiBookSection.PutContentById(res);
+        let result = await ApiBookSection.GetContentBySection({sectionId: res.sectionId});
+        return result;
+    },
    
 }
 

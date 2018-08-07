@@ -12,3 +12,8 @@ export async function GetContentBySection(obj) {
 export async function PostContentBySection(obj) {
     return await axios.post(`${ApiUrl}/book-section/${obj.sectionId}/content`, obj)    
 }
+
+
+export async function PutContentById(obj) {
+    return await axios.put(`${ApiUrl}/book-content/${obj.id}`, obj)    
+}
