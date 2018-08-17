@@ -6,9 +6,9 @@
 				<th>NAME</th>
 				<th>CONTENT</th>
 			</thead>
-
-			<trwrapper :items='tableData' />
-		
+			<tbody>
+				<trwrapper :items='tableData' />
+			</tbody>
 		</table>
 	</div>
 </template>
@@ -55,9 +55,7 @@
 	}
 
 	table p {
-		// height:0px;
-		// padding:0px;
-		// margin:0px;
+	
 	}
 
 </style>
