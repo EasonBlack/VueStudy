@@ -23,14 +23,14 @@ const router = new VueRouter({
         { path: '/inspire',  name: 'inspire', component: Inspire},
         { path: '/collection',  name: 'collection', component: Collection},
         
-        { path: '/book', name: 'book', component: Book },
-        { path: '/book/:id', component: BookIndex, children: [
-            {  path: 'general',component: General },
-            {  path: 'charactor',component: Charactor },
-            {  path: 'section',component: Section },
-            {  path: '/',redirect: 'general' }
-        ]},
-        { path: '/', redirect:  { name: 'book' } },
+        // { path: '/book', name: 'book', component: Book },
+        // { path: '/book/:id', component: BookIndex, children: [
+        //     {  path: 'general',component: General },
+        //     {  path: 'charactor',component: Charactor },
+        //     {  path: 'section',component: Section },
+        //     {  path: '/',redirect: 'general' }
+        // ]},
+        { path: '/', redirect:  { name: 'collection' } },
     ]
 })
 
