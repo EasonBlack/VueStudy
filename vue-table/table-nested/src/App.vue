@@ -22,12 +22,9 @@
 
 <script>
 	import tableData from '$data/array-parent-child.json';
-	import trwrapper from './tr-wrapper.vue';
 	export default {
-		components: {trwrapper},
 		data() {
 			return {
-				message: 'my vue',
 				tableData: [],
 				middle :{},
 				colors: ['red', 'lightgreen', 'steelblue', 'pink', 'yellow']
@@ -42,67 +39,58 @@
 				}
 				middle[r.parent].push(r);
 			}		
-			this.middle = middle;
-			//this.handle(middle['0'], middle);
-			
-			this.tableData = [...middle['0']];
-			console.log(this.tableData);
+			this.middle = Object.assign({},middle);	
+			this.tableData = [...middle['0']];	
 		},
 		methods: {
-			handle(items, source) {
-				for(let i=0;i<items.length;i++) {
-					if(source[items[i].id]) {
-						items[i].children = source[items[i].id];
-						delete source[items[i].id];
-						this.handle(items[i].children, source);
-					}
-				}
-			},
 
-			toggleChildren(item) {
-				let idx = this.tableData.findIndex(t=>item.id == t.id);
-				console.log(this.tableData[idx]);
-				if(!this.tableData[idx].expand) {
-					this.tableData[idx].expand = true;
+			toggleChildren(item) {			
+				let items = [...this.tableData];
+				if(items.find(o=>o.parent == item.id)) {
+					this.tableData = this.deleteChidren(item, items);				
 				} else {
-					this.tableData[idx].expand = false;
-					this.deleteChidren(item);
-					return false;
+					let insert = [...this.middle[item.id]] || [];
+					this.tableData = this.expandChildren(item, items, insert);
 				}
-			
-				let all = [...this.tableData];
-				let _first = all.splice(0, idx + 1);
-				let insert = this.middle[item.id] || [];
-				insert = [...insert]
-				if(insert.length) {
-					let _cidx = (item.colorIndex||0) + 1;
-					insert.map(n=>Object.assign(n, {color: this.colors[_cidx], colorIndex: _cidx}));
-				}
-				this.tableData = [..._first, ...insert, ...all];
-				console.log(this.tableData);		
 			},
 
-			deleteChidren(item) {
-				let _items = [...this.tableData];
-				let idx = this.tableData.findIndex(t=>item.id == t.id);
-				let idx2;
-				let _parents =[];
-				for(let i in _items) {
-					if(i>idx) {
-						if(_items[i].parent == item.parent) {
-							idx2 = i;
+			deleteChidren(item, items) {
+				let idxStart = items.findIndex(t=>item.id == t.id);
+				//如果用findIndex来找，无法找到那种夹在中间的item
+				// -> 
+				//    ->
+				//		->    如果这个需要删除他的子项，很难只找到idxEnd
+				//		  -> 
+				// ->  
+				let idxEnd = -1;
+				let itemIndex = item.colorIndex || 0;
+				for(let i in items) {
+					if(i>idxStart) {
+						if(itemIndex >= (items[i].colorIndex || 0)) {
+							idxEnd = i;
 							break;
 						}
 					}
 				}
-				
-				if(idx2) {
-					console.log(idx, idx2);
-					_items.splice(idx+1, idx2-(idx+1));
+				//console.log(idxEnd);
+				if(idxEnd != -1) {
+					return [...items.slice(0, idxStart+1), ...items.slice(idxEnd, items.length)] 
+					//items.splice(idxStart+1, idxEnd-(idxStart+1));
 				} else {
-					_items.splice(idx+1, 999);
+					return [...items.slice(0, idxStart+1)];
+					//_items.splice(idxStart+1, _items.length - idxStart -1 );
 				}
-				this.tableData =  [..._items];
+			},
+
+			expandChildren(item, items, insert) {
+				if(insert.length) {
+					let idx = items.findIndex(t=>item.id == t.id);
+					let _cidx = (item.colorIndex||0) + 1;
+					insert.map(n=>Object.assign(n, {color: this.colors[_cidx], colorIndex: _cidx}));
+					return [...items.slice(0,idx+1),  ...insert, ...items.slice(idx+1, items.length)];
+				} else {
+					return items
+				}
 					
 			}
 		}

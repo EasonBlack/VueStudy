@@ -18,4 +18,17 @@ describe('App', () => {
         expect(vm.message).toBe('Hello')
     })
 
+    it('test methods', ()=>{
+        const vm = new Vue(App).$mount();
+        let a = vm.getA("bb");
+        expect(a).toBe("bbaaaa");
+    })
+
+    it('test methods2', ()=>{
+        const vm = new Vue(App).$mount();
+        let a = vm.getA("cc");
+        expect(a).toBe("cc aaaa");
+    })
+
+
 })

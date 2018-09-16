@@ -15,6 +15,11 @@
 		created: function() {
 		    this.message = "Hello";
 			console.log('it is created');
+		},
+		methods: {
+			getA(str) {
+				return str+"aaaa";
+			}
 		}
 	}
 </script>
