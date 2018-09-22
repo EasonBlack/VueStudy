@@ -51,7 +51,7 @@
         background-color: rgba(black, 0.9);
         border: 2px solid #41bb8a;
         border-radius: 10px;
-
+        overflow-y: auto;
         ul {
             display: flex;
             justify-content: flex-start;

@@ -8,15 +8,24 @@
         </div>
         <div class='action-wrapper'>
             <input class='form-control search-txt mr-10' v-model='currentSearch' />
-            <button class='btn btn-primary' @click='search'>Search</button>
+            <button class='btn btn-primary mr-10' @click='search'>Search</button>
+            <button class='btn btn-primary' @click='random'>Random</button>
+            <!-- <button class='btn btn-primary' @click='test'>test</button> -->
         </div>
        
         <div class='section-wrapper'>
             <div class='content-wrapper'>
                 <div class='container-fluid'>
-                    <div class='row'>          
-                        <div class='col-6 collection-wrapper'  v-for='item in collectionItems'  v-if='collectionItems.length' :key='item.ID'>
-                            <collection-card :item='item' @edit='edit' @show='show'/>
+                    <div class='row' v-if='collectionItems.length'>          
+                        <div class='col-6' >
+                            <div class=' collection-wrapper'  v-for='item in collectionEvens'   :key='item.ID'>
+                                <collection-card :item='item' @edit='edit' @show='show'/>
+                            </div>           
+                        </div>  
+                         <div class='col-6'>
+                             <div class=' collection-wrapper'  v-for='item in collectionOdds'   :key='item.ID'>
+                                <collection-card :item='item' @edit='edit' @show='show'/>
+                            </div> 
                         </div>  
                     </div>
                 </div>
@@ -77,7 +86,18 @@
                     this.collectionItems = result.data;
                 })
             },
-
+            random() {
+                 this.$store.dispatch('getRandomCollection')
+                 .then(result => {
+                    this.collectionItems = result.data;
+                })
+            },
+            test() {
+                this.$store.dispatch('patchCollectionTimes', {id: 2})
+                .then(result => {
+                    console.log(result);
+                })
+            },
             getCategoryChild(items, id) {
                 let _result = [id];
                 let res = items.filter(item=>item.PARENT_ID==id);
@@ -161,7 +181,17 @@
             ...mapState({
                 categoryItems: (state) => state.category.items,
                 categoryOriginItems: (state) => state.category.originItems
-            })
+            }),
+            collectionEvens() {
+                return this.collectionItems.filter((item,index)=>{
+                   return !(index % 2);
+               })
+            },
+            collectionOdds() {
+                return this.collectionItems.filter((item,index)=>{
+                   return index % 2;
+               })
+            }
 		}
     }
 </script>
