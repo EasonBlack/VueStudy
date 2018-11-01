@@ -1,0 +1,1 @@
+cross-env entry=index2  webpack --config webpack.config.param.js
