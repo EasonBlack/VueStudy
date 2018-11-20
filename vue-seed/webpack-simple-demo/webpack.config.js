@@ -9,7 +9,7 @@ module.exports = {
         filename: 'build.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
