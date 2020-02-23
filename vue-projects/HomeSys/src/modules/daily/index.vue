@@ -142,6 +142,7 @@
         align-content: flex-start;
     }
     .event-list__section {
+        width:100%;
         flex:1;
         display:flex;
         flex-wrap:wrap;

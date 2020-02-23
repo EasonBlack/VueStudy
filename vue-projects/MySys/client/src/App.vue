@@ -1,7 +1,7 @@
 <template>
 	<div class='main-container noisy '>
 		<app-nav />
-		<router-view style='flex:1' />
+		<router-view style='flex:1;background-color: steelblue;' />
 	</div>
 </template>
 
