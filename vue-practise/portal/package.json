@@ -27,7 +27,7 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.4",
     "json-loader": "^0.5.4",
-    "node-sass": "^3.13.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^4.0.2",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.1",
